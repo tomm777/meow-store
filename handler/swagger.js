@@ -15,7 +15,36 @@ const swaggerServers = [
   },
 ];
 
-const swaggerTags = [];
+const swaggerTags = [
+  {
+    name: 'Categorys',
+    description: 'Category list API',
+  },
+  {
+    name: 'Products',
+    description: '상품 list API',
+  },
+  {
+    name: 'Product',
+    description: '상품 API',
+  },
+  {
+    name: 'Member Order',
+    description: '사용자 주문 API',
+  },
+  {
+    name: 'Admin Product',
+    description: 'Admin 상품 API',
+  },
+  {
+    name: 'Admin Order',
+    description: 'Admin 주문 API',
+  },
+  {
+    name: 'Admin Category',
+    description: 'Admin Category API',
+  },
+];
 
 class Swagger {
   static #uniqueSwaggerInstance;
