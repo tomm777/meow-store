@@ -1,0 +1,56 @@
+section {
+  margin: 0 auto;
+  display: flex;
+  width: 80%;
+  height: 100%;
+}
+
+#thumbnail {
+  display: inline;
+}
+#info-box {
+  border: 1px solid black;
+  width: 400px;
+  padding: 20px;
+}
+
+#info-box p {
+  width: 80%;
+  border-bottom: 1px solid black;
+}
+
+#title {
+  font-size: 2em;
+}
+
+#price {
+  font-size: 1.5em;
+  font-weight: 200;
+}
+
+#center {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+#center img {
+  display: block;
+  margin: 0 auto;
+}
+
+footer {
+  border: 1px solid black;
+  padding: 20px 10px 0 10px;
+  margin-top: 100px;
+}
+
+.footer-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.footer-info {
+  font-size: 1em;
+}
