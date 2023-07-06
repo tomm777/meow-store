@@ -1,13 +1,65 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js" type="module"></script>
+    
     <title>야옹 잡화점</title>
   </head>
   <body>
-    cart
+
+    <div class="content">
+      <h1>장바구니</h1>
+    </div>
+    <section class="section">
+      <div class="cart-top">
+        <span>상품명</span>
+        <span>수량</span>
+        <span>가격</span>
+      </div>
+      <ul class="cart-list">
+        <!-- 카트 상품 반복 -->
+        <li class="cart-item">
+          <div class="product-thumbnail">
+            <img src="https://github.com/onblana/vanillajs-challenge/assets/51261847/ef77fe8d-6805-4096-ad4b-dfa627083e7c" alt="thumbnail"/>
+          </div>
+          <div class="product-name">
+            <span>탈취 스프레이</span>
+          </div>
+          <div class="product-info">
+            <span class="product-qty">99</span>
+            <span class="product-price">12,900원</span>
+            <button class="cart-delete">X</button>
+          </div>
+        </li>
+        <li class="cart-item">
+          <div class="product-thumbnail">
+            <img src="https://github.com/onblana/vanillajs-challenge/assets/51261847/f3598738-5b91-42d2-8b68-3ed5ebfe84d2" alt="thumbnail">
+          </div>
+          <div class="product-name">
+            <span>예시 상품 2</span>
+          </div>
+          <div class="product-info">
+            <span class="product-qty">88</span>
+            <span class="product-price">9,900원</span>
+            <button class="cart-delete">X</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-title"><strong>야옹잡화점</strong></div>
+      <div class="footer-info">
+          <strong>meow store</strong> by elice sw engineer track web project 12 team
+          Copyright © elice. All rights reserved
+        </p>
+      </div>
+    </footer>
+
+    <script src="index.js"></script>
   </body>
 </html>
