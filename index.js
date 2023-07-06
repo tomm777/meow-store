@@ -1,9 +1,17 @@
 const express = require('express');
+const connectDB = require('./config/db');
 require('dotenv').config();
+
+connectDB();
 
 const app = express();
 app.use(express.json());
 app.use(express.static('views/pages'));
+app.use('/assets', express.static('assets'));
+app.use('/utils', express.static('views/utils'));
+
+const indexRouter = require('./routes');
+app.use('/api', indexRouter);
 
 //swagger 적용
 const ApiDcos = require('./docs/index');
