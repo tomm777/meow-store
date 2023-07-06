@@ -67,25 +67,38 @@ const getCategory = (data) => {
 getCategory(dummyCate);
 
 function arrowClick() {
+  // 토글 클래스 추가
   this.parentElement.querySelector('.nested').classList.toggle('active');
   this.classList.toggle('caret-down');
+  // 하위, 상위 카테고리가 활성화 된 상태에서 전체를 누르면
+  // 선택 해제
+  const caretCheck = document.querySelectorAll('.caret-down');
+  const caret_down = document.querySelector('.top');
+  const nested_active = document.querySelectorAll('.nested .active');
+  // 전체를 눌렀을 때 상위 카테고리 선택해제
+  if (caret_down.className !== 'caret top caret-down') {
+    caretCheck.forEach((item) => {
+      item.classList.remove('caret-down');
+    });
+    nested_active.forEach((item) => {
+      item.classList.remove('active');
+    });
+  }
+  // 상위 카테고리를 한번 더 눌렀을 때 하위 카테고리 선택해제
+  if (this.className === 'caret') {
+    const lowCate = this.parentElement.querySelectorAll('.lowCateLi');
+    lowCate.forEach((item) => {
+      item.classList.remove('active');
+    });
+  }
 }
+// 선택한 하위카테고리에 active 클래스 추가
 function addToggle() {
   this.classList.toggle('active');
 }
-// function lowCateClick() {
-//   const lowCateItem = document.querySelectorAll('.lowCateLi');
-//   console.log(lowCateItem.length);
-//   lowCateItem.forEach((item) => {
-//     item.addEventListener('click', function () {
-//       this.classList.toggle('active');
-//       console.log(this);
-//     });
-//   });
-// }
+// 하위 카테고리를 클릭 했을 때 이벤트
 function lowCateClick() {
   const lowCateItem = document.querySelectorAll('.lowCateLi');
-  console.log(lowCateItem.length);
   lowCateItem.forEach((item) => {
     item.addEventListener('click', addToggle);
   });
@@ -101,27 +114,11 @@ const nodeSet = () => {
 // 카테고리 가져오기 실행
 nodeSet();
 
-// 감시할 노드 선택
-// let target = document.querySelector('.nested-li');
-// // 감시자 인스턴스 만들기
-// let observer = new MutationObserver((mutations) => {
-//   // 노드가 변경 됐을 때 생성된 DOM의 요소를 바인딩 시켜줌
-//   console.log('변화');
-//   nodeSet();
-// });
-// // 감시자의 설정
-// let option = {
-//   // 자식 노드의 변경 감지
-//   childList: true,
-// };
-// // 대상 노드에 감시자 전달
-// observer.observe(target, option);
-
 // 카테고리 추가 클릭 이벤트
 addButton.addEventListener('click', function () {
   // 카테고리 이름 입력값
-  let inputValue = document.getElementById('cate-input').value;
-  let inputValue1 = document.getElementById('cate-input');
+  // let inputValue = document.getElementById('cate-input').value;
+  let inputValue = document.getElementById('cate-input');
 
   // 선택된 카테고리 하위에 값을 넣기 위해 선택한 요소
   const caretDown = document.querySelector('.nested .active');
@@ -130,7 +127,7 @@ addButton.addEventListener('click', function () {
   const caretCheck = document.querySelectorAll('.caret-down');
 
   // input 값이 없을 때
-  if (!inputValue) {
+  if (!inputValue.value) {
     alert('카테고리 이름을 입력하세요');
     return;
   }
@@ -145,33 +142,59 @@ addButton.addEventListener('click', function () {
     nested.insertAdjacentHTML(
       'beforeend',
       `<div>
-      <span class="caret">${inputValue}</span>
+      <span class="caret">${inputValue.value}</span>
       <ul class="nested">
       </ul>
       </div>`,
     );
-    console.log(inputValue);
     nodeSet();
+    inputValue.value = '';
     return;
   }
 
-  //
+  // 상위 카테고리가 하나 이상일 때
   if (caretCheck.length >= 3) {
     alert('추가 할 하나의 카테고리만 선택해주세요.');
     return;
   }
+  // 하위 카테고리 추가
   caretDown.insertAdjacentHTML(
     'beforeend',
-    `<li class="lowCateLi">${inputValue}</li>`,
+    `<li class="lowCateLi">${inputValue.value}</li>`,
   );
   lowCateClick();
-  inputValue1.value = '';
+  // input value 초기화
+  inputValue.value = '';
 });
-
+// 카테고리 삭제 메서드
 const deleteCate = () => {
   const cateArray = document.querySelectorAll('.lowCateLi.active');
-  if (cateArray.length === 0) {
-    // alert('삭제 할 카테고리를 선택하세요');
+  const caretCheck = document.querySelectorAll('.caret-down');
+  // 아무것도 선택되지 않을 때
+  if (caretCheck.length === 0) {
+    alert('삭제 할 카테고리를 선택하세요');
+    return;
+  }
+  const lowCateItem = document.querySelectorAll('.lowCateLi');
+  // 하위 카테고리를 선택하지 않고 상위카테고리를 선택 했을때를 구분하기 위함
+  const nullArrayCheck = Array.from(lowCateItem).filter((item) => {
+    return item.className === 'lowCateLi active';
+  });
+  // 전체 카테고리만 선택했을 때
+  if (caretCheck.length === 1) {
+    alert('전체 카테고리를 삭제 할 수 없습니다');
+    return;
+  }
+  // 상위 카테고리가 여러개 일 때
+  if (caretCheck.length >= 3) {
+    alert('삭제 할 하나의 카테고리만 선택해주세요.');
+    return;
+  }
+  // 하위 카테고리가 선택되지않고 상위 카테고리를 선택 했을 때
+  if (nullArrayCheck.length === 0) {
+    if (confirm('정말 상위카테고리를 삭제하시겠습니까?')) {
+      caretCheck[caretCheck.length - 1].parentElement.remove();
+    }
   }
   cateArray.forEach((item) => {
     item.remove();
