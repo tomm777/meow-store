@@ -1,38 +1,49 @@
-/*
-// 제품 정보 받아서 페이지에 출력
-// 나중에 API데이터 받으면 파싱하기
+/* 제품 정보 받아서 페이지에 출력. 나중에 API데이터 받으면 fetch하기
 fetch('API주소')
   .then(res => res.json())
   .then(data => productData);
 */
+const productData = {
+  _id: '상품 id(sfsdf)',
+  name: '[사료]로얄캐닌 10kg',
+  price: 100000,
+  summary: '어린 고양이를 위한 사료 10kg',
+  description: '어린 고양이에 너무 좋다고 하더라...',
+  repImgUrl:
+    'https://github.com/onblana/vanillajs-challenge/assets/51261847/ef77fe8d-6805-4096-ad4b-dfa627083e7c',
+  createDate: '2023-07-05',
+  createUser: '최하은',
+  deleteYn: 'N',
+  category: [
+    {
+      _id: '카테고리 id(sdfsdf)',
+      category: '사료',
+    },
+  ],
+};
 
-const productData = [
-  { category: '생활용품 > 위생/청소' },
-  { name: '탈취 스프레이' },
-  { summary: '국내산 천연 편백수 함유 탈취제' },
-  { price: 12900 },
-  { description: '리모넨이 포함되지 않은 국내산 심재 편백 탈취 스프레이. 고양이와 함께하는 공간에서는 인공 향료나 에센셜 오일이 포함되지 않은 천연 탈취 스프레이를 사용해야 합니다. 천연 탈취 스프레이로 안심하고 사용하실 수 있습니다.' },
-  {rep_img_url: ""},
-];
+const thumbnail = document.querySelector('#product_thumbnail');
+thumbnail.src = `${productData.repImgUrl}`;
 
 const infoBox = document.querySelector('#info_box');
-let infoContent = '';
-
-for (i = 0; i < productData.length; ++i) {
-  for (let key in productData[i]) {
-    infoContent += `<p>${productData[i][key]}</p>`;
-    console.log("infoContent: ", infoContent);
-  }
-}
-infoContent += '<button id="addToCartButton" class="button is-warning">장바구니에 추가</button>';
-infoBox.innerHTML = infoContent;
+infoBox.innerHTML = `
+  <p>${productData.category[0].category}</p>
+  <p>${productData.name}</p>
+  <p>${productData.summary}</p>
+  <p>${productData.price}</p>
+  <p>${productData.description}</p>
+  <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
+`;
 
 const addCartBtn = document.querySelector('#addToCartButton');
 
 function addCart() {
-  alert(`'${productData[1]["name"]}'이(가) 장바구니에 추가되었습니다.`);
-  localStorage.setItem("productData", JSON.stringify(productData));
-  // 제품 데이터를 로컬스토리지에 저장하고 장바구니에서 다시 받아오려고 함
+  if (localStorage.getItem(`${productData._id}`)) {
+    alert(`이미 장바구니에 추가되어있습니다.`);
+  } else {
+    localStorage.setItem(`${productData._id}`, JSON.stringify(productData));
+    alert(`'${productData[1]['name']}'이(가) 장바구니에 추가되었습니다.`);
+  }
 }
 
 addCartBtn.addEventListener('click', addCart);
