@@ -55,6 +55,11 @@ module.exports = {
                       description: '대표 이미지 url',
                       example: 'http:image/1/',
                     },
+                    stock: {
+                      type: 'Number',
+                      description: '재고',
+                      example: 10,
+                    },
                     createDate: {
                       type: 'Timestamp',
                       description: '생성일',

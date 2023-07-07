@@ -35,6 +35,11 @@ module.exports = {
                   description: '대표 이미지 url',
                   example: 'http:image/1/',
                 },
+                stock: {
+                  type: 'Number',
+                  description: '재고',
+                  example: 10,
+                },
                 category: {
                   type: 'string',
                   description: '카테고리 id',
