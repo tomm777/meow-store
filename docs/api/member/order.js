@@ -15,7 +15,7 @@ module.exports = {
                   description: '수령인',
                   example: '최하은',
                 },
-                contack: {
+                receiverContack: {
                   type: 'string',
                   description: '연락처',
                   example: '010-1234-5678',
@@ -40,15 +40,30 @@ module.exports = {
                   description: '배송메시지',
                   example: '문앞에 두세영',
                 },
-                products: {
+                totalPrice: {
+                  type: 'Number',
+                  description: 'total 가격',
+                  example: 100000,
+                },
+                orderItemList: {
                   type: 'array',
                   items: {
                     type: 'object',
                     properties: {
-                      _id: {
+                      productId: {
                         type: 'string',
                         description: '상품 id',
-                        example: '상품 id(sdfsdf)',
+                        example: '64a80c24e44baefcf37f9fe6',
+                      },
+                      quantity: {
+                        type: 'Number',
+                        description: '수량',
+                        example: 1,
+                      },
+                      totalPrice: {
+                        type: 'Number',
+                        description: '수량',
+                        example: 10000,
                       },
                     },
                   },
@@ -302,17 +317,12 @@ module.exports = {
             schema: {
               type: 'object',
               properties: {
-                products: {
+                orderItemIds: {
                   type: 'array',
                   items: {
-                    type: 'object',
-                    properties: {
-                      _id: {
-                        type: 'string',
-                        description: '상품 id',
-                        example: '상품 id(sdfsdf)',
-                      },
-                    },
+                    type: 'string',
+                    description: 'OrderItem id',
+                    example: 'OrderItem id',
                   },
                 },
               },
