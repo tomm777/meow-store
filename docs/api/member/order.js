@@ -6,7 +6,7 @@ module.exports = {
       description: '주문 진행',
       requestBody: {
         content: {
-          'application/json;charset=utf-8': {
+          'application/json': {
             schema: {
               type: 'object',
               properties: {
@@ -231,7 +231,7 @@ module.exports = {
       ],
       requestBody: {
         content: {
-          'application/json;charset=utf-8': {
+          'application/json': {
             schema: {
               type: 'object',
               properties: {
@@ -298,7 +298,7 @@ module.exports = {
       ],
       requestBody: {
         content: {
-          'application/json;charset=utf-8': {
+          'application/json': {
             schema: {
               type: 'object',
               properties: {

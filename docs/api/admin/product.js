@@ -6,7 +6,7 @@ module.exports = {
       description: 'Admin 상품 생성',
       requestBody: {
         content: {
-          'application/json;': {
+          'application/json': {
             schema: {
               type: 'object',
               properties: {
@@ -34,6 +34,11 @@ module.exports = {
                   type: 'string',
                   description: '대표 이미지 url',
                   example: 'http:image/1/',
+                },
+                stock: {
+                  type: 'Number',
+                  description: '재고',
+                  example: 10,
                 },
                 category: {
                   type: 'string',
@@ -73,7 +78,7 @@ module.exports = {
       ],
       requestBody: {
         content: {
-          'application/json;charset=utf-8': {
+          'application/json': {
             schema: {
               type: 'object',
               properties: {
