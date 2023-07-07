@@ -109,17 +109,79 @@
           </tr>
         </thead>
         <tbody>
+          <!-- 반복되는구만 -->
           <tr>
             <td>123</td>
             <td>23-07-06</td>
             <td>123515-4545</td>
             <td>이미지 + 상품이름</td>
             <td>1</td>
-            <td>환불중</td>
+            <td>
+              <div id="content">
+                환불중
+              </div>
+              <div class="option">
+                <select name="" id="o2">
+                  <option value="배송중">배송중</option>
+                  <option value="배송 완료">배송 완료</option>
+                  <option value="환불중">환불중</option>
+                  <option value="환불 완료">환불 완료</option>
+                </select>
+              </div>
+            </td>
             <td>8,5000원</td>
             <td>핸드폰</td>
-            <td><button class="btn_black">수정</button></td>
-            <td><button class="btn_black">삭제</button></td>
+            <td><button class="btn_black" id="update_btn" >수정</button></td>
+            <td><button class="btn_black" id="delete_btn">삭제</button></td>
+          </tr>
+          <!-- 반복되는구만 -->
+          <tr>
+            <td>123</td>
+            <td>23-07-06</td>
+            <td>123515-4545</td>
+            <td>이미지 + 상품이름</td>
+            <td>1</td>
+            <td>
+              <div id="content">
+                환불중
+              </div>
+              <div class="option">
+                <select name="" id="">
+                  <option value="배송중">배송중</option>
+                  <option value="배송중">배송 완료</option>
+                  <option value="배송중">환불중</option>
+                  <option value="배송중">환불 완료</option>
+                </select>
+              </div>
+            </td>
+            <td>8,5000원</td>
+            <td>핸드폰</td>
+            <td><button class="btn_black" onclick="deleteRow(this)">수정</button></td>
+            <td><button class="btn_black" id="delete_btn">삭제</button></td>
+          </tr>
+          <tr>
+            <td>123</td>
+            <td>23-07-06</td>
+            <td>123515-4545</td>
+            <td>이미지 + 상품이름</td>
+            <td>1</td>
+            <td>
+              <div id="content">
+                환불중
+              </div>
+              <div class="option">
+                <select name="" id="">
+                  <option value="배송중">배송중</option>
+                  <option value="배송중">배송 완료</option>
+                  <option value="배송중">환불중</option>
+                  <option value="배송중">환불 완료</option>
+                </select>
+              </div>
+            </td>
+            <td>8,5000원</td>
+            <td>핸드폰</td>
+            <td><button class="btn_black" onclick="deleteRow(this)">수정</button></td>
+            <td><button class="btn_black" id="delete_btn">삭제</button></td>
           </tr>
         </tbody>
       </table>
@@ -131,5 +193,7 @@
   <footer>
 
   </footer>
+  <script src="index.js"></script>
 </body>
 </html>
+

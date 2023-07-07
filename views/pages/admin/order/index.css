@@ -110,4 +110,11 @@ table.product thead tr {
   background: aliceblue;
 }
 
-/* 100개 페이지  */
+table td, table th {
+  vertical-align:middle;
+}
+
+
+.option {
+  display: none;
+}
