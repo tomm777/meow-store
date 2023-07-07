@@ -1,10 +1,8 @@
 const { Schema } = require('mongoose');
-const shortId = require('./types/short-id.js');
+const moment = require('moment');
 
 const UserSchema = new Schema(
   {
-    // shortId 추가
-    shortId,
     email: {
       type: String,
       required: true,
@@ -17,13 +15,13 @@ const UserSchema = new Schema(
       type: String,
       default: 'USER',
     },
-    deleteYn: {
+    createDate: {
       type: String,
-      default: 'N',
+      default: () => moment().format('YYYY-MM-DD HH:mm:ss'),
     },
   },
   {
-    timestamps: true,
+    collection: 'users',
   },
 );
 
