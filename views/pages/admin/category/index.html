@@ -2,12 +2,67 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TasdasTT</title>
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js" type="module"></script>
-    <title>야옹 잡화점</title>
+    <script src="index.js" defer></script>
+
   </head>
   <body>
-    admin category
+    <!-- header -->
+    <header>
+      <div class="header-logo">
+        <img src="" alt="Logo" />
+      </div>
+      <!-- nav -->
+      <nav>
+        <div class="header-nav">
+          <ul>
+            <li>관리자</li>
+            <li>카테고리관리</li>
+            <li>상품관리</li>
+            <li>주문관리</li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- main -->
+    <main>
+      <section class="content-wrap">
+        <div class="content-wrapper">
+          <div class="category-box">
+            <div class="category-left">
+              <ul id="myUL">
+                <li class="myUL-li">
+                  <span class="caret top">전체</span>
+                  <ul class="nested">
+                    <li class="nested-li">
+                      </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="category-right">
+              <input
+                id="cate-input"
+                name="cate-input"
+                type="text"
+                value=""
+                placeholder="이름을 입력하세요."
+              />
+              <button class="button addCategory">카테고리 추가</button>
+              <button class="button deleteCategory">카테고리 삭제</button>
+              <button class="button saveCategory">저장</button>
+              <div class="category-img">
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    </main>
+    <footer></footer>
   </body>
 </html>
