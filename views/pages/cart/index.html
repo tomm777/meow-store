@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
     <link rel="stylesheet" href="index.css" />
-    
     <title>야옹 잡화점</title>
   </head>
   <body>
@@ -20,36 +19,26 @@
         <span>가격</span>
         <button class="delete_all">전체 삭제</button>
       </div>
+
       <ul class="cart_list">
         <!-- 카트 상품 반복 -->
-        <li class="cart_item">
-          <div class="product_thumbnail">
-            <img src="https://github.com/onblana/vanillajs-challenge/assets/51261847/ef77fe8d-6805-4096-ad4b-dfa627083e7c" alt="thumbnail"/>
-          </div>
-          <div class="product_info"></div>
-          <div class="product_name">
+        <li>
+          <div class="product_wrap">
+            <div class="product_thumbnail">
+              <img src="https://github.com/onblana/vanillajs-challenge/assets/51261847/ef77fe8d-6805-4096-ad4b-dfa627083e7c" alt="thumbnail"/>
+            </div>
             <span>탈취 스프레이</span>
-          </div>
-          <div class="product_info">
-            <span class="product_qty">99</span>
+            <span>
+              <button class="qty_down">-</button>
+              <span class="product_qty">10</span>
+              <button class="qty_up">+</button>
+            </span>
             <span class="product_price">12,900원</span>
             <button class="delete_each">❌</button>
           </div>
         </li>
-        <!-- <li class="cart_item">
-          <div class="product_thumbnail">
-            <img src="https://github.com/onblana/vanillajs-challenge/assets/51261847/f3598738-5b91-42d2-8b68-3ed5ebfe84d2" alt="thumbnail">
-          </div>
-          <div class="product_name">
-            <span>예시 상품 2</span>
-          </div>
-          <div class="product_info">
-            <span class="product_qty">88</span>
-            <span class="product_price">9,900원</span>
-            <button class="delete_each">❌</button>
-          </div>
-        </li> -->
       </ul>
+
     </section>
 
     <footer class="footer">
