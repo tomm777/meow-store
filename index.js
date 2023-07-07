@@ -1,11 +1,11 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const {
-  productRouter,
   memberOrderRouter,
   adminProductRouter,
   adminCategoryRouter,
   productRouter,
+  productsRouter,
 } = require('./routes');
 
 require('dotenv').config();
