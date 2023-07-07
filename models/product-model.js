@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 const productSchema = require('./schemas/product');
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('products', productSchema);
 
 class ProductModel {
   async findAll() {
     const products = await Product.find({});
     return products;
+  }
+
+  async findById(id) {
+    const product = await Product.findOne({ _id: id });
+    return product;
   }
 
   async create(product) {

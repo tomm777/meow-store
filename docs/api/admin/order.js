@@ -130,7 +130,7 @@ module.exports = {
       ],
       requestBody: {
         content: {
-          'application/json;charset=utf-8': {
+          'application/json': {
             schema: {
               type: 'object',
               properties: {

@@ -12,6 +12,19 @@ class ProductController {
     }
   }
 
+  async getProduct(req, res) {
+    try {
+      const { id } = req.params;
+
+      const products = await ProductService.getProductById(id);
+      res.status(200).json(products);
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
+
   async createProduct(req, res) {
     try {
       const { name, price, summary, description, repImgUrl } = req.body;

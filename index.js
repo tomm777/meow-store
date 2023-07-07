@@ -4,6 +4,7 @@ const {
   productsRouter,
   adminProductRouter,
   adminCategoryRouter,
+  productRouter,
 } = require('./routes');
 
 require('dotenv').config();
@@ -19,6 +20,7 @@ app.use('/assets', express.static('assets'));
 app.use('/utils', express.static('views/utils'));
 
 app.use('/api/products', productsRouter);
+app.use('/api/product', productRouter);
 app.use('/api/admin/product', adminProductRouter);
 app.use('/api/admin/category', adminCategoryRouter);
 
