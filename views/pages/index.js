@@ -1,4 +1,6 @@
-
+document.addEventListener('DOMContentLoaded', function() {
+  // JavaScript 코드 여기에 작성
+});
 const categories = [
   {
     "_id": "1",
@@ -23,7 +25,159 @@ const categories = [
 ];
 
 const items = [
-    { 
+      { 
+        name: "아이템 1", 
+        repImgUrl: "https://dummyimage.com/200x200/000000/fff",
+        summary: "이 아이템은 아이템 1입니다." 
+      },
+      { 
+        name: "아이템 2", 
+        repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
+        summary: "이 아이템은 아이템 2입니다." 
+      },
+      { 
+        name: "아이템 3", 
+        repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
+        summary: "이 아이템은 아이템 3입니다." 
+      },
+      // 아이템 4부터 15까지 추가
+      { 
+        name: "아이템 4", 
+        repImgUrl: "https://dummyimage.com/200x200/0000ff/fff",
+        summary: "이 아이템은 아이템 4입니다." 
+      },
+      { 
+        name: "아이템 5", 
+        repImgUrl: "https://dummyimage.com/200x200/ff00ff/fff",
+        summary: "이 아이템은 아이템 5입니다." 
+      },
+      { 
+        name: "아이템 6", 
+        repImgUrl: "https://dummyimage.com/200x200/ffff00/fff",
+        summary: "이 아이템은 아이템 6입니다." 
+      },
+      { 
+        name: "아이템 7", 
+        repImgUrl: "https://dummyimage.com/200x200/00ffff/fff",
+        summary: "이 아이템은 아이템 7입니다." 
+      },
+      { 
+        name: "아이템 8", 
+        repImgUrl: "https://dummyimage.com/200x200/ff6600/fff",
+        summary: "이 아이템은 아이템 8입니다." 
+      },
+      { 
+        name: "아이템 9", 
+        repImgUrl: "https://dummyimage.com/200x200/6600ff/fff",
+        summary: "이 아이템은 아이템 9입니다." 
+      },
+      { 
+        name: "아이템 10", 
+        repImgUrl: "https://dummyimage.com/200x200/990000/fff",
+        summary: "이 아이템은 아이템 10입니다." 
+      },
+      { 
+        name: "아이템 11", 
+        repImgUrl: "https://dummyimage.com/200x200/009900/fff",
+        summary: "이 아이템은 아이템 11입니다." 
+      },
+      { 
+        name: "아이템 12", 
+        repImgUrl: "https://dummyimage.com/200x200/000099/fff",
+        summary: "이 아이템은 아이템 12입니다." 
+      },
+      { 
+        name: "아이템 13", 
+        repImgUrl: "https://dummyimage.com/200x200/999900/fff",
+        summary: "이 아이템은 아이템 13입니다." 
+      },
+      { 
+        name: "아이템 14", 
+        repImgUrl: "https://dummyimage.com/200x200/009999/fff",
+        summary: "이 아이템은 아이템 14입니다." 
+      },
+      { 
+        name: "아이템 15", 
+        repImgUrl: "https://dummyimage.com/200x200/990099/fff",
+        summary: "이 아이템은 아이템 15입니다." 
+      },
+      { 
+        name: "아이템 1", 
+        repImgUrl: "https://dummyimage.com/200x200/000000/fff",
+        summary: "이 아이템은 아이템 1입니다." 
+      },
+      { 
+        name: "아이템 2", 
+        repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
+        summary: "이 아이템은 아이템 2입니다." 
+      },
+      { 
+        name: "아이템 3", 
+        repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
+        summary: "이 아이템은 아이템 3입니다." 
+      },
+      // 아이템 4부터 15까지 추가
+      { 
+        name: "아이템 4", 
+        repImgUrl: "https://dummyimage.com/200x200/0000ff/fff",
+        summary: "이 아이템은 아이템 4입니다." 
+      },
+      { 
+        name: "아이템 5", 
+        repImgUrl: "https://dummyimage.com/200x200/ff00ff/fff",
+        summary: "이 아이템은 아이템 5입니다." 
+      },
+      { 
+        name: "아이템 6", 
+        repImgUrl: "https://dummyimage.com/200x200/ffff00/fff",
+        summary: "이 아이템은 아이템 6입니다." 
+      },
+      { 
+        name: "아이템 7", 
+        repImgUrl: "https://dummyimage.com/200x200/00ffff/fff",
+        summary: "이 아이템은 아이템 7입니다." 
+      },
+      { 
+        name: "아이템 8", 
+        repImgUrl: "https://dummyimage.com/200x200/ff6600/fff",
+        summary: "이 아이템은 아이템 8입니다." 
+      },
+      { 
+        name: "아이템 9", 
+        repImgUrl: "https://dummyimage.com/200x200/6600ff/fff",
+        summary: "이 아이템은 아이템 9입니다." 
+      },
+      { 
+        name: "아이템 10", 
+        repImgUrl: "https://dummyimage.com/200x200/990000/fff",
+        summary: "이 아이템은 아이템 10입니다." 
+      },
+      { 
+        name: "아이템 11", 
+        repImgUrl: "https://dummyimage.com/200x200/009900/fff",
+        summary: "이 아이템은 아이템 11입니다." 
+      },
+      { 
+        name: "아이템 12", 
+        repImgUrl: "https://dummyimage.com/200x200/000099/fff",
+        summary: "이 아이템은 아이템 12입니다." 
+      },
+      { 
+        name: "아이템 13", 
+        repImgUrl: "https://dummyimage.com/200x200/999900/fff",
+        summary: "이 아이템은 아이템 13입니다." 
+      },
+      { 
+        name: "아이템 14", 
+        repImgUrl: "https://dummyimage.com/200x200/009999/fff",
+        summary: "이 아이템은 아이템 14입니다." 
+      },
+      { 
+        name: "아이템 15", 
+        repImgUrl: "https://dummyimage.com/200x200/990099/fff",
+        summary: "이 아이템은 아이템 15입니다." 
+      },
+      { 
         name: "아이템 1", 
         repImgUrl: "https://dummyimage.com/200x200/000000/fff",
         summary: "이 아이템은 아이템 1입니다." 
@@ -108,56 +262,72 @@ const items = [
   function showCategories() {
     const categoryElements = categories.map(category => `<li><a href="">${category.category}</a></li>
     `);
-    mainNav.innerHTML = `<ul>${categoryElements.join('')}<ul>`;
+    mainNav.innerHTML = `<ul><li><a href="">About</a></li>${categoryElements.join('')}<ul>`;
 
-    console.log(categoryElements);
   }
 
-  
+//전체 아이템 표시
 
-  let currentItemIndex = 0;
-  const itemBox = document.querySelector('.item-box');
-  
-  // featured 아이템을 보여주는 함수. 베스트셀러, 신상품, 추천상품 등 섹션마다 다른 데이터 목록 가져올 함수 추가적으로 필요함.
-  function showItems() {
-    const itemElements = items.slice(currentItemIndex, currentItemIndex + 5).map(item => `
-      <div class="item">
+const itemsPerPage = 10; // 페이지당 표시할 아이템 수
+
+function showItems(pageNumber) {
+  const startIndex = (pageNumber - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedItems = items.slice(startIndex, endIndex);
+
+  const itemElements = paginatedItems.map(item => `
+    <div class="item">
       <img src="${item.repImgUrl}" alt="${item.name}" />
       <h3>${item.name}</h3>
       <p>${item.summary}</p>
     </div>
-    `);
-    itemBox.innerHTML = itemElements.join('');
+  `);
+
+  const itemBox = document.querySelector('.item-box');
+  itemBox.innerHTML = itemElements.join('');
+}
+
+function createPagination() {
+  const totalPages = Math.ceil(items.length / itemsPerPage);
+  const paginationContainer = document.createElement('div');
+  paginationContainer.classList.add('pagination');
+
+  for (let i = 1; i <= totalPages; i++) {
+    const pageNumber = document.createElement('span');
+    pageNumber.classList.add('page-number');
+    pageNumber.textContent = i;
+    pageNumber.addEventListener('click', () => {
+      showItems(i);
+      setActivePageNumber(i);
+    });
+
+    paginationContainer.appendChild(pageNumber);
   }
-  
-  
 
-  // 이전 아이템 보기 함수
-  function previousItem() {
-    currentItemIndex -= 5;
-    if (currentItemIndex < 0) {
-      currentItemIndex = items.length - 5;
-    }
-    showItems();
-  }
-  
-  // 다음 아이템 보기 함수
-  function nextItem() {
-    currentItemIndex += 5;
-    if (currentItemIndex >= items.length) {
-      currentItemIndex = 0;
-    }
-    showItems();
-  }
- 
-  //페이지 로드 시 카테고리 보여주기
-  showCategories();
+  const allItemsSections = document.querySelectorAll('.allItems');
+  allItemsSections.forEach(section => {
+    section.appendChild(paginationContainer.cloneNode(true));
+  });
+}
 
-  // 3초마다 자동으로 다음 아이템 보여주기
-  setInterval(nextItem, 3000);
-  
-  // 페이지 로드 시 초기 아이템 보여주기
-  showItems();
+function setActivePageNumber(pageNumber) {
+  const pageNumbers = document.querySelectorAll('.page-number');
+  pageNumbers.forEach(number => {
+    if(number.classList.contains('active')){
+    number.classList.remove('active');}
+  });
+
+  const activePage = document.querySelector(`.page-number:nth-child(${pageNumber})`);
+  activePage.classList.add('active');
+}
 
 
-  
+// 페이지 로드 시 카테고리 보여주기
+showCategories();
+
+// 페이지 로드 시 초기 아이템 보여주기 (첫 번째 페이지)
+showItems(1);
+setActivePageNumber(1);
+
+// 페이지네이션 생성
+createPagination();
