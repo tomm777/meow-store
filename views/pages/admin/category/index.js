@@ -41,9 +41,13 @@ let nested = document.querySelector('.nested-li');
 // 카테고리 tree 구현을 위해 상위 엘리먼트를 가져온다
 const toggler = document.getElementsByClassName('caret');
 // 카테고리 추가 버튼 엘리먼트
-const addButton = document.querySelector('.addCategory');
+let addButton = document.querySelector('.addCategory');
 // 카테고리 삭제 버튼 엘리멘트
-const deleteButton = document.querySelector('.deleteCategory');
+let deleteButton = document.querySelector('.deleteCategory');
+// 카테고리 수정 버튼 엘리먼트
+let updateButton = document.querySelector('.updateCategory');
+// 수정 후 저장버튼
+const saveButton = document.querySelector('.button.saveCategory');
 
 // API를 받아와서 가공
 const getCategory = (data) => {
@@ -200,6 +204,100 @@ const deleteCate = () => {
     item.remove();
   });
 };
+// 카테고리 수정 메서드
+const updateCate = () => {
+  const cateArray = document.querySelectorAll('.lowCateLi.active');
+  const caretCheck = document.querySelectorAll('.caret-down');
+  const saveButton = document.querySelector('.button.saveCategory');
+  // 하위 카테고리를 선택하지 않고 상위카테고리를 선택 했을때를 구분하기 위함
+  const lowCateItem = document.querySelectorAll('.lowCateLi');
+  const nullArrayCheck = Array.from(lowCateItem).filter((item) => {
+    return item.className === 'lowCateLi active';
+  });
+  // 아무것도 선택되지 않을 때
+  if (caretCheck.length <= 1) {
+    alert('수정 할 카테고리를 선택하세요');
+    return;
+  }
+  // 상위 카테고리가 여러개 일 때
+  if (caretCheck.length >= 3) {
+    alert('수정 할 하나의 카테고리만 선택해주세요.');
+    return;
+  }
+
+  // 하위 카테고리가 선택되지않고 상위 카테고리를 선택 했을 때
+  if (nullArrayCheck.length === 0) {
+    // 수정하는 동안 다른 버튼 비활성화
+    updateButton.disabled = true;
+    addButton.disabled = true;
+    deleteButton.disabled = true;
+    // span을 input으로 변환
+    const spanEle = caretCheck[caretCheck.length - 1];
+    const spanValue = spanEle.textContent;
+    let input = document.createElement('input');
+    input.type = 'text';
+    input.value = spanValue;
+    input.classList.add('updateInput');
+    if (spanEle.parentNode) {
+      spanEle.parentNode.replaceChild(input, spanEle);
+    }
+    saveButton.classList.add('active');
+    // 저장 수정 API가 들어갈 곳
+    saveButton.addEventListener('click', function () {
+      // 비활성화 해제
+      addButton.disabled = false;
+      deleteButton.disabled = false;
+      updateButton.disabled = false;
+      // 원래대로 변환
+      let span = document.createElement('span');
+      span.className = spanEle.className;
+      span.textContent = input.value;
+      if (input.parentNode) {
+        input.parentNode.replaceChild(span, input);
+      }
+      saveButton.classList.remove('active');
+      nodeSet();
+    });
+    return;
+  }
+  if (cateArray.length >= 2) {
+    alert('수정 할 하나의 하위 카테고리를 선택하세요.');
+    return;
+  }
+  updateButton.disabled = true;
+  addButton.disabled = true;
+  deleteButton.disabled = true;
+  const liEle = document.querySelector('.lowCateLi.active');
+  const liValue = liEle.textContent;
+  let input = document.createElement('input');
+  input.type = 'text';
+  input.value = liValue;
+  if (liEle.parentNode) {
+    liEle.parentNode.replaceChild(input, liEle);
+  }
+  // liEle.parentNode.replaceChild(input, liEle);
+  saveButton.classList.add('active');
+
+  saveButton.addEventListener('click', function () {
+    addButton.disabled = false;
+    deleteButton.disabled = false;
+    updateButton.disabled = false;
+    liEle.classList.remove('active');
+    let li = document.createElement('li');
+    li.className = liEle.className;
+    li.textContent = input.value;
+    if (input.parentNode) {
+      input.parentNode.replaceChild(li, input);
+    }
+    // addButton.disabled = false;
+    // deleteButton.disabled = false;
+    saveButton.classList.remove('active');
+    liEle.classList.remove('active');
+    nodeSet();
+  });
+};
 
 // 카테고리 삭제 이벤트
 deleteButton.addEventListener('click', deleteCate);
+// 카테고리 수정 이벤트
+updateButton.addEventListener('click', updateCate);
