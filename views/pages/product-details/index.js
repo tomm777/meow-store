@@ -1,8 +1,16 @@
 /* 제품 정보 받아서 페이지에 출력. 나중에 API데이터 받으면 fetch하기
-fetch('API주소')
-  .then(res => res.json())
-  .then(data => productData);
+fetch('API 요청 보낼 URL')
+  .then((response) => {
+    if (!response.ok) throw new Error('400 또는 500 에러');
+    return response.json();
+  })
+  .then((result) => productData)
+  .catch(() => {
+    console.log('에러');
+  });
 */
+
+// 더미데이터
 const productData = {
   _id: '상품 id(sfsdf)',
   name: '[사료]로얄캐닌 10kg',
