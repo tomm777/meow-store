@@ -43,15 +43,38 @@ infoBox.innerHTML = `
   <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
 `;
 
-const addCartBtn = document.querySelector('#addToCartButton');
+const addToCartBtn = document.querySelector('#addToCartButton');
 
-function addCart() {
-  if (localStorage.getItem(`${productData._id}`)) {
-    alert(`이미 장바구니에 담겨진 상품입니다.`);
-  } else {
-    localStorage.setItem(`${productData._id}`, JSON.stringify(productData));
-    alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
+// JSON.stringify() --- JavaScript object를 JSON string으로 변환
+// JSON.parse() --- JSON string을 JavaScript object로 변환
+
+const addToCart = () => {
+  if (localStorage.getItem('meowStoreCart') === null) {
+    localStorage.setItem('meowStoreCart', JSON.stringify(productData));
+    return;
   }
-}
 
-addCartBtn.addEventListener('click', addCart);
+  // JSON이 배열형식이 아니어서 에러로 동작하지 않음 (forEach, push 메소드 사용불가)
+  // 수정이 필요함
+
+  // const prevCartData = JSON.parse(localStorage.getItem('meowStoreCart')); // prev는 JS object이다.
+  // console.log("prevCartData: ", prevCartData);
+
+  // const isAlreadyIn = prevCartData.forEach((object) => {
+  //   console.log("isAlreadyIn: ", isAlreadyIn);
+  //   console.log("object: ", object);
+  //   if (object.id === productData.id) return true;
+  //   return false;
+  // });
+
+  // if (isAlreadyIn) {
+  //   alert(`이미 장바구니에 담겨진 상품입니다.`);
+  //   return;
+  // } else {
+  //   const newCartData = prevCartData.push(productData);
+  //   localStorage.setItem('mewoStoreCart', JSON.stringify(newCartData));
+  //   alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
+  // }
+};
+
+addToCartBtn.addEventListener('click', addToCart);
