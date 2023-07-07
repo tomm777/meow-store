@@ -188,6 +188,30 @@ module.exports = {
         },
       },
     },
+    post: {
+      tags: ['Member Order'],
+      summary: '사용자별 주문 전체취소',
+      description: '사용자별 주문 전체취소',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          description: '주문 ID',
+          schema: {
+            type: 'string',
+          },
+          example: '주문 id(sfsdfsdf)',
+        },
+      ],
+      responses: {
+        200: {
+          description: '주문 취소 완료.',
+          content: {
+            'application/json': {},
+          },
+        },
+      },
+    },
   },
   '/api/member/order/{id}/info': {
     post: {
