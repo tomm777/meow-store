@@ -12,7 +12,7 @@ fetch('API 요청 보낼 URL')
 
 // 더미데이터
 const productData = {
-  _id: '상품 id(sfsdf)',
+  _id: '444',
   name: '[사료]로얄캐닌 10kg',
   price: 100000,
   summary: '어린 고양이를 위한 사료 10kg',
@@ -47,10 +47,10 @@ const addCartBtn = document.querySelector('#addToCartButton');
 
 function addCart() {
   if (localStorage.getItem(`${productData._id}`)) {
-    alert(`이미 장바구니에 추가되어있습니다.`);
+    alert(`이미 장바구니에 담겨진 상품입니다.`);
   } else {
     localStorage.setItem(`${productData._id}`, JSON.stringify(productData));
-    alert(`'${productData[1]['name']}'이(가) 장바구니에 추가되었습니다.`);
+    alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
   }
 }
 
