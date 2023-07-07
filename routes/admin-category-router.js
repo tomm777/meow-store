@@ -4,5 +4,6 @@ const adminCategoryRouter = Router();
 
 adminCategoryRouter.post('/', categoryController.createCategory);
 adminCategoryRouter.get('/', categoryController.getCategories);
+adminCategoryRouter.delete('/', categoryController.deleteCategory);
 
 module.exports = adminCategoryRouter;

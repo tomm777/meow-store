@@ -24,6 +24,10 @@ class CategoryModel {
     );
     return category;
   }
+  async deleteOne(categoryName) {
+    const category = await Category.deleteOne(categoryName);
+    return category;
+  }
 }
 
 const categoryModel = new CategoryModel();

@@ -41,6 +41,26 @@ class CategoryController {
         .json({ success: false, message: err.message });
     }
   }
+  async deleteCategory(req, res) {
+    try {
+      const { categoryName, lowCategoryName } = req.body;
+      const category = await CategoryModel.findOne({ categoryName });
+        console.log(category);
+    //   if (lowCategoryName.length >= 1) {
+    //     category.lowCategoryName = category.lowCategoryName.filter(
+    //       (item) => item !== lowCategoryName,
+    //     );
+    //     await category.save();
+    //     res.status(201).json({ success: true, data: category });
+    //   }
+    //   await CategoryModel.deleteOne({ categoryName });
+      res.status(200).json({ success: true, message: '카테고리 삭제 완료' });
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
 }
 
 const categoryController = new CategoryController();
