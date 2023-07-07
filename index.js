@@ -1,7 +1,8 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const {
-  productsRouter,
+  productRouter,
+  memberOrderRouter,
   adminProductRouter,
   adminCategoryRouter,
   productRouter,
@@ -21,6 +22,7 @@ app.use('/utils', express.static('views/utils'));
 
 app.use('/api/products', productsRouter);
 app.use('/api/product', productRouter);
+app.use('/api/member', memberOrderRouter);
 app.use('/api/admin/product', adminProductRouter);
 app.use('/api/admin/category', adminCategoryRouter);
 
