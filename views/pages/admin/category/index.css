@@ -1,0 +1,86 @@
+.content-wrap {
+  margin: 22px 44px 0;
+}
+li {
+  list-style: none;
+}
+.header-logo {
+  text-align: center;
+}
+.header-nav {
+  text-align: center;
+  height: 50px;
+  width: 100%;
+  background-color: #e0ec38;
+  display: inline-block;
+}
+.header-nav ul {
+  display: flex;
+  justify-content: space-around;
+}
+.header-nav ul li {
+  display: inline-block;
+  cursor: pointer;
+}
+.header-nav ul li:hover {
+  font-weight: bold;
+}
+.category-left {
+  display: inline-block;
+  width: 200px;
+  margin-top: 100px;
+}
+.category-right {
+  display: inline-block;
+  margin-left: 200px;
+  margin: 100px 200px 0;
+  vertical-align: top;
+}
+.category-left {
+  background-color: aliceblue;
+  height: 100%;
+}
+.lowCateLi {
+  cursor: pointer;
+}
+.lowCateLi.active {
+  background-color: #d3d1d1;
+}
+
+/* Remove margins and padding from the parent ul */
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: '\25B6';
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+.caret-down {
+  background-color: rgb(146, 153, 153);
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}
