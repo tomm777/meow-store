@@ -9,6 +9,11 @@ class ProductModel {
     return products;
   }
 
+  async findById(id) {
+    const product = await Product.findOne({ _id: id });
+    return product;
+  }
+
   async create(product) {
     const newProduct = await Product.create(product);
     return newProduct;
