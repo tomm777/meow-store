@@ -20,6 +20,16 @@ class ProductsService {
     const product = await Product.create(newProduct);
     return product;
   }
+
+  async editProduct(id, update) {
+    const updatedProduct = await Product.updateById(id, update);
+    return updatedProduct;
+  }
+
+  async deleteProduct(id) {
+    const result = await Product.deleteProduct(id);
+    return result;
+  }
 }
 
 const productsService = new ProductsService();
