@@ -6,7 +6,7 @@ module.exports = {
       description: 'Admin 상품 생성',
       requestBody: {
         content: {
-          'application/json;': {
+          'application/json': {
             schema: {
               type: 'object',
               properties: {
@@ -73,7 +73,7 @@ module.exports = {
       ],
       requestBody: {
         content: {
-          'application/json;charset=utf-8': {
+          'application/json': {
             schema: {
               type: 'object',
               properties: {
