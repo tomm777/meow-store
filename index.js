@@ -2,10 +2,13 @@ const express = require('express');
 const connectDB = require('./config/db');
 const {
   memberOrderRouter,
+  memberOrdersRouter,
   adminProductRouter,
   adminCategoryRouter,
   productRouter,
   productsRouter,
+  adminOrderRouter,
+  adminOrdersRouter,
 } = require('./routes');
 
 require('dotenv').config();
@@ -22,9 +25,12 @@ app.use('/utils', express.static('views/utils'));
 
 app.use('/api/products', productsRouter);
 app.use('/api/product', productRouter);
-app.use('/api/member', memberOrderRouter);
+app.use('/api/member/order', memberOrderRouter);
+app.use('/api/member/orders', memberOrdersRouter);
 app.use('/api/admin/product', adminProductRouter);
 app.use('/api/admin/category', adminCategoryRouter);
+app.use('/api/admin/order', adminOrderRouter);
+app.use('/api/admin/orders', adminOrdersRouter);
 
 //swagger 적용
 const ApiDcos = require('./docs/index');

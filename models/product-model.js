@@ -5,8 +5,8 @@ const productSchema = require('./schemas/product');
 const Product = mongoose.model('products', productSchema);
 
 class ProductModel {
-  async findAll() {
-    const products = await Product.find({ deleteYn: 'N' });
+  async findAll(option = {}) {
+    const products = await Product.find({ ...option, deleteYn: 'N' });
     return products;
   }
 

@@ -8,6 +8,7 @@ const OrderItemSchema = new Schema(
       ref: 'orders',
       required: true,
     },
+    //TODO:product 스키마를 넣을지 => 복사해서 고민해볼것
     productId: {
       type: Schema.Types.ObjectId,
       ref: 'products',
