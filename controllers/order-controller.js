@@ -69,6 +69,41 @@ class OrderController {
         .json({ success: false, message: err.message });
     }
   }
+
+  async getAdminOrderList(req, res, next) {
+    try {
+      const orders = await OrderService.getAdminOrderList();
+      res.status(200).json(orders);
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
+
+  async editOrderState(req, res, next) {
+    try {
+      const { id } = req.params;
+      const updatedOrder = await OrderService.editOrderState(id, req.body);
+      res.status(200).json(updatedOrder);
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
+
+  async removeOrder(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await OrderService.removeOrder(id);
+      res.status(200).json(result);
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
 }
 const orderController = new OrderController();
 module.exports = orderController;

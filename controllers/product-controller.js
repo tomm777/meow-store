@@ -44,6 +44,29 @@ class ProductController {
         .json({ success: false, message: err.message });
     }
   }
+
+  async editProduct(req, res, next) {
+    try {
+      const { id } = req.params;
+      const updatedProduct = await ProductService.editProduct(id, req.body);
+      res.status(200).json(updatedProduct);
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
+  async deleteProduct(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await ProductService.deleteProduct(id);
+      res.status(200).json(result);
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
 }
 const productController = new ProductController();
 module.exports = productController;

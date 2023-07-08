@@ -24,8 +24,8 @@ class OrderModel {
     return updatedOrder;
   }
 
-  async findAll() {
-    const orders = await Order.find({});
+  async findAll(option = {}) {
+    const orders = await Order.find({ ...option, deleteYn: 'N' });
     return orders;
   }
 }
