@@ -1,4 +1,4 @@
-/* styles.css */
+/* index.css */
 
 /* 전체 페이지 스타일 */
 body {
@@ -9,7 +9,7 @@ body {
 
 /* 헤더 스타일 */
 header {
-  background-color: #ffffff;
+  background-color: #fffdf4;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -49,48 +49,58 @@ header {
 
 /* 내비게이션 스타일 */
 .mainNav {
-  background-color: #dbdbdb;
-  color: #363636;
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
+  background-color: #fffdf4;
+  padding: 12px 0;
 }
-
 .mainNav ul {
-  list-style-type: none;
-  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
   padding: 0;
+  margin: 0;
+  background-color: #fffdf4;
+}
+.mainNav li {
+  height: 50px;
+  position: relative;
+  flex-grow: 1;
+}
+.mainNav li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 70%;
+  width: 1px;
+  background-color: #ccc;
+}
+
+.mainNav li:last-child::after {
+  display: none; /* 맨 마지막 메뉴의 구분선 숨김 */
+}
+
+.mainNav li a {
   display: flex;
   justify-content: center;
-}
-
-.mainNav ul li {
-  margin-right: 100px;
+  align-items: center;
   height: 100%;
-}
-
-.mainNav ul li:last-child {
-  margin-right: 0;
-}
-
-.mainNav ul li a {
-  font-weight: bold;
-  color: #1f1f1f;
+  color: rgb(100, 100, 100);
   text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.8s;
+}
+.mainNav li a:hover {
+  background-color: #d0ac75;
 }
 
-.mainNav ul li a:hover {
-  color: #ffffff;
-}
-
-/* featured 아이템 스타일 */
-.featuredItems {
+/*allItems 아이템 스타일 */
+.allItems {
   padding: 20px;
 }
 
-.featuredItems h2 {
+.allItems h2 {
   text-align: center;
 }
 
@@ -124,9 +134,24 @@ header {
   color: #888;
 }
 
-.controls {
-  text-align: center;
-  margin-top: 10px;
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-number {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.page-number.active {
+  background-color: #a49474;
+  color: #fff;
 }
 
 /* 푸터 스타일 */
