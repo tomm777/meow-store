@@ -1,18 +1,17 @@
-/* 제품 정보 받아서 페이지에 출력. 나중에 API데이터 받으면 fetch하기
-fetch('API 요청 보낼 URL')
-  .then((response) => {
-    if (!response.ok) throw new Error('400 또는 500 에러');
-    return response.json();
-  })
-  .then((result) => productData)
-  .catch(() => {
-    console.log('에러');
-  });
-*/
+// API 나오면 하기
+// fetch('API 요청 보낼 URL')
+//   .then((response) => {
+//     if (!response.ok) throw new Error('400 또는 500 에러');
+//     return response.json();
+//   })
+//   .then((result) => productData)
+//   .catch(() => {
+//     console.log('에러');
+//   });
 
 // 더미데이터
 const productData = {
-  _id: '444',
+  _id: '111',
   name: '[사료]로얄캐닌 10kg',
   price: 100000,
   summary: '어린 고양이를 위한 사료 10kg',
@@ -44,37 +43,41 @@ infoBox.innerHTML = `
 `;
 
 const addToCartBtn = document.querySelector('#addToCartButton');
-
-// JSON.stringify() --- JavaScript object를 JSON string으로 변환
-// JSON.parse() --- JSON string을 JavaScript object로 변환
+let cartArr = [];
+cartArr.push(productData);
 
 const addToCart = () => {
+  // 로컬스토리지가 비어있으면 현재 상품을 추가
   if (localStorage.getItem('meowStoreCart') === null) {
-    localStorage.setItem('meowStoreCart', JSON.stringify(productData));
+    localStorage.setItem('meowStoreCart', JSON.stringify(cartArr));
     return;
   }
 
-  // JSON이 배열형식이 아니어서 에러로 동작하지 않음 (forEach, push 메소드 사용불가)
-  // 수정이 필요함
+  // 로컬스토리지에 meowStoreCart가 있다면
+  // 현재 상품이 이미 들어가있는지 체크
+  const prevCartData = JSON.parse(localStorage.getItem('meowStoreCart'));
+  const isAlreadyIn = () => {
+    let bool = false;
+    const count = prevCartData.length;
+    for(let i = 0 ; i < count ; ++i) {
+      const curCartData = prevCartData[i];
+      if (productData._id === curCartData._id) {
+        bool = true;
+        break;
+      }
+    }
+    return bool;
+};
 
-  // const prevCartData = JSON.parse(localStorage.getItem('meowStoreCart')); // prev는 JS object이다.
-  // console.log("prevCartData: ", prevCartData);
-
-  // const isAlreadyIn = prevCartData.forEach((object) => {
-  //   console.log("isAlreadyIn: ", isAlreadyIn);
-  //   console.log("object: ", object);
-  //   if (object.id === productData.id) return true;
-  //   return false;
-  // });
-
-  // if (isAlreadyIn) {
-  //   alert(`이미 장바구니에 담겨진 상품입니다.`);
-  //   return;
-  // } else {
-  //   const newCartData = prevCartData.push(productData);
-  //   localStorage.setItem('mewoStoreCart', JSON.stringify(newCartData));
-  //   alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
-  // }
+  if (isAlreadyIn()) {
+    alert(`이미 장바구니에 담겨진 상품입니다.`);
+    return;
+  }
+  // 상품이 들어있지 않으면 로컬스토리지에 추가
+  localStorage.removeItem('meowStoreCart');
+  prevCartData.push(productData);
+  localStorage.setItem('meowStoreCart', JSON.stringify(prevCartData));
+  alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
 };
 
 addToCartBtn.addEventListener('click', addToCart);
