@@ -5,11 +5,6 @@ const CategorySchema = new Schema({
     type: String,
     required: true,
   },
-  // lowCategoryName: [
-  //   {
-  //     type: String,
-  //   },
-  // ],
   lowCategoryName: {
     type: [String],
   },

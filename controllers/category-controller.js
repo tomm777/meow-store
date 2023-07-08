@@ -77,22 +77,56 @@ class CategoryController {
         .json({ success: false, message: err.message });
     }
   }
-  // async updateCategory(req, res) {
-  //   try {
-  //     const { categoryName, lowCategoryName } = req.body;
-  //     const category = await CategoryModel.findOne({ categoryName });
-  //     if (lowCategoryName) {
-  //       if (lowCategoryName.length >= 1) {
-  //           const updateCategory = category.lowCategoryName
-  //       }
-  //     }
-
-  //   } catch (err) {
-  //     res
-  //       .status(err.statusCode || 500)
-  //       .json({ success: false, message: err.message });
-  //   }
-  // }
+  // 카테고리 수정
+  async updateCategory(req, res) {
+    try {
+      if (Object.keys(req.body).length === 2) {
+        const { categoryName, newCategoryName } = req.body;
+        const newCategoryCheck = await CategoryModel.findOne({
+          categoryName: newCategoryName,
+        });
+        if (newCategoryCheck !== null) {
+          return res
+            .status(400)
+            .json({ success: false, message: '이미 있는 카테고리 명입니다' });
+        }
+        const category = await CategoryModel.findOne({ categoryName });
+        category.categoryName = newCategoryName;
+        await category.save();
+        return res
+          .status(200)
+          .json({ success: true, message: '수정 완료', data: category });
+      }
+      const { categoryName, lowCategoryName, newLowCategoryName } = req.body;
+      let validationCheck = false;
+      const category = await CategoryModel.findOne({ categoryName });
+      category.lowCategoryName.forEach((item) => {
+        if (item === newLowCategoryName) {
+          validationCheck = true;
+        }
+      });
+      if (validationCheck) {
+        return res
+          .status(400)
+          .json({ success: false, message: '중복 된 카테고리 입니다' });
+      }
+      const updatedLowCategoryName = category.lowCategoryName.map((item) => {
+        if (item === lowCategoryName) {
+          return newLowCategoryName;
+        }
+        return item;
+      });
+      category.lowCategoryName = updatedLowCategoryName;
+      await category.save();
+      return res
+        .status(200)
+        .json({ success: true, message: '수정 완료', data: category });
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
 }
 
 const categoryController = new CategoryController();
