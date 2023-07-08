@@ -56,6 +56,13 @@ const OrderSchema = new Schema(
       type: String,
       required: true,
     },
+    deleteYn: {
+      type: String,
+      default: 'N',
+    },
+    deleteDate: {
+      type: String,
+    },
   },
   {
     collection: 'orders',

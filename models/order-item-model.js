@@ -12,7 +12,6 @@ class OrderItemModel {
 
   async findByOrderId(orderId) {
     const orderItems = await OrderItem.find({ orderId }).populate('productId');
-    console.log(orderItems);
     return orderItems;
   }
 

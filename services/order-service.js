@@ -88,8 +88,28 @@ class OrderService {
   }
 
   async getOrderList() {
+    //TODO: user 검색 필터 추가할것
     const orders = await Order.findAll();
     return orders;
+  }
+
+  async getAdminOrderList() {
+    const orders = await Order.findAll();
+    return orders;
+  }
+
+  async editOrderState(id, update) {
+    const updatedOrder = await Order.updateById(id, update);
+    return updatedOrder;
+  }
+
+  async removeOrder(id) {
+    //TODO : 배송완료일때만 수정할 수 있도록 하기
+    const result = await Order.updateById(id, {
+      deleteYn: 'Y',
+      deleteDate: moment().format('YYYY-MM-DD HH:mm:ss'),
+    });
+    return result;
   }
 }
 
