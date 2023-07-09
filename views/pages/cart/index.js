@@ -1,32 +1,23 @@
+let savedCartData = JSON.parse(localStorage.getItem('meowStoreCart')) || [];
 const cartList = document.querySelector('.cart_list');
 
-// 로컬스토리지에 여러개의 상품을 하나의 key값으로 저장하도록 변경했으므로
-// 그에 맞춰 로직 수정이 필요함.
-
-let savedCartData = JSON.parse(localStorage.getItem('meowStoreCart')) || []; // 로컬 스토리지에 저장된 장바구니 데이터
-
-console.log(savedCartData);
-
-// 배열을 페이지의 innerHTML에 넣어 요소로 추가
-
+// savedCartData의 상품목록을 장바구니 페이지에 그려주는 반복문
 for (let i = 0; i < savedCartData.length; ++i) {
-  let parsed = savedCartData[i];
-  if (!parsed.qty) parsed.qty = 1; // qty속성이 없을 경우에만 qty속성 추가
-
+  let data = savedCartData[i];
   const content = `
-    <div class="product_wrap" product_id="${parsed._id}">
-      <span class="product_index">${parsed.index}</span>
+    <div class="product_wrap" product_id="${data._id}">
+      <span class="product_index">${data.index}</span>
       <div>
         <div class="product_thumbnail">
-        <!-- <img src="${parsed.repImgUrl}" alt="thumbnail"/> -->
+        <!-- <img src="${data.repImgUrl}" alt="thumbnail"/> -->
         </div>
-        <span>${parsed.name}</span>
+        <span>${data.name}</span>
         <span>
           <button class="qty_down" onclick="qtyDown(event)">-</button>
-          <span class="product_qty" name="cart_qty" >${parsed.qty}</span>
+          <span class="product_qty" name="cart_qty" >${data.qty}</span>
           <button class="qty_up" onclick="qtyUp(event)">+</button>
         </span>
-        <span class="product_price">${parsed.price}</span>
+        <span class="product_price">${data.price}</span>
         <button class="delete_each" onclick="deleteEach(event)">❌</button>
       </div>
     </div>
@@ -52,9 +43,7 @@ function qtyUp(event) {
   } else {
     target.innerText = Number(target.innerText) + 1;
     savedCartData = savedCartData.map((o) => {
-      if (o._id === id) {
-        o.qty += 1;
-      }
+      if (o._id === id) o.qty += 1;
       return o;
     });
     localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
@@ -68,9 +57,7 @@ function qtyDown(event) {
   if (Number(target.innerText) > 1) {
     target.innerText = Number(target.innerText) - 1;
     savedCartData = savedCartData.map((o) => {
-      if (o._id === id) {
-        o.qty -= 1;
-      }
+      if (o._id === id) o.qty -= 1;
       return o;
     });
     localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
@@ -84,18 +71,13 @@ function deleteEach(event) {
 
   savedCartData = savedCartData.filter((o) => o._id !== id);
   localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
-
-  alert('삭제되었습니다.');
 }
 
 function deleteAll() {
-  const userRes = confirm('장바구니를 비우시겠습니까?');
-  if (userRes === false) {
-    return;
-  } else {
+  const userConfirm = confirm('장바구니를 비우시겠습니까?');
+  if (userConfirm) {
     localStorage.removeItem('meowStoreCart');
     cartList.innerHTML = '';
   }
 }
-
 deleteAllBtn.addEventListener('click', deleteAll);
