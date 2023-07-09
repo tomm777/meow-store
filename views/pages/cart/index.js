@@ -6,7 +6,6 @@ for (let i = 0; i < savedCartData.length; ++i) {
   let data = savedCartData[i];
   const content = `
     <div class="product_wrap" product_id="${data._id}">
-      <span class="product_index">${data.index}</span>
       <div>
         <div class="product_thumbnail">
         <!-- <img src="${data.repImgUrl}" alt="thumbnail"/> -->
