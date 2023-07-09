@@ -1,25 +1,23 @@
-// const categories = [
-//     {
-//       "_id": "1",
-//       "category": "사료"
-//     },
-//     {
-//       "_id": "2",
-//       "category": "외출용품"
-//     },
-//     {
-//       "_id": "3",
-//       "category": "장난감"
-//     },
-//     {
-//       "_id": "4",
-//       "category": "고양이 의류"
-//     },
-//     {
-//       "_id": "5",
-//       "category": "건강관리"
-//     }
-//   ];
+async function getOrderSummary() {
+    const response = await fetch("");
+    const jsonData = await response.json();
+    console.log(jsonData);
+  }
+
+const orderSummary = {
+      "totalOrderCount": 10,
+      "totalOrderAmount": 500000,
+      "paymentPending": 2,
+      "paymentCompleted": 5,
+      "shippingPending": 1,
+      "shippingInProgress": 1,
+      "shippingCompleted": 1,
+      "purchaseNotConfirmed": 3,
+      "cancelled": 2,
+      "refunded": 1,
+      "returned": 1,
+      "exchanged": 0
+    }
 
 // // 카테고리 불러오기 함수
 // let currentCategoryIndex = 0;
