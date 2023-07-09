@@ -14,6 +14,10 @@ class CategoriesService {
     const category = await Category.findOne({ categoryName: newCategory });
     return category;
   }
+  async removeCategory(categoryName) {
+    const result = await Category.deleteOne({ categoryName });
+    return result;
+  }
 }
 
 const categoriesService = new CategoriesService();

@@ -46,37 +46,44 @@ class CategoryController {
         .json({ success: false, message: err.message });
     }
   }
-  // 카테고리 삭제
-  async deleteCategory(req, res) {
+  // 하위 카테고리 삭제
+  async deleteLowCategory(req, res) {
     try {
       const { categoryName, lowCategoryName } = req.body;
       //categoryName로 db에 존재하는지 확인
+      console.log(categoryName);
       const category = await CategoryModel.findOne({ categoryName });
       // 하위 카테고리가 있을때 lowCategoryName이 포함되지 않은 요소들로 재배열
-      if (lowCategoryName) {
-        if (lowCategoryName.length >= 1) {
-          const updatecategory = category.lowCategoryName.filter(
-            (item) => !lowCategoryName.includes(item),
-          );
-          category.lowCategoryName = updatecategory;
-          console.log(category.lowCategoryName);
-          await category.save();
-          console.log(category);
-          res
-            .status(201)
-            .json({ success: true, message: '하위 카테고리 삭제 완료' });
-          return;
-        }
-      }
-      // 상위 카테고리만 왔을때 해당 카테고리 삭제
-      await CategoryModel.deleteOne({ categoryName });
-      res.status(200).json({ success: true, message: '카테고리 삭제 완료' });
+      // const updatecategory = category.lowCategoryName.filter(
+      //   (item) => !lowCategoryName.includes(item),
+      // );
+      // category.lowCategoryName = updatecategory;
+      // console.log(category.lowCategoryName);
+      // await category.save();
+      // console.log(category);
+      res
+        .status(201)
+        .json({ success: true, message: '하위 카테고리 삭제 완료' });
     } catch (err) {
       res
         .status(err.statusCode || 500)
         .json({ success: false, message: err.message });
     }
   }
+  // 카테고리 삭제
+  async removeCategory(req, res) {
+    try {
+      const { id } = req.params;
+      console.log(id);
+      const result = await CategoriesService.removeCategory(id);
+      res.status(200).json(result);
+    } catch (err) {
+      res
+        .status(err.statusCode || 500)
+        .json({ success: false, message: err.message });
+    }
+  }
+
   // 카테고리 수정
   async updateCategory(req, res) {
     try {
