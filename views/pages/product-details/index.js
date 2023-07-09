@@ -1,65 +1,55 @@
-// API 나오면 하기
-// fetch('API 요청 보낼 URL')
-//   .then((response) => {
-//     if (!response.ok) throw new Error('400 또는 500 에러');
-//     return response.json();
-//   })
-//   .then((result) => productData)
-//   .catch(() => {
-//     console.log('에러');
-//   });
+// function test() {
+//   location.href = '/product-details?id=64a8b5c760e6ded9c555e247'; // 이 주소로 이동
+// }
 
-// 더미데이터
-const productData = {
-  _id: '111',
-  name: '[사료]로얄캐닌 10kg',
-  price: 100000,
-  summary: '어린 고양이를 위한 사료 10kg',
-  description: '어린 고양이에 너무 좋다고 하더라...',
-  repImgUrl:
-    'https://github.com/onblana/vanillajs-challenge/assets/51261847/ef77fe8d-6805-4096-ad4b-dfa627083e7c',
-  createDate: '2023-07-05',
-  createUser: '최하은',
-  deleteYn: 'N',
-  category: [
-    {
-      _id: '카테고리 id(sdfsdf)',
-      category: '사료',
-    },
-  ],
-};
-
-const thumbnail = document.querySelector('#product_thumbnail');
-thumbnail.src = `${productData.repImgUrl}`;
+console.log(location.search);
+//product-details?64a8b5c760e6ded9c555e247
 
 const infoBox = document.querySelector('#info_box');
-infoBox.innerHTML = `
-  <p>${productData.category[0].category}</p>
-  <p>${productData.name}</p>
-  <p>${productData.summary}</p>
-  <p>${productData.price}</p>
-  <p>${productData.description}</p>
-  <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
-`;
+let productData = {};
 
-const addToCartBtn = document.querySelector('#addToCartButton');
-let cartArr = [];
-cartArr.push(productData);
+async function getProductData(id) {
+  try {
+    const response = await fetch(`/api/product/${id}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-const addToCart = () => {
+    productData = await response.json();
+
+    infoBox.innerHTML = `
+      <p>${productData.name}</p>
+      <p>${productData.summary}</p>
+      <p>${productData.price}</p>
+      <p>${productData.description}</p>
+      <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
+    `;
+
+    //const thumbnail = document.querySelector('#product_thumbnail');
+    //thumbnail.src = `${productData.repImgUrl}`;
+
+    const addToCartBtn = document.querySelector('#addToCartButton');
+    addToCartBtn.addEventListener('click', test);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+getProductData('64a8b5c760e6ded9c555e247');
+
+function addToCart() {
   // 로컬스토리지가 비어있으면 현재 상품을 추가
   if (localStorage.getItem('meowStoreCart') === null) {
-    localStorage.setItem('meowStoreCart', JSON.stringify(cartArr));
+    localStorage.setItem('meowStoreCart', JSON.stringify([productData]));
     return;
   }
 
-  // 로컬스토리지에 meowStoreCart가 있다면
-  // 현재 상품이 이미 들어가있는지 체크
+  // 로컬스토리지에 meowStoreCart가 있다면, 이 상품이 포함되어있는지 체크
   const prevCartData = JSON.parse(localStorage.getItem('meowStoreCart'));
   const isAlreadyIn = () => {
     let bool = false;
     const count = prevCartData.length;
-    for(let i = 0 ; i < count ; ++i) {
+    for (let i = 0; i < count; ++i) {
       const curCartData = prevCartData[i];
       if (productData._id === curCartData._id) {
         bool = true;
@@ -67,7 +57,9 @@ const addToCart = () => {
       }
     }
     return bool;
-};
+  };
+
+  // 이미 담겨있으면 수량 추가하기. map으로 아이디 찾아서 수량. 수량속성을 이 페이지에서 미리 넣어서 넘기기.
 
   if (isAlreadyIn()) {
     alert(`이미 장바구니에 담겨진 상품입니다.`);
@@ -78,6 +70,4 @@ const addToCart = () => {
   prevCartData.push(productData);
   localStorage.setItem('meowStoreCart', JSON.stringify(prevCartData));
   alert(`'${productData.name}'이(가) 장바구니에 추가되었습니다.`);
-};
-
-addToCartBtn.addEventListener('click', addToCart);
+}
