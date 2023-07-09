@@ -1,7 +1,12 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // JavaScript 코드 여기에 작성
-});
-const categories = [
+async function getProductsList() {
+  const response = await fetch("/api/products");
+  const jsonData = await response.json();
+  console.log(jsonData);
+}
+getProductsList();
+
+
+const categoryArr = [
   {
     "_id": "1",
     "category": "사료"
@@ -26,16 +31,19 @@ const categories = [
 
 const items = [
       { 
+        id: "testid",
         name: "아이템 1", 
         repImgUrl: "https://dummyimage.com/200x200/000000/fff",
         summary: "이 아이템은 아이템 1입니다." 
       },
       { 
+        id: "testid1",
         name: "아이템 2", 
         repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
         summary: "이 아이템은 아이템 2입니다." 
       },
       { 
+        id: "testid2",
         name: "아이템 3", 
         repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
         summary: "이 아이템은 아이템 3입니다." 
@@ -259,10 +267,10 @@ const items = [
   let currentCategoryIndex = 0;
   const mainNav = document.querySelector('.mainNav');
 
-  function showCategories() {
-    const categoryElements = categories.map(category => `<li><a href="">${category.category}</a></li>
+  function showcategoryArr() {
+    const categoryElements = categoryArr.map(categoryObj => `<li><a href="">${categoryObj.category}</a></li>
     `);
-    mainNav.innerHTML = `<ul><li><a href="">About</a></li>${categoryElements.join('')}<ul>`;
+    mainNav.innerHTML = `<ul><li><a href="">About</a></li>${categoryElements.join()}<ul>`;
 
   }
 
@@ -276,15 +284,23 @@ function showItems(pageNumber) {
   const paginatedItems = items.slice(startIndex, endIndex);
 
   const itemElements = paginatedItems.map(item => `
-    <div class="item">
+    <div class="item" id="${item.id}">
       <img src="${item.repImgUrl}" alt="${item.name}" />
       <h3>${item.name}</h3>
       <p>${item.summary}</p>
     </div>
   `);
+  
 
-  const itemBox = document.querySelector('.item-box');
-  itemBox.innerHTML = itemElements.join('');
+  const itemBoxs = document.querySelector('.item-box');
+  itemBoxs.innerHTML = itemElements.join('');
+
+  //.item 클릭하면 
+  // 이벤트 발생
+  // 발생했을때 해당 .item의 attribute중 id를 가져오면 product id를 알수있음
+  //왜냐하면 id에 넣어줬기 때문
+  // 어떤 이벤트냐면 페이지 이동 => location.href = "/product-details?id="
+
 }
 
 function createPagination() {
@@ -323,11 +339,14 @@ function setActivePageNumber(pageNumber) {
 
 
 // 페이지 로드 시 카테고리 보여주기
-showCategories();
+showcategoryArr();
 
 // 페이지 로드 시 초기 아이템 보여주기 (첫 번째 페이지)
 showItems(1);
-setActivePageNumber(1);
 
 // 페이지네이션 생성
 createPagination();
+setActivePageNumber(1);
+
+
+
