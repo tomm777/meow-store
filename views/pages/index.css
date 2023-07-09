@@ -134,7 +134,9 @@ header {
   color: #888;
 }
 
-
+.item:hover {
+  cursor: pointer;
+}
 
 .pagination {
   display: flex;
