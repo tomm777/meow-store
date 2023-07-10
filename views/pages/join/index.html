@@ -5,9 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
     <script src="index.js" type="module"></script>
-    <title>야옹 잡화점</title>
+    <title>회원가입</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" defer></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   </head>
   <body>
-    join
+    <section>
+      <div class="content-wrap">
+        <h2 class="title">회원가입</h2>
+        <table>
+          <tbody>
+            <tr>
+              <th>아이디(이메일)</th>
+              <td>
+                <div>
+                  <input type="text" id="email" />
+                  <button class="email-check">중복확인</button>
+                  <span class="check email"
+                    >이메일을 올바르게 입력해주세요</span
+                  >
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>이름</th>
+              <td>
+                <div>
+                  <input type="text" id="name-input" />
+                  <span class="check name">이름을 입력하세요</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>휴대폰 번호</th>
+              <td>
+                <div>
+                  <input type="text" id="phone-number" />
+                  <span class="check phone">휴대폰 번호를 입력하세요</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>주소</th>
+              <td>
+                <div>
+                  <!-- <span>서울특별시 무슨구 무슨도로...</span> -->
+                  <button class="search-address">주소검색</button>
+                  <span class="detail-address">우편 번호</span>
+                  <input type="text" id="zipcode-input" readonly />
+                  <span class="detail-address">도로명 주소</span>
+                  <input type="text" id="address-input" readonly />
+                  <span class="detail-address">상세 주소</span>
+                  <input type="text" id="address-detail-input" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>비밀번호</th>
+              <td>
+                <div>
+                  <input type="password" id="password" />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>비밀번호 확인</th>
+              <td>
+                <div>
+                  <input type="password" id="password-check" />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button class="submit-button">가입하기</button>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
