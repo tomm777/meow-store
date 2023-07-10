@@ -91,6 +91,7 @@ header {
   font-weight: bold;
   transition: background-color 0.8s;
 }
+
 .mainNav li a:hover {
   background-color: #a49474;
 }

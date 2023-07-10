@@ -9,8 +9,6 @@ body {
 /* 헤더 스타일 */
 .header {
   background-color: #fffdf4;
-  padding: 20px;
-  display: flex;
   flex-direction: column;
 }
 
@@ -18,11 +16,12 @@ body {
 .top-right {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 10px;
+  
 }
 .button-container {
   display: flex;
   justify-content: flex-end;
+  padding: 10px 10px 0 0;
 }
 .button-container button {
   display: flex;
@@ -43,14 +42,12 @@ body {
 
 .logo {
   text-align: center;
-  margin-bottom: 10px;
 }
 
 
 /* 내비게이션 스타일 */
 .mainNav {
   background-color: #fffdf4;
-  padding: 12px 0;
 }
 .mainNav ul {
   display: flex;
@@ -65,16 +62,16 @@ body {
   position: relative;
   flex-grow: 1;
 }
-.mainNav li:not(:last-child)::after {
+/* .mainNav li:not(:last-child)::after {
   content: "";
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  height: 70%;
+  height: 50%;
   width: 1px;
   background-color: #ccc;
-}
+} */
 
 .mainNav li:last-child::after {
   display: none; /* 맨 마지막 메뉴의 구분선 숨김 */
@@ -89,8 +86,8 @@ body {
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.8s;
-  transition: color 0.8s;
+  transition: 0.3s ;
+  
 }
 .mainNav li a:hover {
   background-color: #84776e;
@@ -101,7 +98,9 @@ body {
   text-align: left;
   background-color: #84776e;
   padding: 5px 5px 5px 20px;
-  color:azure
+  color:azure;
+  font-size: 15pt;
+  font-weight: bold;
 
 }
   
@@ -143,8 +142,9 @@ body {
     color: #333;
     margin-top: 5px;
   }
+
   .detailShipping{
-    flex-grow: ;
+ 
   }
   .view-details {
     margin-top: 10px;
