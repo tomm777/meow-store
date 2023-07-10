@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const connectDB = require('./config/db');
 const {
   memberOrderRouter,
@@ -16,12 +17,16 @@ require('dotenv').config();
 connectDB();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('views/pages'));
-app.use('/assets', express.static('assets'));
+app.use('/assets', express.static('views/assets'));
+app.use('/components', express.static('views/components'));
 app.use('/utils', express.static('views/utils'));
+app.use('/common', express.static('views/common'));
+app.use('/uploads', express.static('views/uploads'));
 
 app.use('/api/products', productsRouter);
 app.use('/api/product', productRouter);
