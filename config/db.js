@@ -20,6 +20,4 @@ module.exports = () => {
     console.log('mongodb disconnected!. Try connect again');
     connect();
   });
-
-  // 작성한 스키마들을 import합니다.
 };

@@ -27,7 +27,8 @@ class ProductController {
 
   async createProduct(req, res) {
     try {
-      const { name, price, summary, description, repImgUrl } = req.body;
+      const repImgUrl = '/uploads/' + req.file.filename;
+      const { name, price, summary, description } = req.body;
 
       const product = await ProductService.createProduct({
         name,
