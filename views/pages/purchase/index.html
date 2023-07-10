@@ -1,13 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
-    <script src="index.js" type="module"></script>
-    <title>야옹 잡화점</title>
-  </head>
-  <body>
-    purchase
-  </body>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>구매 내역</title>
+  <link rel = "stylesheet" href = "index.css">
+</head>
+<body>
+  <header class="header">
+    <h1>구매 내역</h1>
+  </header>
+
+  <main>
+    <section class="purchase-list">
+      <article class="purchase-item">
+        <img src="고양이사료썸네일.jpg" alt="Product Thumbnail" class="thumbnail">
+        <div class="purchase-details">
+          <span class="order-number">주문번호: 12345</span>
+          <h3 class="product-name">상품 이름</h3>
+          <span class="price">결제 가격: $19.99</span>
+          <button class="view-details">상세 내역 보기</button>
+        </div>
+        <div class="shipping-status">배송 상태</div>
+      </article>
+
+      <!-- 다른 구매 내역 항목들을 여기에 추가 -->
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2023 구매 내역. All rights reserved.</p>
+  </footer>
+</body>
 </html>
