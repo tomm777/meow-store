@@ -3,6 +3,7 @@ async function getProductsList() {
   const jsonData = await response.json();
   console.log(jsonData);
 }
+
 getProductsList();
 
 
