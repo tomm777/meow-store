@@ -27,10 +27,9 @@ for (let i = 0; i < savedCartData.length; ++i) {
   const newLi = document.createElement('li');
   newLi.innerHTML = content;
   cartList.appendChild(newLi);
-
   priceSum += data.price * data.qty;
 }
-priceSumElement.innerText = `${priceSum}원`;
+priceSumElement.innerText = `${priceSum} 원`;
 
 const qtyUpBtns = document.querySelectorAll('.qty_up');
 const qtyDownBtns = document.querySelectorAll('.qty_down');
@@ -50,7 +49,7 @@ function qtyUp(event) {
       if (o._id === id) {
         o.qty += 1;
         priceSum += o.price;
-        priceSumElement.innerText = `${priceSum}원`;
+        priceSumElement.innerText = `${priceSum} 원`;
       }
       return o;
     });
@@ -68,7 +67,7 @@ function qtyDown(event) {
       if (o._id === id) {
         o.qty -= 1;
         priceSum -= o.price;
-        priceSumElement.innerText = `${priceSum}원`;
+        priceSumElement.innerText = `${priceSum} 원`;
       }
       return o;
     });
@@ -84,7 +83,7 @@ function deleteEach(event) {
   const price = event.target.closest('.product_wrap').querySelector('.product_price');
   const qty = event.target.closest('.product_wrap').querySelector('.product_qty');
   priceSum -= Number(price.innerText) * Number(qty.innerText);
-  priceSumElement.innerText = `${priceSum}원`;
+  priceSumElement.innerText = `${priceSum} 원`;
 
   savedCartData = savedCartData.filter((o) => o._id !== id);
   localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
@@ -95,9 +94,7 @@ function deleteAll() {
   if (userConfirm) {
     localStorage.removeItem('meowStoreCart');
     cartList.innerHTML = '';
-    priceSumElement.innerText = 0;
+    priceSumElement.innerText = '0 원';
   }
 }
 deleteAllBtn.addEventListener('click', deleteAll);
-
-priceSumElement.innerText = `${priceSum}원`;
