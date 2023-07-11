@@ -14,11 +14,15 @@ async function getProductData(id) {
     productData.qty = 1;
 
     infoBox.innerHTML = `
-      <p>${productData.name}</p>
-      <p>${productData.summary}</p>
-      <p>${productData.price}</p>
-      <p>${productData.description}</p>
-      <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
+      <p class="product_name title is-3">${productData.name}</p>
+      <p class="line"></p>
+      <p class="product_summary">${productData.summary}</p>
+      <p class="product_description">${productData.description}</p>
+      <p class="line"></p>
+      <p class="product_price">${productData.price} 원</p>
+      <div class="addToCart">
+        <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
+      </div>
     `;
 
     const thumbnail = document.querySelector('#product_thumbnail');
