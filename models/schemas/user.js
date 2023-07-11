@@ -3,6 +3,10 @@ const moment = require('moment');
 
 const UserSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: false,
+    },
     email: {
       type: String,
       required: true,
@@ -11,9 +15,24 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    auth: {
+    address: {
+      type: new Schema(
+        {
+          zipCode: String,
+          address: String,
+          detailAddress: String,
+        },
+        {
+          _id: false,
+        },
+      ),
+      required: false,
+    },
+    role: {
       type: String,
-      default: 'USER',
+      required: false,
+      default: 'user',
+      enum: ['admin', 'user'],
     },
     createDate: {
       type: String,
