@@ -4,26 +4,8 @@
 li {
   list-style: none;
 }
-.header-logo {
-  text-align: center;
-}
-.header-nav {
-  text-align: center;
-  height: 50px;
-  width: 100%;
-  background-color: #e0ec38;
-  display: inline-block;
-}
-.header-nav ul {
-  display: flex;
-  justify-content: space-around;
-}
-.header-nav ul li {
-  display: inline-block;
-  cursor: pointer;
-}
-.header-nav ul li:hover {
-  font-weight: bold;
+.content-wrapper {
+  height: 1000px;
 }
 .category-left {
   display: inline-block;

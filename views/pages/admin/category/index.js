@@ -12,34 +12,37 @@ const updateButton = document.querySelector('.updateCategory');
 // 수정 후 저장버튼
 const saveButton = document.querySelector('.button.saveCategory');
 
-// API를 받아와서 가공
-const getCategoryList = () => {
-  fetch('/api/admin/category')
+let test = {};
+
+// 카테고리 API 호출
+const getCateList = () => {
+  fetch('/api/admin/subcategory')
     .then((response) => response.json())
-    .then((data) => {
-      // 데이터를 처리하는 코드 작성
-      data.map((item) => {
+    .then((data) => data.data)
+    .then((result) => {
+      result.map((item) => {
+        test = item;
+        console.log(item);
         nested.insertAdjacentHTML(
           'beforeend',
           `<div>
-          <span class="caret">${item.categoryName}</span>
-          <ul class="nested">
-          ${item.lowCategoryName
-            .map((items) => `<li class="lowCateLi">${items}</li>`)
-            .join('')}
-          </ul>
-          </div>`,
+    <span class="caret" id=${item._id}>${item.categoryName}</span>
+    <ul class="nested">
+    ${item.data
+      .map((items) => `<li class="lowCateLi">${items.subCategoryName}</li>`)
+      .join('')}
+    </ul>
+    </div>`,
         );
+        nodeSet();
       });
-      nodeSet();
     })
     .catch((error) => {
       // 에러 처리하는 코드 작성
       console.log('Error:', error);
     });
 };
-
-getCategoryList();
+getCateList();
 
 function arrowClick() {
   // 토글 클래스 추가
@@ -90,6 +93,7 @@ const nodeSet = () => {
 
 // 카테고리 추가 클릭 이벤트
 addButton.addEventListener('click', function () {
+  console.log(test);
   // 카테고리 이름 입력값
   // let inputValue = document.getElementById('cate-input').value;
   let inputValue = document.getElementById('cate-input');
@@ -150,34 +154,35 @@ addButton.addEventListener('click', function () {
     alert('추가 할 하나의 카테고리만 선택해주세요.');
     return;
   }
-  const categoryName = caretCheck[caretCheck.length - 1].textContent;
+  const categoryName = caretCheck[caretCheck.length - 1];
+  console.log(categoryName.className);
   // 하위 카테고리 추가 API
-  fetch('/api/admin/category', {
-    method: 'POST', // 요청 방식 설정 (POST)
-    headers: {
-      'Content-Type': 'application/json', // 요청 헤더 설정
-    },
-    body: JSON.stringify({
-      categoryName: categoryName,
-      lowCategoryName: inputValue.value,
-    }),
-  })
-    .then((response) => response.json())
-    .then(() => {
-      // 하위 카테고리 추가
-      caretDown.insertAdjacentHTML(
-        'beforeend',
-        `<li class="lowCateLi">${inputValue.value}</li>`,
-      );
-      lowCateClick();
-      // input value 초기화
-      nodeSet();
-      inputValue.value = '';
-    })
-    .catch((error) => {
-      // 에러 처리하는 코드 작성
-      console.log('Error:', error);
-    });
+  // fetch('/api/admin/subcategory', {
+  //   method: 'POST', // 요청 방식 설정 (POST)
+  //   headers: {
+  //     'Content-Type': 'application/json', // 요청 헤더 설정
+  //   },
+  //   body: JSON.stringify({
+  //     categoryId: categoryName,
+  //     subCategoryName: inputValue.value,
+  //   }),
+  // })
+  //   .then((response) => response.json())
+  //   .then(() => {
+  //     // 하위 카테고리 추가
+  //     caretDown.insertAdjacentHTML(
+  //       'beforeend',
+  //       `<li class="lowCateLi">${inputValue.value}</li>`,
+  //     );
+  //     lowCateClick();
+  //     // input value 초기화
+  //     nodeSet();
+  //     inputValue.value = '';
+  //   })
+  //   .catch((error) => {
+  //     // 에러 처리하는 코드 작성
+  //     console.log('Error:', error);
+  //   });
 });
 // 카테고리 삭제 메서드
 const deleteCate = () => {
