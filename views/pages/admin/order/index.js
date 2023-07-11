@@ -57,11 +57,25 @@ function switchSelectBox(o) {
     // api 호출
     // 주문 상태 변경 api
     // 함수호출
+    // const id = tr.getAttribute("id");
+
+    // updateOrderStatus(id, status);
+
+    // o.innerHTML = "수정"
+
+
+    //
+    // 챗지피티
     const id = tr.getAttribute("id");
-
-    updateOrderStatus(id, status);
-
-    o.innerHTML = "수정"
+    updateOrderStatus(id, status)
+      .then(() => {
+        o.innerHTML = "수정";
+        console.log("주문 상태 업데이트 완료");
+      })
+      .catch((error) => {
+        console.error("주문 상태 업데이트 중 오류 발생:", error);
+      });
+    //
   }
 
 }
@@ -80,11 +94,39 @@ async function updateOrderStatus(id, status) {
   });
 }
 
-function deleteRow(o) {
-  const tr = o.closest("tr");
-  tr.remove()
+// function deleteRow(o) {
+//   const tr = o.closest("tr");
+//   const id = tr.getAttribute("id");
 
-  // api 호출
-  // 주문 삭제
-  // validation check (화면상 체크 => 무작정 삭제x, 주문 취소일때 삭제가능)
+//   tr.remove()
+  
+
+//   // api 호출
+//   // 주문 삭제
+//   // validation check (화면상 체크 => 무작정 삭제x, 주문 취소일때 삭제가능)
+// }
+
+// -------------
+
+async function deleteRow(o) {
+  const tr = o.closest("tr");
+  const id = tr.getAttribute("id");
+
+  try {
+    // 주문 삭제 API 호출
+    await deleteOrder(id);
+
+    // 테이블에서 행 제거
+    tr.remove();
+
+    console.log("주문이 성공적으로 삭제되었습니다.");
+  } catch (error) {
+    console.error("주문 삭제 중 오류가 발생했습니다:", error);
+  }
+}
+
+async function deleteOrder(id) {
+  await fetch(`/api/admin/order/${id}`, {
+    method: "DELETE", // 삭제 요청을 보내기 위해 DELETE 메서드를 사용합니다.
+  });
 }
