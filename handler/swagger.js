@@ -17,6 +17,10 @@ const swaggerServers = [
 
 const swaggerTags = [
   {
+    name: 'User',
+    description: 'User API',
+  },
+  {
     name: 'Categorys',
     description: 'Category list API',
   },
@@ -46,6 +50,17 @@ const swaggerTags = [
   },
 ];
 
+const swaggerSecurityScheme = {
+  bearerAuth: {
+    type: 'http',
+    scheme: 'bearer',
+    bearerFormat: 'Token',
+    name: 'Authorization',
+    description: '인증 토큰 값을 넣어주세요.',
+    in: 'header',
+  },
+};
+
 class Swagger {
   static #uniqueSwaggerInstance;
   #paths = [{}];
@@ -74,6 +89,9 @@ class Swagger {
 
         /* open api 3.0.0 version option */
         produces: swaggerProduces,
+        components: {
+          securitySchemes: swaggerSecurityScheme,
+        },
         tags: swaggerTags,
       },
       apis: [],
