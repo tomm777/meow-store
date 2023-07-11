@@ -3,7 +3,7 @@ const cartList = document.querySelector('.cart_list');
 let priceSum = 0;
 const priceSumElement = document.querySelector('#price_sum');
 
-// savedCartData의 상품목록을 장바구니 페이지에 그려주는 반복문
+// savedCartData의 상품목록을 그려주는 반복문
 for (let i = 0; i < savedCartData.length; ++i) {
   let data = savedCartData[i];
   const content = `
@@ -18,7 +18,7 @@ for (let i = 0; i < savedCartData.length; ++i) {
           <span class="product_qty" name="product_qty" >${data.qty}</span>
           <button class="qty_up" onclick="qtyUp(event)">+</button>
         </span>
-        <span class="product_price">${data.price.toLocaleString()}</span>
+        <span class="product_price">${data.price.toLocaleString()} 원</span>
         <button class="delete_each" onclick="deleteEach(event)">삭제</button>
       </div>
     </div>
