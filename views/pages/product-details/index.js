@@ -19,7 +19,7 @@ async function getProductData(id) {
       <p class="product_summary">${productData.summary}</p>
       <p class="product_description">${productData.description}</p>
       <p class="line"></p>
-      <p class="product_price">${productData.price} 원</p>
+      <p class="product_price">${productData.price.toLocaleString()} 원</p>
       <div class="addToCart">
         <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
       </div>

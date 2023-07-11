@@ -18,7 +18,7 @@ for (let i = 0; i < savedCartData.length; ++i) {
           <span class="product_qty" name="product_qty" >${data.qty}</span>
           <button class="qty_up" onclick="qtyUp(event)">+</button>
         </span>
-        <span class="product_price">${data.price}</span>
+        <span class="product_price">${data.price.toLocaleString()}</span>
         <button class="delete_each" onclick="deleteEach(event)">삭제</button>
       </div>
     </div>
@@ -29,7 +29,7 @@ for (let i = 0; i < savedCartData.length; ++i) {
   cartList.appendChild(newLi);
   priceSum += data.price * data.qty;
 }
-priceSumElement.innerText = `${priceSum} 원`;
+priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
 const qtyUpBtns = document.querySelectorAll('.qty_up');
 const qtyDownBtns = document.querySelectorAll('.qty_down');
@@ -49,7 +49,7 @@ function qtyUp(event) {
       if (o._id === id) {
         o.qty += 1;
         priceSum += o.price;
-        priceSumElement.innerText = `${priceSum} 원`;
+        priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
       }
       return o;
     });
@@ -67,7 +67,7 @@ function qtyDown(event) {
       if (o._id === id) {
         o.qty -= 1;
         priceSum -= o.price;
-        priceSumElement.innerText = `${priceSum} 원`;
+        priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
       }
       return o;
     });
@@ -83,7 +83,7 @@ function deleteEach(event) {
   const price = event.target.closest('.product_wrap').querySelector('.product_price');
   const qty = event.target.closest('.product_wrap').querySelector('.product_qty');
   priceSum -= Number(price.innerText) * Number(qty.innerText);
-  priceSumElement.innerText = `${priceSum} 원`;
+  priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
   savedCartData = savedCartData.filter((o) => o._id !== id);
   localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
