@@ -1,18 +1,16 @@
 const { Schema } = require('mongoose');
 
-const CategorySchema = new Schema({
-  categoryName: {
-    type: String,
-    required: true,
+const categorySchema = new Schema(
+  {
+    //name, id, title 등
+    categoryName: {
+      type: String,
+      require: true,
+    },
   },
-  // lowCategoryName: [
-  //   {
-  //     type: String,
-  //   },
-  // ],
-  lowCategoryName: {
-    type: [String],
+  {
+    collection: 'categories',
   },
-});
+);
 
-module.exports = CategorySchema;
+module.exports = categorySchema;

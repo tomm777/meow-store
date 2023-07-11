@@ -6,6 +6,7 @@ const {
   memberOrdersRouter,
   adminProductRouter,
   adminCategoryRouter,
+  adminSubCategoryRouter,
   productRouter,
   productsRouter,
   adminOrderRouter,
@@ -34,6 +35,7 @@ app.use('/api/member/order', memberOrderRouter);
 app.use('/api/member/orders', memberOrdersRouter);
 app.use('/api/admin/product', adminProductRouter);
 app.use('/api/admin/category', adminCategoryRouter);
+app.use('/api/admin/subcategory', adminSubCategoryRouter);
 app.use('/api/admin/order', adminOrderRouter);
 app.use('/api/admin/orders', adminOrdersRouter);
 
