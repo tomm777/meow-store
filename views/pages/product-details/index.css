@@ -3,44 +3,60 @@ section {
   justify-content: center;
   width: 100%;
   height: 100%;
+  margin-top: 50px;
   margin-bottom: 100px;
 }
 
 #product_thumbnail {
+  width: 500px;
+  height: 500px;
   display: inline;
+  margin-right: 20px;
 }
 
 #info_box {
-  border: 1px solid black;
   width: 400px;
-  padding: 20px;
-  margin-bottom: 100px;
+  height: 500px;
+  padding: 30px;
 }
 
-#info_box p {
-  width: 80%;
-  border-bottom: 1px solid black;
+#info_box p.product_name{
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-.product_name {
-  font-size: 2em;
+#info_box p.product_summary {
+  margin-top: 40px;
 }
 
-.product_price {
+#info_box p.product_description {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+#info_box p.product_price {
+  font-size: 1.7em;
+  font-weight: 400;
+  text-align: right;
+    margin: 30px 20px 40px 0;
+}
+
+div.addToCart {
+  display: flex;
+  justify-content: center;
+}
+
+div.addToCart button#addToCartButton {
+  width: 90%;
+  height: 60px;
   font-size: 1.5em;
-  font-weight: 200;
+  font-weight: 500;
 }
 
-.description {
-  text-align: center;
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 100px;
-}
-
-.description img {
-  display: block;
-  margin: 0 auto;
+p.line {
+  border: 1px solid rgb(222, 222, 222);
+  width: 340px;
+  height: 0.1px;
 }
 
 .footer_title {
