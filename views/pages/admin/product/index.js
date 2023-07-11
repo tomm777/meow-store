@@ -112,11 +112,11 @@ async function getProductList() {
       `
     );
   });
-
-
-
-
 }
+
+
+
+
 
 function goToUpdate(o) {
   const tr = o.closest("[name=table-body]");
@@ -129,6 +129,19 @@ const createBtn = document.getElementById("createBtn");
 createBtn.addEventListener("click", () => {
   location.href = "/admin/product-create"
 })
+
+//될까..?
+
+
+
+
+
+
+
+
+
+
+
 
 
 // getCategoryList()
@@ -198,3 +211,20 @@ createBtn.addEventListener("click", () => {
 
 // input.classList.add('updateInput');
 //   spanEle.parentNode.replaceChild(input, spanEle);
+
+
+//총 몇건인지 조회
+async function countList() {
+  const res = await fetch("/api/products");
+  const dataList = await res.json()
+
+  const totalCount = dataList.length;
+
+  document.querySelector(".b2").innerHTML = totalCount.toString();
+}
+
+countList();
+
+
+//수정버튼 눌렀을때 페이지가 이동되서 그안에 데이터들이 입력값이 있는 상태로 구현되는 동작
+
