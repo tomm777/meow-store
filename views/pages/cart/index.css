@@ -45,6 +45,15 @@ h1 {
   margin-right: 30px;
 }
 
+.footer_title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.footer_info {
+  font-size: 1em;
+}
+
 /* topbottom | leftright */
 /* top | leftright | bottom */
 /* top | right | bottom | left */
