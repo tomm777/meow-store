@@ -1,11 +1,10 @@
-/*DB로 부터 데이터 받아옴. api 완성시 사용.*/
-// async function getProductsList() {
-//   const response = await fetch("/api/products");
-//   const jsonData = await response.json();
-//   console.log(jsonData);
-// }
+async function getOrderSummary() {
+  const response = await fetch('api/member/orders');
+  const jsonData = await response.json();
+  console.log(jsonData);
+}
 
-// getProductsList();
+getOrderSummary();
 
 const purchaseListArr = [
     {

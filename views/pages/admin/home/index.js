@@ -1,4 +1,4 @@
-/*더미데이터 완성 후 사용*/
+// /*더미데이터 완성 후 사용*/
 // async function getOrderSummary() {
 //     const response = await fetch("");
 //     const jsonData = await response.json();
