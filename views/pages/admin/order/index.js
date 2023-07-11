@@ -65,7 +65,7 @@ function switchSelectBox(o) {
 
 
     //
-    // 챗지피티
+    // 
     const id = tr.getAttribute("id");
     updateOrderStatus(id, status)
       .then(() => {
@@ -130,3 +130,23 @@ async function deleteOrder(id) {
     method: "DELETE", // 삭제 요청을 보내기 위해 DELETE 메서드를 사용합니다.
   });
 }
+
+
+//총 몇건인지 조회
+async function countList() {
+  const res = await fetch("/api/admin/orders");
+  const dataList = await res.json();
+
+  const totalCount = dataList.length;
+
+  document.querySelector('.b2').innerHTML = totalCount.toString();
+}
+
+countList();
+
+//새로고침 구현하는 동작
+const button = document.querySelector(".btn_red");
+
+button.addEventListener("click", () => {
+  window.location.reload();
+});
