@@ -15,7 +15,7 @@ for (let i = 0; i < savedCartData.length; ++i) {
   const content = `
     <div class="product_wrap" product_id="${data._id}">
       <div class="product_thumbnail">
-        <!-- <img src="${data.repImgUrl}" alt="thumbnail"/> -->
+        <img src="${data.repImgUrl}" alt="thumbnail"/>
       </div>
       <span>${data.name}</span>
       <span class="product_qty">${data.qty}개</span>
