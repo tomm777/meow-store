@@ -8,19 +8,15 @@ for (let i = 0; i < savedCartData.length; ++i) {
   let data = savedCartData[i];
   const content = `
     <div class="product_wrap" product_id="${data._id}">
-      <div>
-        <div class="product_thumbnail">
-        <img src="${data.repImgUrl}" alt="thumbnail"/>
-        </div>
+        <img src="${data.repImgUrl}" class="product_thumbnail" alt="thumbnail"/>
         <span>${data.name}</span>
-        <span>
+        <span class="qty_wrap">
           <button class="qty_down" onclick="qtyDown(event)">-</button>
           <span class="product_qty" name="product_qty" >${data.qty}</span>
           <button class="qty_up" onclick="qtyUp(event)">+</button>
         </span>
         <span class="product_price">${data.price}</span>
         <button class="delete_each" onclick="deleteEach(event)">❌</button>
-      </div>
     </div>
   `;
 

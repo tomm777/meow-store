@@ -9,8 +9,8 @@
   </head>
   <body>
 
-    <h1>장바구니</h1>
-    <section class="section">
+    <h1 class="title is-2">장바구니</h1>
+    <section>
       <div class="cart_top">
         <span>상품명</span>
         <span>수량</span>
@@ -19,9 +19,27 @@
       </div>
       <ul class="cart_list">
         <!-- 카트 상품 반복 -->
+        <!--
+        <li>
+          <div class="product_wrap" product_id="${data._id}">
+              <img src="${data.repImgUrl}" class="product_thumbnail" alt="thumbnail"/>
+              <span>${data.name}</span>
+              <span>
+                <button class="qty_down" onclick="qtyDown(event)">-</button>
+                <span class="product_qty" name="product_qty" >${data.qty}</span>
+                <button class="qty_up" onclick="qtyUp(event)">+</button>
+              </span>
+              <span class="product_price">${data.price}</span>
+              <button class="delete_each" onclick="deleteEach(event)">❌</button>
+          </div>
+        </li>
+        -->
       </ul>
-      <div>
+      <div class="sum">
         <span>총 결제 금액</span><span id="price_sum"></span>
+      </div>
+      <div class="order">
+        <button id="order_btn" class="button is-warning">장바구니 상품 주문</button>
       </div>
     </section>
 
