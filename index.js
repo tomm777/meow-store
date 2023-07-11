@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { generateSecretKey } = require('./jwt/secret-key');
 const connectDB = require('./config/db');
 const {
   memberOrderRouter,
@@ -11,11 +12,14 @@ const {
   productsRouter,
   adminOrderRouter,
   adminOrdersRouter,
+  userRouter,
 } = require('./routes');
 
 require('dotenv').config();
 
 connectDB();
+
+generateSecretKey();
 
 const app = express();
 app.use(cors());
@@ -38,6 +42,7 @@ app.use('/api/admin/category', adminCategoryRouter);
 app.use('/api/admin/subcategory', adminSubCategoryRouter);
 app.use('/api/admin/order', adminOrderRouter);
 app.use('/api/admin/orders', adminOrdersRouter);
+app.use('/api/user', userRouter);
 
 //swagger 적용
 const ApiDcos = require('./docs/index');
