@@ -36,22 +36,22 @@ const purchaseListArr = [
 
 /*구매내역리스트 보여주는 함수*/
 const purchaseList = document.querySelector(".purchase-list");
-  // Image 객체 생성
-const img = new Image();
-  // src 속성에 파일 주소 지정
-img.src = `고양이사료썸네일.jpg`;
-img.setAttribute('class','thumbnail');
+
+
 function showPurchaseList() {
-  const purchaseListElements = purchaseListArr.map(purchaseInfo => `<article class="purchase-item" id = "${purchaseInfo._id}>
-  <img>
-  <div class="purchase-details">
-    <span class="order-number">주문번호: ${purchaseInfo.number}</span>
-    <span class="purchaseDate">구매 일자: ${purchaseInfo.createDate}</span>
-    <h3 class="product-name">${purchaseInfo.title}</h3>
-    <h3 class="price">${purchaseInfo.price} 원</h3>
-  </div>
-  <div class = 'detailShipping'><button class="view-details">상세 내역 보기</button><div class="shipping-status">배송 상태</div></div>
-</article>`);
+  const purchaseListElements = purchaseListArr.map(purchaseInfo => `
+  <article class="purchase-item" id="${purchaseInfo._id}">
+        <div class="purchase-details">
+          <span class="order-number">주문번호: ${purchaseInfo.number}</span>
+          <span class="purchaseDate">구매 일자: ${purchaseInfo.createDate}</span>
+          <h3 class="product-name">${purchaseInfo.title}</h3>
+          <h3 class="price">${purchaseInfo.price} 원</h3>
+        </div>
+        <div class="detailShipping">
+          <button class="view-details">상세 내역 보기</button>
+          <div class="shipping-status">배송 상태</div>
+        </div>
+  </article>`);
   purchaseList.innerHTML = purchaseListElements.join("");
   
 }
@@ -59,7 +59,7 @@ showPurchaseList();
 
 
 
-purchaseList.appendChild(img);
+
 
 const categoryArr = [
     {
