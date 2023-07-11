@@ -10,7 +10,7 @@ for (let i = 0; i < savedCartData.length; ++i) {
     <div class="product_wrap" product_id="${data._id}">
       <div>
         <div class="product_thumbnail">
-        <!-- <img src="${data.repImgUrl}" alt="thumbnail"/> -->
+        <img src="${data.repImgUrl}" alt="thumbnail"/>
         </div>
         <span>${data.name}</span>
         <span>

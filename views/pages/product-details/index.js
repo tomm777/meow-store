@@ -21,8 +21,8 @@ async function getProductData(id) {
       <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
     `;
 
-    //const thumbnail = document.querySelector('#product_thumbnail');
-    //thumbnail.src = `${productData.repImgUrl}`;
+    const thumbnail = document.querySelector('#product_thumbnail');
+    thumbnail.src = `${productData.repImgUrl}`;
 
     const addToCartBtn = document.querySelector('#addToCartButton');
     addToCartBtn.addEventListener('click', addToCart);
