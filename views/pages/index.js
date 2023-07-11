@@ -1,7 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
-  // JavaScript 코드 여기에 작성
-});
-const categories = [
+async function getProductsList() {
+  const response = await fetch("/api/products");
+  const jsonData = await response.json();
+  console.log(jsonData);
+}
+
+getProductsList();
+
+
+const categoryArr = [
   {
     "_id": "1",
     "category": "사료"
@@ -25,244 +31,291 @@ const categories = [
 ];
 
 const items = [
-      { 
-        name: "아이템 1", 
-        repImgUrl: "https://dummyimage.com/200x200/000000/fff",
-        summary: "이 아이템은 아이템 1입니다." 
-      },
-      { 
-        name: "아이템 2", 
-        repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
-        summary: "이 아이템은 아이템 2입니다." 
-      },
-      { 
-        name: "아이템 3", 
-        repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
-        summary: "이 아이템은 아이템 3입니다." 
-      },
-      // 아이템 4부터 15까지 추가
-      { 
-        name: "아이템 4", 
-        repImgUrl: "https://dummyimage.com/200x200/0000ff/fff",
-        summary: "이 아이템은 아이템 4입니다." 
-      },
-      { 
-        name: "아이템 5", 
-        repImgUrl: "https://dummyimage.com/200x200/ff00ff/fff",
-        summary: "이 아이템은 아이템 5입니다." 
-      },
-      { 
-        name: "아이템 6", 
-        repImgUrl: "https://dummyimage.com/200x200/ffff00/fff",
-        summary: "이 아이템은 아이템 6입니다." 
-      },
-      { 
-        name: "아이템 7", 
-        repImgUrl: "https://dummyimage.com/200x200/00ffff/fff",
-        summary: "이 아이템은 아이템 7입니다." 
-      },
-      { 
-        name: "아이템 8", 
-        repImgUrl: "https://dummyimage.com/200x200/ff6600/fff",
-        summary: "이 아이템은 아이템 8입니다." 
-      },
-      { 
-        name: "아이템 9", 
-        repImgUrl: "https://dummyimage.com/200x200/6600ff/fff",
-        summary: "이 아이템은 아이템 9입니다." 
-      },
-      { 
-        name: "아이템 10", 
-        repImgUrl: "https://dummyimage.com/200x200/990000/fff",
-        summary: "이 아이템은 아이템 10입니다." 
-      },
-      { 
-        name: "아이템 11", 
-        repImgUrl: "https://dummyimage.com/200x200/009900/fff",
-        summary: "이 아이템은 아이템 11입니다." 
-      },
-      { 
-        name: "아이템 12", 
-        repImgUrl: "https://dummyimage.com/200x200/000099/fff",
-        summary: "이 아이템은 아이템 12입니다." 
-      },
-      { 
-        name: "아이템 13", 
-        repImgUrl: "https://dummyimage.com/200x200/999900/fff",
-        summary: "이 아이템은 아이템 13입니다." 
-      },
-      { 
-        name: "아이템 14", 
-        repImgUrl: "https://dummyimage.com/200x200/009999/fff",
-        summary: "이 아이템은 아이템 14입니다." 
-      },
-      { 
-        name: "아이템 15", 
-        repImgUrl: "https://dummyimage.com/200x200/990099/fff",
-        summary: "이 아이템은 아이템 15입니다." 
-      },
-      { 
-        name: "아이템 1", 
-        repImgUrl: "https://dummyimage.com/200x200/000000/fff",
-        summary: "이 아이템은 아이템 1입니다." 
-      },
-      { 
-        name: "아이템 2", 
-        repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
-        summary: "이 아이템은 아이템 2입니다." 
-      },
-      { 
-        name: "아이템 3", 
-        repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
-        summary: "이 아이템은 아이템 3입니다." 
-      },
-      // 아이템 4부터 15까지 추가
-      { 
-        name: "아이템 4", 
-        repImgUrl: "https://dummyimage.com/200x200/0000ff/fff",
-        summary: "이 아이템은 아이템 4입니다." 
-      },
-      { 
-        name: "아이템 5", 
-        repImgUrl: "https://dummyimage.com/200x200/ff00ff/fff",
-        summary: "이 아이템은 아이템 5입니다." 
-      },
-      { 
-        name: "아이템 6", 
-        repImgUrl: "https://dummyimage.com/200x200/ffff00/fff",
-        summary: "이 아이템은 아이템 6입니다." 
-      },
-      { 
-        name: "아이템 7", 
-        repImgUrl: "https://dummyimage.com/200x200/00ffff/fff",
-        summary: "이 아이템은 아이템 7입니다." 
-      },
-      { 
-        name: "아이템 8", 
-        repImgUrl: "https://dummyimage.com/200x200/ff6600/fff",
-        summary: "이 아이템은 아이템 8입니다." 
-      },
-      { 
-        name: "아이템 9", 
-        repImgUrl: "https://dummyimage.com/200x200/6600ff/fff",
-        summary: "이 아이템은 아이템 9입니다." 
-      },
-      { 
-        name: "아이템 10", 
-        repImgUrl: "https://dummyimage.com/200x200/990000/fff",
-        summary: "이 아이템은 아이템 10입니다." 
-      },
-      { 
-        name: "아이템 11", 
-        repImgUrl: "https://dummyimage.com/200x200/009900/fff",
-        summary: "이 아이템은 아이템 11입니다." 
-      },
-      { 
-        name: "아이템 12", 
-        repImgUrl: "https://dummyimage.com/200x200/000099/fff",
-        summary: "이 아이템은 아이템 12입니다." 
-      },
-      { 
-        name: "아이템 13", 
-        repImgUrl: "https://dummyimage.com/200x200/999900/fff",
-        summary: "이 아이템은 아이템 13입니다." 
-      },
-      { 
-        name: "아이템 14", 
-        repImgUrl: "https://dummyimage.com/200x200/009999/fff",
-        summary: "이 아이템은 아이템 14입니다." 
-      },
-      { 
-        name: "아이템 15", 
-        repImgUrl: "https://dummyimage.com/200x200/990099/fff",
-        summary: "이 아이템은 아이템 15입니다." 
-      },
-      { 
-        name: "아이템 1", 
-        repImgUrl: "https://dummyimage.com/200x200/000000/fff",
-        summary: "이 아이템은 아이템 1입니다." 
-      },
-      { 
-        name: "아이템 2", 
-        repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
-        summary: "이 아이템은 아이템 2입니다." 
-      },
-      { 
-        name: "아이템 3", 
-        repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
-        summary: "이 아이템은 아이템 3입니다." 
-      },
-      // 아이템 4부터 15까지 추가
-      { 
-        name: "아이템 4", 
-        repImgUrl: "https://dummyimage.com/200x200/0000ff/fff",
-        summary: "이 아이템은 아이템 4입니다." 
-      },
-      { 
-        name: "아이템 5", 
-        repImgUrl: "https://dummyimage.com/200x200/ff00ff/fff",
-        summary: "이 아이템은 아이템 5입니다." 
-      },
-      { 
-        name: "아이템 6", 
-        repImgUrl: "https://dummyimage.com/200x200/ffff00/fff",
-        summary: "이 아이템은 아이템 6입니다." 
-      },
-      { 
-        name: "아이템 7", 
-        repImgUrl: "https://dummyimage.com/200x200/00ffff/fff",
-        summary: "이 아이템은 아이템 7입니다." 
-      },
-      { 
-        name: "아이템 8", 
-        repImgUrl: "https://dummyimage.com/200x200/ff6600/fff",
-        summary: "이 아이템은 아이템 8입니다." 
-      },
-      { 
-        name: "아이템 9", 
-        repImgUrl: "https://dummyimage.com/200x200/6600ff/fff",
-        summary: "이 아이템은 아이템 9입니다." 
-      },
-      { 
-        name: "아이템 10", 
-        repImgUrl: "https://dummyimage.com/200x200/990000/fff",
-        summary: "이 아이템은 아이템 10입니다." 
-      },
-      { 
-        name: "아이템 11", 
-        repImgUrl: "https://dummyimage.com/200x200/009900/fff",
-        summary: "이 아이템은 아이템 11입니다." 
-      },
-      { 
-        name: "아이템 12", 
-        repImgUrl: "https://dummyimage.com/200x200/000099/fff",
-        summary: "이 아이템은 아이템 12입니다." 
-      },
-      { 
-        name: "아이템 13", 
-        repImgUrl: "https://dummyimage.com/200x200/999900/fff",
-        summary: "이 아이템은 아이템 13입니다." 
-      },
-      { 
-        name: "아이템 14", 
-        repImgUrl: "https://dummyimage.com/200x200/009999/fff",
-        summary: "이 아이템은 아이템 14입니다." 
-      },
-      { 
-        name: "아이템 15", 
-        repImgUrl: "https://dummyimage.com/200x200/990099/fff",
-        summary: "이 아이템은 아이템 15입니다." 
-      }
-    ];
+  { 
+    _id: "item1",
+    name: "아이템 1", 
+    repImgUrl: "https://dummyimage.com/200x200/000000/fff",
+    summary: "이 아이템은 아이템 1입니다." 
+  },
+  { 
+    _id: "item2",
+    name: "아이템 2", 
+    repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
+    summary: "이 아이템은 아이템 2입니다." 
+  },
+  { 
+    _id: "item3",
+    name: "아이템 3", 
+    repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
+    summary: "이 아이템은 아이템 3입니다." 
+  },
+  // 아이템 4부터 15까지 추가
+  { 
+    _id: "item4",
+    name: "아이템 4", 
+    repImgUrl: "https://dummyimage.com/200x200/0000ff/fff",
+    summary: "이 아이템은 아이템 4입니다." 
+  },
+  { 
+    _id: "item5",
+    name: "아이템 5", 
+    repImgUrl: "https://dummyimage.com/200x200/ff00ff/fff",
+    summary: "이 아이템은 아이템 5입니다." 
+  },
+  { 
+    _id: "item6",
+    name: "아이템 6", 
+    repImgUrl: "https://dummyimage.com/200x200/ffff00/fff",
+    summary: "이 아이템은 아이템 6입니다." 
+  },
+  { 
+    _id: "item7",
+    name: "아이템 7", 
+    repImgUrl: "https://dummyimage.com/200x200/00ffff/fff",
+    summary: "이 아이템은 아이템 7입니다." 
+  },
+  { 
+    _id: "item8",
+    name: "아이템 8", 
+    repImgUrl: "https://dummyimage.com/200x200/ff6600/fff",
+    summary: "이 아이템은 아이템 8입니다." 
+  },
+  { 
+    _id: "item9",
+    name: "아이템 9", 
+    repImgUrl: "https://dummyimage.com/200x200/6600ff/fff",
+    summary: "이 아이템은 아이템 9입니다." 
+  },
+  { 
+    _id: "item10",
+    name: "아이템 10", 
+    repImgUrl: "https://dummyimage.com/200x200/990000/fff",
+    summary: "이 아이템은 아이템 10입니다." 
+  },
+  { 
+    _id: "item11",
+    name: "아이템 11", 
+    repImgUrl: "https://dummyimage.com/200x200/009900/fff",
+    summary: "이 아이템은 아이템 11입니다." 
+  },
+  { 
+    _id: "item12",
+    name: "아이템 12", 
+    repImgUrl: "https://dummyimage.com/200x200/000099/fff",
+    summary: "이 아이템은 아이템 12입니다." 
+  },
+  { 
+    _id: "item13",
+    name: "아이템 13", 
+    repImgUrl: "https://dummyimage.com/200x200/999900/fff",
+    summary: "이 아이템은 아이템 13입니다." 
+  },
+  { 
+    _id: "item14",
+    name: "아이템 14", 
+    repImgUrl: "https://dummyimage.com/200x200/009999/fff",
+    summary: "이 아이템은 아이템 14입니다." 
+  },
+  { 
+    _id: "item15",
+    name: "아이템 15", 
+    repImgUrl: "https://dummyimage.com/200x200/990099/fff",
+    summary: "이 아이템은 아이템 15입니다." 
+  },
+  { 
+    _id: "item1",
+    name: "아이템 1", 
+    repImgUrl: "https://dummyimage.com/200x200/000000/fff",
+    summary: "이 아이템은 아이템 1입니다." 
+  },
+  { 
+    _id: "item2",
+    name: "아이템 2", 
+    repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
+    summary: "이 아이템은 아이템 2입니다." 
+  },
+  { 
+    _id: "item3",
+    name: "아이템 3", 
+    repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
+    summary: "이 아이템은 아이템 3입니다." 
+  },
+  // 아이템 4부터 15까지 추가
+  { 
+    _id: "item4",
+    name: "아이템 4", 
+    repImgUrl: "https://dummyimage.com/200x200/0000ff/fff",
+    summary: "이 아이템은 아이템 4입니다." 
+  },
+  { 
+    _id: "item5",
+    name: "아이템 5", 
+    repImgUrl: "https://dummyimage.com/200x200/ff00ff/fff",
+    summary: "이 아이템은 아이템 5입니다." 
+  },
+  { 
+    _id: "item6",
+    name: "아이템 6", 
+    repImgUrl: "https://dummyimage.com/200x200/ffff00/fff",
+    summary: "이 아이템은 아이템 6입니다." 
+  },
+  { 
+    _id: "item7",
+    name: "아이템 7", 
+    repImgUrl: "https://dummyimage.com/200x200/00ffff/fff",
+    summary: "이 아이템은 아이템 7입니다." 
+  },
+  { 
+    _id: "item8",
+    name: "아이템 8", 
+    repImgUrl: "https://dummyimage.com/200x200/ff6600/fff",
+    summary: "이 아이템은 아이템 8입니다." 
+  },
+  { 
+    _id: "item9",
+    name: "아이템 9", 
+    repImgUrl: "https://dummyimage.com/200x200/6600ff/fff",
+    summary: "이 아이템은 아이템 9입니다." 
+  },
+  { 
+    _id: "item10",
+    name: "아이템 10", 
+    repImgUrl: "https://dummyimage.com/200x200/990000/fff",
+    summary: "이 아이템은 아이템 10입니다." 
+  },
+  { 
+    _id: "item11",
+    name: "아이템 11", 
+    repImgUrl: "https://dummyimage.com/200x200/009900/fff",
+    summary: "이 아이템은 아이템 11입니다." 
+  },
+  { 
+    _id: "item12",
+    name: "아이템 12", 
+    repImgUrl: "https://dummyimage.com/200x200/000099/fff",
+    summary: "이 아이템은 아이템 12입니다." 
+  },
+  { 
+    _id: "item13",
+    name: "아이템 13", 
+    repImgUrl: "https://dummyimage.com/200x200/999900/fff",
+    summary: "이 아이템은 아이템 13입니다." 
+  },
+  { 
+    _id: "item14",
+    name: "아이템 14", 
+    repImgUrl: "https://dummyimage.com/200x200/009999/fff",
+    summary: "이 아이템은 아이템 14입니다." 
+  },
+  { 
+    _id: "item15",
+    name: "아이템 15", 
+    repImgUrl: "https://dummyimage.com/200x200/990099/fff",
+    summary: "이 아이템은 아이템 15입니다." 
+  },
+  { 
+    _id: "item1",
+    name: "아이템 1", 
+    repImgUrl: "https://dummyimage.com/200x200/000000/fff",
+    summary: "이 아이템은 아이템 1입니다." 
+  },
+  { 
+    _id: "item2",
+    name: "아이템 2", 
+    repImgUrl: "https://dummyimage.com/200x200/ff0000/fff",
+    summary: "이 아이템은 아이템 2입니다." 
+  },
+  { 
+    _id: "item3",
+    name: "아이템 3", 
+    repImgUrl: "https://dummyimage.com/200x200/00ff00/fff",
+    summary: "이 아이템은 아이템 3입니다." 
+  },
+  // 아이템 4부터 15까지 추가
+  { 
+    _id: "item4",
+    name: "아이템 4", 
+    repImgUrl: "https://dummyimage.com/200x200/0000ff/fff",
+    summary: "이 아이템은 아이템 4입니다." 
+  },
+  { 
+    _id: "item5",
+    name: "아이템 5", 
+    repImgUrl: "https://dummyimage.com/200x200/ff00ff/fff",
+    summary: "이 아이템은 아이템 5입니다." 
+  },
+  { 
+    _id: "item6",
+    name: "아이템 6", 
+    repImgUrl: "https://dummyimage.com/200x200/ffff00/fff",
+    summary: "이 아이템은 아이템 6입니다." 
+  },
+  { 
+    _id: "item7",
+    name: "아이템 7", 
+    repImgUrl: "https://dummyimage.com/200x200/00ffff/fff",
+    summary: "이 아이템은 아이템 7입니다." 
+  },
+  { 
+    _id: "item8",
+    name: "아이템 8", 
+    repImgUrl: "https://dummyimage.com/200x200/ff6600/fff",
+    summary: "이 아이템은 아이템 8입니다." 
+  },
+  { 
+    _id: "item9",
+    name: "아이템 9", 
+    repImgUrl: "https://dummyimage.com/200x200/6600ff/fff",
+    summary: "이 아이템은 아이템 9입니다." 
+  },
+  { 
+    _id: "item10",
+    name: "아이템 10", 
+    repImgUrl: "https://dummyimage.com/200x200/990000/fff",
+    summary: "이 아이템은 아이템 10입니다." 
+  },
+  { 
+    _id: "item11",
+    name: "아이템 11", 
+    repImgUrl: "https://dummyimage.com/200x200/009900/fff",
+    summary: "이 아이템은 아이템 11입니다." 
+  },
+  { 
+    _id: "item12",
+    name: "아이템 12", 
+    repImgUrl: "https://dummyimage.com/200x200/000099/fff",
+    summary: "이 아이템은 아이템 12입니다." 
+  },
+  { 
+    _id: "item13",
+    name: "아이템 13", 
+    repImgUrl: "https://dummyimage.com/200x200/999900/fff",
+    summary: "이 아이템은 아이템 13입니다." 
+  },
+  { 
+    _id: "item14",
+    name: "아이템 14", 
+    repImgUrl: "https://dummyimage.com/200x200/009999/fff",
+    summary: "이 아이템은 아이템 14입니다." 
+  },
+  { 
+    _id: "item15",
+    name: "아이템 15", 
+    repImgUrl: "https://dummyimage.com/200x200/990099/fff",
+    summary: "이 아이템은 아이템 15입니다." 
+  }
+];
+
 
   // 카테고리 불러오기 함수
   let currentCategoryIndex = 0;
   const mainNav = document.querySelector('.mainNav');
 
-  function showCategories() {
-    const categoryElements = categories.map(category => `<li><a href="">${category.category}</a></li>
-    `);
-    mainNav.innerHTML = `<ul><li><a href="">About</a></li>${categoryElements.join('')}<ul>`;
+  function showcategoryArr() {
+    const categoryElements = categoryArr.map(categoryObj => `<li><a href="">${categoryObj.category}</a></li>
+    `); //각 category의 이름을 넣은 html 코드가 요소로 있는 배열을 생성.
+    mainNav.innerHTML = `<ul><li><a href="">About</a></li>${categoryElements.join("")}<ul>`; 
+    //배열을 하나의 문자열로 만들어서 mainNav div에 삽입.
 
   }
 
@@ -275,16 +328,22 @@ function showItems(pageNumber) {
   const endIndex = startIndex + itemsPerPage;
   const paginatedItems = items.slice(startIndex, endIndex);
 
-  const itemElements = paginatedItems.map(item => `
-    <div class="item">
+   const itemElements = paginatedItems.map(item => `
+    <div class="item" id="${item._id}" onclick="redirectToProductDetails('${item._id}')">
       <img src="${item.repImgUrl}" alt="${item.name}" />
       <h3>${item.name}</h3>
       <p>${item.summary}</p>
     </div>
   `);
+  
+  function redirectToProductDetails(itemId) {
+    location.href = `/product-details?id=${itemId}`;
+  }
 
-  const itemBox = document.querySelector('.item-box');
-  itemBox.innerHTML = itemElements.join('');
+  const itemBoxs = document.querySelector('.item-box');
+  itemBoxs.innerHTML = itemElements.join('');
+
+
 }
 
 function createPagination() {
@@ -323,11 +382,14 @@ function setActivePageNumber(pageNumber) {
 
 
 // 페이지 로드 시 카테고리 보여주기
-showCategories();
+showcategoryArr();
 
 // 페이지 로드 시 초기 아이템 보여주기 (첫 번째 페이지)
 showItems(1);
-setActivePageNumber(1);
 
 // 페이지네이션 생성
 createPagination();
+setActivePageNumber(1);
+
+
+

@@ -119,26 +119,25 @@ main hr {
     text-align: center;
     border: 1px solid;
     border-color: rgb(155, 155, 155); 
-    
+    border-radius: 5px;   
 }
-
-table {
-    padding: 5px;
+  .tableContainer table {
+    margin:0 10px 10px 10px;
     width: 400px;
     height: 50px;
     font-size : 11pt;
     border-collapse: collapse;
     border-spacing: 0;
-}
+  }
 
-td {
+.tableContainer td {
     padding: 5px;
     font-weight: normal;
     background-color: rgb(236, 236, 236);
     border: 1px solid white;
 }
 
-th {
+.tableContainer th {
     padding: 5px;
     border: 1px solid white;
     background-color: darkgray;
