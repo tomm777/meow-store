@@ -19,10 +19,10 @@ class CategoriesService {
     return result;
   }
 
-  // async modifyCategory(id, categoryName) {
-  //   const result = await Category.findByIdAndUpdate(id, categoryName);
-  //   return result;
-  // }
+  async modifyCategory(id, categoryName) {
+    const result = await Category.updateId(id, categoryName);
+    return result;
+  }
   async findById(id) {
     const result = await Category.findById(id);
     return result;

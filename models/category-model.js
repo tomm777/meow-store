@@ -21,10 +21,17 @@ class CategoryModel {
     const result = await Category.deleteOne(id);
     return result;
   }
-  // async findByIdAndUpdate(id, categoryName) {
-  //   const result = await Category.findByIdAndUpdate(id, categoryName);
-  //   return result;
-  // }
+  async updateId(id, categoryName) {
+    const filter = { _id: id };
+    const option = { returnOriginal: false };
+    const result = await Category.findOneAndUpdate(
+      filter,
+      categoryName,
+      option,
+    );
+    return result;
+  }
+
   async findById(id) {
     const result = await Category.findById(id);
     return result;
