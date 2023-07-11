@@ -12,24 +12,24 @@ const updateButton = document.querySelector('.updateCategory');
 // 수정 후 저장버튼
 const saveButton = document.querySelector('.button.saveCategory');
 
-let test = {};
-
 // 카테고리 API 호출
 const getCateList = () => {
   fetch('/api/admin/subcategory')
     .then((response) => response.json())
     .then((data) => data.data)
     .then((result) => {
+      // getAttribute("categoryId")
       result.map((item) => {
-        test = item;
-        console.log(item);
         nested.insertAdjacentHTML(
           'beforeend',
           `<div>
     <span class="caret" id=${item._id}>${item.categoryName}</span>
     <ul class="nested">
     ${item.data
-      .map((items) => `<li class="lowCateLi">${items.subCategoryName}</li>`)
+      .map(
+        (items) =>
+          `<li class="lowCateLi" id=${items._id}>${items.subCategoryName}</li>`,
+      )
       .join('')}
     </ul>
     </div>`,
@@ -93,10 +93,9 @@ const nodeSet = () => {
 
 // 카테고리 추가 클릭 이벤트
 addButton.addEventListener('click', function () {
-  console.log(test);
   // 카테고리 이름 입력값
   // let inputValue = document.getElementById('cate-input').value;
-  let inputValue = document.getElementById('cate-input');
+  const inputValue = document.getElementById('cate-input');
 
   // 선택된 카테고리 하위에 값을 넣기 위해 선택한 요소
   const caretDown = document.querySelector('.nested .active');
@@ -129,15 +128,17 @@ addButton.addEventListener('click', function () {
     })
       .then((response) => response.json())
       .then((data) => {
+        const result = data.data;
         console.log(data);
         nested.insertAdjacentHTML(
           'beforeend',
           `<div>
-          <span class="caret">${inputValue.value}</span>
+          <span class="caret" id=${result._id}>${inputValue.value}</span>
           <ul class="nested">
           </ul>
           </div>`,
         );
+        // window.location.reload(true);
         nodeSet();
         inputValue.value = '';
       })
@@ -155,34 +156,39 @@ addButton.addEventListener('click', function () {
     return;
   }
   const categoryName = caretCheck[caretCheck.length - 1];
-  console.log(categoryName.className);
+  // console.log(categoryName.id, categoryName.textContent);
   // 하위 카테고리 추가 API
-  // fetch('/api/admin/subcategory', {
-  //   method: 'POST', // 요청 방식 설정 (POST)
-  //   headers: {
-  //     'Content-Type': 'application/json', // 요청 헤더 설정
-  //   },
-  //   body: JSON.stringify({
-  //     categoryId: categoryName,
-  //     subCategoryName: inputValue.value,
-  //   }),
-  // })
-  //   .then((response) => response.json())
-  //   .then(() => {
-  //     // 하위 카테고리 추가
-  //     caretDown.insertAdjacentHTML(
-  //       'beforeend',
-  //       `<li class="lowCateLi">${inputValue.value}</li>`,
-  //     );
-  //     lowCateClick();
-  //     // input value 초기화
-  //     nodeSet();
-  //     inputValue.value = '';
-  //   })
-  //   .catch((error) => {
-  //     // 에러 처리하는 코드 작성
-  //     console.log('Error:', error);
-  //   });
+  fetch('/api/admin/subcategory', {
+    method: 'POST', // 요청 방식 설정 (POST)
+    headers: {
+      'Content-Type': 'application/json', // 요청 헤더 설정
+    },
+    body: JSON.stringify({
+      categoryId: categoryName.id,
+      subCategoryName: inputValue.value,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const result = data.data;
+      // console.log(data._id);
+      // 하위 카테고리 추가
+      if (!data.success) {
+        alert('중복된 카테고리입니다');
+        return;
+      }
+      caretDown.insertAdjacentHTML(
+        'beforeend',
+        `<li class="lowCateLi" id=${result._id}>${inputValue.value}</li>`,
+      );
+      lowCateClick();
+      nodeSet();
+      inputValue.value = '';
+    })
+    .catch((error) => {
+      // 에러 처리하는 코드 작성
+      console.log('Error:', error);
+    });
 });
 // 카테고리 삭제 메서드
 const deleteCate = () => {
@@ -211,18 +217,34 @@ const deleteCate = () => {
   // 하위 카테고리가 선택되지않고 상위 카테고리를 선택 했을 때
   if (nullArrayCheck.length === 0) {
     if (confirm('정말 상위카테고리를 삭제하시겠습니까?')) {
+      console.log(caretCheck[caretCheck.length - 1].id);
+      fetch(`/api/admin/category/${caretCheck[caretCheck.length - 1].id}`, {
+        method: 'DELETE',
+      }).then();
       caretCheck[caretCheck.length - 1].parentElement.remove();
+      nodeSet();
+      return;
     }
   }
+  if (nullArrayCheck.length >= 2) {
+    alert('삭제 할 하나의 카테고리만 선택해주세요');
+    return;
+  }
+
+  fetch(`/api/admin/subcategory/${cateArray[0].id}`, {
+    method: 'DELETE',
+  }).then();
   cateArray.forEach((item) => {
     item.remove();
   });
+  nodeSet();
 };
 // 카테고리 수정 메서드
 const updateCate = () => {
   const cateArray = document.querySelectorAll('.lowCateLi.active');
   const caretCheck = document.querySelectorAll('.caret-down');
   const saveButton = document.querySelector('.button.saveCategory');
+  const inputValue = document.getElementById('cate-input');
   // 하위 카테고리를 선택하지 않고 상위카테고리를 선택 했을때를 구분하기 위함
   const lowCateItem = document.querySelectorAll('.lowCateLi');
   const nullArrayCheck = Array.from(lowCateItem).filter((item) => {
@@ -245,9 +267,12 @@ const updateCate = () => {
     updateButton.disabled = true;
     addButton.disabled = true;
     deleteButton.disabled = true;
+    inputValue.disabled = true;
+
     // span을 input으로 변환
     const spanEle = caretCheck[caretCheck.length - 1];
     const spanValue = spanEle.textContent;
+    // console.log(spanEle.id);
     let input = document.createElement('input');
     input.type = 'text';
     input.value = spanValue;
@@ -257,20 +282,32 @@ const updateCate = () => {
     }
     saveButton.classList.add('active');
     // 저장 수정 API가 들어갈 곳
-    saveButton.addEventListener('click', function () {
+    saveButton.addEventListener('click', async function () {
+      console.log(spanEle.id);
+      console.log(input.value);
+      await fetch(`/api/admin/category/${spanEle.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          categoryName: input.value,
+        }),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          addButton.disabled = false;
+          deleteButton.disabled = false;
+          updateButton.disabled = false;
+          // 원래대로 변환
+          let span = document.createElement('span');
+          span.className = spanEle.className;
+          span.textContent = input.value;
+          if (input.parentNode) {
+            input.parentNode.replaceChild(span, input);
+          }
+          saveButton.classList.remove('active');
+          nodeSet();
+          console.log(result);
+        });
       // 비활성화 해제
-      addButton.disabled = false;
-      deleteButton.disabled = false;
-      updateButton.disabled = false;
-      // 원래대로 변환
-      let span = document.createElement('span');
-      span.className = spanEle.className;
-      span.textContent = input.value;
-      if (input.parentNode) {
-        input.parentNode.replaceChild(span, input);
-      }
-      saveButton.classList.remove('active');
-      nodeSet();
     });
     return;
   }
