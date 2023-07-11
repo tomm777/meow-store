@@ -13,7 +13,7 @@ const purchaseListArr = [
       "number": "2023070601(날짜와 시간 외 조합)",
       "title": "[사료]로얄캐닌 10kg 외 25건",
       "price": 200000,
-      "repImgUrl": "https://www.costco.co.kr/medias/sys_master/images/hd3/he7/12521552281630.jpg",
+      "repImgUrl": "https://github.com/SparklingMind/JavaScript/assets/129268793/4f752356-00a6-4ca9-bd70-b9e970aa5a2e",
       "createDate": "2023-07-05"
     },
     {
@@ -21,7 +21,7 @@ const purchaseListArr = [
       "number": "2023070702(날짜와 시간 외 조합)",
       "title": "[장난감]캣닢볼 외 5건",
       "price": 50000,
-      "repImgUrl": "https://www.costco.co.kr/medias/sys_master/images/hd3/he7/12521552281630.jpg",
+      "repImgUrl": "https://github.com/SparklingMind/JavaScript/assets/129268793/4f752356-00a6-4ca9-bd70-b9e970aa5a2e",
       "createDate": "2023-07-06"
     },
     {
@@ -29,16 +29,21 @@ const purchaseListArr = [
       "number": "2023070803(날짜와 시간 외 조합)",
       "title": "[배변패드]캣그리드 50매 외 10건",
       "price": 80000,
-      "repImgUrl": "https://www.costco.co.kr/medias/sys_master/images/hd3/he7/12521552281630.jpg",
+      "repImgUrl": "https://github.com/SparklingMind/JavaScript/assets/129268793/4f752356-00a6-4ca9-bd70-b9e970aa5a2e",
       "createDate": "2023-07-07"
     }
   ];
 
 /*구매내역리스트 보여주는 함수*/
 const purchaseList = document.querySelector(".purchase-list");
+  // Image 객체 생성
+const img = new Image();
+  // src 속성에 파일 주소 지정
+img.src = `고양이사료썸네일.jpg`;
+img.setAttribute('class','thumbnail');
 function showPurchaseList() {
   const purchaseListElements = purchaseListArr.map(purchaseInfo => `<article class="purchase-item" id = "${purchaseInfo._id}>
-  <img class = "thumbnail" src= "${purchaseInfo.repImgUrl}" alt="Product Thumbnail" class="thumbnail" />
+  <img>
   <div class="purchase-details">
     <span class="order-number">주문번호: ${purchaseInfo.number}</span>
     <span class="purchaseDate">구매 일자: ${purchaseInfo.createDate}</span>
@@ -53,6 +58,8 @@ function showPurchaseList() {
 showPurchaseList();
 
 
+
+purchaseList.appendChild(img);
 
 const categoryArr = [
     {
