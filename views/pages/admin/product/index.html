@@ -7,10 +7,10 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="index.css">
+  <script defer src="index.js"></script>
 </head>
 
 <body>
-  
   <!-- header 부분 -->
   <header>
 
@@ -34,13 +34,13 @@
           검색어
         </div>
         <div class="t-right">
-          <select name="" id="">
+          <!-- <select name="" id="">
             <option value="">상품명</option>
             <option value="">상품명</option>
             <option value="">상품명</option>
             <option value="">상품명</option>
             <option value="">상품명</option>
-          </select>
+          </select> -->
           <input type="text">
         </div>
       </div>
@@ -50,13 +50,13 @@
           카테고리
         </div>
         <div class="t-right">
-          <select name="" id="" class="t-right2">
+          <!-- <select name="" id="" class="t-right2">
             <option value=""> = 카테고리 선택 = </option>
             <option value="">상품명</option>
             <option value="">상품명</option>
             <option value="">상품명</option>
             <option value="">상품명</option>
-          </select>
+          </select> -->
         </div>
       </div>
     </div>
@@ -71,19 +71,19 @@
 
     <div class="container">
       <div>
-        전체 : <b class="b2">13</b>건 조회 |
-        <select name="" id="" class="b2_selector">
+        전체 : <b class="b2">13</b>건 조회
+        <!-- <select name="" id="" class="b2_selector">
           <option value="">상품명</option>
           <option value="">상품명</option>
           <option value="">상품명</option>
           <option value="">상품명</option>
           <option value="">상품명</option>
-        </select>
+        </select> -->
       </div>
       <hr>
       <div class="btn_btw">
         <button class="btn_blank" id="deleteRows" onclick="deleteSelectedRows()">선택삭제</button>
-        <button class="btn_red" id="openModal" onclick="openModal()">+상품등록</button>
+        <button class="btn_red" id="createBtn">+상품등록</button>
       </div>
       <!-- -모달- -->
 
@@ -119,9 +119,9 @@
               <td>관리</td>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="table-body">
             <!-- 반복되는 구간 -->
-            <tr>
+            <!-- <tr>
               <td><input type="checkbox" name="" id=""></td>
               <td>123123</td>
               <td>123</td>
@@ -129,81 +129,17 @@
               <td>123</td>
               <td>123</td>
               <td><button class="btn_black">수정</button></td>
-            </tr>
+            </tr> -->
             <!-- 반복되는 구간 -->
-            <tr>
-              <td><input type="checkbox" name="" id=""></td>
-              <td>123123</td>
-              <td>123</td>
-              <td>123</td>
-              <td>123</td>
-              <td>123</td>
-              <td><button class="btn_black">수정</button></td>
-            </tr>
           </tbody>
         </table>
       </div>
-
   </main>
 
   <!-- footer 부분 -->
   <footer>
 
   </footer>
-
-  <script>
-    function deleteSelectedRows() {
-      var checkboxes = document.querySelectorAll(".product tbody input[type='checkbox']");
-      var rowsToDelete = [];
-
-      checkboxes.forEach(function (checkbox) {
-        if (checkbox.checked) {
-          rowsToDelete.push(checkbox.parentNode.parentNode);
-        }
-      });
-
-      rowsToDelete.forEach(function (row) {
-        row.parentNode.removeChild(row);
-      });
-    }
-
-    //모달창
-
-    let modal = document.getElementById("modal");
-    let previewImg = document.getElementById("preview");
-
-    function openModal() {
-      modal.style.display = "block";
-    }
-
-    function closeModal() {
-      modal.style.display = "none";
-    }
-
-    function previewImage(event) {
-      let reader = new FileReader();
-      reader.onload = function () {
-        previewImg.src = reader.result;
-      }
-      reader.readAsDataURL(event.target.files[0]);
-    }
-
-    function addProduct() {
-      let productName = document.getElementById("product-name").value;
-      let productNumber = document.getElementById("product-number").value;
-      let productPrice = document.getElementById("product-price").value;
-      let productImage = previewImg.src;
-
-      // 여기에서 상품 정보를 활용하여 추가 작업을 수행할 수 있습니다.
-      console.log("상품명:", productName);
-      console.log("상품번호:", productNumber);
-      console.log("가격:", productPrice);
-      console.log("이미지:", productImage);
-
-      closeModal();
-    }
-
-  </script>
 </body>
 
 </html>
