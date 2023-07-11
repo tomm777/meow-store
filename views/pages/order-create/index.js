@@ -14,12 +14,14 @@ for (let i = 0; i < savedCartData.length; ++i) {
   let data = savedCartData[i];
   const content = `
     <div class="product_wrap" product_id="${data._id}">
-      <div class="product_thumbnail">
-        <img src="${data.repImgUrl}" alt="thumbnail"/>
+      <div class="thumbnail_wrap">
+        <img src="${data.repImgUrl}" class="product_thumbnail" alt="thumbnail"/>
       </div>
-      <span>${data.name}</span>
-      <span class="product_qty">${data.qty}개</span>
-      <span class="product_price">${data.price}원</span>
+      <div class="product_info">
+        <span class="product_name">${data.name}</span>
+        <span class="product_qty">${data.qty}개</span>
+        <span class="product_price">${data.price.toLocaleString()}원</span>
+      </div>
     </div>
   `;
   const newLi = document.createElement('li');
