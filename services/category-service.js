@@ -6,16 +6,25 @@ class CategoriesService {
     return categories;
   }
 
-  async createCategory(newCategory) {
-    const category = await Category.create(newCategory);
+  async createCategory(categoryName) {
+    const category = await Category.create(categoryName);
     return category;
   }
-  async findCategory(newCategory) {
-    const category = await Category.findOne({ categoryName: newCategory });
+  async findCategory(categoryName) {
+    const category = await Category.findOne(categoryName);
     return category;
   }
-  async removeCategory(categoryName) {
-    const result = await Category.deleteOne({ categoryName });
+  async removeCategory(id) {
+    const result = await Category.deleteOne(id);
+    return result;
+  }
+
+  // async modifyCategory(id, categoryName) {
+  //   const result = await Category.findByIdAndUpdate(id, categoryName);
+  //   return result;
+  // }
+  async findById(id) {
+    const result = await Category.findById(id);
     return result;
   }
 }
