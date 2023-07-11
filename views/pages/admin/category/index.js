@@ -282,17 +282,21 @@ const updateCate = () => {
     }
     saveButton.classList.add('active');
     // 저장 수정 API가 들어갈 곳
-    saveButton.addEventListener('click', async function () {
+    saveButton.addEventListener('click', function () {
       console.log(spanEle.id);
       console.log(input.value);
-      await fetch(`/api/admin/category/${spanEle.id}`, {
+      fetch(`/api/admin/category/${spanEle.id}`, {
         method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json', // 요청 헤더 설정
+        },
         body: JSON.stringify({
           categoryName: input.value,
         }),
       })
         .then((response) => response.json())
         .then((result) => {
+          console.log(result);
           addButton.disabled = false;
           deleteButton.disabled = false;
           updateButton.disabled = false;
@@ -305,7 +309,6 @@ const updateCate = () => {
           }
           saveButton.classList.remove('active');
           nodeSet();
-          console.log(result);
         });
       // 비활성화 해제
     });
