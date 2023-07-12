@@ -1,5 +1,5 @@
 /* 헤더 스타일 */
-header {
+.header {
   background-color: #fffdf4;
   padding: 20px;
   flex-direction: column;
@@ -82,7 +82,7 @@ li.active {
 }
 
 /* 푸터 스타일 */
-footer {
+.footer {
   background-color: #f2f2f2;
   padding: 10px;
   text-align: center;
