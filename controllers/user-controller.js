@@ -36,15 +36,9 @@ class UserController {
 
   async updateUser(req, res) {
     try {
-      const { password, name, address } = req.body;
       const updatedUser = await UserService.updatedUserInfo(
         req.currentUserId,
-        req.body.currentPassword,
-        {
-          password,
-          name,
-          address,
-        },
+        req.body,
       );
       res.status(200).json({ updatedUser });
     } catch (error) {
@@ -81,16 +75,7 @@ class UserController {
   async updateUserByAdmin(req, res) {
     try {
       const { userId } = req.params;
-      const { password, name, address } = req.body;
-      const updatedUser = await UserService.updatedUserInfo(
-        userId,
-        req.body.currentPassword,
-        {
-          password,
-          name,
-          address,
-        },
-      );
+      const updatedUser = await UserService.updatedUserInfo(userId, req.body);
       res.status(200).json({ updatedUser });
     } catch (error) {
       res
