@@ -1,0 +1,43 @@
+body main {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;  /* 수평 중앙 정렬 */
+    margin: 0;  /* 기본 마진 제거 */
+    padding: 0;  /* 기본 패딩 제거 */
+   
+}
+
+#orderContainer {
+    margin: 10px auto;
+    width: 40%;
+    display: inline-block;
+    border: 1px solid white;
+}
+
+#orderTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#orderTable th, #orderTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#orderTable .header-row {
+    background-color: #f2f2f2;
+}
+
+#orderTable td img {
+    width: 50px;
+}
+
+#totalAmountRow {
+    padding: 8px;
+    text-align: right;
+    border-top: 1px solid #ddd;
+}
+
+#cancelAll {
+    float: center;
+}
