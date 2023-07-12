@@ -1,19 +1,34 @@
 const header = document.querySelector('header');
-
+const token = window.localStorage.getItem('token');
 header.innerHTML = `
-    <div class="logo-container">
-      <div class="logo">
-        <a href ='/'><img src="/assets/로고.png" height="90px" width = "300px"></a>
-      </div>
-      <div class="button-container">
-          <button><a href = '/login'><img src="/assets/icon-login.png" alt="Login" /></a></button>
-          <button><a href = '/cart'><img src="/assets/icon-cart.png" alt="Cart" /></a></button>
-          <button><a href = '/admin/home'><img src="/assets/icon-admin.png" alt="Admin" /></a></button>
-      </div>
-    </div>  
-    <nav class = "mainNav">
-    </nav>
+<div class="logo-container">
+<div class="logo">
+<a href ='/'><img src="/assets/로고.png" height="90px" width = "300px"></a>
+</div>
+<div class="button-container">
+<button type="button" class="logout-button">로그인</button>
+<button><a href = '/login'><img src="/assets/icon-login.png" alt="Login" /></a></button>
+<button><a href = '/cart'><img src="/assets/icon-cart.png" alt="Cart" /></a></button>
+<button><a href = '/admin/home'><img src="/assets/icon-admin.png" alt="Admin" /></a></button>
+</div>
+</div>  
+<nav class = "mainNav">
+</nav>
 `;
+const logoutButton = document.querySelector('.logout-button');
+if (token) {
+  logoutButton.textContent = '로그아웃';
+}
+
+logoutButton.addEventListener('click', function () {
+  if (token) {
+    localStorage.removeItem('token');
+    alert('로그아웃 되었습니다.');
+    window.location.href = '/';
+  } else {
+    window.location.href = '/login';
+  }
+});
 
 const mainNav = document.querySelector('.mainNav');
 function clickNav(o, filter_id) {

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" type="module"></script>
+    <title>야옹 잡화점</title>
+    <link rel="stylesheet" href="../../../common/global.css" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" defer></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="../../../components/header.js" defer></script>
+    <script src="../../../components/footer.js" defer></script>
+    <!-- <script src="../../../api/index.js" defer></script> -->
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header"></header>
+    <main>
+      <!-- aside tab부분 -->
+      <aside class="tab">
+        <div class="side-section">
+          <ul>
+            <div>
+              <span class="bold">쇼핑정보</span>
+            </div>
+            <li><a href="#">- 배송조회</a></li>
+            <li><a href="#">- 취소/반품내역</a></li>
+            <ul>
+              <div>
+                <span class="bold">회원 정보</span>
+              </div>
+              <li><a href="">- 사용자 정보 변경</a></li>
+              <li><a href="#">- 비밀번호변경</a></li>
+              <li><a href="#">- 회원 탈퇴</a></li>
+            </ul>
+          </ul>
+        </div>
+      </aside>
+      <!-- content 부분-->
+      <section class="content-wrap">
+        <div class="content-wrapper">
+          <h2 class="title">회원 정보 수정</h2>
+          <table>
+            <tbody>
+              <tr>
+                <th>아이디(이메일)</th>
+                <td>
+                  <div>
+                    <input type="text" id="email" />
+                    <!-- <button class="modify-mail">이메일 수정하기</button> -->
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>이름</th>
+                <td>
+                  <div>
+                    <span>김기범</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>휴대폰 번호</th>
+                <td>
+                  <div>
+                    <input type="text" id="phone-number" />
+                    <!-- <button class="modify-number">휴대폰 번호 수정</button> -->
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>주소</th>
+                <td>
+                  <div class="address-area">
+                    <!-- <span>서울특별시 무슨구 무슨도로...</span> -->
+                    <button class="modify-address">주소검색</button>
+                    <span>우편 번호</span>
+                    <input type="text" id="address-zip-input" readonly />
+                    <span>주소지</span>
+                    <input type="text" id="address-input" readonly />
+                    <span>상세 주소</span>
+                    <input type="text" id="address-detail-input" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>비밀번호 확인</th>
+                <td>
+                  <div>
+                    <input type="password" id="password-check" />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="save-area">
+            <button class="save-button">저장</button>
+            <button class="cansle-button">취소</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer"></footer>
+  </body>
+</html>
