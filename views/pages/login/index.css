@@ -1,0 +1,20 @@
+.login {
+  width: 400px;
+  margin: 0 auto;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-tilte {
+  margin-bottom: 20px;
+}
+
+.login-tilte b {
+  font-size: x-large;
+}
+
+.icon.active {
+  color: black !important;
+}
