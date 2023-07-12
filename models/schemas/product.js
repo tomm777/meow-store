@@ -3,16 +3,21 @@ const moment = require('moment');
 
 const ProductSchema = new Schema(
   {
-    /*userId: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
-    },*/
-    /*categoryId: {
+    },
+    categoryId: {
       type: Schema.Types.ObjectId,
-      ref: 'categorys',
+      ref: 'categories',
       required: true,
-    },*/
+    },
+    subcategoryId: {
+      type: Schema.Types.ObjectId,
+      ref: 'subcategories',
+      required: false,
+    },
     name: {
       type: String,
       required: true,

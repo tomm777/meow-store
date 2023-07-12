@@ -32,6 +32,9 @@ function adminRequired(req, res, next) {
       return;
     }
 
+    const userId = jwtDecoded.userId;
+    req.currentUserId = userId;
+
     next();
   } catch (error) {
     next(error);
