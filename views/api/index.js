@@ -1,4 +1,4 @@
-async function get(endpoint, params = '') {
+async function get(endpoint, params = '', errorAlert = true) {
   const apiUrl = `${endpoint}${params}`;
 
   const res = await fetch(apiUrl, {
@@ -7,18 +7,20 @@ async function get(endpoint, params = '') {
     },
   });
 
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-
   const result = await res.json();
+
+  if (!res.ok) {
+    const { message } = result;
+
+    if (message && errorAlert) {
+      alert(message);
+      throw new Error(message);
+    }
+  }
   return result;
 }
 
-async function post(endpoint, data) {
+async function post(endpoint, data, errorAlert = true) {
   const apiUrl = endpoint;
   const bodyData = JSON.stringify(data);
 
@@ -31,17 +33,20 @@ async function post(endpoint, data) {
     body: bodyData,
   });
 
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-    throw new Error(reason);
-  }
-
   const result = await res.json();
+
+  if (!res.ok) {
+    const { message } = result;
+
+    if (message && errorAlert) {
+      alert(message);
+      throw new Error(message);
+    }
+  }
   return result;
 }
 
-async function patch(endpoint, params = '', data) {
+async function patch(endpoint, params = '', data, errorAlert = true) {
   const apiUrl = `${endpoint}${params}`;
   const bodyData = JSON.stringify(data);
 
@@ -54,19 +59,21 @@ async function patch(endpoint, params = '', data) {
     body: bodyData,
   });
 
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-
   const result = await res.json();
+
+  if (!res.ok) {
+    const { message } = result;
+
+    if (message && errorAlert) {
+      alert(message);
+      throw new Error(message);
+    }
+  }
 
   return result;
 }
 
-async function put(endpoint, params = '', data) {
+async function put(endpoint, params = '', data, errorAlert = true) {
   const apiUrl = `${endpoint}${params}`;
   const bodyData = JSON.stringify(data);
 
@@ -79,19 +86,21 @@ async function put(endpoint, params = '', data) {
     body: bodyData,
   });
 
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-
   const result = await res.json();
+
+  if (!res.ok) {
+    const { message } = result;
+
+    if (message && errorAlert) {
+      alert(message);
+      throw new Error(message);
+    }
+  }
 
   return result;
 }
 
-async function del(endpoint, params = '') {
+async function del(endpoint, params = '', errorAlert = true) {
   const apiUrl = `${endpoint}${params}`;
 
   const res = await fetch(apiUrl, {
@@ -102,14 +111,16 @@ async function del(endpoint, params = '') {
     },
   });
 
-  if (!res.ok) {
-    const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
-  }
-
   const result = await res.json();
+
+  if (!res.ok) {
+    const { message } = result;
+
+    if (message && errorAlert) {
+      alert(message);
+      throw new Error(message);
+    }
+  }
   return result;
 }
 
