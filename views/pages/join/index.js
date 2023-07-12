@@ -31,7 +31,9 @@ window.onload = function () {
 };
 // HTML onclick 이벤트
 function register() {
+  console.log(phoneNumberInput.value);
   // console.log(joinFlag);
+
   if (
     zipcodeInput.value === '' ||
     addressValue.value === '' ||
@@ -61,6 +63,7 @@ function register() {
       name: nameValue.value,
       email: emailInput.value,
       password: password.value,
+      contact: phoneNumberInput.value,
       address: {
         zipCode: zipcodeInput.value,
         address: addressValue.value,
@@ -70,9 +73,8 @@ function register() {
   })
     .then((data) => data.json())
     .then((result) => console.log(result));
-  console.log('완료');
   // 로그인 페이지로 이동
-  // window.location.href = '/login';
+  window.location.href = '/login';
 }
 
 // 로그에 2번찍힘
@@ -119,6 +121,13 @@ const validationCheck = () => {
       numberFlag = false;
       return;
     }
+    // 하이픈 달아주기
+
+    // const newphone = phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+    phoneNumberInput.value = phoneNumberInput.value.replace(
+      /^(\d{2,3})(\d{3,4})(\d{4})$/,
+      `$1-$2-$3`,
+    );
     numberFlag = true;
     phoneSpan.style.display = 'none';
   };
