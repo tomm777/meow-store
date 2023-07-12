@@ -36,6 +36,7 @@ const qtyDownBtns = document.querySelectorAll('.qty_down');
 const qtyElements = document.querySelectorAll('.product_qty');
 const deleteEachBtns = document.querySelectorAll('.delete_each');
 const deleteAllBtn = document.querySelector('.delete_all');
+const orderBtn = document.querySelector('#order_btn');
 
 function qtyUp(event) {
   const qtyElement = event.target.closest('span').querySelector('[name=product_qty]');
@@ -98,3 +99,7 @@ function deleteAll() {
   }
 }
 deleteAllBtn.addEventListener('click', deleteAll);
+
+orderBtn.addEventListener('click', () => {
+  location.href = 'http://localhost:3000/order-create/';
+});
