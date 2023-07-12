@@ -10,7 +10,12 @@ adminProductRouter.post(
   upload.single('file'),
   productController.createProduct,
 );
-adminProductRouter.post('/:id', adminRequired, productController.editProduct);
+adminProductRouter.post(
+  '/:id',
+  adminRequired,
+  upload.single('file'),
+  productController.editProduct,
+);
 adminProductRouter.delete(
   '/:id',
   adminRequired,
