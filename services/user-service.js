@@ -9,7 +9,7 @@ class UserService {
   }
 
   async addUser(userInfo) {
-    const { name, contact, email, address, password } = userInfo;
+    const { name, contact, email, address, password, role } = userInfo;
 
     const user = await this.userModel.findByEmail(email);
     if (user) {
@@ -25,6 +25,7 @@ class UserService {
       email,
       address,
       password: hashedPassword,
+      role,
     });
 
     return createdNewUser;
