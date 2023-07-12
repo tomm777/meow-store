@@ -20,10 +20,10 @@ const swaggerTags = [
     name: 'User',
     description: 'User API',
   },
-  {
-    name: 'Categorys',
-    description: 'Category list API',
-  },
+  // {
+  //   name: 'Categorys',
+  //   description: 'Category list API',
+  // },
   {
     name: 'Products',
     description: '상품 list API',
@@ -44,10 +44,10 @@ const swaggerTags = [
     name: 'Admin Order',
     description: 'Admin 주문 API',
   },
-  {
-    name: 'Admin Category',
-    description: 'Admin Category API',
-  },
+  // {
+  //   name: 'Admin Category',
+  //   description: 'Admin Category API',
+  // },
 ];
 
 const swaggerSecurityScheme = {
