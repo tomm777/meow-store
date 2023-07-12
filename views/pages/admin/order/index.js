@@ -173,6 +173,7 @@ const button = document.querySelector(".btn_red");
 
 button.addEventListener("click", () => {
   window.location.reload();
+
 });
 
 
@@ -200,3 +201,4 @@ function performSearch(searchText) {
     }
   }
 }
+
