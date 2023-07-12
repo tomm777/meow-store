@@ -1,104 +1,109 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/common/global.css" />
+    <link rel="stylesheet" href="/components/category-modal.css" />
+    <script defer src="/components/admin-header.js"></script>
+    <script defer src="/components/footer.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <script defer type="module" src="index.js"></script>
+    <title>야옹 잡화점</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>야옹 잡화점</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="index.css" />
-</head>
+  <body>
+    <header class="header"></header>
 
-<body>
-  <!-- 상단헤더 -->
-  <header>
+    <!-- 메인 -->
+    <main>
+      <h1 class="title">상품 수정</h1>
 
-  </header>
+      <div class="product">
+        <div class="product_wrap">
+          <div class="product_left">카테고리</div>
+          <div class="product_right">
+            <button
+              class="js-modal-trigger"
+              data-target="modal-category"
+              data-callback="callbackCategoryModal"
+            >
+              카테고리 찾기
+            </button>
+            <b class="category-name" id="categoryName"></b>
+            <input type="hidden" id="categoryId" />
+            <input type="hidden" id="subcategoryId" />
+          </div>
+        </div>
+        <div class="product_wrap">
+          <div class="product_left">상품명</div>
+          <div class="product_right">
+            <input
+              type="text"
+              id="product_name"
+              placeholder="예시) 플라워 미니 원피스"
+            />
+            <span>(0/250)</span>
+          </div>
+        </div>
 
+        <div class="product_wrap">
+          <div class="product_left">판매가</div>
+          <div class="product_right">
+            <input type="number" id="price" class="input2" min="0" />
+            <span class="won">원</span>
+          </div>
+        </div>
 
+        <div class="product_wrap">
+          <div class="product_left">재고</div>
+          <div class="product_right">
+            <input type="number" id="stock" class="input2" min="0" />
+            <span class="won">개</span>
+          </div>
+        </div>
 
+        <div class="product_wrap">
+          <div class="product_left">상품 요약 설명</div>
+          <div class="product_right">
+            <input type="text" id="summary" class="text2" />
+            <span>(0/250)</span>
+          </div>
+        </div>
 
-  <!-- 메인 -->
-  <main>
-    <h1 class="title">상품 수정</h1>
-    <!-- 상품 추가 섹션 -->
-    <div class="product">
-      <!-- 한줄씩 시작됨 -->
-      <div class="product_wrap">
-        <div class="product_left">
-          상품명
-          <span>(필수)</span>
+        <div class="product_wrap">
+          <div class="product_left">상품 상세 설명</div>
+          <div class="product_right">
+            <textarea id="description" cols="30" rows="3"></textarea>
+            <div class="text3">
+              - 상품의 간단한 추가 정보를 입력할 수 있습니다.
+            </div>
+            <div class="text-mini">
+              상품의 간단한 추가 정보를 입력할 수 있습니다.
+            </div>
+          </div>
         </div>
-        <div class="product_right">
-          <input type="text" placeholder="예시) 플라워 미니 원피스">
-          <span>(0/250)</span>
-        </div>
-      </div>
-      <!-- 222 -->
-      <div class="product_wrap">
-        <div class="product_left">
-          판매가
-          <span>(필수)</span>
-        </div>
-        <div class="product_right">
-          <input type="text" class="input2">
-          <span class="won">원</span>
-        </div>
-      </div>
-      <!-- 333 -->
-      <div class="product_wrap">
-        <div class="product_left">
-          상품 요약 설명
-        </div>
-        <div class="product_right">
-          <input type="text" class="text2">
-          <span>(0/250)</span>
-        </div>
-      </div>
-      <!-- 4444 -->
-      <div class="product_wrap">
-        <div class="product_left">
-          상품 상세 설명
-        </div>
-        <div class="product_right">
-          <textarea name="" id="area" cols="30" rows="3"></textarea>
-          <div class="text3">- 상품의 간단한 추가 정보를 입력할 수 있습니다.</div>
-          <div class="text-mini">
-            상품의 간단한 추가 정보를 입력할 수 있습니다.
+
+        <div class="product_wrap">
+          <div class="product_left">상품 이미지</div>
+          <div class="product_right">
+            <input type="file" id="fileInput" multiple />
           </div>
         </div>
       </div>
-      <!-- 5555 -->
-      <div class="product_wrap">
-        <div class="product_left">
-          상품 이미지
-        </div>
-        <div class="product_right">
-          <button class="btn1">상품 대표 이미지 등록</button>
-        </div>
-      </div>
-      <!-- 666 -->
-      <div class="product_wrap">
-        <div class="product_left">
-          상품 썸네일
-        </div>
-        <div class="product_right">
-          <button class="btn1">상품 이미지 등록</button>
-          <button class="btn1" style="margin-left: 20px;">상품 이미지 등록</button>
-          <button class="btn1" style="margin-left: 20px;">상품 이미지 등록</button>
-          <button class="btn1" style="margin-left: 20px;">상품 이미지 등록</button>
-        </div>
-      </div>
-    </div>
+      <button id="uploadButton">수정</button>
+    </main>
 
+    <div class="modal" id="modal-category"></div>
 
-  </main>
-
-
-
-
-  <!-- 푸터 -->
-  <footer></footer>
-</body>
-
+    <footer class="footer"></footer>
+  </body>
 </html>
