@@ -46,16 +46,15 @@ async function login() {
       headers: { 'Content-Type': 'application/json' },
     });
     const data = await response.json();
-    const { token, isAdmin } = data;
-    localStorage.setItem('token', token);
-
-    if (isAdmin) {
-      localStorage.setItem('admin', 'admin');
-    }
-
     if (response.ok) {
       alert(`정상적으로 로그인되었습니다.`);
 
+      const { token, isAdmin } = data;
+      localStorage.setItem('token', token);
+
+      if (isAdmin) {
+        localStorage.setItem('admin', 'admin');
+      }
       const { previouspage } = getUrlParams();
 
       if (previouspage) {
@@ -64,6 +63,10 @@ async function login() {
         return;
       }
       window.location.href = '/';
+    } else {
+      if (data.message) {
+        alert(data.message);
+      }
     }
   } catch (e) {
     console.log('error msg: ', e);
