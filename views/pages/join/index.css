@@ -1,0 +1,98 @@
+body,
+div,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+p,
+button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+table {
+  position: relative;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table tbody tr:first-child {
+  border-top: 2px solid #969696;
+}
+table tbody tr {
+  border-bottom: 1px solid #969696;
+}
+table th {
+  width: 160px;
+  padding: 14px 30px;
+}
+table td {
+  width: 500px;
+  padding: 14px 30px;
+  border-left: 1px solid #ddd;
+}
+button {
+  cursor: pointer;
+}
+button {
+  display: block;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  /* border: unset; */
+  color: #777;
+  background-color: aliceblue;
+  border-radius: 9px;
+  border-color: white;
+}
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 80%;
+}
+input#address-input {
+  display: block;
+}
+h2.title {
+  margin-bottom: 12px;
+}
+section.content-wrapper {
+  margin: 50px 0;
+}
+section .content-wrap {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+span.detail-address {
+  display: block;
+}
+input#email {
+  position: relative;
+}
+button.email-check {
+  border-radius: 0;
+  position: absolute;
+  right: 100px;
+  top: 23px;
+}
+button.submit-button {
+  margin-top: 20px;
+  width: 180px;
+  height: 70px;
+  margin-left: 350px;
+  /* position: absolute;
+  left: calc(50% - 480px); */
+  font-size: large;
+}
+span.check {
+  font-size: 12px;
+  color: red;
+  display: none;
+}
