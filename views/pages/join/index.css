@@ -62,9 +62,14 @@ input#address-input {
 h2.title {
   margin-bottom: 12px;
 }
-section .content-wrap {
-  margin: 22px 44px;
+section.content-wrapper {
+  margin: 50px 0;
 }
+section .content-wrap {
+  width: 1000px;
+  margin: 0 auto;
+}
+
 span.detail-address {
   display: block;
 }

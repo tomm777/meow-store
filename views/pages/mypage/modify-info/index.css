@@ -91,12 +91,14 @@ h2.title {
   margin-bottom: 12px;
 }
 main {
-  /* background-color: #e5e5cb; */
+  margin: 40px 22px;
+  height: 725px;
 }
 /* aside */
 section.content-wrap {
   display: inline-block;
   vertical-align: top;
+  width: 1000px;
 }
 ul li {
   margin-left: 30px;
@@ -124,10 +126,9 @@ aside.tab {
 /* content */
 .content-wrapper {
   position: relative;
-  width: 1200px;
+  margin: 0 30px;
   height: 100%;
   /* border: 1px solid black; */
-  margin: 22px 44px;
   position: relative;
 }
 .save-area {
@@ -148,4 +149,7 @@ aside.tab {
 .save-area button.cansle-button {
   left: calc(50% - 100px);
   background-color: #969696;
+}
+.address-area > span {
+  display: block;
 }
