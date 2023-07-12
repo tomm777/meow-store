@@ -15,6 +15,11 @@ module.exports = {
                   description: '이름',
                   example: '최하은',
                 },
+                contact: {
+                  type: 'string',
+                  description: '연락처',
+                  example: '010-1234-5678',
+                },
                 email: {
                   type: 'string',
                   description: 'email',
@@ -62,6 +67,11 @@ module.exports = {
                     type: 'string',
                     description: '이름',
                     example: '최하은',
+                  },
+                  contact: {
+                    type: 'string',
+                    description: '연락처',
+                    example: '010-1234-5678',
                   },
                   password: {
                     type: 'string',
