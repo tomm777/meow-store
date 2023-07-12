@@ -32,6 +32,7 @@ app.use('/components', express.static('views/components'));
 app.use('/utils', express.static('views/utils'));
 app.use('/common', express.static('views/common'));
 app.use('/uploads', express.static('views/uploads'));
+app.use('/api', express.static('views/api'));
 
 app.use('/api/products', productsRouter);
 app.use('/api/product', productRouter);
