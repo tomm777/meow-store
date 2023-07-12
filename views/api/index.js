@@ -20,16 +20,20 @@ async function get(endpoint, params = '', errorAlert = true) {
   return result;
 }
 
-async function post(endpoint, data, errorAlert = true) {
+async function post(endpoint, data, errorAlert = true, isForm = false) {
   const apiUrl = endpoint;
-  const bodyData = JSON.stringify(data);
+  const bodyData = isForm ? data : JSON.stringify(data);
+
+  let headers = {
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  };
+  if (!isForm) {
+    headers['Content-Type'] = 'application/json';
+  }
 
   const res = await fetch(apiUrl, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
+    headers: headers,
     body: bodyData,
   });
 
