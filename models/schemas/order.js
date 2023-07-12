@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose');
 const moment = require('moment');
+const { v4: uuidv4 } = require('uuid');
 
 const OrderSchema = new Schema(
   {
@@ -8,11 +9,18 @@ const OrderSchema = new Schema(
       ref: 'users',
       required: true,
     },*/
+    number: {
+      type: String,
+      require: true,
+      unique: true,
+      //TODO: 주문번호 생성 로직 업그레이드 해보기
+      default: generateOrderNumber,
+    },
     receiver: {
       type: String,
       required: true,
     },
-    receiverContack: {
+    receiverContact: {
       type: String,
       required: true,
     },
@@ -68,5 +76,10 @@ const OrderSchema = new Schema(
     collection: 'orders',
   },
 );
+
+function generateOrderNumber() {
+  const randomString = uuidv4().replace(/-/g, '').substring(0, 10);
+  return `${moment().format('YYYYMMDDHHmmss')}${randomString}`;
+}
 
 module.exports = OrderSchema;
