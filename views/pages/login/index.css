@@ -18,3 +18,9 @@
 .icon.active {
   color: black !important;
 }
+
+.join {
+  font-size: small;
+  text-align: right;
+  margin-bottom: 10px;
+}
