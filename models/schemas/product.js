@@ -10,12 +10,12 @@ const ProductSchema = new Schema(
     },
     categoryId: {
       type: Schema.Types.ObjectId,
-      ref: 'categories',
+      ref: 'Category',
       required: true,
     },
     subcategoryId: {
       type: Schema.Types.ObjectId,
-      ref: 'subcategories',
+      ref: 'SubCategory',
       required: false,
     },
     name: {
