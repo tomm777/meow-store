@@ -9,7 +9,7 @@ class UserService {
   }
 
   async addUser(userInfo) {
-    const { name, email, address, password } = userInfo;
+    const { name, contact, email, address, password } = userInfo;
 
     const user = await this.userModel.findByEmail(email);
     if (user) {
@@ -21,6 +21,7 @@ class UserService {
     const hashedPassword = await bcrypt.hash(password, 10);
     const createdNewUser = await this.userModel.create({
       name,
+      contact,
       email,
       address,
       password: hashedPassword,
@@ -69,30 +70,34 @@ class UserService {
 
     return user;
   }
-  async updatedUserInfo(userId, currentPassword, toUpdate) {
+  async updatedUserInfo(userId, toUpdate) {
     let user = await this.userModel.findById(userId);
+
+    const { currentPassword } = toUpdate;
 
     if (!user) {
       throw new Error('가입 내역이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
-    const correctPasswordHash = user.password;
-    const isPasswordCorrect = await bcrypt.compare(
-      currentPassword,
-      correctPasswordHash,
-    );
-
-    if (!isPasswordCorrect) {
-      throw new Error(
-        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
+    if (currentPassword) {
+      const correctPasswordHash = user.password;
+      const isPasswordCorrect = await bcrypt.compare(
+        currentPassword,
+        correctPasswordHash,
       );
-    }
 
-    const { password } = toUpdate;
+      if (!isPasswordCorrect) {
+        throw new Error(
+          '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
+        );
+      }
 
-    if (password) {
-      const newPasswordHash = await bcrypt.hash(password, 10);
-      toUpdate.password = newPasswordHash;
+      const { password } = toUpdate;
+
+      if (password) {
+        const newPasswordHash = await bcrypt.hash(password, 10);
+        toUpdate.password = newPasswordHash;
+      }
     }
 
     user = await this.userModel.update({
