@@ -4,10 +4,11 @@ async function getOrderList() {
 
   const tbody = document.getElementById("order_tbody");
   const html = dataList.map((data, index) => {
+    console.log(data);
     return `<tr id="${data._id}">
     <td>${index+1}</td>
     <td>${data.createDate}</td>
-    <td></td>
+    <td>${data.number}</td>
     <td><img src="${data.repImgUrl}" /></td>
     <td>
       <div name="content">
@@ -62,6 +63,29 @@ function switchSelectBox(o) {
     // updateOrderStatus(id, status);
 
     // o.innerHTML = "수정"
+    
+    ///보란님
+    // fetch('/api/admin/orders', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(dataToSend), // 데이터를 JSON 형식으로 변환하여 전송
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       return response.json(); // 새로 생성된 ID
+    //     }
+    //     throw new Error('Network response was not ok.');
+    //   })
+    //   .then((responseText) => {
+    //     console.log(responseText); // 새 아이디가 나옴
+    //     location.href = 'http://localhost:3000/order-complete/';
+    //   })
+    //   .catch((error) => {
+    //     // 요청이 실패했을 때의 처리 로직
+    //     console.log('Error: ', error.message);
+    //   });
+
+
 
 
     //
@@ -150,3 +174,29 @@ const button = document.querySelector(".btn_red");
 button.addEventListener("click", () => {
   window.location.reload();
 });
+
+
+
+//검색기능
+
+document.getElementById("searchButton").addEventListener("click", function() {
+  const searchText = document.getElementById("searchInput").value;
+  performSearch(searchText);
+});
+
+function performSearch(searchText) {
+  // Perform the search logic here
+  // You can use the entered searchText to filter the data and display the relevant results
+  // You can access the order items and perform the necessary filtering or searching operations
+
+  // Example:
+  const orderItems = document.querySelectorAll("#order_tbody tr");
+  for (const item of orderItems) {
+    const orderNumber = item.querySelector("td:nth-child(3)").innerText;
+    if (orderNumber.includes(searchText)) {
+      item.style.display = "table-row"; // Show the matching items
+    } else {
+      item.style.display = "none"; // Hide the non-matching items
+    }
+  }
+}

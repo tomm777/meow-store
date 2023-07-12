@@ -1,62 +1,85 @@
-function deleteSelectedRows() {
-  var checkboxes = document.querySelectorAll(".product tbody input[type='checkbox']");
-  var rowsToDelete = [];
+const count = document.querySelector(".b2");
 
-  checkboxes.forEach(function (checkbox) {
-    if (checkbox.checked) {
-      rowsToDelete.push(checkbox.parentNode.parentNode);
+async function deleteSelectedRows() {
+  let radioes = document.querySelectorAll(".product tbody input[type='radio']");
+  let rowsToDelete = [];
+
+  radioes.forEach(function (radio) {
+    if (radio.checked) {
+      rowsToDelete.push(radio.parentNode.parentNode);
     }
   });
 
   rowsToDelete.forEach(function (row) {
     row.parentNode.removeChild(row);
   });
+  await countList();
+  console.log(count.innerText)
+  count.innerText = Number(count.innerText)-1;
+  console.log(count.innerText)
 }
 
-const dummyData = [{
-    number: '1',
-    image: "이미지",
-    name: "Aquila Foster",
-    category: "blue",
-    price: "20000",
-  },
-  {
-    number: '2',
-    image: "이미지",
-    name: "Aquila Foster",
-    category: "blue",
-    price: "40000",
-  },
-  {
-    number: '3',
-    image: "이미지",
-    name: "Aquila Foster",
-    category: "blue",
-    price: "50000",
-  }
-];
+//총 몇건인지 조회
+async function countList() {
+  const res = await fetch("/api/products");
+  const dataList = await res.json()
 
-function getCategoryList() {
-  let tbody = document.querySelector('#table-body');
-  dummyData.forEach(function (item, index) {
-    tbody.insertAdjacentHTML('beforeend',
-      `
-      <tr id="table-body">
-        <td><input type="checkbox" name="" id=""></td>
-        <td name="number">${item.index}</td>
-        <td name="image"><img src="${item.repImgUrl}" /></td>
-        <td name="name">${item.name}</td>
-        <td name="category"></td>
-        <td name="price">${item.price}</td>
-        <td><button id="fix_btn" class="btn_black">수정</button></td>
-      </tr>
-      `
-    );
-  });
+  const totalCount = dataList.length;
+
+  count.innerHTML = totalCount.toString();
 }
+
+countList();
+
+
+
+
+
+
+// const dummyData = [{
+//     number: '1',
+//     image: "이미지",
+//     name: "Aquila Foster",
+//     category: "blue",
+//     price: "20000",
+//   },
+//   {
+//     number: '2',
+//     image: "이미지",
+//     name: "Aquila Foster",
+//     category: "blue",
+//     price: "40000",
+//   },
+//   {
+//     number: '3',
+//     image: "이미지",
+//     name: "Aquila Foster",
+//     category: "blue",
+//     price: "50000",
+//   }
+// ];
+
+// function getCategoryList() {
+//   let tbody = document.querySelector('#table-body');
+//   dummyData.forEach(function (item, index) {
+//     tbody.insertAdjacentHTML('beforeend',
+//       `
+//       <tr id="table-body">
+//         <td><input type="checkbox" name="" id=""></td>
+//         <td name="number">${item.index}</td>
+//         <td name="image"><img src="${item.repImgUrl}" /></td>
+//         <td name="name">${item.name}</td>
+//         <td name="category"></td>
+//         <td name="price">${item.price}</td>
+//         <td><button id="fix_btn" class="btn_black">수정</button></td>
+//       </tr>
+//       `
+//     );
+//   });
+// }
 //document.querySelector("[name=number]")
 //getCategoryList();
-getProductList()
+
 
 // let fixBtns = document.querySelectorAll(".fix_btn");
 // fixBtns.forEach(function (btn) {
@@ -101,11 +124,11 @@ async function getProductList() {
     tbody.insertAdjacentHTML('beforeend',
       `
       <tr name="table-body" product_id="${item._id}" >
-        <td><input type="checkbox"></td>
+        <td><input type="radio"></td>
         <td name="number">${index+1}</td>
         <td name="image"><img src="${item.repImgUrl}" /></td>
         <td name="name">${item.name}</td>
-        <td name="category"></td>
+        <td name="category">${item.categoty}</td>
         <td name="price">${item.price}</td>
         <td><button onclick="goToUpdate(this)" class="btn_black">수정</button></td>
       </tr>
@@ -114,7 +137,7 @@ async function getProductList() {
   });
 }
 
-
+getProductList()
 
 
 
@@ -213,18 +236,28 @@ createBtn.addEventListener("click", () => {
 //   spanEle.parentNode.replaceChild(input, spanEle);
 
 
-//총 몇건인지 조회
-async function countList() {
-  const res = await fetch("/api/products");
-  const dataList = await res.json()
 
-  const totalCount = dataList.length;
 
-  document.querySelector(".b2").innerHTML = totalCount.toString();
+//검색 기능 
+
+const searchButton = document.querySelector('.btn_black');
+searchButton.addEventListener('click', performSearch);
+
+function performSearch() {
+  const radioes = document.querySelectorAll('.product tbody input[type="radio"]');
+  const selectedRows = [];
+
+  radioes.forEach(function (radio) {
+    if (radio.checked) {
+      const row = radio.parentNode.parentNode;
+      selectedRows.push(row);
+    }
+  });
+
+  const tableBody = document.getElementById('table-body');
+  tableBody.innerHTML = ''; // 검색 결과를 표시하기 전에 테이블 바디 내용을 비웁니다.
+
+  selectedRows.forEach(function (row) {
+    tableBody.appendChild(row); // 선택된 행을 테이블 바디에 다시 추가하여 검색 결과로 표시합니다.
+  });
 }
-
-countList();
-
-
-//수정버튼 눌렀을때 페이지가 이동되서 그안에 데이터들이 입력값이 있는 상태로 구현되는 동작
-
