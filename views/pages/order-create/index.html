@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="index.css" />
     <script defer src="/components/header.js"></script>
     <script defer src="/components/footer.js"></script>
-    <script defer src="index.js"></script>
+    <script defer type="module" src="index.js"></script>
     <title>야옹 잡화점</title>
   </head>
   
@@ -55,7 +55,9 @@
           <div class="sum">
             <span>총 결제 금액</span><span id="price_sum"></span>
           </div>
-          <button id="order" type="button" form="delivery_form" class="button is-warning">결제하기</button>
+          <div class="order">
+            <button id="order_btn" type="button" form="delivery_form" class="button is-warning">결제하기</button>
+          </div>
         </div>
       </section>
     </main>
