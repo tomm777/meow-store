@@ -11,7 +11,7 @@ form#delivery_form {
   padding: 60px 0 80px 30px;
 }
 
-formm#delivery_form div {
+form#delivery_form div {
   margin-bottom: 10px;
 }
 
@@ -65,10 +65,19 @@ img.product_thumbnail {
   padding-left: 20px;
 }
 
+div.sum {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+div.sum span {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
 button#order {
-  margin-left: 134px; /* (568-300)/2 */
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: 30px auto 20px auto;
   width: 300px;
   height: 50px;
   font-size: 1.5em;
