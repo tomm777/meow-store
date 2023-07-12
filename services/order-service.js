@@ -8,7 +8,7 @@ class OrderService {
   async createOrder({
     orderItemList,
     receiver,
-    receiverContack,
+    receiverContact,
     zipCode,
     address,
     detailAddress,
@@ -28,7 +28,7 @@ class OrderService {
       const [newOrder] = await Order.createWithSession(
         {
           receiver,
-          receiverContack,
+          receiverContact,
           zipCode,
           address,
           detailAddress,
