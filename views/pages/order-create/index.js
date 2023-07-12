@@ -78,25 +78,6 @@ async function createOrder(event) {
   if (userConfirm) {
     const result = await API.post('/api/member/order', dataToSend);
     console.log(result);
-    // fetch('/api/member/order', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(dataToSend), // 데이터를 JSON 형식으로 변환하여 전송
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       return response.json(); // 새로 생성된 ID
-    //     }
-    //     throw new Error('Network response was not ok.');
-    //   })
-    //   .then((responseText) => {
-    //     console.log(responseText); // 새 아이디가 나옴
-    //     location.href = 'http://localhost:3000/order-complete/';
-    //   })
-    //   .catch((error) => {
-    //     // 요청이 실패했을 때의 처리 로직
-    //     console.log('Error: ', error.message);
-    //   });
   }
 };
 orderBtn.addEventListener('click', createOrder);
