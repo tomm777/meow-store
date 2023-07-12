@@ -1,13 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/common/global.css" />
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js" type="module"></script>
+    <script defer src="/components/header.js"></script>
+    <script defer src="/components/footer.js"></script>
+    <script defer src="index.js"></script>
     <title>야옹 잡화점</title>
   </head>
-  <body>
-    order details
-  </body>
+
+<body>
+    <header class="header">
+
+    </header>
+    <main>
+      <div id="orderContainer">
+        <table id="orderTable">
+            <tr class="header-row">
+                <th colspan="3"><h2>주문 상품 정보</h2></th>
+                <th><button id="cancelAll" onclick="cancelAll()">전체 주문 취소</button></th>
+            </tr>
+            <tr>
+                <th>상품명</th>
+                <th>수량</th>
+                <th>가격</th>
+                <th>선택취소</th>
+            </tr>
+            <!-- Product rows will be inserted here -->
+        </table>
+        <div id="totalAmountRow">
+            총 결제금액: <span id="totalAmount">0원</span>
+        </div>
+    </div>
+  </main>
+  <footer class = "footer">
+
+  </footer>
+  
+</body>
+
 </html>
