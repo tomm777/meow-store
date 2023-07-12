@@ -26,7 +26,7 @@ function adminRequired(req, res, next) {
     if (role !== 'admin') {
       res.status(403).json({
         result: 'forbidden-approach',
-        reason: '관리자만 권한이 없습니다.',
+        reason: '관리자 권한이 없습니다.',
       });
 
       return;
