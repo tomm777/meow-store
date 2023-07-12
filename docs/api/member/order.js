@@ -15,7 +15,7 @@ module.exports = {
                   description: '수령인',
                   example: '최하은',
                 },
-                receiverContack: {
+                receiverContact: {
                   type: 'string',
                   description: '연락처',
                   example: '010-1234-5678',
