@@ -1,3 +1,21 @@
+button {
+  padding: 12px 10px;
+  font-size: 18px;
+  background-color: #b99090;
+  border: unset;
+  cursor: pointer;
+}
+input {
+  padding: 10px 12px;
+  display: block;
+  margin-bottom: 20px;
+}
+.category-left input {
+  width: 140px;
+}
+button {
+  margin-right: 15px;
+}
 .content-wrap {
   margin: 22px 44px 0;
 }
@@ -19,14 +37,15 @@ li {
   vertical-align: top;
 }
 .category-left {
-  background-color: aliceblue;
+  background-color: #b2bec9;
   height: 100%;
+  padding: 12px 30px;
 }
 .lowCateLi {
   cursor: pointer;
 }
 .lowCateLi.active {
-  background-color: #d3d1d1;
+  background-color: #a39c97;
 }
 #myUL {
   margin: 0;
@@ -45,7 +64,9 @@ li {
   margin-right: 6px;
 }
 .caret-down {
-  background-color: rgb(146, 153, 153);
+  background-color: #84776e;
+  padding: 4px 10px;
+  color: whitesmoke;
 }
 
 .caret-down::before {
@@ -64,4 +85,14 @@ li {
 }
 .button.saveCategory.active {
   display: block;
+  margin-top: 12px;
+}
+.nested-li > div {
+  margin-bottom: 12px;
+}
+.nested-li > div:first-child {
+  margin-top: 12px;
+}
+.nested-li > div > ul > li {
+  margin-top: 8px;
 }

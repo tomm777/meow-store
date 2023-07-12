@@ -285,6 +285,7 @@ const updateCate = () => {
     saveButton.addEventListener('click', function () {
       console.log(spanEle.id);
       console.log(input.value);
+      // 상위 카테고리 수정 API
       fetch(`/api/admin/category/${spanEle.id}`, {
         method: 'PUT',
         headers: {
@@ -297,9 +298,14 @@ const updateCate = () => {
         .then((response) => response.json())
         .then((result) => {
           console.log(result);
+          if (!result.success) {
+            alert(result.message);
+            return;
+          }
           addButton.disabled = false;
           deleteButton.disabled = false;
           updateButton.disabled = false;
+          inputValue.disabled = false;
           // 원래대로 변환
           let span = document.createElement('span');
           span.className = spanEle.className;
@@ -321,6 +327,7 @@ const updateCate = () => {
   updateButton.disabled = true;
   addButton.disabled = true;
   deleteButton.disabled = true;
+  inputValue.disabled = true;
   const liEle = document.querySelector('.lowCateLi.active');
   const liValue = liEle.textContent;
   let input = document.createElement('input');
@@ -333,21 +340,38 @@ const updateCate = () => {
   saveButton.classList.add('active');
 
   saveButton.addEventListener('click', function () {
-    addButton.disabled = false;
-    deleteButton.disabled = false;
-    updateButton.disabled = false;
-    liEle.classList.remove('active');
-    let li = document.createElement('li');
-    li.className = liEle.className;
-    li.textContent = input.value;
-    if (input.parentNode) {
-      input.parentNode.replaceChild(li, input);
-    }
-    // addButton.disabled = false;
-    // deleteButton.disabled = false;
-    saveButton.classList.remove('active');
-    liEle.classList.remove('active');
-    nodeSet();
+    // 상위 카테고리 수정 API
+    console.log(liEle.id);
+    console.log(input.value);
+    fetch(`/api/admin/subcategory/${liEle.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json', // 요청 헤더 설정
+      },
+      body: JSON.stringify({
+        subCategoryName: input.value,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.success) {
+          alert(data.message);
+          return;
+        }
+        addButton.disabled = false;
+        deleteButton.disabled = false;
+        updateButton.disabled = false;
+        liEle.classList.remove('active');
+        let li = document.createElement('li');
+        li.className = liEle.className;
+        li.textContent = input.value;
+        if (input.parentNode) {
+          input.parentNode.replaceChild(li, input);
+        }
+        saveButton.classList.remove('active');
+        liEle.classList.remove('active');
+        nodeSet();
+      });
   });
 };
 
