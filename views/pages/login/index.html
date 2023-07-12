@@ -1,13 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/common/global.css" />
+    <script defer src="/components/header.js"></script>
+    <script defer src="/components/footer.js"></script>
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js" type="module"></script>
+    <script defer type="module" src="index.js"></script>
     <title>야옹 잡화점</title>
   </head>
   <body>
-    login
+    <header class="header"></header>
+
+    <main>
+      <div class="login">
+        <div class="login-tilte">
+          <b>야옹 잡화점</b><br />
+          <p>다양한 고양이 물품을 찾아보세요.</p>
+        </div>
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input class="input" id="email" type="email" placeholder="Email" />
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <p class="control has-icons-left has-icons-right">
+            <input
+              class="input"
+              id="password"
+              type="password"
+              placeholder="Password"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div class="join">
+          <a href="/join">회원가입</a>
+        </div>
+        <button class="button is-warning" type="button" id="loginBtn">
+          로그인
+        </button>
+      </div>
+    </main>
+
+    <footer class="footer"></footer>
   </body>
 </html>
