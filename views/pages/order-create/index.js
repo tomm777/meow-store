@@ -5,6 +5,7 @@ const searchZipCodeBtn = document.querySelector('#search_zip_code');
 const addressInput = document.querySelector('#address');
 const detailAddressInput = document.querySelector('#detail_address');
 const messageInput = document.querySelector('#message');
+const orderButton = document.querySelector('#order');
 
 let savedCartData = JSON.parse(localStorage.getItem('meowStoreCart')) || [];
 const orderList = document.querySelector('.order_list');
@@ -56,7 +57,10 @@ const data = {
   ],
 };
 
-const createOrder = () => {
+const createOrder = (event) => {
+  event.preventDefault();
+  console.log(event);
+
   const userConfirm = confirm('결제하시겠습니까?');
   if (userConfirm) {
     fetch('api/member/order', {
@@ -81,4 +85,8 @@ const createOrder = () => {
         console.log('Error: ', error.message);
       });
   }
+  // const link = 'http://localhost:3000/order-complete/';
+  // location.href = link;
 };
+
+orderButton.addEventListener('click', createOrder);

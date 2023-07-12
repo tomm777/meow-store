@@ -19,7 +19,7 @@
     <main>
       <section>
         <div class="delivery_wrap">
-          <form class="delivery_info" method="post">
+          <form id="delivery_form" method="post">
             <h3 class="subtitle is-3">배송지 정보를 입력해주세요.</h2>
             <div>
               <label for="receiver">수령인</label>
@@ -52,7 +52,7 @@
           <ul class="order_list">
             <!-- 주문 상품 반복 -->
           </ul>
-          <button class="button is-warning">결제하기</button>
+          <button id="order" type="submit" form="delivery_form" class="button is-warning">결제하기</button>
         </div>
       </section>
     </main>
