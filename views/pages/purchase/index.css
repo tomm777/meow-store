@@ -62,16 +62,7 @@ body {
   position: relative;
   flex-grow: 1;
 }
-/* .mainNav li:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 50%;
-  width: 1px;
-  background-color: #ccc;
-} */
+
 
 .mainNav li:last-child::after {
   display: none; /* 맨 마지막 메뉴의 구분선 숨김 */

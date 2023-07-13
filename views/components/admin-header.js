@@ -7,7 +7,7 @@ header.innerHTML = `
       </div>
       
       <div class="button-container">
-        <button><a href=''><img src="icon-admin.png" alt="Admin-logout" /></a></button> 
+      <button><a href = '/admin/home'><img src="/assets/icon-admin_signout.png" alt="Admin-logout" /></a></button>
       </div>
     </div>
     <nav class = "mainNav">
