@@ -86,8 +86,13 @@ function deleteEach(event) {
   priceSum -= Number(price.innerText) * Number(qty.innerText);
   priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
-  savedCartData = savedCartData.filter((o) => o._id !== id);
-  localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
+  savedCartData = savedCartData.filter((o) => { o._id !== id; });
+  if (savedCartData.length === 0) {
+    localStorage.removeItem('meowStoreCart');
+    priceSumElement.innerText = '0 원';
+  } else {
+    localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
+  }
 }
 
 function deleteAll() {
