@@ -8,3 +8,6 @@ footer.innerHTML = `
       </div>
       <p class="copyright">Copyright © meowstore. all right reserved</p>
 `;
+
+// 아이콘 저작권
+//freeiconspng.com
