@@ -15,6 +15,10 @@ form#delivery_form div {
   margin-bottom: 10px;
 }
 
+label {
+  align-items: center;
+}
+
 input#receiver,
 input#contact,
 input#zip_code {

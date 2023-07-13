@@ -15,7 +15,7 @@ async function getUserInfo() {
   const data = await API.get(`/api/user/mypage/`);
   if (data.result === 'forbidden-approach') {
     alert('로그인 후 주문이 가능합니다.');
-    location.href = 'http://localhost:3000/cart/';
+    location.href = '/cart/';
   }
   receiverInput.value = `${data.name}`;
   contactInput.value = `${data.contact}`;
@@ -92,7 +92,7 @@ async function createOrder(event) {
   if (userConfirm) {
     const result = await API.post('/api/member/order', dataToPost);
     localStorage.setItem('orderId', result);
-    location.href = 'http://localhost:3000/order-complete/';
+    location.href = '/order-complete/';
   }
 };
 orderBtn.addEventListener('click', createOrder);
