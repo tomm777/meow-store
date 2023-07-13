@@ -70,10 +70,10 @@ class CategoryController {
           message: '이미 존재하는 카테고리 명입니다.',
         });
       }
-      const result = await CategoriesService.findById(id);
-      result.categoryName = categoryName;
-      const updatedCategory = await result.save();
-      res.status(201).json({ success: true, data: updatedCategory });
+      const result = await CategoriesService.modifyCategory(id, {
+        categoryName,
+      });
+      res.status(201).json({ success: true, data: result });
     } catch (err) {
       res
         .status(err.statusCode || 500)
