@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/common/global.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="index.css">
+  <script defer src="/components/admin-header.js"></script>
   <script defer src="/components/header.js"></script>
   <script defer src="/components/footer.js"></script>
   <script defer src="index.js"></script>
@@ -46,22 +47,24 @@
           검색어
         </div>
         <div class="t-right">
-          <!-- <select name="" id="">
+          <select name="" id="">
             <option value="">상품명</option>
             <option value="">상품명</option>
             <option value="">상품명</option>
             <option value="">상품명</option>
             <option value="">상품명</option>
-          </select> -->
+          </select>
           <input type="text">
         </div>
       </div>
       <!-- 222 -->
-      <div class="t_wrap">
+      <!-- <div class="t_wrap">
         <div class="t-left">
           카테고리
         </div>
         <div class="t-right">
+          <select name="" id="" class="t-right2">
+        <div class="t-right"> -->
           <!-- <select name="" id="" class="t-right2">
             <option value=""> = 카테고리 선택 = </option>
             <option value="">상품명</option>
@@ -72,18 +75,24 @@
         </div>
       </div>
     </div>
+
+          </select> 
+        </div>
+      </div>
+    </div>
+
     <!-- 버튼 -->
     <div class="container">
       <div class="btn_wrap">
         <button class="btn_black">검색</button>
-        <button class="btn_black">초기화</button>
+        <!-- <button class="btn_black">초기화</button> -->
       </div>
       <hr>
-    </div>
+    </div> 
 
     <div class="container">
       <div>
-        전체 : <b class="b2">13</b>건 조회
+        전체 : <b class="b2">12</b>건 조회
         <!-- <select name="" id="" class="b2_selector">
           <option value="">상품명</option>
           <option value="">상품명</option>
@@ -99,7 +108,7 @@
       </div>
       <!-- -모달- -->
 
-      <div id="modal" class="modal">
+      <!-- <div id="modal" class="modal">
         <div class="modal-content">
           <span onclick="closeModal()" style="float: right; cursor: pointer;">&times;</span>
           <h2>상품 추가</h2>
@@ -114,7 +123,7 @@
           <img id="preview" class="preview-image" src="#" alt="미리보기 이미지">
           <button onclick="addProduct()">추가</button>
         </div>
-      </div>
+      </div> -->
 
       <!-- 2번째 작업 -->
 
@@ -122,7 +131,7 @@
         <table class="product">
           <thead>
             <tr>
-              <td><input type="checkbox" name="" id=""></td>
+              <td></td>
               <td>번호</td>
               <td style="width: 120px;">이미지</td>
               <td style="width: 400px;">상품명</td>
@@ -146,6 +155,7 @@
           </tbody>
         </table>
       </div>
+      
   </main>
 
   <!-- footer 부분 -->
