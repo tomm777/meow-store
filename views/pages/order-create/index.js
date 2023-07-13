@@ -11,9 +11,23 @@ const orderBtn = document.querySelector('#order_btn');
 const orderList = document.querySelector('.order_list');
 const priceSumElement = document.querySelector('#price_sum');
 
+async function getUserInfo() {
+  const data = await API.get(`/api/user/mypage/`);
+  if (data.result === 'forbidden-approach') {
+    alert('로그인 후 주문이 가능합니다.');
+    location.href = 'http://localhost:3000/cart/';
+  }
+  receiverInput.value = `${data.name}`;
+  contactInput.value = `${data.contact}`;
+  zipCodeInput.value = `${data.address.zipCode}`;
+  addressInput.value = `${data.address.address}`;
+  detailAddressInput.value = `${data.address.detailAddress}`;
+}
+getUserInfo();
+
 let savedCartData = JSON.parse(localStorage.getItem('meowStoreCart')) || [];
 let priceSum = 0;
-let dataToSend = {
+let dataToPost = {
   receiver: '',
   receiverContact: '',
   zipCode: 0,
@@ -24,7 +38,7 @@ let dataToSend = {
   orderItemList: [],
 };
 
-// savedCartData의 상품목록을 그려주고, 각 아이템을 dataToSend에 넣는 반복문
+// savedCartData의 상품목록을 그려주고, 각 아이템을 dataToPost에 넣는 반복문
 for (let i = 0; i < savedCartData.length; ++i) {
   let data = savedCartData[i];
   const subTotal = data.price * data.qty;
@@ -34,7 +48,7 @@ for (let i = 0; i < savedCartData.length; ++i) {
     quantity: data.qty,
     totalPrice: subTotal,
   };
-  dataToSend.orderItemList.push(temp);
+  dataToPost.orderItemList.push(temp);
 
   const content = `
     <div class="product_wrap" product_id="${data._id}">
@@ -66,17 +80,17 @@ searchZipCodeBtn.addEventListener('click', searchZipCode);
 
 async function createOrder(event) {
   event.preventDefault();
-  dataToSend.receiver = receiverInput.value;
-  dataToSend.receiverContact = contactInput.value;
-  dataToSend.zipCode = zipCodeInput.value;
-  dataToSend.address = addressInput.value;
-  dataToSend.detailAddress = detailAddressInput.value;
-  dataToSend.shippingMessage = messageInput.value;
-  dataToSend.totalPrice = priceSum;
+  dataToPost.receiver = receiverInput.value;
+  dataToPost.receiverContact = contactInput.value;
+  dataToPost.zipCode = zipCodeInput.value;
+  dataToPost.address = addressInput.value;
+  dataToPost.detailAddress = detailAddressInput.value;
+  dataToPost.shippingMessage = messageInput.value;
+  dataToPost.totalPrice = priceSum;
 
   const userConfirm = confirm('결제하시겠습니까?');
   if (userConfirm) {
-    const result = await API.post('/api/member/order', dataToSend);
+    const result = await API.post('/api/member/order', dataToPost);
     localStorage.setItem('orderId', result);
     location.href = 'http://localhost:3000/order-complete/';
   }
