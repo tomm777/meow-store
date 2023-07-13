@@ -5,16 +5,19 @@ const Order = require('../models/order-model');
 const OrderItem = require('../models/order-item-model');
 
 class OrderService {
-  async createOrder({
-    orderItemList,
-    receiver,
-    receiverContact,
-    zipCode,
-    address,
-    detailAddress,
-    shippingMessage,
-    totalPrice,
-  }) {
+  async createOrder(
+    {
+      orderItemList,
+      receiver,
+      receiverContact,
+      zipCode,
+      address,
+      detailAddress,
+      shippingMessage,
+      totalPrice,
+    },
+    userId,
+  ) {
     const session = await startSession();
 
     try {
@@ -27,6 +30,7 @@ class OrderService {
           : `${reqProduct.name}`;
       const [newOrder] = await Order.createWithSession(
         {
+          userId,
           receiver,
           receiverContact,
           zipCode,
@@ -87,9 +91,9 @@ class OrderService {
     return result;
   }
 
-  async getOrderList() {
+  async getOrderList(userId) {
     //TODO: user 검색 필터 추가할것
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({ userId });
     return orders;
   }
 
