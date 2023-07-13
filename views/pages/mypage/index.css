@@ -35,6 +35,7 @@ main {
 section.content-wrap {
   display: inline-block;
   vertical-align: top;
+  position: absolute;
 }
 /* content */
 .content-wrapper {

@@ -1,4 +1,5 @@
 const header = document.querySelector('header'); // header 요소를 선택하여 변수에 할당
+const admin = window.localStorage.getItem('admin');
 
 header.innerHTML = `
 <div class="logo-container">
@@ -9,6 +10,7 @@ header.innerHTML = `
         </a>
       </div>
       <div class="span-container">
+      <button class="button is-normal user-home">사용자 홈</button>
           <span class="header-span login-text admin">관리자 계정</span>
       </div>
     </div>
@@ -16,10 +18,16 @@ header.innerHTML = `
 <nav class = "mainNav">
 </nav>`;
 const loginIcon = document.querySelector('.login');
-
+const userHome = document.querySelector('.user-home');
 const mainNav = document.querySelector('.mainNav'); // mainNav 클래스를 가진 요소를 선택하여 변수에 할당
+if (admin) {
+  userHome.style.display = 'inline-block';
+  userHome.addEventListener('click', function () {
+    window.location.href = '/';
+  });
+}
 
-function clickNav(e, type) {
+function clickNav(e) {
   // clickNav 함수 정의, o 매개변수는 클릭된 메뉴 아이템을 나타냄
   console.log(e);
   const lis = mainNav.querySelectorAll('li'); // mainNav 내부의 모든 li 요소를 선택하여 변수에 할당

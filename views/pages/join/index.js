@@ -72,9 +72,16 @@ function register() {
     }),
   })
     .then((data) => data.json())
-    .then((result) => console.log(result));
+    .then((result) => {
+      if (!result.success) {
+        alert(result.message);
+        return;
+      }
+      alert('회원가입 되었습니다.');
+      window.location.href = '/login';
+    });
+
   // 로그인 페이지로 이동
-  window.location.href = '/login';
 }
 
 // 로그에 2번찍힘
