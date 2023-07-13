@@ -65,6 +65,10 @@ img.product_thumbnail {
   text-align: center;
 }
 
+.qty_down, .qty_up {
+  width: 20px;
+}
+
 .product_info span.product_qty {
   margin: 0 5px;
 }
