@@ -3,7 +3,17 @@ const ProductService = require('../services/product-service');
 class ProductController {
   async getProducts(req, res) {
     try {
-      const products = await ProductService.getProductList();
+      const { categoryId, subcategoryId } = req.query;
+
+      let option = {};
+      if (categoryId) {
+        option.categoryId = categoryId;
+      }
+      if (subcategoryId) {
+        option.subcategoryId = subcategoryId;
+      }
+
+      const products = await ProductService.getProductList(option);
       res.status(200).json(products);
     } catch (err) {
       res
