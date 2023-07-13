@@ -95,15 +95,12 @@ body {
 }
 
 /* category nav */
-.top-categorys {
-  position: relative;
-}
 
 .row-categorys {
   position: absolute;
   flex-direction: row;
   top: 60px;
-  width: 800px;
+  width: 100vh;
   left: 0;
   justify-content: center;
   display: none;
