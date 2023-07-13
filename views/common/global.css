@@ -103,6 +103,7 @@ a {
 /* 내비게이션 스타일 */
 .mainNav {
   background-color: #fffdf4;
+  position: relative;
 }
 
 .mainNav ul {
