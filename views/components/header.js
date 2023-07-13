@@ -22,7 +22,7 @@ header.innerHTML = `
         <a href = '/cart'>
           <span class="header-span">장바구니</span>
         </a>
-        <a href = '/mypage'>
+        <a href = '/mypage' class="mypage">
             <span class="header-span">마이페이지</span>
         </a>
       </div>
@@ -32,8 +32,10 @@ header.innerHTML = `
 </nav>
 `;
 const login = document.querySelector('.header-span.login-text');
+const mypage = document.querySelector('.mypage');
 if (token) {
   login.textContent = '로그아웃';
+  mypage.style.display = 'inline-block';
   // loginIcon.style.display = 'none';
 }
 
