@@ -13,7 +13,10 @@ async function getProductData(id) {
     productData = await response.json();
     productData.qty = 1;
 
-    infoBox.innerHTML = `
+    let subCategory = '';
+    if (productData.subcategoryId.subCategoryName) subCategory = ` > ${productData.subcategoryId.subCategoryName}`;
+      infoBox.innerHTML = `
+      <p class="product_category">${productData.categoryId.categoryName}${subCategory}</p>
       <p class="product_name title is-3">${productData.name}</p>
       <p class="line"></p>
       <p class="product_summary">${productData.summary}</p>
