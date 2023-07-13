@@ -1,93 +1,108 @@
 /* index.css */
 body main {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;  /* 수평 중앙 정렬 */
-    margin: 0;  /* 기본 마진 제거 */
-    padding: 0;  /* 기본 패딩 제거 */
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center; /* 수평 중앙 정렬 */
+  margin: 0; /* 기본 마진 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  flex-direction: column;
+  margin-top: 10px;
 }
 
 #orderContainer {
-    display: inline-block;
-    border: 1px solid #000;
-    width: 40%;
-    margin: 20px;
+  width: 50%;
+  margin: 20px auto;
 }
 
 #orderTable {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-#orderTable th, #orderTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
+#orderTable th,
+#orderTable td {
+  padding: 8px;
 }
 
 #orderTable .header-row {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 #orderTable td img {
-    width: 50px;
+  width: 50px;
 }
 
 #totalAmountRow {
-    padding: 8px;
-    text-align: right;
-    border-top: 1px solid #ddd;
+  padding: 8px;
+  text-align: right;
+  border-top: 1px solid #ddd;
 }
 
 #cancelAll {
-    float: center;
+  float: center;
 }
 
 .strikethrough {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .requestBtn {
-    float: right;
-    margin: 2px 10px 10px 0;
-
+  float: right;
+  margin: 2px 10px 10px 0;
 }
 
 #shippingInfoTable {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-#shippingInfoTable td {
-    border: none;
-    padding: 10px;
+#shippingInfoTable td,
+#shippingInfoTable th {
+  border: none;
+  padding: 10px;
 }
+
+/* #shippingInfoTable thead tr:second-child {
+  border: 1px solid #ddd;
+} */
 
 #shippingInfoDiv {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: none;
-    border-right: none;
-    margin: 10px auto;
-    width: 50%;
-    
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
+  margin: 10px auto;
+  width: 50%;
 }
 
 .info-header {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 .info-property {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-#shippingInfoTable tr:first-child{
-    border-bottom: 1px solid black;
+.edit-btn-wrap {
+  text-align: end;
 }
 
-#shippingInfoTable td:first-child {
-    padding-left: 0;
+.none {
+  display: none !important;
 }
 
-#shippingInfoTable td:last-child {
-    padding-right: 0;
+.product-td {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.control-product {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.product-div {
+  display: flex;
+}
+.product-name {
+  align-self: center;
+  margin-left: 10px;
 }
