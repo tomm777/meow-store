@@ -1,74 +1,174 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <link rel="stylesheet" href="/common/global.css" />
     <link rel="stylesheet" href="index.css" />
     <script defer src="/components/header.js"></script>
     <script defer src="/components/footer.js"></script>
-    <script defer src="index.js"></script>
+    <script
+      defer
+      src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
+    ></script>
+    <script defer type="module" src="index.js"></script>
     <title>야옹 잡화점</title>
   </head>
-<body>
-    <header class="header">
-
-    </header>
+  <body>
+    <header class="header"></header>
     <main>
-      <div id="orderContainer">
-        <table id="orderTable">
-            <tr class="header-row">
-                <th colspan="3"><h2>주문 상품 정보</h2></th>
-                <th>
-                  <button id="cancelAll" onclick="toggleCancelOrder()">전체 선택</button>
-                  <button onclick="uncheckAll()">전체 해제</button>
-                </th>
-                
+      <div id="shippingInfoDiv">
+        <table id="shippingInfoTable">
+          <thead>
+            <tr class="info-header content">
+              <th>
+                <h3 class="">배송지 정보</h3>
+              </th>
+              <th>
+                <div class="edit-btn-wrap">
+                  <button
+                    class="button is-warning is-small edit none"
+                    id="infoResetBtn"
+                  >
+                    취소
+                  </button>
+                  <button
+                    class="button is-warning is-small edit none"
+                    id="infoChangeBtn"
+                  >
+                    완료
+                  </button>
+                  <button
+                    class="button is-warning is-small view"
+                    id="infoEditModeBtn"
+                  >
+                    수정
+                  </button>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="info-property">수령인 :</td>
+              <td>
+                <p class="view" id="receiver"></p>
+                <input class="input edit none" type="text" id="receiverInput" />
+              </td>
             </tr>
             <tr>
-                <th>상품명</th>
-                <th>수량</th>
-                <th>가격</th>
-                <th>선택 취소</th>
+              <td class="info-property">연락처 :</td>
+              <td>
+                <p class="view" id="contact"></p>
+                <input class="input edit none" type="text" id="contactInput" />
+              </td>
             </tr>
-            <!-- Product rows will be inserted here -->
+            <tr>
+              <td class="info-property">우편번호 :</td>
+              <td>
+                <p class="view" id="zipCode"></p>
+                <div class="field is-grouped edit none">
+                  <p class="control is-expanded">
+                    <input
+                      class="input"
+                      type="text"
+                      id="zipCodeInput"
+                      disabled
+                    />
+                  </p>
+                  <p class="control">
+                    <a class="button is-info" id="zipCodeBtn"> Search </a>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="info-property">주소 :</td>
+              <td>
+                <p class="view" id="address"></p>
+                <input
+                  class="input edit none"
+                  type="text"
+                  id="addressInput"
+                  disabled
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="info-property">상세 주소 :</td>
+              <td>
+                <p class="view" id="detailAddress"></p>
+                <input
+                  class="input edit none"
+                  type="text"
+                  id="detailAddressInput"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="info-property">배송 메세지 :</td>
+              <td>
+                <p class="view" id="shippingMessage"></p>
+                <input
+                  class="input edit none"
+                  type="text"
+                  id="shippingMessageInput"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="orderContainer">
+        <table id="orderTable">
+          <thead>
+            <tr class="header-row content">
+              <th colspan="2"><h3>주문 상품 정보</h3></th>
+              <th>
+                <div class="edit-btn-wrap">
+                  <button
+                    class="edit button is-warning is-small none"
+                    id="resetBtn"
+                  >
+                    취소
+                  </button>
+                  <button
+                    class="edit button is-warning is-small none"
+                    id="changeBtn"
+                  >
+                    완료
+                  </button>
+                  <button
+                    class="view button is-warning is-small"
+                    id="editModeBtn"
+                  >
+                    수정
+                  </button>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <th>상품명</th>
+              <th>수량</th>
+              <th>가격</th>
+            </tr>
+          </thead>
+          <tbody id="orderTbody"></tbody>
         </table>
         <div id="totalAmountRow">
-            <span id="totalAmount"></span>
+          <span id="totalAmount"></span>
         </div>
-        <button class = "requestBtn" onclick="submitCancelRequest()">신청하기</button>
-    </div>
-
-    <div id="shippingInfoDiv">
-      <table id="shippingInfoTable">
-          <tr class="info-header">
-              <td><h2 style="display: inline-block;">배송지 정보</h2></td>
-              <td><button id="editBtn" style="float: right; margin: 10px;" onclick="editInfo()">수정하기</button></td>
-          </tr>
-          <tr>
-              <td class="info-property">수령인:</td><td id="recipientP"></td>
-          </tr>
-          <tr>
-              <td class="info-property">연락처:</td><td id="contactP"></td>
-          </tr>
-          <tr>
-              <td class="info-property">우편번호:</td><td id="zipcodeP"></td>
-          </tr>
-          <tr>
-              <td class="info-property">주소:</td><td id="addressP"></td>
-          </tr>
-          <tr>
-              <td class="info-property">배송 메세지:</td><td id="messageP"></td>
-          </tr>
-      </table>
-      
-  </main>
-  <footer class = "footer">
-
-  </footer>
-  
-
-</body>
-
+      </div>
+    </main>
+    <footer class="footer"></footer>
+  </body>
 </html>

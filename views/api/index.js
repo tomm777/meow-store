@@ -104,8 +104,9 @@ async function put(endpoint, params = '', data, errorAlert = true) {
   return result;
 }
 
-async function del(endpoint, params = '', errorAlert = true) {
+async function del(endpoint, params = '', data, errorAlert = true) {
   const apiUrl = `${endpoint}${params}`;
+  const bodyData = JSON.stringify(data);
 
   const res = await fetch(apiUrl, {
     method: 'DELETE',
@@ -113,6 +114,7 @@ async function del(endpoint, params = '', errorAlert = true) {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
+    body: bodyData,
   });
 
   const result = await res.json();
