@@ -13,6 +13,10 @@ const priceSumElement = document.querySelector('#price_sum');
 
 async function getUserInfo() {
   const data = await API.get(`/api/user/mypage/`);
+  if (data.result === 'forbidden-approach') {
+    alert('로그인 후 주문이 가능합니다.');
+    location.href = 'http://localhost:3000/cart/';
+  }
   receiverInput.value = `${data.name}`;
   contactInput.value = `${data.contact}`;
   zipCodeInput.value = `${data.address.zipCode}`;
