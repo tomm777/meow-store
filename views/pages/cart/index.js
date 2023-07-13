@@ -108,6 +108,6 @@ function deleteAll() {
 deleteAllBtn.addEventListener('click', deleteAll);
 
 orderBtn.addEventListener('click', () => {
-  if (localStorage.getItem('token')) location.href = 'http://localhost:3000/order-create/';
+  if (localStorage.getItem('token')) location.href = '/order-create/';
   else alert("로그인 후 주문 가능합니다.");
 });
