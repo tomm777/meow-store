@@ -17,13 +17,12 @@ asideTab.innerHTML = `
       <li>
         <a href="/mypage/modify-info">- 사용자 정보 변경</a>
       </li>
-      <li><a href="/mypage/modify-password">- 비밀번호변경</a></li>
+      <li><a href="/mypage/modify-password">- 비밀번호 변경</a></li>
       <li><a href="/mypage/delete-user">- 회원 탈퇴</a></li>
     </ul>
   </ul>
 </div>`;
 const title = document.querySelector('.title');
-console.log(title);
 title.addEventListener('click', function () {
   window.location.href = '/mypage';
 });

@@ -45,7 +45,6 @@ async function getUserInfo() {
   addressDetailInput.value = `${data.address.detailAddress}`;
   addressZipCode.value = `${data.address.zipCode}`;
   console.log(data);
-  const phone = '01012345678';
 }
 getUserInfo();
 

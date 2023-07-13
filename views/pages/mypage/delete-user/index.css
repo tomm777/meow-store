@@ -60,37 +60,10 @@ section.content-wrap {
   /* border: 1px solid black; */
   position: relative;
 }
-.save-area {
-  margin-top: 20px;
-}
-.save-area button {
-  position: absolute;
-  left: calc(50% - 320px);
-  color: #fff;
-  background-color: rgb(139, 168, 194);
-  width: 150px;
-  height: 60px;
-  border-radius: 5px;
-  line-height: 50px;
-  border: unset;
-  font-size: 20px;
-}
-.save-area button.cansle-button {
-  left: calc(50% - 100px);
-  background-color: #969696;
-}
-.address-area > span {
-  display: block;
-}
-span.check {
-  font-size: 12px;
-  color: red;
-  display: none;
-}
-.modify-card {
+
+.delete-card {
   /* width: 700px;
   margin: 0 auto;*/
-
   width: 700px;
   margin: 0 auto;
   margin-top: 50px;
@@ -99,14 +72,14 @@ span.check {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   border-radius: 10px;
 }
-.modify-card-area {
+.delete-card-area {
   padding: 20px 22px;
   /* border: 1px solid black; */
 }
-.modify-card-area span {
+.delete-card-area span {
   display: block;
 }
-.modify-card-area button {
+.delete-card-area button {
   display: block;
 
   width: 160px;
@@ -128,7 +101,7 @@ span.check {
   text-decoration: none;
   text-shadow: 0px 1px 0px #ffffff;
 }
-.modify-card-area button:hover {
+.delete-card-area button:hover {
   background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
   background-color: #dfdfdf;
 }

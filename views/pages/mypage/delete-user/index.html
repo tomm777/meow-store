@@ -3,17 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>야옹 잡화점</title>
     <link rel="stylesheet" href="../../../common/global.css" />
     <link rel="stylesheet" href="../../../common/mypage-aside.css" />
     <link rel="stylesheet" href="index.css" />
-    <script type="module" , src="index.js"></script>
+    <script type="module" src="index.js" defer></script>
     <script src="../../../components/header.js" defer></script>
     <script src="../../../components/footer.js" defer></script>
     <script src="../../../components/mypage-aside.js" defer></script>
     <script type="module" src="../../../api/index.js" defer></script>
   </head>
   <body>
+    <!-- header -->
     <header class="header"></header>
     <main>
       <!-- aside tab부분 -->
@@ -21,16 +22,13 @@
       <!-- content 부분-->
       <section class="content-wrap">
         <div class="content-wrapper">
-          <h2>비밀번호 변경</h2>
-          <div class="modify-card">
-            <div class="modify-card-area">
-              <span>현재 비밀번호</span>
+          <h2>회원 탈퇴</h2>
+          <div class="delete-card">
+            <div class="delete-card-area">
+              <span>비밀번호</span>
               <input type="password" id="password" />
-              <span>새 비밀번호</span>
-              <input type="password" id="new-password" />
-              <span>새 비밀번호 확인</span>
-              <input type="password" id="new-password-check" />
-              <button class="changeButton">비밀번호 변경</button>
+              <!-- <button id="delete-button">회원 탈퇴</button> -->
+              <button id="delete-button">회원 탈퇴</button>
             </div>
           </div>
         </div>
