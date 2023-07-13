@@ -88,6 +88,7 @@ class OrderService {
   async removeOrderProducts(orderId, orderItemIds) {
     //TODO : 배송전일때만 수정할 수 있도록 하기
     const result = await OrderItem.cancelOderItems(orderItemIds);
+    //TODO:orderid로 조회한 list중에 모두 cancelYn 이면 주문상태 취소로 변경하기
     return result;
   }
 

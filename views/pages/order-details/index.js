@@ -1,180 +1,287 @@
-/*index.js*/
+import * as API from '/api/index.js';
 
+const urlParams = new URLSearchParams(window.location.search); // http://localhost:3000/product-details/?id=64a8b5c760e6ded9c555e247
+const id = urlParams.get('id');
 
-// 주문 상품 정보
-const orderData = {
-    "_id": "주문 id(sfsdf)",
-    "number": "230706ssfesfes",
-    "receiver": "최하은",
-    "contack": "010-1234-5678",
-    "zipCode": "010-010",
-    "address": "서울특별시 무슨구 무슨도로...",
-    "detailAddress": "무슨아파트 몇동 몇호",
-    "shippingMessage": "문앞에 두세영",
-    "products": [
-        {
-            "_id": "상품 id(sdfsdf)",
-            "name": "[사료]로얄캐닌 10kg",
-            "price": 100000,
-            "summary": "어린 고양이를 위한 사료 10kg",
-            "repImgUrl": "http:image/1/",
-            "deleteYn": "N"
-        },
-        {
-            "_id": "상품 id(sdfsdf)",
-            "name": "[사료]로얄캐닌 10kg",
-            "price": 100000,
-            "summary": "어린 고양이를 위한 사료 10kg",
-            "repImgUrl": "http:image/1/",
-            "deleteYn": "N"
-        },
-        {
-            "_id": "상품 id(sdfsdf)",
-            "name": "[사료]로얄캐닌 10kg",
-            "price": 100000,
-            "summary": "어린 고양이를 위한 사료 10kg",
-            "repImgUrl": "http:image/1/",
-            "deleteYn": "N"
-        },
-    ]
-};
+if (!id) {
+  location.href = '/';
+}
 
+const infoResetBtn = document.getElementById('infoResetBtn');
+const infoChangeBtn = document.getElementById('infoChangeBtn');
+const infoEditModeBtn = document.getElementById('infoEditModeBtn');
+const receiver = document.getElementById('receiver');
+const receiverInput = document.getElementById('receiverInput');
+const contact = document.getElementById('contact');
+const contactInput = document.getElementById('contactInput');
+const zipCode = document.getElementById('zipCode');
+const zipCodeInput = document.getElementById('zipCodeInput');
+const zipCodeBtn = document.getElementById('zipCodeBtn');
+const address = document.getElementById('address');
+const addressInput = document.getElementById('addressInput');
+const detailAddress = document.getElementById('detailAddress');
+const detailAddressInput = document.getElementById('detailAddressInput');
+const shippingMessage = document.getElementById('shippingMessage');
+const shippingMessageInput = document.getElementById('shippingMessageInput');
+const shippingInfoDiv = document.getElementById('shippingInfoDiv');
+
+infoResetBtn.addEventListener('click', () => {
+  initEditShippingInfo();
+  showShippingViewMode();
+});
+infoChangeBtn.addEventListener('click', () => {
+  saveOrderDeatil();
+});
+infoEditModeBtn.addEventListener('click', showShippingEditMode);
+
+zipCodeBtn.addEventListener('click', () => {
+  new daum.Postcode({
+    oncomplete: function (data) {
+      zipCodeInput.value = data.zonecode;
+      addressInput.value = data.address;
+    },
+  }).open();
+});
+
+getOrderDetail();
+
+async function getOrderDetail() {
+  const data = await API.get(`/api/member/order/${id}`);
+
+  console.log(data);
+
+  //수정모드 판별
+  //결제완료 단계에서만 수정가능
+  checkStatus(data.order.status);
+  initShippingInfo(data.order);
+  initProductList(data.orderItemList);
+}
+
+async function saveOrderDeatil() {
+  //validation 필요함
+  const data = {
+    receiver: receiverInput.value,
+    receiverContact: contactInput.value,
+    zipCode: zipCodeInput.value,
+    address: addressInput.value,
+    detailAddress: detailAddressInput.value,
+    shippingMessage: shippingMessageInput.value,
+  };
+  const result = await API.post(`/api/member/order/${id}/info`, data);
+
+  alert('배송지 정보가 수정되었습니다.');
+  initShippingInfo(data);
+  showShippingViewMode();
+}
+
+function initShippingInfo(info) {
+  receiver.innerText = info.receiver;
+  receiverInput.value = info.receiver;
+  contact.innerText = info.receiverContact;
+  contactInput.value = info.receiverContact;
+  zipCode.innerText = info.zipCode;
+  zipCodeInput.value = info.zipCode;
+  address.innerText = info.address;
+  addressInput.value = info.address;
+  detailAddress.innerText = info.detailAddress;
+  detailAddressInput.value = info.detailAddress;
+  shippingMessage.innerText = info.shippingMessage;
+  shippingMessageInput.value = info.shippingMessage;
+}
+
+function initEditShippingInfo() {
+  receiverInput.value = receiver.innerText.trim();
+  contactInput.value = contact.innerText.trim();
+  zipCodeInput.value = zipCode.innerText.trim();
+  addressInput.value = address.innerText.trim();
+  detailAddressInput.value = detailAddress.innerText.trim();
+  shippingMessageInput.value = shippingMessage.innerText.trim();
+}
+
+function showShippingEditMode() {
+  shippingInfoDiv.querySelectorAll('.view').forEach((obj) => {
+    obj.classList.add('none');
+  });
+  shippingInfoDiv.querySelectorAll('.edit').forEach((obj) => {
+    obj.classList.remove('none');
+  });
+}
+
+function showShippingViewMode() {
+  shippingInfoDiv.querySelectorAll('.view').forEach((obj) => {
+    obj.classList.remove('none');
+  });
+  shippingInfoDiv.querySelectorAll('.edit').forEach((obj) => {
+    obj.classList.add('none');
+  });
+}
+
+//여기서 부터 제품 리스트
+const orderContainer = document.getElementById('orderContainer');
+const resetBtn = document.getElementById('resetBtn');
+const changeBtn = document.getElementById('changeBtn');
+const editModeBtn = document.getElementById('editModeBtn');
+const orderTbody = document.getElementById('orderTbody');
+let totalAmountDiv = document.getElementById('totalAmount');
 let totalAmount = 0;
+let cancleProductList = [];
 
-// 주문 초기화
-window.onload = () => {
-    for (let i = 0; i < orderData.products.length; i++) {
-        let product = orderData.products[i];
-        insertRow(product, i);
-        totalAmount += product.price;
+resetBtn.addEventListener('click', () => {
+  initEditInfo();
+  showViewMode();
+});
+changeBtn.addEventListener('click', () => {
+  saveChangeProduct();
+});
+editModeBtn.addEventListener('click', showEditMode);
+
+function initProduct() {
+  cancleProductList = [];
+}
+
+function initProductList(list) {
+  totalAmount = 0;
+  initProduct();
+  let html = '';
+
+  list.forEach((product) => {
+    html += `<tr cancelYn="${product.cancelYn}" id=${product._id} totalPrice="${
+      product.totalPrice
+    }" >
+        <td class="product-td">
+        ${
+          product.cancelYn === 'Y'
+            ? ''
+            : `<div class="control-product edit none" >
+                <span class="minus icon has-text-danger"><i class="fas fa-minus"></i></span>
+                <span class="plus icon has-text-success none"><i class="fas fa-plus"></i></span>
+              </div>`
+        }
+          <div class="product-div">
+            <img src="${product.productId.repImgUrl}" width="50">
+            <span class="product-name ${
+              product.cancelYn === 'Y' ? 'strikethrough' : ''
+            }">${product.productId.name}</span>
+          </div>
+        </td>
+        <td class="product-qty ${
+          product.cancelYn === 'Y' ? 'strikethrough' : ''
+        }" >${product.quantity}</td>
+        <td class="product-price ${
+          product.cancelYn === 'Y' ? 'strikethrough' : ''
+        }" >${product.totalPrice}</td>
+      </tr>`;
+    totalAmount += Number(product.totalPrice);
+  });
+
+  orderTbody.innerHTML = html;
+  updateTotalAmount();
+
+  orderTbody.querySelectorAll('.minus').forEach((obj) => {
+    obj.removeEventListener('click', minusProduct);
+    obj.addEventListener('click', minusProduct);
+  });
+
+  orderTbody.querySelectorAll('.plus').forEach((obj) => {
+    obj.removeEventListener('click', plusProduct);
+    obj.addEventListener('click', plusProduct);
+  });
+}
+
+async function saveChangeProduct() {
+  console.log(cancleProductList);
+  if (cancleProductList.length > 0) {
+    const result = await API.delete(`/api/member/order/${id}/products`, '', {
+      orderItemIds: cancleProductList,
+    });
+    alert('주문 상품 정보가 수정되었습니다.');
+    const data = await API.get(`/api/member/order/${id}`);
+    initProductList(data.orderItemList);
+  }
+
+  showViewMode();
+}
+
+function minusProduct(event) {
+  const tr = event.target.closest('tr');
+  const orderId = tr.getAttribute('id');
+  const totalPrice = Number(tr.getAttribute('totalPrice'));
+
+  cancleProductList.push(orderId);
+  totalAmount -= totalPrice;
+
+  tr.querySelector('.product-name').classList.add('strikethrough');
+  tr.querySelector('.product-qty').classList.add('strikethrough');
+  tr.querySelector('.product-price').classList.add('strikethrough');
+
+  tr.querySelector('.plus').classList.remove('none');
+  tr.querySelector('.minus').classList.add('none');
+  updateTotalAmount();
+}
+
+function plusProduct(event) {
+  const tr = event.target.closest('tr');
+  const orderId = tr.getAttribute('id');
+  const totalPrice = Number(tr.getAttribute('totalPrice'));
+
+  cancleProductList = cancleProductList.filter((idx) => idx !== orderId);
+  totalAmount += totalPrice;
+
+  tr.querySelector('.product-name').classList.remove('strikethrough');
+  tr.querySelector('.product-qty').classList.remove('strikethrough');
+  tr.querySelector('.product-price').classList.remove('strikethrough');
+
+  tr.querySelector('.plus').classList.add('none');
+  tr.querySelector('.minus').classList.remove('none');
+  updateTotalAmount();
+}
+
+function showEditMode() {
+  orderContainer.querySelectorAll('.view').forEach((obj) => {
+    obj.classList.add('none');
+  });
+  orderContainer.querySelectorAll('.edit').forEach((obj) => {
+    obj.classList.remove('none');
+  });
+}
+
+function showViewMode() {
+  orderContainer.querySelectorAll('.view').forEach((obj) => {
+    obj.classList.remove('none');
+  });
+  orderContainer.querySelectorAll('.edit').forEach((obj) => {
+    obj.classList.add('none');
+  });
+}
+
+function initEditInfo() {
+  initProduct();
+  totalAmount = 0;
+
+  orderTbody.querySelectorAll('tr').forEach((tr) => {
+    const cancelYn = tr.getAttribute('cancelYn');
+    if (cancelYn !== 'Y') {
+      tr.querySelectorAll('.strikethrough').forEach((o) =>
+        o.classList.remove('strikethrough'),
+      );
+      const price = Number(tr.getAttribute('totalPrice'));
+      totalAmount += price;
     }
-    updateTotalAmount();
-};
+    tr.querySelector('.minus')?.classList.remove('none');
+    tr.querySelector('.plus')?.classList.add('none');
+  });
 
-// 테이블에 새로운 행 삽입
-const insertRow = (product, idx) => {
-    let table = document.getElementById('orderTable');
-    let row = table.insertRow(-1);
-    let cell1 = row.insertCell(0);
-    let cell2 = row.insertCell(1);
-    let cell3 = row.insertCell(2);
-    let cell4 = row.insertCell(3);
+  updateTotalAmount();
+}
 
-    cell1.innerHTML = `<img src="${product.repImgUrl}" width="50" height="50"><span id="productName${idx}">${product.name}</span>`;
-    cell2.innerHTML = `1`;
-    cell3.innerHTML = `<span id="productPrice${idx}">${product.price}원</span>`;
-    cell4.innerHTML = `<input type="checkbox" id="checkbox${idx}" onclick="toggleCheckbox(${idx}, ${product.price})">`;
-};
-
-// 체크박스 토글 및 총액 조정
-const toggleCheckbox = (idx, price) => {
-    let checkbox = document.getElementById(`checkbox${idx}`);
-    let productName = document.getElementById(`productName${idx}`);
-    let productPrice = document.getElementById(`productPrice${idx}`);
-
-    // 체크박스가 선택되었는지 확인
-    if (checkbox.checked) {
-        totalAmount -= price;
-        productName.classList.add('strikethrough');
-        productPrice.classList.add('strikethrough');
-    } else {
-        totalAmount += price;
-        productName.classList.remove('strikethrough');
-        productPrice.classList.remove('strikethrough');
-    }
-    updateTotalAmount();
-};
+function checkStatus(status) {
+  if (status !== '결제완료') {
+    infoEditModeBtn.classList.add('none');
+    editModeBtn.classList.add('none');
+  }
+}
 
 // 총액 업데이트
-const updateTotalAmount = () => {
-    let totalAmountDiv = document.getElementById('totalAmount');
-    totalAmountDiv.innerHTML = `총 결제금액: ${totalAmount}원`;
-};
-
-// 전체 주문 취소 토글
-const toggleCancelOrder = () => {
-    for (let i = 0; i < orderData.products.length; i++) {
-        let checkbox = document.getElementById(`checkbox${i}`);
-        if(!checkbox.checked) {
-            checkbox.click();
-        }
-    }
-};
-
-// 모든 체크박스 선택 해제 및 총액 업데이트
-const uncheckAll = () => {
-    for (let i = 0; i < orderData.products.length; i++) {
-        let checkbox = document.getElementById(`checkbox${i}`);
-        if(checkbox.checked) {
-            checkbox.click();
-        }
-    }
-    updateTotalAmount();
-};
-
-
-const submitCancelRequest = () => {
-    // 취소된 상품들의 ID를 수집
-    let cancelledProductIds = [];
-    for (let i = 0; i < orderData.products.length; i++) {
-        let checkbox = document.getElementById(`checkbox${i}`);
-        if(checkbox.checked) {
-            cancelledProductIds.push(orderData.products[i].id);
-        }
-    }
-
-    // 서버에 취소 요청 보내기
-  
-};
-
-
-// let shippingData = {
-//     recipient: "홍길동",
-//     contact: "010-1234-5678",
-//     zipcode: "12345",
-//     address: "서울특별시 강남구 테헤란로",
-//     message: "부재시 경비실에 맡겨주세요."
-// };
-
-// window.onload = () => {
-//     displayInfo();
-// };
-
-// const displayInfo = () => {
-//     document.getElementById('recipientP').textContent = shippingData.recipient;
-//     document.getElementById('contactP').textContent = shippingData.contact;
-//     document.getElementById('zipcodeP').textContent = shippingData.zipcode;
-//     document.getElementById('addressP').textContent = shippingData.address;
-//     document.getElementById('messageP').textContent = shippingData.message;
-// };
-
-// const editInfo = () => {
-//     document.getElementById('recipientP').innerHTML = `<input type="text" id="recipientInput" value="${shippingData.recipient}">`;
-//     document.getElementById('contactP').innerHTML = `<input type="text" id="contactInput" value="${shippingData.contact}">`;
-//     document.getElementById('zipcodeP').innerHTML = `<input type="text" id="zipcodeInput" value="${shippingData.zipcode}">`;
-//     document.getElementById('addressP').innerHTML = `<input type="text" id="addressInput" value="${shippingData.address}">`;
-//     document.getElementById('messageP').innerHTML = `<input type="text" id="messageInput" value="${shippingData.message}">`;
-
-//     // 수정하기 버튼을 수정 완료 버튼으로 바꾸기
-//     document.getElementById('editBtn').textContent = "수정 완료";
-//     document.getElementById('editBtn').onclick = submitInfo;
-// };
-
-// const submitInfo = () => {
-//     // 수정된 정보 가져오기
-//     shippingData.recipient = document.getElementById('recipientInput').value;
-//     shippingData.contact = document.getElementById('contactInput').value;
-//     shippingData.zipcode = document.getElementById('zipcodeInput').value;
-//     shippingData.address = document.getElementById('addressInput').value;
-//     shippingData.message = document.getElementById('messageInput').value;
-
-//     // 수정 완료 후, 원래 텍스트로 복구
-//     displayInfo();
-
-//     // 수정 완료 버튼을 다시 수정하기 버튼으로 바꾸기
-//     document.getElementById('editBtn').textContent = "수정하기";
-//     document.getElementById('editBtn').onclick = editInfo;
-
-//     // 서버에 데이터 업데이트 요청
-//     // ...
-// };
+function updateTotalAmount() {
+  totalAmountDiv.innerHTML = `총 결제금액: ${totalAmount}원`;
+}
