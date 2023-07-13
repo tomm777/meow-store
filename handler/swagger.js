@@ -10,8 +10,9 @@ const swaggerProduces = ['application/json'];
 
 const swaggerServers = [
   {
-    url: 'http://localhost:3000',
-    description: '로컬 서버',
+    url: 'http://kdt-sw-5-team12.elicecoding.com',
+    //url: 'http://localhost:3000',
+    //description: '로컬 서버',
   },
 ];
 
