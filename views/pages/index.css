@@ -10,6 +10,8 @@ body {
 /*allItems 아이템 스타일 */
 .allItems {
   padding: 20px;
+  width: 1350px;
+  margin: 0 auto;
 }
 
 .allItems h2 {
@@ -17,37 +19,61 @@ body {
 }
 
 .item-box {
+  width: 100%;
+  margin-top: 55px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
-.item {
-  width: 200px;
+.item-box .item {
   border: 1px solid #ccc;
-  padding: 20px;
-  margin: 10px;
+  width: 290px;
   text-align: center;
+  cursor: pointer;
+  margin-right: 50px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  border-bottom: 4px solid #ffdc7d;
+  padding-bottom: 10px;
+}
+.item-box .item:nth-child(4n) {
+  margin-right: 0;
+}
+.item-bottom {
+  margin-top: 20px;
+  padding: 0 25px 20px;
+}
+.item-bottom span {
+  display: block;
+  text-align: left;
+}
+.item-bottom > span:nth-child(2) {
+  margin: 10px 0;
+}
+.item-bottom > span.price {
+  font-weight: bold;
+  text-align: right;
+}
+.item h3.title {
+  text-align: left;
+  font-size: 1.2rem;
+  margin-bottom: 0;
 }
 
+.item .image-box {
+  width: 290px;
+  height: 290px;
+}
 .item img {
   width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.item h3 {
-  font-size: 18px;
-  margin-bottom: 5px;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .item p {
   font-size: 14px;
   color: #888;
-}
-
-.item:hover {
-  cursor: pointer;
 }
 
 .pagination {
