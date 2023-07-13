@@ -1,3 +1,5 @@
+import * as API from '/api/index.js';
+
 const receiverInput = document.querySelector('#receiver');
 const contactInput = document.querySelector('#contact');
 const zipCodeInput = document.querySelector('#zip_code');
@@ -5,27 +7,52 @@ const searchZipCodeBtn = document.querySelector('#search_zip_code');
 const addressInput = document.querySelector('#address');
 const detailAddressInput = document.querySelector('#detail_address');
 const messageInput = document.querySelector('#message');
+const orderBtn = document.querySelector('#order_btn');
+const orderList = document.querySelector('.order_list');
+const priceSumElement = document.querySelector('#price_sum');
 
 let savedCartData = JSON.parse(localStorage.getItem('meowStoreCart')) || [];
-const orderList = document.querySelector('.order_list');
+let priceSum = 0;
+let dataToSend = {
+  receiver: '',
+  receiverContact: '',
+  zipCode: 0,
+  address: '',
+  detailAddress: '',
+  shippingMessage: '',
+  totalPrice: 0,
+  orderItemList: [],
+};
 
-// savedCartData의 상품목록을 그려주는 반복문
+// savedCartData의 상품목록을 그려주고, 각 아이템을 dataToSend에 넣는 반복문
 for (let i = 0; i < savedCartData.length; ++i) {
   let data = savedCartData[i];
+  const subTotal = data.price * data.qty;
+  priceSum += subTotal;
+  const temp = {
+    productId: data._id,
+    quantity: data.qty,
+    totalPrice: subTotal,
+  };
+  dataToSend.orderItemList.push(temp);
+
   const content = `
     <div class="product_wrap" product_id="${data._id}">
-      <div class="product_thumbnail">
-        <img src="${data.repImgUrl}" alt="thumbnail"/>
+      <div class="thumbnail_wrap">
+        <img src="${data.repImgUrl}" class="product_thumbnail" alt="thumbnail"/>
       </div>
-      <span>${data.name}</span>
-      <span class="product_qty">${data.qty}개</span>
-      <span class="product_price">${data.price}원</span>
+      <div class="product_info">
+        <span class="product_name">${data.name}</span>
+        <span class="product_qty">${data.qty}개</span>
+        <span class="product_price">${subTotal.toLocaleString()}원</span>
+      </div>
     </div>
   `;
   const newLi = document.createElement('li');
   newLi.innerHTML = content;
   orderList.appendChild(newLi);
 }
+priceSumElement.innerText = priceSum.toLocaleString();
 
 const searchZipCode = () => {
   new daum.Postcode({
@@ -37,46 +64,21 @@ const searchZipCode = () => {
 };
 searchZipCodeBtn.addEventListener('click', searchZipCode);
 
-const data = {
-  receiver: `${receiverInput.value}`,
-  receiverContact: `${contactInput.value}`,
-  zipCode: `${zipCodeInput.value}`,
-  address: `${addressInput.value}`,
-  detailAddress: `${detailAddressInput.value}`,
-  shippingMessage: `${messageInput.value}`,
-  totalPrice: 100000,
-  orderItemList: [
-    {
-      productId: '64a80c24e44baefcf37f9fe6',
-      quantity: 1,
-      totalPrice: 10000,
-    },
-  ],
-};
+async function createOrder(event) {
+  event.preventDefault();
+  dataToSend.receiver = receiverInput.value;
+  dataToSend.receiverContact = contactInput.value;
+  dataToSend.zipCode = zipCodeInput.value;
+  dataToSend.address = addressInput.value;
+  dataToSend.detailAddress = detailAddressInput.value;
+  dataToSend.shippingMessage = messageInput.value;
+  dataToSend.totalPrice = priceSum;
 
-const createOrder = () => {
   const userConfirm = confirm('결제하시겠습니까?');
   if (userConfirm) {
-    fetch('api/member/order', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', // 전송할 데이터의 형식 지정 (JSON 형식 예시)
-      },
-      body: JSON.stringify(data), // 데이터를 JSON 형식으로 변환하여 전송
-    })
-      .then(function (response) {
-        if (response.ok) {
-          return response.text();
-        }
-        throw new Error('Network response was not ok.');
-      })
-      .then(function (responseText) {
-        // 요청이 성공적으로 완료되었을 때의 처리 로직
-        console.log(responseText);
-      })
-      .catch(function (error) {
-        // 요청이 실패했을 때의 처리 로직
-        console.log('Error: ', error.message);
-      });
+    const result = await API.post('/api/member/order', dataToSend);
+    localStorage.setItem('orderId', result);
+    location.href = 'http://localhost:3000/order-complete/';
   }
 };
+orderBtn.addEventListener('click', createOrder);

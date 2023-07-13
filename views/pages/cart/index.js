@@ -3,7 +3,7 @@ const cartList = document.querySelector('.cart_list');
 let priceSum = 0;
 const priceSumElement = document.querySelector('#price_sum');
 
-// savedCartData의 상품목록을 장바구니 페이지에 그려주는 반복문
+// savedCartData의 상품목록을 그려주는 반복문
 for (let i = 0; i < savedCartData.length; ++i) {
   let data = savedCartData[i];
   const content = `
@@ -18,7 +18,7 @@ for (let i = 0; i < savedCartData.length; ++i) {
           <span class="product_qty" name="product_qty" >${data.qty}</span>
           <button class="qty_up" onclick="qtyUp(event)">+</button>
         </span>
-        <span class="product_price">${data.price}</span>
+        <span class="product_price">${data.price.toLocaleString()} 원</span>
         <button class="delete_each" onclick="deleteEach(event)">삭제</button>
       </div>
     </div>
@@ -29,13 +29,14 @@ for (let i = 0; i < savedCartData.length; ++i) {
   cartList.appendChild(newLi);
   priceSum += data.price * data.qty;
 }
-priceSumElement.innerText = `${priceSum} 원`;
+priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
 const qtyUpBtns = document.querySelectorAll('.qty_up');
 const qtyDownBtns = document.querySelectorAll('.qty_down');
 const qtyElements = document.querySelectorAll('.product_qty');
 const deleteEachBtns = document.querySelectorAll('.delete_each');
 const deleteAllBtn = document.querySelector('.delete_all');
+const orderBtn = document.querySelector('#order_btn');
 
 function qtyUp(event) {
   const qtyElement = event.target.closest('span').querySelector('[name=product_qty]');
@@ -49,7 +50,7 @@ function qtyUp(event) {
       if (o._id === id) {
         o.qty += 1;
         priceSum += o.price;
-        priceSumElement.innerText = `${priceSum} 원`;
+        priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
       }
       return o;
     });
@@ -67,7 +68,7 @@ function qtyDown(event) {
       if (o._id === id) {
         o.qty -= 1;
         priceSum -= o.price;
-        priceSumElement.innerText = `${priceSum} 원`;
+        priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
       }
       return o;
     });
@@ -83,7 +84,7 @@ function deleteEach(event) {
   const price = event.target.closest('.product_wrap').querySelector('.product_price');
   const qty = event.target.closest('.product_wrap').querySelector('.product_qty');
   priceSum -= Number(price.innerText) * Number(qty.innerText);
-  priceSumElement.innerText = `${priceSum} 원`;
+  priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
   savedCartData = savedCartData.filter((o) => o._id !== id);
   localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
@@ -98,3 +99,7 @@ function deleteAll() {
   }
 }
 deleteAllBtn.addEventListener('click', deleteAll);
+
+orderBtn.addEventListener('click', () => {
+  location.href = 'http://localhost:3000/order-create/';
+});
