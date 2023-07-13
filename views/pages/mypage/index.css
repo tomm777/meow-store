@@ -18,7 +18,7 @@ button {
 }
 a {
   text-decoration: none;
-  color: #3273dc;
+  color: #756d6d;
 }
 ul {
   padding: 0;
@@ -72,10 +72,18 @@ section.content-wrap {
   height: 100px;
 }
 .content i.member-icon {
-  background: url('../icon-admin.png');
+  background: url('../../assets/icon-admin.png');
+  background-size: cover;
+}
+.content i.ask-icon {
+  background: url('../../assets/ask.png');
   background-size: cover;
 }
 .content i.order-icon {
-  background: url('../orderList.png');
+  background: url('../../assets/orderList.png');
   background-size: cover;
+}
+
+footer.footer {
+  margin-top: 80px;
 }

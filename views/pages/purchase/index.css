@@ -90,6 +90,7 @@ body {
 
 .purchase-list {
   margin-top: 20px;
+  min-height: 609px;
 }
 
 .purchase-item {
