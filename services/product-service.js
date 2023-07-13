@@ -1,9 +1,9 @@
 const Product = require('../models/product-model');
 
 class ProductsService {
-  async getProductList() {
+  async getProductList(option) {
     //TODO:category 필터 추가
-    const products = await Product.findAll();
+    const products = await Product.findAll(option);
     return products;
   }
 
