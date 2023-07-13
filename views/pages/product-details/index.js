@@ -14,7 +14,7 @@ async function getProductData(id) {
     productData.qty = 1;
 
     let subCategory = '';
-    if (productData.subcategoryId.subCategoryName) subCategory = ` > ${productData.subcategoryId.subCategoryName}`;
+    if (productData.subcategoryId) subCategory = ` > ${productData.subcategoryId.subCategoryName}`;
       infoBox.innerHTML = `
       <p class="product_category">${productData.categoryId.categoryName}${subCategory}</p>
       <p class="product_name title is-3">${productData.name}</p>
