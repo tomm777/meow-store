@@ -35,14 +35,12 @@ div.cart_top span.cart_top_price {
   width: 100%;
   margin-bottom: 20px;
   border: 1px solid grey;
-}
-
-.product_wrap div {
-  display: inline;
+  display: flex;
+  align-items: center;
 }
 
 .thumbnail_wrap {
-  margin-right: 30px;
+  margin-right: 10px;
 }
 
 img.product_thumbnail {
@@ -52,25 +50,24 @@ img.product_thumbnail {
   vertical-align: middle;
 }
 
-.product.info {
-  display: inline;
+span.product_name {
+  margin-right: 43px;
 }
 
-.product_info span {
-  margin-right: 50px;
-  height: 25px;
-}
+/* .qty_wrap {
 
-.qty_wrap {
-  text-align: center;
-}
+} */
 
 .qty_down, .qty_up {
-  width: 20px;
+  width: 40px;
+  padding: 0;
+  height: 40px;
+  font-size: 1.5em;
+  font-weight: 400;
 }
 
-.product_info span.product_qty {
-  margin: 0 5px;
+span.product_qty {
+  margin: 10px 20px 0px 20px;
 }
 
 span.product_price {
