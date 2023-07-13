@@ -1,21 +1,18 @@
 import * as API from '/api/index.js';
 const addressValue = document.querySelector('#address-input');
 const cansleButton = document.querySelector('.cansle-button');
-const emailInput = document.querySelector('#email');
+const email = document.querySelector('.email');
 const nameValue = document.querySelector('#name-input');
 const phoneNumberInput = document.querySelector('#phone-number');
 const addressDetailInput = document.querySelector('#address-detail-input');
-// const passwordCheck = document.querySelector('#password-check');
 const addressZipCode = document.querySelector('#address-zip-input');
-const addressArea = document.querySelector('.address-area');
-const spanName = document.querySelector('.span-name');
 const saveButton = document.querySelector('.save-button');
-const emailSpan = document.querySelector('.check.email');
 const nameSpan = document.querySelector('.check.name');
 const phoneSpan = document.querySelector('.check.phone');
 
+let validation = '';
+
 let nameFlag = false;
-let emailFlag = false;
 let numberFlag = false;
 
 window.onload = function () {
@@ -39,11 +36,12 @@ window.onload = function () {
 async function getUserInfo() {
   const data = await API.get(`/api/user/mypage/`);
   nameValue.value = `${data.name}`;
-  emailInput.value = `${data.email}`;
+  email.textContent = `${data.email}`;
   phoneNumberInput.value = `${data.contact}`;
   addressValue.value = `${data.address.address}`;
   addressDetailInput.value = `${data.address.detailAddress}`;
   addressZipCode.value = `${data.address.zipCode}`;
+  validation = data._id;
   console.log(data);
 }
 getUserInfo();
@@ -53,10 +51,6 @@ cansleButton.addEventListener('click', function () {
 });
 
 saveButton.addEventListener('click', function () {
-  if (emailInput.value === '') {
-    alert('이메일을 입력하세요');
-    return;
-  }
   if (phoneNumberInput.value === '') {
     alert('휴대번호를 입력하세요.');
     return;
@@ -73,29 +67,12 @@ saveButton.addEventListener('click', function () {
   // console.log('API시작');
 });
 const validationCheck = () => {
-  // 이메일 validation
-  emailInput.onblur = function () {
-    let regex = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
-    if (!emailInput.value) {
-      emailSpan.textContent = '이메일을 입력하세요.';
-      emailSpan.style.display = 'block';
-      emailFlag = false;
-      return;
-    }
-    if (!regex.test(emailInput.value)) {
-      emailSpan.textContent = '이메일을 올바르게 입력하세요.';
-      emailSpan.style.display = 'block';
-      emailFlag = false;
-      return;
-    }
-    emailSpan.style.display = 'none';
-    emailFlag = true;
-  };
   // 이름 validation
   nameValue.onblur = function () {
     if (nameValue.value === '') {
       nameSpan.style.display = 'block';
       nameFlag = false;
+      alert('수정할 이름을 입력하세요');
       return;
     }
     nameFlag = true;
@@ -123,9 +100,8 @@ const validationCheck = () => {
 };
 validationCheck();
 
-function modifyUserInfo() {
-  const result = API.post('/api/user/mypage', {
-    email: emailInput.value,
+async function modifyUserInfo() {
+  const result = await API.post('/api/user/mypage', {
     contact: phoneNumberInput.value,
     name: nameValue.value,
     address: {
@@ -134,7 +110,11 @@ function modifyUserInfo() {
       zipCode: addressZipCode.value,
     },
   });
-  console.log(result);
-  alert('정보 수정이 완료 되었습니다.');
-  window.location.href = '/mypage';
+  if (validation === result.updatedUser._id) {
+    alert('정보 수정이 완료 되었습니다.');
+    window.location.href = '/mypage';
+  } else {
+    alert(result);
+    return;
+  }
 }

@@ -159,4 +159,7 @@ body {
   margin-left: auto; /* 추가: 오른쪽으로 이동 */
   margin-top: 10px; /* 추가: 위쪽으로 이동 */
   text-align: center;
+  background-color: #f5f5f5;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
 }
