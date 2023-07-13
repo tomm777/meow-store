@@ -1,5 +1,4 @@
-
-      /* 전체 페이지 스타일 */
+/* 전체 페이지 스타일 */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -12,11 +11,9 @@ body {
   flex-direction: column;
 }
 
-
 .top-right {
   display: flex;
   justify-content: flex-end;
-  
 }
 .button-container {
   display: flex;
@@ -44,7 +41,6 @@ body {
   text-align: center;
 }
 
-
 /* 내비게이션 스타일 */
 .mainNav {
   background-color: #fffdf4;
@@ -63,7 +59,6 @@ body {
   flex-grow: 1;
 }
 
-
 .mainNav li:last-child::after {
   display: none; /* 맨 마지막 메뉴의 구분선 숨김 */
 }
@@ -77,8 +72,7 @@ body {
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
-  transition: 0.3s ;
-  
+  transition: 0.3s;
 }
 .mainNav li a:hover {
   background-color: #84776e;
@@ -89,69 +83,67 @@ body {
   text-align: left;
   background-color: #84776e;
   padding: 5px 5px 5px 20px;
-  color:azure;
+  color: azure;
   font-size: 15pt;
   font-weight: bold;
-
 }
 
-  .purchase-list {
-    margin-top: 20px;
-  }
+.purchase-list {
+  margin-top: 20px;
+}
 
-  .purchase-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* 추가: 항목 요소들을 양쪽으로 정렬 */
-    border-top: 1px solid #ccc;
-    padding: 10px;
-  }
+.purchase-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 추가: 항목 요소들을 양쪽으로 정렬 */
+  border-top: 1px solid #ccc;
+  padding: 10px;
+}
 
-  .thumbail {
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-  }
+.thumbnail {
+  width: 150px;
+  margin-right: 10px;
+}
 
-  .purchase-details {
-    flex-grow: 1;
-  }
+.purchase-details {
+  flex-grow: 1;
+}
 
-  .order-number {
-    font-size: 14px;
-    color: #888;
-    margin: 0 2px 2px 2px;
-  }
+.order-number {
+  font-size: 14px;
+  color: #888;
+  margin: 0 2px 2px 2px;
+}
 
-  .purchaseDate {
-    font-size: 14px;
-    font-style: italic;
-    color: #888;
-    margin: 0 1px 1px 1px;
-  }
+.purchaseDate {
+  font-size: 14px;
+  font-style: italic;
+  color: #888;
+  margin: 0 1px 1px 1px;
+}
 
-  .product-name {
-    font-size: 18px;
-    margin-top: 3px;
-    margin-bottom: 2px;
-  }
+.product-name {
+  font-size: 18px;
+  margin-top: 3px;
+  margin-bottom: 2px;
+}
 
-  .price {
-    font-size: 18px;
-    color: #454545;
-    margin-bottom: 2px;
-  }
+.price {
+  font-size: 18px;
+  color: #454545;
+  margin-bottom: 2px;
+}
 
-  .view-details {
-    margin-top: 10px;
-  }
+.view-details {
+  margin-top: 10px;
+}
 
-  .shipping-status {
-    padding: 5px;
-    background-color: #f2f2f2;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 12px;
-    margin-left: auto; /* 추가: 오른쪽으로 이동 */
-    margin-top: 10px; /* 추가: 위쪽으로 이동 */
-  }
+.shipping-status {
+  padding: 5px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-left: auto; /* 추가: 오른쪽으로 이동 */
+  margin-top: 10px; /* 추가: 위쪽으로 이동 */
+}
