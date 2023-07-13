@@ -45,9 +45,9 @@ const orderListBtn = document.querySelector('#to_order_list');
 const homeBtn = document.querySelector('#to_home');
 
 orderListBtn.addEventListener('click', () => {
-  location.href = 'http://localhost:3000/purchase/';
+  location.href = '/purchase/';
 });
 
 homeBtn.addEventListener('click', () => {
-  location.href = 'http://localhost:3000/';
+  location.href = '/';
 });
