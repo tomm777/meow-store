@@ -4,11 +4,11 @@ const { v4: uuidv4 } = require('uuid');
 
 const OrderSchema = new Schema(
   {
-    /*userId: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
-    },*/
+    },
     number: {
       type: String,
       require: true,
