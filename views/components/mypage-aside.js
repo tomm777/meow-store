@@ -9,7 +9,6 @@ asideTab.innerHTML = `
       <span class="bold">쇼핑정보</span>
     </div>
     <li><a href="/purchase">- 구매내역</a></li>
-    <li><a href="#">- 취소/반품내역</a></li>
     <ul>
       <div>
         <span class="bold">회원 정보</span>

@@ -1,5 +1,6 @@
 const header = document.querySelector('header');
 const token = window.localStorage.getItem('token');
+const admin = window.localStorage.getItem('admin');
 
 header.innerHTML = `
 <div class="logo-container">
@@ -10,6 +11,7 @@ header.innerHTML = `
         </a>
       </div>
       <div class="span-container">
+      <button class="button is-normal admin-home">관리자 홈</button>
         <a href = '/login'>
           <span class="header-span login-text">로그인</span>
         </a>
@@ -25,10 +27,18 @@ header.innerHTML = `
 `;
 const login = document.querySelector('.header-span.login-text');
 const mypage = document.querySelector('.mypage');
+const adminHome = document.querySelector('.admin-home');
+console.log(adminHome);
 if (token) {
   login.textContent = '로그아웃';
   mypage.style.display = 'inline-block';
   // loginIcon.style.display = 'none';
+}
+if (admin) {
+  adminHome.style.display = 'block';
+  adminHome.addEventListener('click', function () {
+    window.location.href = '/admin/home';
+  });
 }
 
 login.addEventListener('click', function () {

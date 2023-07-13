@@ -67,6 +67,13 @@ a {
 .span-container .mypage {
   display: none;
 }
+.span-container button {
+  vertical-align: middle;
+  display: none;
+}
+.span-container button.admin-home {
+  margin: 0 auto;
+}
 
 .logout-button {
   box-shadow: inset 0px 1px 0px 0px #ffffff;
@@ -95,7 +102,7 @@ a {
 
 .logo-container .span-container {
   position: absolute;
-  right: 300px;
+  right: 13%;
   top: 50px;
   /* bottom: 63px; */
 }
@@ -136,9 +143,6 @@ li.active {
 }
 
 /* 푸터 스타일 */
-footer {
-  width: 100%;
-}
 .footer {
   background-color: #fafafa;
   padding: 2rem 1.5rem 2rem;
