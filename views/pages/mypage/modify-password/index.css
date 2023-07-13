@@ -11,72 +11,25 @@ h5,
 h6,
 form,
 p,
+input,
 button {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
-table {
-  position: relative;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-table tbody tr:first-child {
-  border-top: 2px solid #969696;
-}
-table tbody tr {
-  border-bottom: 1px solid #969696;
-}
-table th {
-  width: 160px;
-  padding: 14px 30px;
-}
-table td {
-  width: 500px;
-  padding: 14px 30px;
-  border-left: 1px solid #ddd;
-}
+
 button {
   cursor: pointer;
 }
-table button {
-  display: block;
-  margin-bottom: 12px;
-  padding: 8px 12px;
-  /* border: unset; */
-  color: #777;
-  background-color: aliceblue;
-  border-radius: 9px;
-  border-color: white;
-}
-/* button.modify-mail {
-  display: block;
-  margin-bottom: 12px;
-  padding: 8px 12px;
-  color: #777;
-  background-color: aliceblue;
-  border-radius: 9px;
-  border-color: white;
-} 
- button.modify-address {
-  display: block;
-  margin-bottom: 12px;
-  padding: 8px 12px;
-  color: #777;
-  background-color: aliceblue;
-  border-radius: 9px;
-  border-color: white;
-} */
+
 input {
   background-color: #eee;
   border: none;
   padding: 12px 15px;
-  margin: 8px 0;
+  margin: 10px 0;
   width: 80%;
 }
-input#address-input {
-  display: block;
-}
+
 a {
   text-decoration: none;
   color: #3273dc;
@@ -99,7 +52,6 @@ section.content-wrap {
   vertical-align: top;
   width: 1000px;
 }
-
 /* content */
 .content-wrapper {
   position: relative;
@@ -134,4 +86,49 @@ span.check {
   font-size: 12px;
   color: red;
   display: none;
+}
+.modify-card {
+  /* width: 700px;
+  margin: 0 auto;*/
+
+  width: 700px;
+  margin: 0 auto;
+  margin-top: 50px;
+  /* border: 1px solid black; */
+  padding: 30px 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 10px;
+}
+.modify-card-area {
+  padding: 20px 22px;
+  /* border: 1px solid black; */
+}
+.modify-card-area span {
+  display: block;
+}
+.modify-card-area button {
+  display: block;
+
+  width: 160px;
+  height: 50px;
+
+  margin: 0 auto;
+  margin-top: 30px;
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+  background-color: #ededed;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  cursor: pointer;
+  color: #777777;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  /* padding: 6px 24px; */
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
+}
+.modify-card-area button:hover {
+  background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+  background-color: #dfdfdf;
 }
