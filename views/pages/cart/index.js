@@ -12,14 +12,14 @@ for (let i = 0; i < savedCartData.length; ++i) {
         <img src="${data.repImgUrl}" class="product_thumbnail" alt="thumbnail"/>
       </div>
       <div class="product_info">
-        <span>${data.name}</span>
+        <span class="product_name">${data.name}</span>
         <span class="qty_wrap">
-          <button class="qty_down" onclick="qtyDown(event)">-</button>
+          <button class="qty_down button is-light" onclick="qtyDown(event)">-</button>
           <span class="product_qty" name="product_qty" >${data.qty}</span>
-          <button class="qty_up" onclick="qtyUp(event)">+</button>
+          <button class="qty_up button is-light" onclick="qtyUp(event)">+</button>
         </span>
         <span class="product_price">${data.price.toLocaleString()} 원</span>
-        <button class="delete_each" onclick="deleteEach(event)">삭제</button>
+        <button class="delete_each button is-light" onclick="deleteEach(event)">삭제</button>
       </div>
     </div>
   `;
@@ -86,8 +86,13 @@ function deleteEach(event) {
   priceSum -= Number(price.innerText) * Number(qty.innerText);
   priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
-  savedCartData = savedCartData.filter((o) => o._id !== id);
-  localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
+  savedCartData = savedCartData.filter((o) => { o._id !== id; });
+  if (savedCartData.length === 0) {
+    localStorage.removeItem('meowStoreCart');
+    priceSumElement.innerText = '0 원';
+  } else {
+    localStorage.setItem('meowStoreCart', JSON.stringify(savedCartData));
+  }
 }
 
 function deleteAll() {
@@ -101,5 +106,6 @@ function deleteAll() {
 deleteAllBtn.addEventListener('click', deleteAll);
 
 orderBtn.addEventListener('click', () => {
-  location.href = 'http://localhost:3000/order-create/';
+  if (localStorage.getItem('token')) location.href = 'http://localhost:3000/order-create/';
+  else alert("로그인 후 주문 가능합니다.");
 });
