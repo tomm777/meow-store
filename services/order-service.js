@@ -122,7 +122,7 @@ class OrderService {
   }
 
   async getAdminOrderList() {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({ deleteYn: 'N' });
     return orders;
   }
 
