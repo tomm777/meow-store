@@ -1,3 +1,5 @@
+import { blockIfNotLogin } from '/utils/index.js';
+blockIfNotLogin();
 import * as API from '/api/index.js';
 // confirm창이 2번뜨는 문제 발생
 const deleteButton = document.getElementById('delete-button');
