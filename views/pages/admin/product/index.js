@@ -6,12 +6,13 @@ getProductList();
 
 async function getProductList() {
   const response = await fetch('/api/products');
-  const data = await response.json();
-  count.innerHTML = data.length.toString();
+  const rawData = await response.json();
+  const sortedData = rawData.toSorted((a, b) => b.createDate - a.createDate ? 1 : -1);
+  count.innerHTML = sortedData.length.toString();
   let tbody = document.querySelector('#table-body');
   tbody.innerHTML = '';
 
-  data.forEach(async (item, index) => {
+  sortedData.forEach(async (item, index) => {
     let subCategory = '';
     if (item.subcategoryId) {
       subCategory = ` > ${item.subcategoryId.subCategoryName}`;
