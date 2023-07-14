@@ -22,22 +22,30 @@
           <form id="delivery_form" method="post">
             <h3 class="subtitle is-3">배송지 정보를 입력해주세요.</h2>
             <div>
-              <label for="receiver">수령인</label>
+              <div class="label">
+                <label for="receiver">수령인</label>
+              </div>
               <input type="text" id="receiver" class="input" placeholder="홍길동" required>
             </div>
             <div>
-              <label for="contact">연락처</label>
+              <div class="label">
+                <label for="contact">연락처</label>
+              </div>
               <input type="text" id="contact" class="input" placeholder="010-0000-0000" required>
             </div>
             <div>
-              <label for="zip_code">배송지</label>
+              <div class="label">
+                <label for="zip_code">배송지</label>
+              </div>
               <input type="text" id="zip_code" class="input" placeholder="12345" required>
-              <button id="search_zip_code">우편번호 검색</button><br/>
+              <button id="search_zip_code" class="button is-light">우편번호 검색</button><br/>
               <input type="text" id="address" class="input" placeholder="주소" required><br/>
               <input type="text" id="detail_address" class="input" placeholder="상세주소" required>
             </div>
             <div>
-              <label for="receiver">배송 메세지</label>
+              <div class="label">
+                <label for="receiver">배송 메세지</label>
+              </div>
               <input type="text" id="message" class="input" placeholder="(선택) 배송 시 요청사항">
             </div>
           </form>

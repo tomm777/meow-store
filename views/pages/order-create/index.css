@@ -9,33 +9,48 @@ section {
 
 form#delivery_form {
   padding: 60px 0 80px 30px;
+  width: 500px;
 }
 
 form#delivery_form div {
   margin-bottom: 10px;
 }
 
-label {
+div.label {
+  height: 42px;
+  display: inline-flex;
   align-items: center;
+  font-size: 1.1em;
+  font-weight: 500;
 }
 
 input#receiver,
 input#contact,
 input#zip_code {
-  margin-left: 47px;
+  margin-left: 50px;
+  width: 300px;
 }
 
 input#zip_code {
-  width: 55px;
+  width: 162px;
+  margin-bottom: 10px;
 }
 
-input#address,
+input#address {
+  margin-left: 107px;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
 input#detail_address {
-  margin-left: 100px;
+  margin-left: 107px;
+margin-bottom: 10px;
+  width: 300px;
 }
 
 input#message {
   margin-left: 11px;
+  width: 300px;
 }
 
 .order_wrap {
