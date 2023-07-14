@@ -18,7 +18,6 @@ async function getProductList() {
 
     let subCategory = '';
     if (productDetailData.subcategoryId) subCategory = ` > ${productDetailData.subcategoryId.subCategoryName}`;
-
     tbody.insertAdjacentHTML(
       'beforeend',
       `<tr name="table-body" product_id="${item._id}">
@@ -31,12 +30,16 @@ async function getProductList() {
         <td name="name">${item.name}</td>
         <td name="category">${productDetailData.categoryId.categoryName}${subCategory}</td>
         <td name="price">${item.price.toLocaleString()}원</td>
-        <td><button class="button is-light" name="modify" type="button">수정</button></td>
+        <td><button class="modify button is-light" name="modify" type="button">수정</button></td>
       </tr>`,
-    );
+      );
   });
+}
+getProductList();
 
-  document.querySelectorAll("[name='modify']").forEach((btn) => {
+function modify() {
+  document.querySelectorAll('button.modify').forEach((btn) => {
+    console.log('수정버튼에 이벤트리스너 추가중');
     btn.addEventListener('click', (e) => {
       const productId = e.target
         .closest('[name=table-body]')
@@ -44,8 +47,9 @@ async function getProductList() {
       location.href = `/admin/product-details?id=${productId}`;
     });
   });
+  console.log(document.querySelectorAll('button.modify'));
 }
-getProductList();
+modify();
 
 function deleteSelectedRows() {
   console.log('delete버튼 클릭됨');
