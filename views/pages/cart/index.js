@@ -41,7 +41,7 @@ const deleteAllBtn = document.querySelector('.delete_all');
 const orderBtn = document.querySelector('#order_btn');
 
 function qtyUp(event) {
-  const qtyElement = event.target.closest('span').querySelector('[name=product_qty]');
+  const qtyElement = event.target.closest('div').querySelector('[name=product_qty]');
   const id = event.target.closest('.product_wrap').getAttribute('product_id');
 
   if (qtyElement.innerText === '9') {
@@ -61,7 +61,7 @@ function qtyUp(event) {
 }
 
 function qtyDown(event) {
-  const qtyElement = event.target.closest('span').querySelector('[name=product_qty]');
+  const qtyElement = event.target.closest('div').querySelector('[name=product_qty]');
   const id = event.target.closest('.product_wrap').getAttribute('product_id');
 
   if (Number(qtyElement.innerText) > 1) {
