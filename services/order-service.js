@@ -72,24 +72,47 @@ class OrderService {
 
   async cancelOrder(id) {
     //TODO : 결제 완료일때만 취소할수 있도록 하기
-    await Order.updateById(id, { status: '취소' });
-    return { result: 'success' };
-  }
-
-  async editOrderInfo(id, update) {
-    //TODO : 배송전일때만 수정할 수 있도록 하기
     const updatedOrder = await Order.updateById(id, {
-      ...update,
+      status: '취소',
       cancelDate: moment().format('YYYY-MM-DD HH:mm:ss'),
     });
     return updatedOrder;
   }
 
+  async editOrderInfo(id, update) {
+    //TODO : 배송전일때만 수정할 수 있도록 하기
+    const updatedOrder = await Order.updateById(id, update);
+    return updatedOrder;
+  }
+
   async removeOrderProducts(orderId, orderItemIds) {
     //TODO : 배송전일때만 수정할 수 있도록 하기
-    const result = await OrderItem.cancelOderItems(orderItemIds);
+    await OrderItem.cancelOderItems(orderItemIds);
     //TODO:orderid로 조회한 list중에 모두 cancelYn 이면 주문상태 취소로 변경하기
-    return result;
+    const orderItemList = await OrderItem.findByOrderId(orderId);
+
+    let cacleTotalAmount = 0;
+    let cancleItem = 0;
+    console.log(orderItemList);
+    orderItemList.forEach((item) => {
+      if (item.cancelYn === 'Y') {
+        cacleTotalAmount += item.totalPrice;
+        cancleItem += 1;
+      }
+    });
+
+    //업데이트
+    let update = {
+      cacleTotalAmount,
+    };
+    console.log(orderItemList);
+    if (orderItemList.length === cancleItem) {
+      update.status = '취소';
+      update.cancelDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    }
+
+    const updatedOrder = await Order.updateById(orderId, update);
+    return { order: updatedOrder, orderItemList };
   }
 
   async getOrderList(userId) {
@@ -104,7 +127,13 @@ class OrderService {
   }
 
   async editOrderState(id, update) {
-    const updatedOrder = await Order.updateById(id, update);
+    let option = {
+      ...update,
+    };
+    if (update.status === '취소') {
+      option.cancelDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    }
+    const updatedOrder = await Order.updateById(id, option);
     return updatedOrder;
   }
 
