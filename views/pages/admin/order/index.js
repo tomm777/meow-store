@@ -1,4 +1,6 @@
 import * as API from '/api/index.js';
+import { blockIfNotAdmin } from '/utils/index.js';
+blockIfNotAdmin();
 let flag = false;
 async function getOrderList() {
   const res = await API.get('/api/admin/orders');
