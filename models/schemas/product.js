@@ -42,7 +42,7 @@ const ProductSchema = new Schema(
       type: Number,
       min: 0,
       default: 0,
-      required: true,
+      // required: true,
     },
     createDate: {
       type: String,
