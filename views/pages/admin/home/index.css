@@ -44,20 +44,6 @@ header {
   margin-bottom: 10px;
 }
 
-/* 내비게이션 스타일 */
-.mainNav {
-  text-align: center;
-  background-color: #fffdf4;
-  padding: 12px 0;
-}
-.mainNav ul {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: #fffdf4;
-}
 .mainNav li {
   height: 50px;
   position: relative;
@@ -71,7 +57,7 @@ header {
   transform: translateY(-50%);
   height: 70%;
   width: 1px;
-  background-color: #ccc;
+  background-color: #84776e;
 }
 
 .mainNav li:last-child::after {
@@ -84,18 +70,6 @@ header {
   align-items: center;
   font-weight: bold;
   color: rgb(244, 71, 71);
-}
-.mainNav li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  color: rgb(100, 100, 100);
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #fffdf4;
-  transition: 0.8s;
 }
 
 .mainNav li :hover {
