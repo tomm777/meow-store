@@ -1,7 +1,6 @@
 button {
   padding: 12px 10px;
   font-size: 18px;
-  background-color: #b99090;
   border: unset;
   cursor: pointer;
 }
@@ -40,6 +39,7 @@ li {
   background-color: #b2bec9;
   height: 100%;
   padding: 12px 30px;
+  box-sizing: content-box;
 }
 .lowCateLi {
   cursor: pointer;
@@ -89,10 +89,14 @@ li {
 }
 .nested-li > div {
   margin-bottom: 12px;
+  padding-inline-start: 30px;
 }
 .nested-li > div:first-child {
   margin-top: 12px;
 }
 .nested-li > div > ul > li {
-  margin-top: 8px;
+  margin-top: 5px;
+  padding-inline-start: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
