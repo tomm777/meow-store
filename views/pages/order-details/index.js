@@ -24,6 +24,8 @@ const detailAddressInput = document.getElementById('detailAddressInput');
 const shippingMessage = document.getElementById('shippingMessage');
 const shippingMessageInput = document.getElementById('shippingMessageInput');
 const shippingInfoDiv = document.getElementById('shippingInfoDiv');
+const totalAmountDiv = document.getElementById('totalAmount');
+let isCancle = true;
 
 infoResetBtn.addEventListener('click', () => {
   initEditShippingInfo();
@@ -52,9 +54,12 @@ async function getOrderDetail() {
 
   //수정모드 판별
   //결제완료 단계에서만 수정가능
+  isCancle = data.order.status === '취소';
   checkStatus(data.order.status);
   initShippingInfo(data.order);
   initProductList(data.orderItemList);
+
+  totalAmountDiv.innerHTML = `총 결제금액: ${data.order.totalPrice}원`;
 }
 
 async function saveOrderDeatil() {
@@ -122,8 +127,8 @@ const resetBtn = document.getElementById('resetBtn');
 const changeBtn = document.getElementById('changeBtn');
 const editModeBtn = document.getElementById('editModeBtn');
 const orderTbody = document.getElementById('orderTbody');
-let totalAmountDiv = document.getElementById('totalAmount');
-let totalAmount = 0;
+const cacleTotalAmountDiv = document.getElementById('cacleTotalAmount');
+let cacleTotalAmount = 0;
 let cancleProductList = [];
 
 resetBtn.addEventListener('click', () => {
@@ -140,7 +145,7 @@ function initProduct() {
 }
 
 function initProductList(list) {
-  totalAmount = 0;
+  cacleTotalAmount = 0;
   initProduct();
   let html = '';
 
@@ -160,22 +165,24 @@ function initProductList(list) {
           <div class="product-div">
             <img src="${product.productId.repImgUrl}" width="50">
             <span class="product-name ${
-              product.cancelYn === 'Y' ? 'strikethrough' : ''
+              isCancle || product.cancelYn === 'Y' ? 'strikethrough' : ''
             }">${product.productId.name}</span>
           </div>
         </td>
         <td class="product-qty ${
-          product.cancelYn === 'Y' ? 'strikethrough' : ''
+          isCancle || product.cancelYn === 'Y' ? 'strikethrough' : ''
         }" >${product.quantity}</td>
         <td class="product-price ${
-          product.cancelYn === 'Y' ? 'strikethrough' : ''
+          isCancle || product.cancelYn === 'Y' ? 'strikethrough' : ''
         }" >${product.totalPrice}</td>
       </tr>`;
-    totalAmount += Number(product.totalPrice);
+    if (isCancle || product.cancelYn === 'Y') {
+      cacleTotalAmount += Number(product.totalPrice);
+    }
   });
 
   orderTbody.innerHTML = html;
-  updateTotalAmount();
+  updateCancleTotalAmount();
 
   orderTbody.querySelectorAll('.minus').forEach((obj) => {
     obj.removeEventListener('click', minusProduct);
@@ -195,8 +202,11 @@ async function saveChangeProduct() {
       orderItemIds: cancleProductList,
     });
     alert('주문 상품 정보가 수정되었습니다.');
-    const data = await API.get(`/api/member/order/${id}`);
-    initProductList(data.orderItemList);
+    isCancle = result.order.status === '취소';
+    if (isCancle) {
+      location.reload(true);
+    }
+    initProductList(result.orderItemList);
   }
 
   showViewMode();
@@ -208,7 +218,7 @@ function minusProduct(event) {
   const totalPrice = Number(tr.getAttribute('totalPrice'));
 
   cancleProductList.push(orderId);
-  totalAmount -= totalPrice;
+  cacleTotalAmount += totalPrice;
 
   tr.querySelector('.product-name').classList.add('strikethrough');
   tr.querySelector('.product-qty').classList.add('strikethrough');
@@ -216,7 +226,7 @@ function minusProduct(event) {
 
   tr.querySelector('.plus').classList.remove('none');
   tr.querySelector('.minus').classList.add('none');
-  updateTotalAmount();
+  updateCancleTotalAmount();
 }
 
 function plusProduct(event) {
@@ -225,7 +235,7 @@ function plusProduct(event) {
   const totalPrice = Number(tr.getAttribute('totalPrice'));
 
   cancleProductList = cancleProductList.filter((idx) => idx !== orderId);
-  totalAmount += totalPrice;
+  cacleTotalAmount -= totalPrice;
 
   tr.querySelector('.product-name').classList.remove('strikethrough');
   tr.querySelector('.product-qty').classList.remove('strikethrough');
@@ -233,7 +243,7 @@ function plusProduct(event) {
 
   tr.querySelector('.plus').classList.add('none');
   tr.querySelector('.minus').classList.remove('none');
-  updateTotalAmount();
+  updateCancleTotalAmount();
 }
 
 function showEditMode() {
@@ -256,7 +266,7 @@ function showViewMode() {
 
 function initEditInfo() {
   initProduct();
-  totalAmount = 0;
+  cacleTotalAmount = 0;
 
   orderTbody.querySelectorAll('tr').forEach((tr) => {
     const cancelYn = tr.getAttribute('cancelYn');
@@ -264,24 +274,33 @@ function initEditInfo() {
       tr.querySelectorAll('.strikethrough').forEach((o) =>
         o.classList.remove('strikethrough'),
       );
-      const price = Number(tr.getAttribute('totalPrice'));
-      totalAmount += price;
+    }
+    const price = Number(tr.getAttribute('totalPrice'));
+    if (isCancle || cancelYn === 'Y') {
+      cacleTotalAmount += price;
     }
     tr.querySelector('.minus')?.classList.remove('none');
     tr.querySelector('.plus')?.classList.add('none');
   });
 
-  updateTotalAmount();
+  updateCancleTotalAmount();
 }
 
 function checkStatus(status) {
-  if (status !== '결제완료') {
+  if (status === '결제완료') {
+    infoEditModeBtn.classList.remove('none');
+    editModeBtn.classList.remove('none');
+  } else {
     infoEditModeBtn.classList.add('none');
     editModeBtn.classList.add('none');
   }
 }
 
 // 총액 업데이트
-function updateTotalAmount() {
-  totalAmountDiv.innerHTML = `총 결제금액: ${totalAmount}원`;
+function updateCancleTotalAmount() {
+  if (cacleTotalAmount === 0) {
+    cacleTotalAmountDiv.innerHTML = '';
+  } else {
+    cacleTotalAmountDiv.innerHTML = `총 환불금액: ${cacleTotalAmount}원`;
+  }
 }
