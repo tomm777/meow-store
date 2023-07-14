@@ -1,4 +1,6 @@
 import * as API from '/api/index.js';
+import { blockIfNotAdmin } from '/utils/index.js';
+blockIfNotAdmin();
 // 자식요소에 데이터를 넣기위한 부모 요소 가져오기
 const nested = document.querySelector('.nested-li');
 
@@ -11,7 +13,7 @@ const deleteButton = document.querySelector('.deleteCategory');
 // 카테고리 수정 버튼 엘리먼트
 const updateButton = document.querySelector('.updateCategory');
 // 수정 후 저장버튼
-const saveButton = document.querySelector('.button.saveCategory');
+// const saveButton = document.querySelector('.button.saveCategory');
 
 // 카테고리 API 호출
 const getCateList = () => {
@@ -46,6 +48,7 @@ getCateList();
 
 function arrowClick() {
   // 토글 클래스 추가
+  console.log(this.id);
   this.parentElement.querySelector('.nested').classList.toggle('active');
   this.classList.toggle('caret-down');
   // 하위, 상위 카테고리가 활성화 된 상태에서 전체를 누르면
@@ -72,6 +75,7 @@ function arrowClick() {
 }
 // 선택한 하위카테고리에 active 클래스 추가
 function addToggle() {
+  console.log(this.id);
   this.classList.toggle('active');
 }
 // 하위 카테고리를 클릭 했을 때 이벤트
@@ -258,7 +262,9 @@ const updateCate = () => {
   }
 
   // 하위 카테고리가 선택되지않고 상위 카테고리를 선택 했을 때
+  // 상위 카테고리 수정
   if (nullArrayCheck.length === 0) {
+    // const cateId = caretCheck[1].id;
     // 수정하는 동안 다른 버튼 비활성화
     updateButton.disabled = true;
     addButton.disabled = true;
@@ -267,43 +273,45 @@ const updateCate = () => {
 
     // span을 input으로 변환
     const spanEle = caretCheck[caretCheck.length - 1];
+    const cateId = spanEle.id;
     const spanValue = spanEle.textContent;
     // console.log(spanEle.id);
     let input = document.createElement('input');
     input.type = 'text';
     input.value = spanValue;
+    input.id = cateId;
     input.classList.add('updateInput');
     if (spanEle.parentNode) {
       spanEle.parentNode.replaceChild(input, spanEle);
     }
     saveButton.classList.add('active');
     // 저장 수정 API가 들어갈 곳
-    saveButton.addEventListener('click', function () {
-      console.log(spanEle.id);
-      console.log(input.value);
+    saveButton.addEventListener('click', async function () {
       // 상위 카테고리 수정 API
-      API.put('/api/admin/category/', `${spanEle.id}`, {
+      const result = await API.put('/api/admin/category/', `${spanEle.id}`, {
         categoryName: input.value,
-      }).then((result) => {
-        console.log(result);
-        if (!result.success) {
-          alert(result.message);
-          return;
-        }
-        addButton.disabled = false;
-        deleteButton.disabled = false;
-        updateButton.disabled = false;
-        inputValue.disabled = false;
-        // 원래대로 변환
-        let span = document.createElement('span');
-        span.className = spanEle.className;
-        span.textContent = input.value;
-        if (input.parentNode) {
-          input.parentNode.replaceChild(span, input);
-        }
-        saveButton.classList.remove('active');
-        nodeSet();
       });
+      console.log(result);
+      if (!result.success) {
+        alert(result.message);
+        return;
+      } else {
+        // addButton.disabled = false;
+        // deleteButton.disabled = false;
+        // updateButton.disabled = false;
+        // inputValue.disabled = false;
+        // // 원래대로 변환
+        // let span = document.createElement('span');
+        // span.className = spanEle.className;
+        // span.id = input.id;
+        // span.textContent = input.value;
+        // if (input.parentNode) {
+        //   input.parentNode.replaceChild(span, input);
+        // }
+        // saveButton.classList.remove('active');
+        window.location.reload();
+      }
+
       // 비활성화 해제
     });
     return;
@@ -320,6 +328,7 @@ const updateCate = () => {
   const liValue = liEle.textContent;
   let input = document.createElement('input');
   input.type = 'text';
+  input.id = liEle.id;
   input.value = liValue;
   if (liEle.parentNode) {
     liEle.parentNode.replaceChild(input, liEle);
@@ -327,30 +336,35 @@ const updateCate = () => {
   // liEle.parentNode.replaceChild(input, liEle);
   saveButton.classList.add('active');
 
-  saveButton.addEventListener('click', function () {
-    // 상위 카테고리 수정 API
-    API.put('/api/admin/subcategory/', `${liEle.id}`, {
+  saveButton.addEventListener('click', async function () {
+    // 하위 카테고리 수정 API
+    const result = await API.put('/api/admin/subcategory/', `${liEle.id}`, {
       subCategoryName: input.value,
-    }).then((data) => {
-      if (!data.success) {
-        alert(data.message);
-        return;
-      }
-      addButton.disabled = false;
-      deleteButton.disabled = false;
-      updateButton.disabled = false;
-      liEle.classList.remove('active');
-      let li = document.createElement('li');
-      li.className = liEle.className;
-      li.textContent = input.value;
-      if (input.parentNode) {
-        input.parentNode.replaceChild(li, input);
-      }
-      saveButton.classList.remove('active');
-      liEle.classList.remove('active');
-      nodeSet();
     });
+    console.log(result);
+    if (result.success) {
+      // addButton.disabled = false;
+      // deleteButton.disabled = false;
+      // updateButton.disabled = false;
+      // liEle.classList.remove('active');
+      // let li = document.createElement('li');
+      // li.className = liEle.className;
+      // li.id = liEle.id;
+      // li.textContent = input.value;
+      // if (input.parentNode) {
+      //   input.parentNode.replaceChild(li, input);
+      // }
+      // saveButton.classList.remove('active');
+      // liEle.classList.remove('active');
+      window.location.reload();
+      // nodeSet();
+      // lowCateClick();
+    } else {
+      alert(result.message);
+      return;
+    }
   });
+  // return;
 };
 
 // 카테고리 삭제 이벤트

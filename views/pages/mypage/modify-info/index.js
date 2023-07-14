@@ -12,7 +12,6 @@ const phoneSpan = document.querySelector('.check.phone');
 
 let validation = '';
 
-let nameFlag = false;
 let numberFlag = false;
 
 window.onload = function () {
@@ -43,8 +42,30 @@ async function getUserInfo() {
   addressZipCode.value = `${data.address.zipCode}`;
   validation = data._id;
   console.log(data);
+  numberFlag = true;
 }
 getUserInfo();
+// 번호 validation
+phoneNumberInput.onblur = function () {
+  let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+  console.log(regPhone.test(phoneNumberInput.value));
+  if (!regPhone.test(phoneNumberInput.value)) {
+    phoneSpan.style.display = 'block';
+    phoneSpan.textContent = '휴대폰 번호를 정확하게 입력하세요.';
+    numberFlag = false;
+    console.log(numberFlag);
+    return;
+  }
+  // 하이픈 달아주기
+  console.log('타지마');
+  // const newphone = phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+  phoneNumberInput.value = phoneNumberInput.value.replace(
+    /^(\d{2,3})(\d{3,4})(\d{4})$/,
+    `$1-$2-$3`,
+  );
+  numberFlag = true;
+  phoneSpan.style.display = 'none';
+};
 
 cansleButton.addEventListener('click', function () {
   window.location.href = '/mypage';
@@ -63,47 +84,18 @@ saveButton.addEventListener('click', function () {
     alert('주소를 입력하세요');
     return;
   }
-  if (nameFlag || numberFlag === false) {
-    alert('값을 올바르게 입력하세요');
+  if (nameValue.value === '') {
+    alert('이름을 입력하세요.');
+    return;
+  }
+  if (!numberFlag) {
+    alert('전화번호를 올바르게 입력하세요.');
     return;
   }
   modifyUserInfo();
+
   // console.log('API시작');
 });
-const validationCheck = () => {
-  // 이름 validation
-  nameValue.onblur = function () {
-    if (nameValue.value === '') {
-      nameSpan.style.display = 'block';
-      nameFlag = false;
-      alert('수정할 이름을 입력하세요');
-      return;
-    }
-    nameFlag = true;
-    nameSpan.style.display = 'none';
-  };
-  // 번호 validation
-  phoneNumberInput.onblur = function () {
-    let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-    if (!regPhone.test(phoneNumberInput.value)) {
-      phoneSpan.style.display = 'block';
-      phoneSpan.textContent = '휴대폰 번호를 정확하게 입력하세요.';
-      numberFlag = false;
-      console.log(numberFlag);
-      return;
-    }
-    // 하이픈 달아주기
-
-    // const newphone = phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-    phoneNumberInput.value = phoneNumberInput.value.replace(
-      /^(\d{2,3})(\d{3,4})(\d{4})$/,
-      `$1-$2-$3`,
-    );
-    numberFlag = true;
-    phoneSpan.style.display = 'none';
-  };
-};
-validationCheck();
 
 async function modifyUserInfo() {
   const result = await API.post('/api/user/mypage', {
