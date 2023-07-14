@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose');
-const moment = require('moment');
+const { moment } = require('../../utils/moment');
 const { v4: uuidv4 } = require('uuid');
 
 const OrderSchema = new Schema(
