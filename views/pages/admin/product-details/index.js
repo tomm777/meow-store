@@ -25,6 +25,7 @@ const stock = document.getElementById('stock');
 const price = document.getElementById('price');
 const summary = document.getElementById('summary');
 const description = document.getElementById('description');
+let prevImgUrl = '';
 
 uploadButton.addEventListener('click', createProduct);
 getProductDetail();
@@ -40,7 +41,8 @@ async function getProductDetail() {
   stock.value = result.stock;
   summary.value = result.summary;
   description.value = result.description;
-
+  fileName.textContent = result.repImgUrl.split('/')[2];
+  prevImgUrl = result.repImgUrl;
   let categoryTitle = result.categoryId.categoryName;
   if (result.subcategoryId) {
     categoryTitle += ` > ${result.subcategoryId.subCategoryName}`;
@@ -63,6 +65,7 @@ async function createProduct() {
   formData.append('stock', stock.value);
   formData.append('summary', summary.value);
   formData.append('description', description.value);
+  formData.append('prevImgUrl', prevImgUrl);
 
   formData.append('file', fileInput.files[0]); // 파일을 FormData에 추가
   console.log(formData);
@@ -80,3 +83,10 @@ async function createProduct() {
   alert('제품수정이 완료되었습니다.');
   location.href = '/admin/product';
 }
+
+fileInput.onchange = () => {
+  if (fileInput.files.length > 0) {
+    const fileName = document.querySelector('#fileName');
+    fileName.textContent = fileInput.files[0].name;
+  }
+};
