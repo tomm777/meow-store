@@ -83,18 +83,13 @@ function deleteEach(event) {
   const li = event.target.closest('.product_wrap').parentElement;
   li.remove();
 
-  console.log("id: ", id);
-  const price = savedCartData.filter((o) => { o._id === id; });
+  const price = savedCartData.filter((o) => o._id === id)[0].price;
   const qty = event.target.closest('.product_wrap').querySelector('.product_qty');
 
-  console.log(price);
-
-  console.log(priceSum);
   priceSum -= price * Number(qty.innerText);
-  console.log("after: ",priceSum);
   priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
-  savedCartData = savedCartData.filter((o) => { o._id !== id; });
+  savedCartData = savedCartData.filter((o) => o._id !== id);
   if (savedCartData.length === 0) {
     localStorage.removeItem('meowStoreCart');
     priceSumElement.innerText = '0 원';
