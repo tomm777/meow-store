@@ -3,9 +3,7 @@ import * as API from '/api/index.js';
 const count = document.querySelector('.b2');
 
 async function getProductList() {
-  const response = await fetch(
-    '/api/products',
-  );
+  const response = await fetch('/api/products');
   const data = await response.json();
 
   count.innerHTML = data.length.toString();
@@ -36,20 +34,19 @@ async function getProductList() {
   });
 }
 getProductList();
+setFuncToModifyBtns();
 
-function modify() {
-  document.querySelectorAll('button.modify').forEach((btn) => {
-    console.log('수정버튼에 이벤트리스너 추가중');
+function setFuncToModifyBtns() {
+  const modifyBtns = document.querySelectorAll('button.modify');
+  console.log(modifyBtns);
+  modifyBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
-      const productId = e.target
-        .closest('[name=table-body]')
-        .getAttribute('product_id');
+      // e.stopPropagation();
+      const productId = e.target.closest('[name=table-body]').getAttribute('product_id');
       location.href = `/admin/product-details?id=${productId}`;
     });
   });
-  console.log(document.querySelectorAll('button.modify'));
 }
-modify();
 
 function deleteSelectedRows() {
   console.log('delete버튼 클릭됨');
