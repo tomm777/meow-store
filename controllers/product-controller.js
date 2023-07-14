@@ -58,12 +58,18 @@ class ProductController {
 
   async editProduct(req, res, next) {
     try {
+      console.log(req.body);
       const { id } = req.params;
-      let repImgUrl = '/assets/not-image.png';
+      let repImgUrl = req.body.prevImgUrl
+        ? req.body.prevImgUrl
+        : '/assets/not-image.png';
       if (req.file) {
         repImgUrl = '/uploads/' + req.file?.filename;
       }
-      if (req.body.subcategoryId === '') {
+      if (
+        req.body.subcategoryId === '' ||
+        req.body.subcategoryId == 'undefined'
+      ) {
         req.body.subcategoryId = null;
       }
       const updatedProduct = await ProductService.editProduct(id, {
