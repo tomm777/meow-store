@@ -3,8 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <link rel="stylesheet" href="/common/global.css" />
     <link rel="stylesheet" href="/components/category-modal.css" />
     <script defer src="/components/admin-header.js"></script>
@@ -26,7 +32,7 @@
           <div class="product_left">카테고리</div>
           <div class="product_right">
             <button
-              class="js-modal-trigger"
+              class="button is-warning js-modal-trigger is-small"
               data-target="modal-category"
               data-callback="callbackCategoryModal"
             >
@@ -40,11 +46,7 @@
         <div class="product_wrap">
           <div class="product_left">상품명</div>
           <div class="product_right">
-            <input
-              type="text"
-              id="product_name"
-              placeholder="예시) 플라워 미니 원피스"
-            />
+            <input type="text" id="product_name" />
           </div>
         </div>
 
@@ -73,12 +75,9 @@
 
         <div class="product_wrap">
           <div class="product_left">상품 상세 설명</div>
-          <div class="product_right">
+          <div class="product_right" style="flex-direction: column">
             <textarea id="description" cols="30" rows="3"></textarea>
-            <div class="text3">
-              - 상품의 간단한 추가 정보를 입력할 수 있습니다.
-            </div>
-            <div class="text-mini">
+            <div class="text-mini" style="align-self: start">
               상품의 간단한 추가 정보를 입력할 수 있습니다.
             </div>
           </div>
@@ -87,11 +86,30 @@
         <div class="product_wrap">
           <div class="product_left">상품 이미지</div>
           <div class="product_right">
-            <input type="file" id="fileInput" multiple />
+            <div class="file is-small has-name">
+              <label class="file-label">
+                <input
+                  class="file-input"
+                  type="file"
+                  name="resume"
+                  id="fileInput"
+                  multiple
+                />
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">Choose a file…</span>
+                </span>
+                <span class="file-name" id="fileName"> No file uploaded </span>
+              </label>
+            </div>
           </div>
         </div>
+        <button class="button is-warning is-fullwidth" id="uploadButton">
+          등록
+        </button>
       </div>
-      <button id="uploadButton">등록</button>
     </main>
 
     <div class="modal" id="modal-category"></div>
