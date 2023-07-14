@@ -3,7 +3,7 @@ footer.innerHTML = `
 <div class="footer-area">
   <div class="footer-left">
       <div class="img-box">
-        <img src="../../assets/야옹잡화점.png" alt="로고"/>
+        <img src="../../assets/로고.png" alt="로고"/>
       </div>
       <div class="content-area">
         <p>대표자 : 최하은</p>
