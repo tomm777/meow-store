@@ -51,8 +51,9 @@ class UserController {
   async deleteUser(req, res) {
     try {
       //TODO: 유저삭제시 관련 데이터 지우기
-      await UserService.deleteUser(req.currentUserId);
-      res.status(204).end();
+      const result = await UserService.deleteUser(req.currentUserId, req.body);
+      res.status(200).json({ success: true });
+      //res.status(204).end();
     } catch (error) {
       res
         .status(error.status || 500)

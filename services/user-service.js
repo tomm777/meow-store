@@ -109,14 +109,25 @@ class UserService {
     return user;
   }
 
-  async deleteUser(userId) {
-    const { deletedCount } = await this.userModel.deleteById(userId);
+  async deleteUser(userId, { password }) {
+    //TODO:비밀번호 확인
+    const user = await this.userModel.findById(userId);
 
-    if (deletedCount === 0) {
-      throw new Error(`${userId} 사용자 데이터의 삭제에 실패하였습니다.`);
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordCorrect) {
+      throw new Error(
+        '비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.',
+      );
     }
 
-    return { result: 'success' };
+    const result = await this.userModel.deleteById(userId);
+
+    if (result.deletedCount === 0) {
+      throw new Error(`${userId} 사용자 데이터의 삭제에 실패하였습니다.`);
+    }
+    console.log(result);
+    return result;
   }
 }
 
