@@ -21,10 +21,10 @@ async function getOrderSummary() {
         <h3 class="price">${purchaseInfo.totalPrice.toLocaleString()}원</h3>
       </div>
       <div class="detailShipping">
-        <button class="view-details button block" name="goToOrderDetailBtn">상세 내역 보기</button>
+        <button class="button" name="goToOrderDetailBtn">상세 내역 보기</button>
         ${
           purchaseInfo.status === '결제완료'
-            ? `<button class="view-details button block" name="cancleBtn">주문 취소</button>`
+            ? `<button class="button cancle" name="cancleBtn">주문 취소</button>`
             : ''
         }
         

@@ -1,8 +1,84 @@
 /* 전체 페이지 스타일 */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
+body,
+div,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+p,
+input,
+button {
   padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+button {
+  display: block;
+  width: 160px;
+  height: 50px;
+  margin: 0 auto;
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+  background-color: #ededed;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  cursor: pointer;
+  color: #777777;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  /* padding: 6px 24px; */
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
+}
+.detailShipping button:first-child {
+  margin-bottom: 10px;
+}
+button.cancle {
+  box-shadow: 0px 1px 0px 0px #fff6af;
+  background: linear-gradient(to bottom, #ebf1b9 5%, #f4f7c3 100%);
+  background-color: #f0e078;
+  border-radius: 6px;
+  display: inline-block;
+  cursor: pointer;
+  color: #777777;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffee66;
+}
+
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 10px 0;
+  width: 80%;
+}
+
+a {
+  text-decoration: none;
+}
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+main {
+  margin: 40px 22px;
+}
+main .aside-tab .title {
+  /* font-size: 19px; */
+  font-size: medium;
 }
 
 /* 헤더 스타일 */
@@ -87,10 +163,15 @@ body {
   font-size: 15pt;
   font-weight: bold;
 }
+section {
+  width: 1100px;
+  display: inline-block;
+}
 .content-wrap {
-  width: 1300px;
-  margin: 60px auto;
-  margin-bottom: 80px;
+  /* margin: 60px auto;
+  margin-bottom: 80px; */
+  margin: 0 30px;
+  margin-bottom: 50px;
 }
 
 .purchase-list {
@@ -128,21 +209,21 @@ body {
 }
 
 .purchaseDate {
+  margin-left: 7px;
   font-size: 14px;
   font-style: italic;
   color: #888;
-  margin: 0 1px 1px 1px;
 }
 
 .product-name {
   font-size: 18px;
-  margin-top: 3px;
+  margin-top: 8px;
 }
 
 .price {
   font-size: 18px;
   color: #454545;
-  margin-top: 25px;
+  margin-top: 30px;
   font-weight: bold;
 }
 
