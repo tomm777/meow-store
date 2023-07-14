@@ -63,6 +63,10 @@ saveButton.addEventListener('click', function () {
     alert('주소를 입력하세요');
     return;
   }
+  if (nameFlag || numberFlag === false) {
+    alert('값을 올바르게 입력하세요');
+    return;
+  }
   modifyUserInfo();
   // console.log('API시작');
 });
@@ -85,6 +89,7 @@ const validationCheck = () => {
       phoneSpan.style.display = 'block';
       phoneSpan.textContent = '휴대폰 번호를 정확하게 입력하세요.';
       numberFlag = false;
+      console.log(numberFlag);
       return;
     }
     // 하이픈 달아주기
