@@ -10,8 +10,7 @@ header.innerHTML = `
         </a>
       </div>
       <div class="span-container">
-      <button class="button is-normal user-home">사용자 홈</button>
-          <span class="header-span login-text admin">관리자 계정</span>
+      <span class="user-home">사용자 홈</span>
       </div>
     </div>
 </div>  
