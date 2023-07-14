@@ -25,7 +25,9 @@ class OrderModel {
   }
 
   async findAll(option = {}) {
-    const orders = await Order.find({ ...option, deleteYn: 'N' });
+    const orders = await Order.find({ ...option, deleteYn: 'N' }).sort({
+      createDate: -1,
+    });
     return orders;
   }
 }
