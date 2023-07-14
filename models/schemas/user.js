@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose');
-const moment = require('moment');
+const { moment } = require('../../utils/moment');
 
 const UserSchema = new Schema(
   {
@@ -45,6 +45,7 @@ const UserSchema = new Schema(
   },
   {
     collection: 'users',
+    timestamps: true,
   },
 );
 
