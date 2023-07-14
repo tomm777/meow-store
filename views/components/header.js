@@ -20,7 +20,7 @@ header.innerHTML = `
         <a href = '/mypage' class="mypage">
             <span class="header-span">마이페이지</span>
         </a>
-        <a href = '/admin/home'>
+        <a href = '/admin/product'>
         <span class="header-span admin">관리자 페이지</span>
       </a>
       </div>

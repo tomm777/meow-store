@@ -5,7 +5,7 @@ header.innerHTML = `
 <div class="logo-container">
     <div class="logo">
       <div class="img-box">
-        <a href ='/admin/home'>
+        <a href ='/admin/product/'>
           <img src="/assets/로고.png">
         </a>
       </div>
@@ -28,10 +28,10 @@ if (admin) {
 
 mainNav.innerHTML = `
         <ul>
-            <li ep="/admin/home/" class="active" onclick="clickNav('home')">현황</li> 
-            <li ep="/admin/category/" onclick="clickNav('category')">카테고리 관리</li> 
-            <li ep="/admin/product/" onclick="clickNav('product')">상품관리</li> 
-            <li ep="/admin/order/" onclick="clickNav('order')">주문관리</li> 
+        <!-- <li ep="/admin/home/" class="active" onclick="clickNav('home')">현황</li>  -->
+          <li ep="/admin/product/" onclick="clickNav('product')">상품관리</li>     
+          <li ep="/admin/category/" onclick="clickNav('category')">카테고리 관리</li> 
+          <li ep="/admin/order/" onclick="clickNav('order')">주문관리</li> 
         </ul>
     </nav>`;
 
