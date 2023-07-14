@@ -3,22 +3,21 @@ import * as API from '/api/index.js';
 const count = document.querySelector('.b2');
 
 async function getProductList() {
-  const response = await fetch('/api/products');
+  const response = await fetch(
+    '/api/products',
+  );
   const data = await response.json();
 
   count.innerHTML = data.length.toString();
   let tbody = document.querySelector('#table-body');
   tbody.innerHTML = '';
 
-  data.forEach((item, index) => {
-    let category = '';
-    if (item.categoryId) {
-      category = item.categoryId.categoryName;
-    }
+  data.forEach(async (item, index) => {
+    const response = await fetch(`/api/product/${item._id}`);
+    const productDetailData = await response.json();
+
     let subCategory = '';
-    if (item.subcategoryId) {
-      subCategory = ` > ${item.subcategoryId.subCategoryName}`;
-    }
+    if (productDetailData.subcategoryId) subCategory = ` > ${productDetailData.subcategoryId.subCategoryName}`;
 
     tbody.insertAdjacentHTML(
       'beforeend',
@@ -32,7 +31,7 @@ async function getProductList() {
         </div>
         </td>
         <td name="name">${item.name}</td>
-        <td name="category">${category}${subCategory}</td>
+        <td name="category">${productDetailData.categoryId.categoryName}${subCategory}</td>
         <td name="price">${item.price.toLocaleString()}원</td>
         <td><button class="button is-light" name="modify" type="button">수정</button></td>
       </tr>
