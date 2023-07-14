@@ -47,6 +47,15 @@ export const blockIfNotLogin = () => {
   }
 };
 
+export const blockIfNotAdmin = () => {
+  const admin = localStorage.getItem('admin');
+
+  if (!admin) {
+    alert('관리자 전용 페이지입니다.');
+    window.location.replace('/');
+  }
+};
+
 export const navigate = (pathname) => {
   return function () {
     window.location.href = pathname;
