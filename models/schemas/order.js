@@ -44,6 +44,10 @@ const OrderSchema = new Schema(
       type: Number,
       required: true,
     },
+    cacleTotalAmount: {
+      type: Number,
+      required: false,
+    },
     status: {
       type: String,
       required: true,

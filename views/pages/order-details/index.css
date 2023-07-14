@@ -32,7 +32,8 @@ body main {
   width: 50px;
 }
 
-#totalAmountRow {
+#totalAmountRow,
+#cacleTotalAmountRow {
   padding: 8px;
   text-align: right;
   border-top: 1px solid #ddd;

@@ -6,7 +6,9 @@ async function getOrderSummary() {
 
   const purchaseListElements = jsonData.map(
     (purchaseInfo) => `
-    <article class="purchase-item" id="${purchaseInfo._id}">
+    <article class="purchase-item" id="${purchaseInfo._id}" status="${
+      purchaseInfo.status
+    }" >
       <div class="thumbnail-img-box">
         <img class="thumbnail" src="${
           purchaseInfo.repImgUrl
@@ -19,7 +21,13 @@ async function getOrderSummary() {
         <h3 class="price">${purchaseInfo.totalPrice.toLocaleString()}원</h3>
       </div>
       <div class="detailShipping">
-        <button class="view-details button" name="goToOrderDetailBtn">상세 내역 보기</button>
+        <button class="view-details button block" name="goToOrderDetailBtn">상세 내역 보기</button>
+        ${
+          purchaseInfo.status === '결제완료'
+            ? `<button class="view-details button block" name="cancleBtn">주문 취소</button>`
+            : ''
+        }
+        
         <div class="shipping-status">${purchaseInfo.status}</div>
       </div>
     </article>
@@ -28,11 +36,22 @@ async function getOrderSummary() {
   purchaseList.innerHTML = purchaseListElements.join('');
 
   //반복적인 요소에 이벤트 버블링을 이용해서 위임하기
-  purchaseList.addEventListener('click', (event) => {
+  purchaseList.addEventListener('click', async (event) => {
     const target = event.target;
     if (target.getAttribute('name') === 'goToOrderDetailBtn') {
       const orderId = target.closest('.purchase-item').getAttribute('id');
       location.href = `/order-details?id=${orderId}`;
+    }
+
+    if (target.getAttribute('name') === 'cancleBtn') {
+      const orderId = target.closest('.purchase-item').getAttribute('id');
+      //주문취소 api 호출
+      const result = await API.post(`/api/member/order/${orderId}`);
+      console.log(result);
+      target.classList.add('none');
+      target
+        .closest('.purchase-item')
+        .querySelector('.shipping-status').innerText = '취소';
     }
   });
 }

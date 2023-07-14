@@ -163,3 +163,12 @@ body {
   border-color: transparent;
   color: rgba(0, 0, 0, 0.7);
 }
+
+.block {
+  display: block;
+  width: 100%;
+}
+
+.none {
+  display: none;
+}
