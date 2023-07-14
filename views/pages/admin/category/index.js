@@ -1,4 +1,6 @@
 import * as API from '/api/index.js';
+import { blockIfNotAdmin } from '/utils/index.js';
+blockIfNotAdmin();
 // 자식요소에 데이터를 넣기위한 부모 요소 가져오기
 const nested = document.querySelector('.nested-li');
 
