@@ -1,3 +1,5 @@
+import { blockIfNotLogin } from '/utils/index.js';
+blockIfNotLogin();
 import * as API from '/api/index.js';
 
 async function getOrderSummary() {
