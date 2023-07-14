@@ -46,12 +46,14 @@ async function getOrderSummary() {
     if (target.getAttribute('name') === 'cancleBtn') {
       const orderId = target.closest('.purchase-item').getAttribute('id');
       //주문취소 api 호출
-      const result = await API.post(`/api/member/order/${orderId}`);
-      console.log(result);
-      target.classList.add('none');
-      target
-        .closest('.purchase-item')
-        .querySelector('.shipping-status').innerText = '취소';
+      if (confirm('주문을 취소하시겠습니까?')) {
+        const result = await API.post(`/api/member/order/${orderId}`);
+        console.log(result);
+        target.classList.add('none');
+        target
+          .closest('.purchase-item')
+          .querySelector('.shipping-status').innerText = '취소';
+      }
     }
   });
 }
