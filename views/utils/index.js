@@ -38,6 +38,15 @@ export const checkAdmin = async () => {
   }
 };
 
+export const blockIfLogin = () => {
+  const token = localStorage.getItem('token');
+
+  if (token) {
+    alert('로그인 한 상태에서는 접근할 수 없는 페이지입니다.');
+    window.location.replace('/');
+  }
+};
+
 export const blockIfNotLogin = () => {
   const token = localStorage.getItem('token');
 

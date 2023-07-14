@@ -1,4 +1,7 @@
+import { blockIfNotAdmin } from '/utils/index.js';
+blockIfNotAdmin();
 import * as API from '/api/index.js';
+
 import categoryModal from '/components/category-modal.js';
 window.callbackCategoryModal = function (result) {
   console.log(result);
