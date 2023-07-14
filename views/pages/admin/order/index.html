@@ -1,141 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/common/global.css" />
+    <link rel="stylesheet" href="index.css" />
+    <script defer src="/components/admin-header.js"></script>
+    <!-- <script defer src="/components/header.js"></script> -->
+    <script defer src="/components/footer.js"></script>
+    <script defer type="module" src="index.js"></script>
+    <script defer type="module" src="/api/index.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="stylesheet" href="/common/global.css" />
-  <link rel="stylesheet" href="index.css">
-  <script defer src="/components/admin-header.js"></script>
-  <!-- <script defer src="/components/header.js"></script> -->
-  <script defer src="/components/footer.js"></script>
-  <script defer type= module src="index.js"></script>
-  <script defer type= module src="/api/index.js"></script>
-</head>
+  <body>
+    <!-- header 부분 -->
+    <header class="header"></header>
 
-<body>
-  <!-- header 부분 -->
-  <header class="header"></header>
-
-  <!-- main 부분 -->
-  <main>
-
-    <section>
-      <h2></h2>
-      <div class="item-box">
-        <!-- 아이템 썸네일 -->
-      </div>
-
-      <div class="pagination"></div>
-      <!-- 페이지네이션 컨테이너 -->
-    </section>
-
-    <div class="container">
-      <h1 class="title">주문 관리</h1>
-      <hr>
-      <div class="text-1">기본검색</div>
-    </div>
-
-
-    <!-- 인제시작부분 -->
-    <div class="container" style="margin-top:15px;">
-      <!-- 111 -->
-      <div class="t_wrap">
-        <div class="t-left">
-          검색어
+    <!-- main 부분 -->
+    <main>
+      <section>
+        <h2></h2>
+        <div class="item-box">
+          <!-- 아이템 썸네일 -->
         </div>
-        <div class="t-right">
-          <!-- <select name="" id="">
-            <option value="">주문번호</option>
-            <option value="">상품명</option>
-            <option value="">상품명</option>
-            <option value="">상품명</option>
-            <option value="">상품명</option>
-          </select> -->
-          <input type="text" id="searchInput">
-        </div>
+
+        <div class="pagination"></div>
+        <!-- 페이지네이션 컨테이너 -->
+      </section>
+
+      <div class="container">
+        <div class="total">전체 : <strong class="b2"></strong>건 조회</div>
       </div>
-      <!-- 222 -->
-      <!-- <div class="t_wrap">
-        <div class="t-left">
-          카테고리
-        </div>
-        <div class="t-right"> -->
-      <!-- <select name="" id="" class="t-right2" >
-            <option value=""> 주문일 </option>
-            <option value="">년</option>
-            <option value="">월</option>
-            <option value="">일</option>
-            
-            <input type="text" class="sel_text" style="margin-left: 15px;">
-            <b>~</b>
-            <input type="text" class="sel_text">
-            <button class="button" style="font-weight: 600;">오늘</button>
-            <button class="button" style="font-weight: 600;">어제</button>
-            <button class="button" style="font-weight: 600;">일주일</button>
-            <button class="button" style="font-weight: 600;">지난달</button>
-            <button class="button" style="font-weight: 600;">전체</button>
-          </select> -->
-      <!-- </div> -->
-    </div>
-    </div>
-    <!-- 버튼 -->
-    <div class="container">
-      <div class="btn_wrap">
-        <button class="button" id="searchButton">검색</button>
-        <!-- <button class="btn_black">초기화</button> -->
+      <!-- 2번째 작업 -->
+
+      <div class="container">
+        <table class="product">
+          <thead>
+            <tr>
+              <td>번호</td>
+              <td>주문일시</td>
+              <td style="width: 200px">주문번호</td>
+              <td style="width: 200px">주문상품</td>
+              <td>주문상태</td>
+              <td>총 금액</td>
+              <td>수정</td>
+              <td>삭제</td>
+            </tr>
+          </thead>
+          <tbody id="order_tbody">
+            <!-- 반복되는구만 -->
+          </tbody>
+        </table>
       </div>
-      <hr>
-    </div>
+    </main>
 
-    <div class="container">
-      <div>
-        전체 : <b class="b2"></b>건 조회
-        <!-- <select name="" id="" class="b2_selector">
-          <option value=""> - - 줄 정렬</option>
-          <option value="">상품명</option>
-          <option value="">상품명</option>
-          <option value="">상품명</option>
-          <option value="">상품명</option>
-        </select> -->
-      </div>
-      <hr>
-      <!-- <div class="btn_btw">
-        <button class="button is-light">새로고침</button>
-      </div> -->
-    </div>
-    <!-- 2번째 작업 -->
-
-    <div class="container">
-      <table class="product">
-        <thead>
-          <tr>
-            <td>번호</td>
-            <td>주문일시</td>
-            <td style="width: 200px;">주문번호</td>
-            <td style="width: 200px;">주문상품</td>
-            <td>주문상태</td>
-            <td>총 금액</td>
-            <td>관리</td>
-            <td>관리</td>
-          </tr>
-        </thead>
-        <tbody id="order_tbody">
-          <!-- 반복되는구만 -->
-
-        </tbody>
-      </table>
-    </div>
-
-  </main>
-
-  <!-- footer 부분 -->
-  <footer class="footer">
-
-  </footer>
-
-</body>
-
+    <!-- footer 부분 -->
+    <footer class="footer"></footer>
+  </body>
 </html>

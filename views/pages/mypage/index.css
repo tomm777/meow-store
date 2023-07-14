@@ -44,7 +44,7 @@ section.content-wrap {
   width: 1200px;
   height: 100%;
   /* border: 1px solid black; */
-  margin: 22px 44px;
+  margin: 0 30px;
   position: relative;
 }
 .gray {
@@ -60,7 +60,8 @@ section.content-wrap {
   width: 100%;
 }
 .content:last-child {
-  margin-top: 50px;
+  /* margin-top: 50px; */
+  margin-top: 117px;
 }
 .content .content-area {
   width: 33%;

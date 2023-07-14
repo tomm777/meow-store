@@ -6,6 +6,7 @@ aside.aside-tab {
   display: inline-block;
   background-color: #fff8c6;
   height: 500px;
+  vertical-align: top;
 }
 .aside-tab {
   padding: 10px 16px;
@@ -22,11 +23,11 @@ aside.aside-tab {
   font-size: large;
 }
 .aside-tab .title span {
-  font-size: larger;
   display: block;
   margin-bottom: 15px;
   font-weight: bold;
   cursor: pointer;
+  font-size: 19px;
 }
 .aside-tab li:hover {
   background-color: rgb(83 81 78 / 13%);
