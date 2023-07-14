@@ -12,7 +12,7 @@ async function getProductList() {
   let tbody = document.querySelector('#table-body');
   tbody.innerHTML = '';
 
-  data.forEach(async (item, index) => {
+  data.forEach(async (item) => {
     const response = await fetch(`/api/product/${item._id}`);
     const productDetailData = await response.json();
 
@@ -21,21 +21,18 @@ async function getProductList() {
 
     tbody.insertAdjacentHTML(
       'beforeend',
-      `
-      <tr name="table-body" product_id="${item._id}" >
+      `<tr name="table-body" product_id="${item._id}">
         <td><input type="radio"></td>
-        <td name="number">${index + 1}</td>
         <td name="image">
-        <div class="img-box">
-        <img src="${item.repImgUrl}" />
-        </div>
+          <div class="img-box">
+            <img src="${item.repImgUrl}" />
+          </div>
         </td>
         <td name="name">${item.name}</td>
         <td name="category">${productDetailData.categoryId.categoryName}${subCategory}</td>
         <td name="price">${item.price.toLocaleString()}원</td>
         <td><button class="button is-light" name="modify" type="button">수정</button></td>
-      </tr>
-      `,
+      </tr>`,
     );
   });
 
@@ -50,7 +47,7 @@ async function getProductList() {
 }
 getProductList();
 
-async function deleteSelectedRows() {
+function deleteSelectedRows() {
   console.log('delete버튼 클릭됨');
   let radioes = document.querySelectorAll(".product tbody input[type='radio']");
   let rowsToDelete = [];
@@ -66,7 +63,6 @@ async function deleteSelectedRows() {
     const id = row.getAttribute('product_id');
     API.delete('/api/admin/product/', id); // API에서 삭제
   });
-  await getProductList();
   count.innerHTML = Number(count.innerText) - 1;
 }
 const deleteBtn = document.getElementById('deleteRows');
