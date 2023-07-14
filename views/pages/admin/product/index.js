@@ -1,4 +1,4 @@
-const count = document.querySelector(".b2");
+const count = document.querySelector('.b2');
 
 async function deleteSelectedRows() {
   let radioes = document.querySelectorAll(".product tbody input[type='radio']");
@@ -14,15 +14,15 @@ async function deleteSelectedRows() {
     row.parentNode.removeChild(row);
   });
   await countList();
-  console.log(count.innerText)
-  count.innerText = Number(count.innerText)-1;
-  console.log(count.innerText)
+  console.log(count.innerText);
+  count.innerText = Number(count.innerText) - 1;
+  console.log(count.innerText);
 }
 
 //총 몇건인지 조회
 async function countList() {
-  const res = await fetch("/api/products");
-  const dataList = await res.json()
+  const res = await fetch('/api/products');
+  const dataList = await res.json();
 
   const totalCount = dataList.length;
 
@@ -30,11 +30,6 @@ async function countList() {
 }
 
 countList();
-
-
-
-
-
 
 // const dummyData = [{
 //     number: '1',
@@ -80,21 +75,10 @@ countList();
 //document.querySelector("[name=number]")
 //getCategoryList();
 
-
 // let fixBtns = document.querySelectorAll(".fix_btn");
 // fixBtns.forEach(function (btn) {
 //   btn.addEventListener("click", fixRow);
 // });
-
-
-
-
-
-
-
-
-
-
 
 // 더미데이터
 // let tbody = document.querySelector('#table-body');
@@ -115,60 +99,50 @@ countList();
 // }
 
 async function getProductList() {
-  const response = await fetch("/api/products");
+  const response = await fetch('/api/products');
   const data = await response.json();
-  console.log(data)
+  console.log(data);
 
   let tbody = document.querySelector('#table-body');
   data.forEach(function (item, index) {
-    tbody.insertAdjacentHTML('beforeend',
+    tbody.insertAdjacentHTML(
+      'beforeend',
       `
       <tr name="table-body" product_id="${item._id}" >
         <td><input type="radio"></td>
-        <td name="number">${index+1}</td>
-        <td name="image"><img src="${item.repImgUrl}" /></td>
+        <td name="number">${index + 1}</td>
+        <td name="image">
+        <div class="img-box">
+        <img src="${item.repImgUrl}" />
+        </div>
+        </td>
         <td name="name">${item.name}</td>
         <td name="category">${item.categoty}</td>
-        <td name="price">${item.price}</td>
-        <td><button onclick="goToUpdate(this)" class="btn_black">수정</button></td>
+        <td name="price">${item.price.toLocaleString()}원</td>
+        <td><button onclick="goToUpdate(this)" class="button is-light">수정</button></td>
       </tr>
-      `
+      `,
     );
   });
 }
 
-getProductList()
-
-
+getProductList();
 
 function goToUpdate(o) {
-  const tr = o.closest("[name=table-body]");
-  const id = tr.getAttribute("product_id");
+  const tr = o.closest('[name=table-body]');
+  const id = tr.getAttribute('product_id');
 
-  location.href = "/admin/product-details?id=" + id;
+  location.href = '/admin/product-details?id=' + id;
 }
 
-const createBtn = document.getElementById("createBtn");
-createBtn.addEventListener("click", () => {
-  location.href = "/admin/product-create"
-})
+const createBtn = document.getElementById('createBtn');
+createBtn.addEventListener('click', () => {
+  location.href = '/admin/product-create';
+});
 
 //될까..?
 
-
-
-
-
-
-
-
-
-
-
-
-
 // getCategoryList()
-
 
 // fetch('/api/admin/category', {
 //   method: 'POST', // 요청 방식 설정 (POST)
@@ -216,11 +190,10 @@ createBtn.addEventListener("click", () => {
 
 // const updateOne =() => {
 //   saveButton.classList.add("active")
-//   // api 호출 후 
+//   // api 호출 후
 
 //   saveButton.classList.remove("active")
 // }
-
 
 // span을 input으로 변환
 // const spanEle = caretCheck[caretCheck.length - 1];
@@ -231,21 +204,18 @@ createBtn.addEventListener("click", () => {
 // input.type = 'text';
 // input.value = spanValue;
 
-
 // input.classList.add('updateInput');
 //   spanEle.parentNode.replaceChild(input, spanEle);
 
-
-
-
-
-//검색 기능 
+//검색 기능
 
 const searchButton = document.querySelector('.btn_black');
 searchButton.addEventListener('click', performSearch);
 
 function performSearch() {
-  const radioes = document.querySelectorAll('.product tbody input[type="radio"]');
+  const radioes = document.querySelectorAll(
+    '.product tbody input[type="radio"]',
+  );
   const selectedRows = [];
 
   radioes.forEach(function (radio) {
@@ -265,16 +235,14 @@ function performSearch() {
 
 //총 몇건인지 조회
 async function countList() {
-  const res = await fetch("/api/products");
-  const dataList = await res.json()
+  const res = await fetch('/api/products');
+  const dataList = await res.json();
 
   const totalCount = dataList.length;
 
-  document.querySelector(".b2").innerHTML = totalCount.toString();
+  document.querySelector('.b2').innerHTML = totalCount.toString();
 }
 
 countList();
 
-
 //수정버튼 눌렀을때 페이지가 이동되서 그안에 데이터들이 입력값이 있는 상태로 구현되는 동작
-
