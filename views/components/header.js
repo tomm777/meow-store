@@ -11,7 +11,6 @@ header.innerHTML = `
         </a>
       </div>
       <div class="span-container">
-      <button class="button is-normal admin-home">관리자 홈</button>
         <a href = '/login'>
           <span class="header-span login-text">로그인</span>
         </a>
@@ -21,24 +20,23 @@ header.innerHTML = `
         <a href = '/mypage' class="mypage">
             <span class="header-span">마이페이지</span>
         </a>
+        <a href = '/admin/home'>
+        <span class="header-span admin">관리자 페이지</span>
+      </a>
       </div>
     </div>
 </div>  
 `;
 const login = document.querySelector('.header-span.login-text');
 const mypage = document.querySelector('.mypage');
-const adminHome = document.querySelector('.admin-home');
-console.log(adminHome);
+const adminHome = document.querySelector('.admin');
 if (token) {
   login.textContent = '로그아웃';
   mypage.style.display = 'inline-block';
   // loginIcon.style.display = 'none';
 }
 if (admin) {
-  adminHome.style.display = 'block';
-  adminHome.addEventListener('click', function () {
-    window.location.href = '/admin/home';
-  });
+  adminHome.style.display = 'inline-block';
 }
 
 login.addEventListener('click', function () {

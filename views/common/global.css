@@ -36,8 +36,6 @@ a {
   position: relative;
   padding: 20px 5px;
 }
-.logo-container .logo {
-}
 .logo-container .logo .img-box {
   width: 300px;
   height: 80px;
@@ -180,5 +178,10 @@ li.active {
 
 /* 관리자 계정  */
 .span-container .admin {
+  display: none;
+  font-weight: bold;
+}
+.span-container .user-home {
+  cursor: pointer;
   font-weight: bold;
 }

@@ -5,7 +5,7 @@ async function getOrderList() {
   console.log(res);
   const totalCount = res.length;
 
-  document.querySelector('.b2').innerHTML = totalCount.toString();
+  document.querySelector('.b2').textContent = totalCount.toString();
 
   const tbody = document.getElementById('order_tbody');
   const html = res
@@ -16,16 +16,16 @@ async function getOrderList() {
     <td>${data.number}</td>
     <td><img src="${data.repImgUrl}" /></td>
     <td>
-      <div name="content">
+      <div name="content" class="status">
         ${data.status}
       </div>
       <div class="option">
-        <select id="select-value" value=${data.status}>
+        <select id="select-value">
           <option value="none">주문상태 선택</option>
-          <option value="배송 중">배송 중</option>
-          <option value="배송 완료">배송 완료</option>
-          <option value="환불중">환불중</option>
-          <option value="환불 완료">환불 완료</option>
+          <option value="배송중">배송중</option>
+          <option value="배송완료">배송완료</option>
+          <option value="결제완료">결제완료</option>
+          <option value="취소">취소</option>
         </select>
       </div>
     </td>
@@ -97,15 +97,21 @@ async function updateOrderStatus(id, status) {
 async function deleteOrder(target) {
   const targetId = target.closest('tr').id;
   const tr = target.closest('tr');
-  console.log('CLICK');
   // 주문 삭제 API 호출
+  const checkStatus = target
+    .closest('tr')
+    .querySelector('.status')
+    .textContent.trim();
+  if (!checkStatus.includes('취소')) {
+    alert('주문 상태가 취소 일 경우에만 삭제가 가능합니다.');
+    return;
+  }
   const result = await API.delete(`/api/admin/order/${targetId}`);
   console.log(result);
   if (result) {
     tr.remove();
     window.location.reload();
   }
-  // 테이블에서 행 제거
 }
 
 //총 몇건인지 조회
