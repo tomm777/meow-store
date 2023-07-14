@@ -44,6 +44,7 @@ class OrderService {
         { session },
       );
 
+      //TODO:재고가 있는지 확인할것
       await OrderItem.insertMany(
         orderItemList.map((orderItemData) => ({
           orderId: newOrder._id,
@@ -71,7 +72,12 @@ class OrderService {
   }
 
   async cancelOrder(id) {
-    //TODO : 결제 완료일때만 취소할수 있도록 하기
+    //TODO : 재고에 추가 할것
+    const order = await Order.findById(id);
+    if (order.status !== '결제완료') {
+      throw new Error('결제완료 상태일때만 취소할 수 있습니다.');
+    }
+
     const updatedOrder = await Order.updateById(id, {
       status: '취소',
       cancelDate: moment().format('YYYY-MM-DD HH:mm:ss'),
@@ -80,15 +86,21 @@ class OrderService {
   }
 
   async editOrderInfo(id, update) {
-    //TODO : 배송전일때만 수정할 수 있도록 하기
+    const order = await Order.findById(id);
+    if (order.status !== '결제완료') {
+      throw new Error('결제완료 상태일때만 수정할 수 있습니다.');
+    }
     const updatedOrder = await Order.updateById(id, update);
     return updatedOrder;
   }
 
   async removeOrderProducts(orderId, orderItemIds) {
-    //TODO : 배송전일때만 수정할 수 있도록 하기
+    //TODO : 재고에 추가 할것
+    const order = await Order.findById(orderId);
+    if (order.status !== '결제완료') {
+      throw new Error('결제완료 상태일때만 수정할 수 있습니다.');
+    }
     await OrderItem.cancelOderItems(orderItemIds);
-    //TODO:orderid로 조회한 list중에 모두 cancelYn 이면 주문상태 취소로 변경하기
     const orderItemList = await OrderItem.findByOrderId(orderId);
 
     let cacleTotalAmount = 0;
@@ -116,13 +128,12 @@ class OrderService {
   }
 
   async getOrderList(userId) {
-    //TODO: user 검색 필터 추가할것
     const orders = await Order.findAll({ userId });
     return orders;
   }
 
   async getAdminOrderList() {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({ deleteYn: 'N' });
     return orders;
   }
 
@@ -138,7 +149,10 @@ class OrderService {
   }
 
   async removeOrder(id) {
-    //TODO : 배송완료일때만 수정할 수 있도록 하기
+    const order = await Order.findById(id);
+    if (order.status !== '취소') {
+      throw new Error('취소 상태일때만 삭제할 수 있습니다.');
+    }
     const result = await Order.updateById(id, {
       deleteYn: 'Y',
       deleteDate: moment().format('YYYY-MM-DD HH:mm:ss'),

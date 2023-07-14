@@ -10,9 +10,7 @@ class ProductsService {
   async getProductById(id) {
     const product = await Product.findById(id);
     if (!product) {
-      return res
-        .status(404)
-        .json({ success: false, message: '상품을 찾을 수 없습니다.' });
+      throw new Error('상품을 찾을 수 없습니다.');
     }
     return product;
   }
