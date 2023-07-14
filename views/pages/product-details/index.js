@@ -1,4 +1,4 @@
-const urlParams = new URLSearchParams(window.location.search); // http://localhost:3000/product-details/?id=64a8b5c760e6ded9c555e247
+const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 const infoBox = document.querySelector('#info_box');
 let productData = {};
