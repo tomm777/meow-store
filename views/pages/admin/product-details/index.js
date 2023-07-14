@@ -53,7 +53,49 @@ async function getProductDetail() {
   document.getElementById('categoryName').innerText = categoryTitle;
 }
 
+function checkValidation() {
+  if (isNull(categoryId.value)) {
+    alert('카테고리를 선택해 주세요');
+    return false;
+  }
+  if (isNull(productName.value)) {
+    productName.focus();
+    alert('상품명을 입력해 주세요.');
+    return false;
+  }
+  if (isNull(price.value)) {
+    price.focus();
+    alert('판매가를 입력해 주세요.');
+    return false;
+  }
+  if (isNaN(price.value)) {
+    price.focus();
+    alert('숫자를 입력해 주세요.');
+    return false;
+  }
+  if (isNaN(stock.value)) {
+    stock.focus();
+    alert('숫자를 입력해 주세요.');
+    return false;
+  }
+  if (isNull(summary.value)) {
+    summary.focus();
+    alert('상품 요약 설명을 입력해 주세요.');
+    return false;
+  }
+  if (isNull(description.value)) {
+    description.focus();
+    alert('상품 상세 설명을 입력해 주세요.');
+    return false;
+  }
+
+  return true;
+}
+function isNull(str) {
+  return str === null || str === undefined || str === '';
+}
 async function createProduct() {
+  if (!checkValidation()) return;
   const formData = new FormData();
   formData.enctype = 'multipart/form-data';
   formData.append('categoryId', categoryId.value);
