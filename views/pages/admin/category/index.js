@@ -119,26 +119,25 @@ addButton.addEventListener('click', function () {
     // 상위 카테고리 추가 API
     API.post('/api/admin/category', {
       categoryName: inputValue.value,
-    })
-      .then((data) => {
+    }).then((data) => {
+      if (data.success) {
         const result = data.data;
         console.log(data);
         nested.insertAdjacentHTML(
           'beforeend',
           `<div>
-          <span class="caret" id=${result._id}>${inputValue.value}</span>
-          <ul class="nested">
-          </ul>
-          </div>`,
+            <span class="caret" id=${result._id}>${inputValue.value}</span>
+            <ul class="nested">
+            </ul>
+            </div>`,
         );
-        // window.location.reload(true);
         nodeSet();
         inputValue.value = '';
-      })
-      .catch((error) => {
-        // 에러 처리하는 코드 작성
-        console.log('Error:', error);
-      });
+      } else {
+        alert(data.message);
+        return;
+      }
+    });
 
     return;
   }
@@ -159,8 +158,9 @@ addButton.addEventListener('click', function () {
       const result = data.data;
       // console.log(data._id);
       // 하위 카테고리 추가
+      console.log(data);
       if (!data.success) {
-        alert('중복된 카테고리입니다');
+        alert(data.message);
         return;
       }
       caretDown.insertAdjacentHTML(
@@ -203,26 +203,37 @@ const deleteCate = () => {
   // 하위 카테고리가 선택되지않고 상위 카테고리를 선택 했을 때
   if (nullArrayCheck.length === 0) {
     if (confirm('정말 상위카테고리를 삭제하시겠습니까?')) {
-      console.log(caretCheck[caretCheck.length - 1].id);
+      // console.log(caretCheck[caretCheck.length - 1].id);
       API.delete(
         '/api/admin/category/',
         `${caretCheck[caretCheck.length - 1].id}`,
-      );
-      caretCheck[caretCheck.length - 1].parentElement.remove();
-      nodeSet();
-      return;
+      ).then((item) => {
+        if (item.success) {
+          caretCheck[caretCheck.length - 1].parentElement.remove();
+          nodeSet();
+        } else {
+          alert(item.message);
+          return;
+        }
+      });
     }
+    return;
   }
   if (nullArrayCheck.length >= 2) {
     alert('삭제 할 하나의 카테고리만 선택해주세요');
     return;
   }
-
-  API.delete('/api/admin/subcategory/', `${cateArray[0].id}`);
-  cateArray.forEach((item) => {
-    item.remove();
+  API.delete('/api/admin/subcategory/', `${cateArray[0].id}`).then((result) => {
+    if (result.success) {
+      cateArray.forEach((item) => {
+        item.remove();
+      });
+      nodeSet();
+    } else {
+      alert(result.message);
+      return;
+    }
   });
-  nodeSet();
 };
 // 카테고리 수정 메서드
 const updateCate = () => {
