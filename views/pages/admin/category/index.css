@@ -11,6 +11,8 @@ input {
 }
 .category-left input {
   width: 140px;
+  margin-top: 11px;
+  margin-inline-start: 20px;
 }
 button {
   margin-right: 15px;
