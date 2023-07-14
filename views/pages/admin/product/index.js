@@ -2,20 +2,21 @@ import * as API from '/api/index.js';
 
 const count = document.querySelector('.b2');
 
+getProductList();
+
 async function getProductList() {
   const response = await fetch('/api/products');
   const data = await response.json();
-
   count.innerHTML = data.length.toString();
   let tbody = document.querySelector('#table-body');
   tbody.innerHTML = '';
 
   data.forEach(async (item) => {
-    const response = await fetch(`/api/product/${item._id}`);
-    const productDetailData = await response.json();
-
     let subCategory = '';
-    if (productDetailData.subcategoryId) subCategory = ` > ${productDetailData.subcategoryId.subCategoryName}`;
+    if (item.subcategoryId) {
+      subCategory = ` > ${item.subcategoryId.subCategoryName}`;
+    }
+
     tbody.insertAdjacentHTML(
       'beforeend',
       `<tr name="table-body" product_id="${item._id}">
@@ -26,15 +27,14 @@ async function getProductList() {
           </div>
         </td>
         <td name="name">${item.name}</td>
-        <td name="category">${productDetailData.categoryId.categoryName}${subCategory}</td>
+        <td name="category">${item.categoryId.categoryName}${subCategory}</td>
         <td name="price">${item.price.toLocaleString()}원</td>
         <td><button class="modify button is-light" name="modify" type="button">수정</button></td>
       </tr>`,
-      );
+    );
   });
+  setFuncToModifyBtns();
 }
-getProductList();
-setFuncToModifyBtns();
 
 function setFuncToModifyBtns() {
   const modifyBtns = document.querySelectorAll('button.modify');
@@ -42,7 +42,9 @@ function setFuncToModifyBtns() {
   modifyBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       // e.stopPropagation();
-      const productId = e.target.closest('[name=table-body]').getAttribute('product_id');
+      const productId = e.target
+        .closest('[name=table-body]')
+        .getAttribute('product_id');
       location.href = `/admin/product-details?id=${productId}`;
     });
   });

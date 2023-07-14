@@ -6,7 +6,9 @@ const Product = mongoose.model('products', productSchema);
 
 class ProductModel {
   async findAll(option = {}) {
-    const products = await Product.find({ ...option, deleteYn: 'N' });
+    const products = await Product.find({ ...option, deleteYn: 'N' })
+      .populate('categoryId')
+      .populate('subcategoryId');
     return products;
   }
 
