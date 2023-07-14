@@ -1,20 +1,16 @@
-const count = document.querySelector('.b2');
-//총 몇건인지 조회
-async function countList() {
-  const res = await fetch('/api/products');
-  const dataList = await res.json();
+import * as API from '/api/index.js';
 
-  const totalCount = dataList.length;
-  count.innerHTML = totalCount.toString();
-}
-countList();
+const count = document.querySelector('.b2');
 
 async function getProductList() {
   const response = await fetch('/api/products');
   const data = await response.json();
 
+  count.innerHTML = data.length.toString();
   let tbody = document.querySelector('#table-body');
-  data.forEach(function (item, index) {
+  tbody.innerHTML = '';
+
+  data.forEach((item, index) => {
     let category = '';
     if (item.categoryId) {
       category = item.categoryId.categoryName;
@@ -38,15 +34,25 @@ async function getProductList() {
         <td name="name">${item.name}</td>
         <td name="category">${category}${subCategory}</td>
         <td name="price">${item.price.toLocaleString()}원</td>
-        <td><button onclick="goToUpdate(this)" class="button is-light">수정</button></td>
+        <td><button class="button is-light" name="modify" type="button">수정</button></td>
       </tr>
       `,
     );
+  });
+
+  document.querySelectorAll("[name='modify']").forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const productId = e.target
+        .closest('[name=table-body]')
+        .getAttribute('product_id');
+      location.href = `/admin/product-details?id=${productId}`;
+    });
   });
 }
 getProductList();
 
 async function deleteSelectedRows() {
+  console.log('delete버튼 클릭됨');
   let radioes = document.querySelectorAll(".product tbody input[type='radio']");
   let rowsToDelete = [];
 
@@ -57,31 +63,17 @@ async function deleteSelectedRows() {
   });
 
   rowsToDelete.forEach(function (row) {
-    row.parentNode.removeChild(row);
+    row.parentNode.removeChild(row); // 화면에서 삭제
+    const id = row.getAttribute('product_id');
+    API.delete('/api/admin/product/', id); // API에서 삭제
   });
-  await countList();
-  count.innerText = Number(count.innerText) - 1;
-  // getProductList();
+  await getProductList();
+  count.innerHTML = Number(count.innerText) - 1;
 }
-
-function goToUpdate(o) {
-  const tr = o.closest('[name=table-body]');
-  const id = tr.getAttribute('product_id');
-
-  location.href = '/admin/product-details?id=' + id;
-}
+const deleteBtn = document.getElementById('deleteRows');
+deleteBtn.addEventListener('click', deleteSelectedRows);
 
 const createBtn = document.getElementById('createBtn');
 createBtn.addEventListener('click', () => {
   location.href = '/admin/product-create';
 });
-
-// //총 몇건인지 조회
-async function countList() {
-  const res = await fetch('/api/products');
-  const dataList = await res.json();
-
-  const totalCount = dataList.length;
-  document.querySelector('.b2').innerHTML = totalCount.toString();
-}
-countList();

@@ -9,7 +9,7 @@
   <script defer src="/components/admin-header.js"></script>
   <!-- <script defer src="/components/header.js"></script> -->
   <script defer src="../../../components/footer.js"></script>
-  <script defer src="index.js"></script>
+  <script defer type="module" src="index.js"></script>
   <title>야옹 잡화점</title>
 </head>
 
@@ -27,8 +27,8 @@
       </div>
       <hr>
       <div class="btn_btw">
-        <button class="button" id="deleteRows" onclick="deleteSelectedRows()">선택 상품 삭제</button>
-        <button class="button is-light" id="createBtn">+상품등록</button>
+        <button type="button" class="button" id="deleteRows">선택 상품 삭제</button>
+        <button type="button" class="button is-light" id="createBtn">+상품등록</button>
       </div>
       <div class="container">
         <table class="product">
