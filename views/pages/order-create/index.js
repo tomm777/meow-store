@@ -91,8 +91,7 @@ async function createOrder(event) {
   const userConfirm = confirm('결제하시겠습니까?');
   if (userConfirm) {
     const result = await API.post('/api/member/order', dataToPost);
-    localStorage.setItem('orderId', result);
-    location.href = '/order-complete/';
+    location.href = `/order-complete/?id=${result}`;
   }
 };
 orderBtn.addEventListener('click', createOrder);
