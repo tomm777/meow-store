@@ -29,7 +29,7 @@ async function createProduct() {
   const formData = new FormData();
   formData.enctype = 'multipart/form-data';
   formData.append('categoryId', categoryId.value);
-  if(subcategoryId.value !== ""){
+  if (subcategoryId.value !== '') {
     formData.append('subcategoryId', subcategoryId.value);
   }
   formData.append('name', productName.value);
@@ -49,3 +49,10 @@ async function createProduct() {
   alert('제품등록이 완료되었습니다.');
   location.href = '/admin/product';
 }
+
+fileInput.onchange = () => {
+  if (fileInput.files.length > 0) {
+    const fileName = document.querySelector('#fileName');
+    fileName.textContent = fileInput.files[0].name;
+  }
+};
