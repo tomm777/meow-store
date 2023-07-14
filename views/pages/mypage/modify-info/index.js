@@ -1,3 +1,5 @@
+import { blockIfNotLogin } from '/utils/index.js';
+blockIfNotLogin();
 import * as API from '/api/index.js';
 const addressValue = document.querySelector('#address-input');
 const cansleButton = document.querySelector('.cansle-button');
