@@ -12,12 +12,14 @@ for (let i = 0; i < savedCartData.length; ++i) {
         <img src="${data.repImgUrl}" class="product_thumbnail" alt="thumbnail"/>
       </div>
       <div class="product_info">
-        <span class="product_name">${data.name}</span>
-        <span class="qty_wrap">
+        <div class="product_name">
+          <span>${data.name}</span>
+        </div>
+        <div class="qty_wrap">
           <button class="qty_down button is-light" onclick="qtyDown(event)">-</button>
           <span class="product_qty" name="product_qty" >${data.qty}</span>
           <button class="qty_up button is-light" onclick="qtyUp(event)">+</button>
-        </span>
+        </div>
         <span class="product_price">${data.price.toLocaleString()} 원</span>
         <button class="delete_each button is-light" onclick="deleteEach(event)">삭제</button>
       </div>
@@ -106,6 +108,10 @@ function deleteAll() {
 deleteAllBtn.addEventListener('click', deleteAll);
 
 orderBtn.addEventListener('click', () => {
-  if (localStorage.getItem('token')) location.href = 'http://localhost:3000/order-create/';
+  if (!localStorage.getItem('meowStoreCart')) {
+    alert('장바구니에 상품이 없습니다.');
+    return;
+  }
+  if (localStorage.getItem('token')) location.href = '/order-create/';
   else alert("로그인 후 주문 가능합니다.");
 });

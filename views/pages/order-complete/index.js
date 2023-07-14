@@ -1,8 +1,9 @@
 import * as API from '/api/index.js';
-const ulElement = document.querySelector('#order-ul');
 
-const id = localStorage.getItem('orderId');
-const promise = API.get('/api/member/order/', `${id}`); // ?id= 넣으면 404 오류나서 일단 뺌
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('id');
+const ulElement = document.querySelector('#order-ul');
+const promise = API.get(`/api/member/order/${id}`);
 
 promise.then((data) => {
   ulElement.innerHTML = `
@@ -37,7 +38,6 @@ promise.then((data) => {
       </div>
     </li>
   `;
-  localStorage.removeItem('orderId');
   localStorage.removeItem('meowStoreCart');
 });
 
@@ -45,9 +45,9 @@ const orderListBtn = document.querySelector('#to_order_list');
 const homeBtn = document.querySelector('#to_home');
 
 orderListBtn.addEventListener('click', () => {
-  location.href = 'http://localhost:3000/purchase/';
+  location.href = '/purchase/';
 });
 
 homeBtn.addEventListener('click', () => {
-  location.href = 'http://localhost:3000/';
+  location.href = '/';
 });
