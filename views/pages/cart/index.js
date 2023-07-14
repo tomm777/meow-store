@@ -83,9 +83,15 @@ function deleteEach(event) {
   const li = event.target.closest('.product_wrap').parentElement;
   li.remove();
 
-  const price = event.target.closest('.product_wrap').querySelector('.product_price');
+  console.log("id: ", id);
+  const price = savedCartData.filter((o) => { o._id === id; });
   const qty = event.target.closest('.product_wrap').querySelector('.product_qty');
-  priceSum -= Number(price.innerText) * Number(qty.innerText);
+
+  console.log(price);
+
+  console.log(priceSum);
+  priceSum -= price * Number(qty.innerText);
+  console.log("after: ",priceSum);
   priceSumElement.innerText = `${priceSum.toLocaleString()} 원`;
 
   savedCartData = savedCartData.filter((o) => { o._id !== id; });
