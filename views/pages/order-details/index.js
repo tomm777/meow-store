@@ -1,4 +1,4 @@
-import { blockIfNotLogin } from '/utils/index.js';
+import { blockIfNotLogin, isNull } from '/utils/index.js';
 blockIfNotLogin();
 import * as API from '/api/index.js';
 
@@ -61,11 +61,37 @@ async function getOrderDetail() {
   initShippingInfo(data.order);
   initProductList(data.orderItemList);
 
-  totalAmountDiv.innerHTML = `총 결제금액: ${data.order.totalPrice}원`;
+  totalAmountDiv.innerHTML = `총 결제금액: ${Number(
+    data.order.totalPrice,
+  ).toLocaleString()}원`;
 }
 
+function checkValidation() {
+  if (isNull(receiverInput.value)) {
+    receiverInput.focus();
+    alert('수령인을 입력해 주세요.');
+    return false;
+  }
+  if (isNull(contactInput.value)) {
+    contactInput.focus();
+    alert('연락처를 입력해 주세요.');
+    return false;
+  }
+  if (isNull(zipCodeInput.value)) {
+    alert('배송지를 입력해 주세요.');
+    return false;
+  }
+  if (isNull(addressInput.value)) {
+    addressInput.focus();
+    alert('배송지를 입력해 주세요.');
+    return false;
+  }
+
+  return true;
+}
 async function saveOrderDeatil() {
   //validation 필요함
+  if (!checkValidation()) return;
   const data = {
     receiver: receiverInput.value,
     receiverContact: contactInput.value,
@@ -176,7 +202,7 @@ function initProductList(list) {
         }" >${product.quantity}</td>
         <td class="product-price ${
           isCancle || product.cancelYn === 'Y' ? 'strikethrough' : ''
-        }" >${product.totalPrice}</td>
+        }" >${Number(product.totalPrice).toLocaleString()}원</td>
       </tr>`;
     if (isCancle || product.cancelYn === 'Y') {
       cacleTotalAmount += Number(product.totalPrice);
@@ -303,6 +329,6 @@ function updateCancleTotalAmount() {
   if (cacleTotalAmount === 0) {
     cacleTotalAmountDiv.innerHTML = '';
   } else {
-    cacleTotalAmountDiv.innerHTML = `총 환불금액: ${cacleTotalAmount}원`;
+    cacleTotalAmountDiv.innerHTML = `총 환불금액: ${cacleTotalAmount.toLocaleString()}원`;
   }
 }
