@@ -1,3 +1,4 @@
+import { isNull } from '/utils/index.js';
 import * as API from '/api/index.js';
 
 const receiverInput = document.querySelector('#receiver');
@@ -78,7 +79,32 @@ const searchZipCode = () => {
 };
 searchZipCodeBtn.addEventListener('click', searchZipCode);
 
+function checkValidation() {
+  if (isNull(receiverInput.value)) {
+    receiverInput.focus();
+    alert('수령인을 입력해 주세요.');
+    return false;
+  }
+  if (isNull(contactInput.value)) {
+    contactInput.focus();
+    alert('연락처를 입력해 주세요.');
+    return false;
+  }
+  if (isNull(zipCodeInput.value)) {
+    alert('배송지를 입력해 주세요.');
+    return false;
+  }
+  if (isNull(addressInput.value)) {
+    addressInput.focus();
+    alert('배송지를 입력해 주세요.');
+    return false;
+  }
+
+  return true;
+}
+
 async function createOrder(event) {
+  if (!checkValidation()) return;
   event.preventDefault();
   dataToPost.receiver = receiverInput.value;
   dataToPost.receiverContact = contactInput.value;
@@ -93,5 +119,5 @@ async function createOrder(event) {
     const result = await API.post('/api/member/order', dataToPost);
     location.href = `/order-complete/?id=${result}`;
   }
-};
+}
 orderBtn.addEventListener('click', createOrder);

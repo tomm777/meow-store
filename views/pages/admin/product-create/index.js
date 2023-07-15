@@ -1,4 +1,4 @@
-import { blockIfNotAdmin } from '/utils/index.js';
+import { blockIfNotAdmin, isNull } from '/utils/index.js';
 blockIfNotAdmin();
 import * as API from '/api/index.js';
 
@@ -66,11 +66,6 @@ function checkValidation() {
 
   return true;
 }
-
-function isNull(str) {
-  return str === null || str === undefined || str === '';
-}
-
 async function createProduct() {
   if (!checkValidation()) return;
   const formData = new FormData();
