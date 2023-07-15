@@ -1,18 +1,23 @@
 const { Schema } = require('mongoose');
-const moment = require('moment');
+const { moment } = require('../../utils/moment');
 
 const ProductSchema = new Schema(
   {
-    /*userId: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
-    },*/
-    /*categoryId: {
+    },
+    categoryId: {
       type: Schema.Types.ObjectId,
-      ref: 'categorys',
+      ref: 'Category',
       required: true,
-    },*/
+    },
+    subcategoryId: {
+      type: Schema.Types.ObjectId,
+      ref: 'SubCategory',
+      required: false,
+    },
     name: {
       type: String,
       required: true,
@@ -37,7 +42,7 @@ const ProductSchema = new Schema(
       type: Number,
       min: 0,
       default: 0,
-      required: true,
+      // required: true,
     },
     createDate: {
       type: String,

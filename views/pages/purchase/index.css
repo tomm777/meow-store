@@ -1,0 +1,255 @@
+/* 전체 페이지 스타일 */
+body,
+div,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+p,
+input,
+button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+button {
+  display: block;
+  width: 160px;
+  height: 50px;
+  margin: 0 auto;
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+  background-color: #ededed;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  cursor: pointer;
+  color: #777777;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  /* padding: 6px 24px; */
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
+}
+.detailShipping button:first-child {
+  margin-bottom: 10px;
+}
+button.cancle {
+  box-shadow: 0px 1px 0px 0px #fff6af;
+  background: linear-gradient(to bottom, #ebf1b9 5%, #f4f7c3 100%);
+  background-color: #f0e078;
+  border-radius: 6px;
+  display: inline-block;
+  cursor: pointer;
+  color: #777777;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffee66;
+}
+
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 10px 0;
+  width: 80%;
+}
+
+a {
+  text-decoration: none;
+}
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+main {
+  margin: 40px 22px;
+}
+main .aside-tab .title {
+  /* font-size: 19px; */
+  font-size: medium;
+}
+
+/* 헤더 스타일 */
+.header {
+  background-color: #fffdf4;
+  flex-direction: column;
+}
+
+.top-right {
+  display: flex;
+  justify-content: flex-end;
+}
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 10px 0 0;
+}
+.button-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.button-container button img {
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  text-align: center;
+}
+
+/* 내비게이션 스타일 */
+.mainNav {
+  background-color: #fffdf4;
+}
+.mainNav ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fffdf4;
+}
+.mainNav li {
+  height: 50px;
+  position: relative;
+  flex-grow: 1;
+}
+
+.mainNav li:last-child::after {
+  display: none; /* 맨 마지막 메뉴의 구분선 숨김 */
+}
+
+.mainNav li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: rgb(100, 100, 100);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.mainNav li a:hover {
+  background-color: #84776e;
+  color: whitesmoke;
+}
+
+.subtitle {
+  text-align: left;
+  background-color: #84776e;
+  padding: 5px 5px 5px 20px;
+  color: azure;
+  font-size: 15pt;
+  font-weight: bold;
+}
+section {
+  width: 1100px;
+  display: inline-block;
+}
+.content-wrap {
+  /* margin: 60px auto;
+  margin-bottom: 80px; */
+  margin: 0 30px;
+  margin-bottom: 50px;
+}
+
+.purchase-list {
+  min-height: 609px;
+}
+
+.content-wrap .purchase-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 추가: 항목 요소들을 양쪽으로 정렬 */
+  border-top: 1px solid #ccc;
+  padding: 15px 20px;
+}
+.content-wrap article:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.thumbnail-img-box {
+  width: 150px;
+  height: 150px;
+  margin-right: 10px;
+}
+.thumbnail {
+  width: 100%;
+}
+
+.purchase-details {
+  flex-grow: 1;
+}
+
+.order-number {
+  font-size: 14px;
+  color: #888;
+  margin: 0 2px 2px 2px;
+}
+
+.purchaseDate {
+  margin-left: 7px;
+  font-size: 14px;
+  font-style: italic;
+  color: #888;
+}
+
+.product-name {
+  font-size: 18px;
+  margin-top: 8px;
+}
+
+.price {
+  font-size: 18px;
+  color: #454545;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+.view-details {
+  margin-top: 10px;
+}
+
+.shipping-status {
+  padding: 5px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-left: auto; /* 추가: 오른쪽으로 이동 */
+  margin-top: 10px; /* 추가: 위쪽으로 이동 */
+  text-align: center;
+  background-color: #f5f5f5;
+  border-color: transparent;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.block {
+  display: block;
+  width: 100%;
+}
+
+.none {
+  display: none !important;
+}

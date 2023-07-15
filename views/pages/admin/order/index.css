@@ -1,5 +1,5 @@
 .title {
-  margin-top: 10px;
+  margin: 30px 0 24px;
 }
 
 hr {
@@ -10,7 +10,9 @@ hr {
 .text-1 {
   font-weight: 800;
 }
-
+.head > div {
+  font-size: 14px;
+}
 
 .t-left {
   border: 1px solid black;
@@ -21,7 +23,7 @@ hr {
   display: flex;
   align-items: center;
 }
-.t_wrap{
+.t_wrap {
   display: flex;
   flex-wrap: wrap;
 }
@@ -52,16 +54,19 @@ hr {
 .btn_wrap {
   display: flex;
   justify-content: center;
-  gap:10px;
+  gap: 10px;
   margin-top: 20px;
 }
 .btn1 {
-  
   background-color: black;
   color: white;
   font-size: 20px;
   width: 80px;
-
+}
+.total {
+  margin-top: 30px;
+  font-size: 19px;
+  font-weight: bold;
 }
 
 .b2 {
@@ -70,28 +75,28 @@ hr {
 
 select.b2_selector {
   width: 120px;
-  padding:10px;
+  padding: 10px;
 }
 .btn_blank {
   font-size: 20px;
-  padding:10px;
+  padding: 10px;
   background-color: white;
   color: black;
 }
-.btn_black{
+.btn_black {
   background-color: black;
   color: white;
   font-size: 15px;
-  padding:5px;
+  padding: 5px;
 }
 .btn_red {
-  color:white; 
-  background-color: red; 
-  padding:5px 10px;
+  color: white;
+  background-color: red;
+  padding: 5px 10px;
   font-size: 20px;
 }
 
-.btn_btw{
+.btn_btw {
   display: flex;
   justify-content: flex-end;
 }
@@ -99,22 +104,25 @@ select.b2_selector {
 table.product {
   text-align: center;
   width: 100%;
-  margin-top:20px;
+  margin-top: 20px;
   border: 1px solid black;
 }
 table.product td {
   padding: 10px;
-  border:1px solid #eee; 
+  border: 1px solid #eee;
 }
 table.product thead tr {
   background: aliceblue;
 }
 
-table td, table th {
-  vertical-align:middle;
+table td,
+table th {
+  vertical-align: middle;
 }
 
-
 .option {
+  display: none;
+}
+#select-value {
   display: none;
 }

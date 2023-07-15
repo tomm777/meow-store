@@ -3,7 +3,7 @@ const OrderService = require('../services/order-service');
 class OrderController {
   async createOrder(req, res, next) {
     try {
-      const order = await OrderService.createOrder(req.body);
+      const order = await OrderService.createOrder(req.body, req.currentUserId);
       res.status(200).json(order._id);
     } catch (err) {
       res
@@ -61,7 +61,7 @@ class OrderController {
   }
   async getOrderList(req, res, next) {
     try {
-      const orders = await OrderService.getOrderList();
+      const orders = await OrderService.getOrderList(req.currentUserId);
       res.status(200).json(orders);
     } catch (err) {
       res

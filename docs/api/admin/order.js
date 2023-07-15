@@ -4,6 +4,11 @@ module.exports = {
       tags: ['Admin Order'],
       summary: 'Admin 주문 조회',
       description: 'Admin 주문 조회',
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       parameters: [
         {
           name: 'id',
@@ -117,6 +122,11 @@ module.exports = {
       tags: ['Admin Order'],
       summary: 'Admin 주문 상태 수정',
       description: 'Admin 주문 상태 수정',
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       parameters: [
         {
           name: 'id',
@@ -157,6 +167,11 @@ module.exports = {
       tags: ['Admin Order'],
       summary: 'Admin 주문 삭제',
       description: 'Admin 주문 삭제',
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       parameters: [
         {
           name: 'id',

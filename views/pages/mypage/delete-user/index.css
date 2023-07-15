@@ -1,0 +1,106 @@
+body,
+div,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+p,
+input,
+button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 10px 0;
+  width: 80%;
+}
+
+a {
+  text-decoration: none;
+}
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+h2.title {
+  margin-bottom: 12px;
+}
+main {
+  margin: 40px 22px;
+  height: 725px;
+}
+section.content-wrap {
+  display: inline-block;
+  vertical-align: top;
+  width: 1000px;
+}
+/* content */
+.content-wrapper {
+  position: relative;
+  margin: 0 30px;
+  height: 100%;
+  /* border: 1px solid black; */
+  position: relative;
+}
+
+.delete-card {
+  /* width: 700px;
+  margin: 0 auto;*/
+  width: 700px;
+  margin: 0 auto;
+  margin-top: 50px;
+  /* border: 1px solid black; */
+  padding: 30px 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 10px;
+}
+.delete-card-area {
+  padding: 20px 22px;
+  /* border: 1px solid black; */
+}
+.delete-card-area span {
+  display: block;
+}
+.delete-card-area button {
+  display: block;
+
+  width: 160px;
+  height: 50px;
+
+  margin: 0 auto;
+  margin-top: 30px;
+  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+  background-color: #ededed;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  cursor: pointer;
+  color: #777777;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  /* padding: 6px 24px; */
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ffffff;
+}
+.delete-card-area button:hover {
+  background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+  background-color: #dfdfdf;
+}

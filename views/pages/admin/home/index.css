@@ -1,11 +1,11 @@
 /* 전체 페이지 스타일 */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* 헤더 스타일 */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* 헤더 스타일 */
 header {
   background-color: #fffdf4;
   padding: 20px;
@@ -44,35 +44,20 @@ header {
   margin-bottom: 10px;
 }
 
-
-/* 내비게이션 스타일 */
-.mainNav {
-  text-align: center;
-  background-color: #fffdf4;
-  padding: 12px 0;
-}
-.mainNav ul {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: #fffdf4;
-}
 .mainNav li {
   height: 50px;
   position: relative;
   flex-grow: 1;
 }
 .mainNav li:not(:last-child)::after {
-  content: "";
+  content: '';
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
   height: 70%;
   width: 1px;
-  background-color: #ccc;
+  background-color: #84776e;
 }
 
 .mainNav li:last-child::after {
@@ -84,21 +69,12 @@ header {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  color: rgb(244, 71, 71)
+  color: rgb(244, 71, 71);
 }
-.mainNav li a  {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  color: rgb(100, 100, 100);
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.8s;
-}
-.mainNav li a:hover {
-  background-color: #d0ac75;
+
+.mainNav li :hover {
+  background-color: #84776e;
+  color: whitesmoke;
 }
 
 main {
@@ -108,45 +84,47 @@ main {
 }
 
 main hr {
-    width: 80%;
+  width: 80%;
 }
 
-.tableContainer{
-    margin: 50px;
-    padding: 5px;
-    font-weight: bold;
-    display: inline-block;
-    text-align: center;
-    border: 1px solid;
-    border-color: rgb(155, 155, 155); 
-    
+.tableContainer {
+  margin: 50px;
+  padding: 20px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid;
+  border-color: rgb(155, 155, 155);
+}
+.tableContainer table {
+  margin: 0 10px 10px 10px;
+  width: 400px;
+  height: 50px;
+  font-size: 11pt;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-table {
-    padding: 5px;
-    width: 400px;
-    height: 50px;
-    font-size : 11pt;
-    border-collapse: collapse;
-    border-spacing: 0;
+.tableContainer td {
+  padding: 5px;
+  font-weight: normal;
+  background-color: rgb(236, 236, 236);
+  border: 1px solid white;
 }
 
-td {
-    padding: 5px;
-    font-weight: normal;
-    background-color: rgb(236, 236, 236);
-    border: 1px solid white;
+.tableContainer th {
+  padding: 5px;
+  border: 1px solid white;
+  background-color: darkgray;
 }
-
-th {
-    padding: 5px;
-    border: 1px solid white;
-    background-color: darkgray;
+.container {
+  height: 600px;
+  text-align: center;
 }
 
 /* 푸터 스타일 */
 footer {
-    background-color: #f2f2f2;
-    padding: 10px;
-    text-align: center;
-  }
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: center;
+}

@@ -4,33 +4,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TasdasTT</title>
+    <title>카테고리 관리</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="../../../common/global.css" />
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js" defer></script>
+    <script type="module" src="index.js" defer></script>
+    <script defer src="/components/admin-header.js"></script>
+    <script src="../../../components/footer.js" defer></script>
+    <script type="module" src="../../../api/index.js" defer></script>
 
   </head>
   <body>
     <!-- header -->
-    <header>
-      <div class="header-logo">
-        <img src="" alt="Logo" />
-      </div>
-      <!-- nav -->
-      <nav>
-        <div class="header-nav">
-          <ul>
-            <li>관리자</li>
-            <li>카테고리관리</li>
-            <li>상품관리</li>
-            <li>주문관리</li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <header class="header"></header>
     <!-- main -->
     <main>
       <section class="content-wrap">
-        <div class="content-wrapper">
+        <div class="container">
+          <h1 class="title">카테고리 관리</h2>
+          <hr/>
           <div class="category-box">
             <div class="category-left">
               <ul id="myUL">
@@ -49,6 +44,7 @@
               <input
                 id="cate-input"
                 name="cate-input"
+                class="input"
                 type="text"
                 value=""
                 placeholder="이름을 입력하세요."
@@ -64,6 +60,6 @@
         </div>
     </section>
     </main>
-    <footer></footer>
+    <footer class="footer"></footer>
   </body>
 </html>

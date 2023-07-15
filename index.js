@@ -1,20 +1,25 @@
 const express = require('express');
 const cors = require('cors');
+const { generateSecretKey } = require('./jwt/secret-key');
 const connectDB = require('./config/db');
 const {
   memberOrderRouter,
   memberOrdersRouter,
   adminProductRouter,
   adminCategoryRouter,
+  adminSubCategoryRouter,
   productRouter,
   productsRouter,
   adminOrderRouter,
   adminOrdersRouter,
+  userRouter,
 } = require('./routes');
 
 require('dotenv').config();
 
 connectDB();
+
+generateSecretKey();
 
 const app = express();
 app.use(cors());
@@ -27,6 +32,7 @@ app.use('/components', express.static('views/components'));
 app.use('/utils', express.static('views/utils'));
 app.use('/common', express.static('views/common'));
 app.use('/uploads', express.static('views/uploads'));
+app.use('/api', express.static('views/api'));
 
 app.use('/api/products', productsRouter);
 app.use('/api/product', productRouter);
@@ -34,8 +40,10 @@ app.use('/api/member/order', memberOrderRouter);
 app.use('/api/member/orders', memberOrdersRouter);
 app.use('/api/admin/product', adminProductRouter);
 app.use('/api/admin/category', adminCategoryRouter);
+app.use('/api/admin/subcategory', adminSubCategoryRouter);
 app.use('/api/admin/order', adminOrderRouter);
 app.use('/api/admin/orders', adminOrdersRouter);
+app.use('/api/user', userRouter);
 
 //swagger 적용
 const ApiDcos = require('./docs/index');

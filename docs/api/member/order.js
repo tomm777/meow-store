@@ -2,6 +2,11 @@ module.exports = {
   '/api/member/order': {
     post: {
       tags: ['Member Order'],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       summary: '주문 진행',
       description: '주문 진행',
       requestBody: {
@@ -15,7 +20,7 @@ module.exports = {
                   description: '수령인',
                   example: '최하은',
                 },
-                receiverContack: {
+                receiverContact: {
                   type: 'string',
                   description: '연락처',
                   example: '010-1234-5678',
@@ -97,6 +102,11 @@ module.exports = {
   '/api/member/order/{id}': {
     get: {
       tags: ['Member Order'],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       summary: '사용자별 구매 내역 상세 조회',
       description: '사용자별 구매 내역 상세 조회',
       parameters: [
@@ -205,6 +215,11 @@ module.exports = {
     },
     post: {
       tags: ['Member Order'],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       summary: '사용자별 주문 전체취소',
       description: '사용자별 주문 전체취소',
       parameters: [
@@ -231,6 +246,11 @@ module.exports = {
   '/api/member/order/{id}/info': {
     post: {
       tags: ['Member Order'],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       summary: '사용자별 주문 상세 (사용자 정보) 수정',
       description: '사용자별 주문 상세 (사용자 정보) 수정',
       parameters: [
@@ -298,6 +318,11 @@ module.exports = {
   '/api/member/order/{id}/products': {
     delete: {
       tags: ['Member Order'],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       summary: '사용자별 주문 상세 (상품) 삭제',
       description: '사용자별 주문 상세 (상품) 삭제',
       parameters: [
