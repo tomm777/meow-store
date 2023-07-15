@@ -1,3 +1,5 @@
+import { blockIfNotAdmin } from '/utils/index.js';
+blockIfNotAdmin();
 import * as API from '/api/index.js';
 
 const count = document.querySelector('.b2');
@@ -7,7 +9,9 @@ getProductList();
 async function getProductList() {
   const response = await fetch('/api/products');
   const rawData = await response.json();
-  const sortedData = rawData.toSorted((a, b) => b.createDate - a.createDate ? 1 : -1);
+  const sortedData = rawData.toSorted((a, b) =>
+    b.createDate - a.createDate ? 1 : -1,
+  );
   count.innerHTML = sortedData.length.toString();
   let tbody = document.querySelector('#table-body');
   tbody.innerHTML = '';
@@ -52,7 +56,7 @@ function setFuncToModifyBtns() {
 }
 
 function deleteSelectedRows() {
-  const userConfirm = confirm("선택된 상품을 정말 삭제하시겠습니까?");
+  const userConfirm = confirm('선택된 상품을 정말 삭제하시겠습니까?');
   if (userConfirm) {
     let radioes = document.querySelectorAll(
       ".product tbody input[type='radio']",
@@ -72,7 +76,7 @@ function deleteSelectedRows() {
       API.delete('/api/admin/product/', id); // API에서 삭제
     });
     getProductList();
-    alert("삭제되었습니다.");
+    alert('삭제되었습니다.');
   }
 }
 const deleteBtn = document.getElementById('deleteRows');
