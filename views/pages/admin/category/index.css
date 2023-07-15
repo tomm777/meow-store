@@ -9,10 +9,25 @@ input {
   display: block;
   margin-bottom: 20px;
 }
+hr {
+  background-color: black;
+  height: 1px;
+}
+.title {
+  margin-top: 30px;
+}
+.category-right input {
+  width: 200px;
+  display: block;
+}
 .category-left input {
-  width: 140px;
-  margin-top: 11px;
+  width: 170px;
+  margin: 0;
+  margin-top: 10px;
   margin-inline-start: 20px;
+}
+.category-left .input.cate {
+  margin-top: 0;
 }
 button {
   margin-right: 15px;
@@ -23,25 +38,26 @@ button {
 li {
   list-style: none;
 }
-.content-wrapper {
-  height: 1000px;
+.container {
+  height: 800px;
 }
 .category-left {
   display: inline-block;
-  width: 200px;
+  width: 20%;
   margin-top: 100px;
 }
 .category-right {
   display: inline-block;
   margin-left: 200px;
   margin: 100px 200px 0;
-  vertical-align: top;
+  vertical-align: middle;
 }
 .category-left {
-  background-color: #b2bec9;
+  background: aliceblue;
   height: 100%;
   padding: 12px 30px;
   box-sizing: content-box;
+  vertical-align: middle;
 }
 .lowCateLi {
   cursor: pointer;
@@ -98,7 +114,8 @@ li {
 }
 .nested-li > div > ul > li {
   margin-top: 5px;
-  padding-inline-start: 30px;
+  /* padding-inline-start: 30px; */
   padding-top: 2px;
   padding-bottom: 2px;
+  margin-inline-start: 30px;
 }
