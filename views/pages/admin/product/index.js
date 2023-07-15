@@ -6,12 +6,13 @@ getProductList();
 
 async function getProductList() {
   const response = await fetch('/api/products');
-  const data = await response.json();
-  count.innerHTML = data.length.toString();
+  const rawData = await response.json();
+  const sortedData = rawData.toSorted((a, b) => b.createDate - a.createDate ? 1 : -1);
+  count.innerHTML = sortedData.length.toString();
   let tbody = document.querySelector('#table-body');
   tbody.innerHTML = '';
 
-  data.forEach(async (item) => {
+  sortedData.forEach(async (item, index) => {
     let subCategory = '';
     if (item.subcategoryId) {
       subCategory = ` > ${item.subcategoryId.subCategoryName}`;
@@ -21,6 +22,7 @@ async function getProductList() {
       'beforeend',
       `<tr name="table-body" product_id="${item._id}">
         <td><input type="radio"></td>
+        <td name="number">${index + 1}</td>
         <td name="image">
           <div class="img-box">
             <img src="${item.repImgUrl}" />
@@ -38,7 +40,6 @@ async function getProductList() {
 
 function setFuncToModifyBtns() {
   const modifyBtns = document.querySelectorAll('button.modify');
-  console.log(modifyBtns);
   modifyBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
       // e.stopPropagation();
@@ -51,22 +52,28 @@ function setFuncToModifyBtns() {
 }
 
 function deleteSelectedRows() {
-  console.log('delete버튼 클릭됨');
-  let radioes = document.querySelectorAll(".product tbody input[type='radio']");
-  let rowsToDelete = [];
+  const userConfirm = confirm("선택된 상품을 정말 삭제하시겠습니까?");
+  if (userConfirm) {
+    let radioes = document.querySelectorAll(
+      ".product tbody input[type='radio']",
+    );
+    let rowsToDelete = [];
 
-  radioes.forEach(function (radio) {
-    if (radio.checked) {
-      rowsToDelete.push(radio.parentNode.parentNode);
-    }
-  });
+    radioes.forEach(function (radio) {
+      if (radio.checked) {
+        rowsToDelete.push(radio.parentNode.parentNode);
+      }
+    });
 
-  rowsToDelete.forEach(function (row) {
-    row.parentNode.removeChild(row); // 화면에서 삭제
-    const id = row.getAttribute('product_id');
-    API.delete('/api/admin/product/', id); // API에서 삭제
-  });
-  count.innerHTML = Number(count.innerText) - 1;
+    rowsToDelete.forEach(function (row) {
+      row.parentNode.removeChild(row); // 화면에서 삭제
+      count.innerHTML = Number(count.innerText) - 1;
+      const id = row.getAttribute('product_id');
+      API.delete('/api/admin/product/', id); // API에서 삭제
+    });
+    getProductList();
+    alert("삭제되었습니다.");
+  }
 }
 const deleteBtn = document.getElementById('deleteRows');
 deleteBtn.addEventListener('click', deleteSelectedRows);

@@ -16,7 +16,9 @@ async function getProductData(id) {
     let subCategory = '';
     if (productData.subcategoryId) subCategory = ` > ${productData.subcategoryId.subCategoryName}`;
       infoBox.innerHTML = `
-      <p class="product_category">${productData.categoryId.categoryName}${subCategory}</p>
+      <p class="product_category">${
+        productData.categoryId.categoryName
+      }${subCategory}</p>
       <p class="product_name title is-3">${productData.name}</p>
       <p class="line"></p>
       <p class="product_summary">${productData.summary}</p>
@@ -24,15 +26,16 @@ async function getProductData(id) {
       <p class="line"></p>
       <p class="product_price">${productData.price.toLocaleString()} 원</p>
       <div class="addToCart">
-        <button id="addToCartButton" class="button is-warning">장바구니에 추가</button>
+        <button id="order_button" class="button is-warning">구매하기</button>
+        <button id="cart_button" class="button is-warning">장바구니에 추가</button>
       </div>
     `;
 
     const thumbnail = document.querySelector('#product_thumbnail');
     thumbnail.src = `${productData.repImgUrl}`;
 
-    const addToCartBtn = document.querySelector('#addToCartButton');
-    addToCartBtn.addEventListener('click', addToCart);
+    document.querySelector('#cart_button').addEventListener('click', addToCart);
+    document.querySelector('#order_button').addEventListener('click', addToCart);
   } catch (err) {
     console.log(err);
   }
