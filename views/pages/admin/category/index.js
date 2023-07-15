@@ -12,6 +12,8 @@ const addButton = document.querySelector('.addCategory');
 const deleteButton = document.querySelector('.deleteCategory');
 // 카테고리 수정 버튼 엘리먼트
 const updateButton = document.querySelector('.updateCategory');
+// 저장 취소 버튼
+const cancelButton = document.querySelector('.cancelCategory');
 // 수정 후 저장버튼
 // const saveButton = document.querySelector('.button.saveCategory');
 
@@ -266,6 +268,7 @@ const updateCate = () => {
   if (nullArrayCheck.length === 0) {
     // const cateId = caretCheck[1].id;
     // 수정하는 동안 다른 버튼 비활성화
+    console.log('상위 카테고리 수정');
     updateButton.disabled = true;
     addButton.disabled = true;
     deleteButton.disabled = true;
@@ -280,13 +283,16 @@ const updateCate = () => {
     input.type = 'text';
     input.value = spanValue;
     input.id = cateId;
-    input.classList.add('updateInput');
+    input.className = 'input cate';
+    input.remove();
     if (spanEle.parentNode) {
       spanEle.parentNode.replaceChild(input, spanEle);
     }
     saveButton.classList.add('active');
     // 저장 수정 API가 들어갈 곳
-    saveButton.addEventListener('click', async function () {
+    // arrowClick()
+    saveButton.removeEventListener('click', lowCateClick);
+    saveButton.addEventListener('click', async function setCategory() {
       // 상위 카테고리 수정 API
       const result = await API.put('/api/admin/category/', `${spanEle.id}`, {
         categoryName: input.value,
@@ -296,23 +302,25 @@ const updateCate = () => {
         alert(result.message);
         return;
       } else {
-        // addButton.disabled = false;
-        // deleteButton.disabled = false;
-        // updateButton.disabled = false;
-        // inputValue.disabled = false;
-        // // 원래대로 변환
-        // let span = document.createElement('span');
-        // span.className = spanEle.className;
-        // span.id = input.id;
-        // span.textContent = input.value;
-        // if (input.parentNode) {
-        //   input.parentNode.replaceChild(span, input);
-        // }
-        // saveButton.classList.remove('active');
-        window.location.reload();
+        addButton.disabled = false;
+        deleteButton.disabled = false;
+        updateButton.disabled = false;
+        inputValue.disabled = false;
+        // 원래대로 변환
+        let span = document.createElement('span');
+        span.className = spanEle.className;
+        span.id = input.id;
+        span.textContent = input.value;
+        if (input.parentNode) {
+          input.parentNode.replaceChild(span, input);
+        }
+        saveButton.classList.remove('active');
+        nodeSet();
+        // window.location.reload();
       }
 
-      // 비활성화 해제
+      // 연속적으로 부르지 못하게 event 제거
+      saveButton.removeEventListener('click', setCategory);
     });
     return;
   }
@@ -330,35 +338,35 @@ const updateCate = () => {
   input.type = 'text';
   input.id = liEle.id;
   input.value = liValue;
+  input.className = 'input';
   if (liEle.parentNode) {
     liEle.parentNode.replaceChild(input, liEle);
   }
   // liEle.parentNode.replaceChild(input, liEle);
   saveButton.classList.add('active');
-
-  saveButton.addEventListener('click', async function () {
+  saveButton.addEventListener('click', async function setSubCategory() {
     // 하위 카테고리 수정 API
     const result = await API.put('/api/admin/subcategory/', `${liEle.id}`, {
       subCategoryName: input.value,
     });
     console.log(result);
     if (result.success) {
-      // addButton.disabled = false;
-      // deleteButton.disabled = false;
-      // updateButton.disabled = false;
-      // liEle.classList.remove('active');
-      // let li = document.createElement('li');
-      // li.className = liEle.className;
-      // li.id = liEle.id;
-      // li.textContent = input.value;
-      // if (input.parentNode) {
-      //   input.parentNode.replaceChild(li, input);
-      // }
-      // saveButton.classList.remove('active');
-      // liEle.classList.remove('active');
-      window.location.reload();
-      // nodeSet();
-      // lowCateClick();
+      addButton.disabled = false;
+      deleteButton.disabled = false;
+      updateButton.disabled = false;
+      liEle.classList.remove('active');
+      let li = document.createElement('li');
+      li.className = liEle.className;
+      li.id = liEle.id;
+      li.textContent = input.value;
+      if (input.parentNode) {
+        input.parentNode.replaceChild(li, input);
+      }
+      saveButton.classList.remove('active');
+      liEle.classList.remove('active');
+      // window.location.reload();
+      nodeSet();
+      saveButton.removeEventListener('click', setSubCategory);
     } else {
       alert(result.message);
       return;

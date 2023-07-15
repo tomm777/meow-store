@@ -59,7 +59,7 @@ function switchSelectBox(e) {
   e.classList.add('on');
 
   if (text === '수정') {
-    select.style.display = 'block';
+    select.style.display = 'inline-block';
     option.style.display = 'block';
     content.style.display = 'none';
     e.innerHTML = '완료';
@@ -135,27 +135,27 @@ const button = document.querySelector('.btn_red');
 
 //검색기능
 
-document.getElementById('searchButton').addEventListener('click', function () {
-  const searchText = document.getElementById('searchInput').value;
-  performSearch(searchText);
-});
+// document.getElementById('searchButton').addEventListener('click', function () {
+//   const searchText = document.getElementById('searchInput').value;
+//   performSearch(searchText);
+// });
 
-function performSearch(searchText) {
-  // Perform the search logic here
-  // You can use the entered searchText to filter the data and display the relevant results
-  // You can access the order items and perform the necessary filtering or searching operations
+// function performSearch(searchText) {
+//   // Perform the search logic here
+//   // You can use the entered searchText to filter the data and display the relevant results
+//   // You can access the order items and perform the necessary filtering or searching operations
 
-  // Example:
-  const orderItems = document.querySelectorAll('#order_tbody tr');
-  for (const item of orderItems) {
-    const orderNumber = item.querySelector('td:nth-child(3)').innerText;
-    if (orderNumber.includes(searchText)) {
-      item.style.display = 'table-row'; // Show the matching items
-    } else {
-      item.style.display = 'none'; // Hide the non-matching items
-    }
-  }
-}
+//   // Example:
+//   const orderItems = document.querySelectorAll('#order_tbody tr');
+//   for (const item of orderItems) {
+//     const orderNumber = item.querySelector('td:nth-child(3)').innerText;
+//     if (orderNumber.includes(searchText)) {
+//       item.style.display = 'table-row'; // Show the matching items
+//     } else {
+//       item.style.display = 'none'; // Hide the non-matching items
+//     }
+//   }
+// }
 
 // api 호출
 // 주문 상태 변경 api
