@@ -2,6 +2,11 @@ module.exports = {
   '/api/admin/product': {
     post: {
       tags: ['Admin Product'],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       summary: 'Admin 상품 생성',
       description: 'Admin 상품 생성',
       requestBody: {
@@ -63,6 +68,11 @@ module.exports = {
   '/api/admin/product/{id}': {
     post: {
       tags: ['Admin Product'],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       summary: 'Admin 상품 상세 수정',
       description: 'Admin 상품 상세 수정',
       parameters: [
@@ -128,6 +138,11 @@ module.exports = {
     },
     delete: {
       tags: ['Admin Product'],
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       summary: 'Admin 상품 삭제',
       description: 'Admin 상품 삭제',
       parameters: [

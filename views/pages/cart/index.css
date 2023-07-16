@@ -1,48 +1,131 @@
-h1 {
+h1#cart {
   margin: 0 auto;
   text-align: center;
-  width: 70%;
-  border-bottom: 1px solid black;
+  width: 50%;
+  border-bottom: 1px solid grey;
   padding: 30px 0;
 }
 
+.cart_list {
+  width: 50%;
+  margin: 0 auto;
+}
+
 .cart_top {
-  width: 70%;
-  margin-left: 380px;
-  margin-bottom: 50px;
-  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 30px auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid grey;
 }
 
 .cart_top span {
+  font-size: 20px;
+}
+
+.cart_top span.cart_top_name {
+  margin-left: 50px;
+  margin-right: 150px;
+}
+
+div.cart_top span.cart_top_qty {
   margin-right: 100px;
 }
 
+div.cart_top span.cart_top_price {
+  margin-right: 100px;
+}
+
+/* button.delete_all {
+  margin-bottom: 20px;
+} */
+
 .product_wrap {
-  display: -webkit-box;
-  width: 80%;
-  margin-left: 200px;
+  width: 100%;
   margin-bottom: 20px;
   border: 1px solid grey;
+  display: flex;
+  align-items: center;
 }
 
-.product_wrap span {
-  margin-right: 50px;
+.product_wrap div {
+  display: flex;
+  align-items: center;
 }
 
-.product_thumbnail {
+.thumbnail_wrap {
+  margin-right: 20px;
+}
+
+img.product_thumbnail {
   width: 150px;
   height: 150px;
   box-sizing: border-box;
   vertical-align: middle;
-  margin-right: 30px;
 }
 
-.product_qty {
-  margin-right: 30px;
+div.product_name {
+  width: 200px;
 }
 
-.product_price {
-  margin-right: 30px;
+div.qty_wrap {
+  display: flex;
+  align-items: stretch;
+}
+
+.qty_down, .qty_up {
+  width: 40px;
+  padding: 0;
+  height: 40px;
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+span.product_qty {
+  margin: 10px 20px 0px 20px;
+}
+
+span.product_price {
+  margin-left: 50px;
+}
+
+button.delete_each {
+  margin-left: 100px;
+}
+
+div.sum {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+div.sum span {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+div.order {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0 100px 0;
+}
+
+button#order_btn {
+  height: 55px;
+  width: 500px;
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.footer_title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.footer_info {
+  font-size: 1em;
 }
 
 /* topbottom | leftright */

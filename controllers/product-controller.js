@@ -3,7 +3,17 @@ const ProductService = require('../services/product-service');
 class ProductController {
   async getProducts(req, res) {
     try {
-      const products = await ProductService.getProductList();
+      const { categoryId, subcategoryId } = req.query;
+
+      let option = {};
+      if (categoryId) {
+        option.categoryId = categoryId;
+      }
+      if (subcategoryId) {
+        option.subcategoryId = subcategoryId;
+      }
+
+      const products = await ProductService.getProductList(option);
       res.status(200).json(products);
     } catch (err) {
       res
@@ -27,14 +37,14 @@ class ProductController {
 
   async createProduct(req, res) {
     try {
-      const repImgUrl = '/uploads/' + req.file.filename;
-      const { name, price, summary, description } = req.body;
+      let repImgUrl = '/assets/not-image.png';
+      if (req.file) {
+        repImgUrl = '/uploads/' + req.file?.filename;
+      }
 
       const product = await ProductService.createProduct({
-        name,
-        price,
-        summary,
-        description,
+        ...req.body,
+        userId: req.currentUserId,
         repImgUrl,
       });
 
@@ -48,8 +58,25 @@ class ProductController {
 
   async editProduct(req, res, next) {
     try {
+      console.log(req.body);
       const { id } = req.params;
-      const updatedProduct = await ProductService.editProduct(id, req.body);
+      let repImgUrl = req.body.prevImgUrl
+        ? req.body.prevImgUrl
+        : '/assets/not-image.png';
+      if (req.file) {
+        repImgUrl = '/uploads/' + req.file?.filename;
+      }
+      if (
+        req.body.subcategoryId === '' ||
+        req.body.subcategoryId == 'undefined'
+      ) {
+        req.body.subcategoryId = null;
+      }
+      const updatedProduct = await ProductService.editProduct(id, {
+        ...req.body,
+        userId: req.currentUserId,
+        repImgUrl,
+      });
       res.status(200).json(updatedProduct);
     } catch (err) {
       res

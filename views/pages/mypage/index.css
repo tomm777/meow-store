@@ -1,0 +1,101 @@
+body,
+div,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+p,
+button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: #756d6d;
+}
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+h2.title {
+  margin-bottom: 20px;
+}
+main {
+  margin: 40px 22px;
+  height: 725px;
+}
+section.content-wrap {
+  display: inline-block;
+  vertical-align: top;
+  position: absolute;
+}
+/* content */
+.content-wrapper {
+  position: relative;
+  width: 1200px;
+  height: 100%;
+  /* border: 1px solid black; */
+  margin: 0 30px;
+  position: relative;
+}
+.gray {
+  position: absolute;
+  top: 12px;
+  left: 171px;
+  font-size: 13px;
+  color: #a0a3a7;
+}
+.content {
+  border: 1px solid black;
+  padding: 30px 12px;
+  width: 100%;
+}
+.content:last-child {
+  /* margin-top: 50px; */
+  margin-top: 117px;
+}
+.content .content-area {
+  width: 33%;
+  display: inline-block;
+  text-align: center;
+}
+.content-wrapper .content:last-child {
+  text-align: center;
+}
+.content-wrapper .content:last-child .content-area {
+  width: 49%;
+}
+.content .text {
+  margin-bottom: 10px;
+}
+.content i {
+  display: inline-block;
+  margin-bottom: 20px;
+  width: 100px;
+  height: 100px;
+}
+.content i.member-icon {
+  background: url('../../assets/icon-admin.png');
+  background-size: cover;
+}
+.content i.ask-icon {
+  background: url('../../assets/ask.png');
+  background-size: cover;
+}
+.content i.order-icon {
+  background: url('../../assets/orderList.png');
+  background-size: cover;
+}
+
+footer.footer {
+  margin-top: 80px;
+}

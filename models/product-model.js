@@ -1,17 +1,21 @@
 const mongoose = require('mongoose');
-const moment = require('moment');
+const {moment} = require('../utils/moment');
 const productSchema = require('./schemas/product');
 
 const Product = mongoose.model('products', productSchema);
 
 class ProductModel {
   async findAll(option = {}) {
-    const products = await Product.find({ ...option, deleteYn: 'N' });
+    const products = await Product.find({ ...option, deleteYn: 'N' })
+      .populate('categoryId')
+      .populate('subcategoryId');
     return products;
   }
 
   async findById(id) {
-    const product = await Product.findOne({ _id: id });
+    const product = await Product.findOne({ _id: id })
+      .populate('categoryId')
+      .populate('subcategoryId');
     return product;
   }
 

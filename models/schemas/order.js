@@ -1,18 +1,26 @@
 const { Schema } = require('mongoose');
-const moment = require('moment');
+const { moment } = require('../../utils/moment');
+const { v4: uuidv4 } = require('uuid');
 
 const OrderSchema = new Schema(
   {
-    /*userId: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
       required: true,
-    },*/
+    },
+    number: {
+      type: String,
+      require: true,
+      unique: true,
+      //TODO: 주문번호 생성 로직 업그레이드 해보기
+      default: generateOrderNumber,
+    },
     receiver: {
       type: String,
       required: true,
     },
-    receiverContack: {
+    receiverContact: {
       type: String,
       required: true,
     },
@@ -35,6 +43,10 @@ const OrderSchema = new Schema(
     totalPrice: {
       type: Number,
       required: true,
+    },
+    cacleTotalAmount: {
+      type: Number,
+      required: false,
     },
     status: {
       type: String,
@@ -68,5 +80,10 @@ const OrderSchema = new Schema(
     collection: 'orders',
   },
 );
+
+function generateOrderNumber() {
+  const randomString = uuidv4().replace(/-/g, '').substring(0, 10);
+  return `${moment().format('YYYYMMDDHHmmss')}${randomString}`;
+}
 
 module.exports = OrderSchema;

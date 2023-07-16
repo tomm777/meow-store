@@ -7,7 +7,7 @@ const member = require('../docs/api/member');
 const user = require('../docs/api/user');
 const products = require('../docs/api/products');
 const product = require('../docs/api/product');
-const categorys = require('../docs/api/categorys');
+//const categorys = require('../docs/api/categorys');
 
 class ApiDocs {
   #apiDocOption;
@@ -20,7 +20,7 @@ class ApiDocs {
       ...user,
       ...products,
       ...product,
-      ...categorys,
+      //...categorys,
     };
 
     this.#swagger = new Swagger();

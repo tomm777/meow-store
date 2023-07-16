@@ -1,20 +1,23 @@
 const { startSession } = require('mongoose');
-const moment = require('moment');
+const { moment } = require('../utils/moment');
 const Product = require('../models/product-model');
 const Order = require('../models/order-model');
 const OrderItem = require('../models/order-item-model');
 
 class OrderService {
-  async createOrder({
-    orderItemList,
-    receiver,
-    receiverContack,
-    zipCode,
-    address,
-    detailAddress,
-    shippingMessage,
-    totalPrice,
-  }) {
+  async createOrder(
+    {
+      orderItemList,
+      receiver,
+      receiverContact,
+      zipCode,
+      address,
+      detailAddress,
+      shippingMessage,
+      totalPrice,
+    },
+    userId,
+  ) {
     const session = await startSession();
 
     try {
@@ -27,8 +30,9 @@ class OrderService {
           : `${reqProduct.name}`;
       const [newOrder] = await Order.createWithSession(
         {
+          userId,
           receiver,
-          receiverContack,
+          receiverContact,
           zipCode,
           address,
           detailAddress,
@@ -40,6 +44,7 @@ class OrderService {
         { session },
       );
 
+      //TODO:재고가 있는지 확인할것
       await OrderItem.insertMany(
         orderItemList.map((orderItemData) => ({
           orderId: newOrder._id,
@@ -67,44 +72,87 @@ class OrderService {
   }
 
   async cancelOrder(id) {
-    //TODO : 결제 완료일때만 취소할수 있도록 하기
-    await Order.updateById(id, { status: '취소' });
-    return { result: 'success' };
-  }
+    //TODO : 재고에 추가 할것
+    const order = await Order.findById(id);
+    if (order.status !== '결제완료') {
+      throw new Error('결제완료 상태일때만 취소할 수 있습니다.');
+    }
 
-  async editOrderInfo(id, update) {
-    //TODO : 배송전일때만 수정할 수 있도록 하기
     const updatedOrder = await Order.updateById(id, {
-      ...update,
+      status: '취소',
       cancelDate: moment().format('YYYY-MM-DD HH:mm:ss'),
     });
     return updatedOrder;
   }
 
-  async removeOrderProducts(orderId, orderItemIds) {
-    //TODO : 배송전일때만 수정할 수 있도록 하기
-    const result = await OrderItem.cancelOderItems(orderItemIds);
-    return result;
-  }
-
-  async getOrderList() {
-    //TODO: user 검색 필터 추가할것
-    const orders = await Order.findAll();
-    return orders;
-  }
-
-  async getAdminOrderList() {
-    const orders = await Order.findAll();
-    return orders;
-  }
-
-  async editOrderState(id, update) {
+  async editOrderInfo(id, update) {
+    const order = await Order.findById(id);
+    if (order.status !== '결제완료') {
+      throw new Error('결제완료 상태일때만 수정할 수 있습니다.');
+    }
     const updatedOrder = await Order.updateById(id, update);
     return updatedOrder;
   }
 
+  async removeOrderProducts(orderId, orderItemIds) {
+    //TODO : 재고에 추가 할것
+    const order = await Order.findById(orderId);
+    if (order.status !== '결제완료') {
+      throw new Error('결제완료 상태일때만 수정할 수 있습니다.');
+    }
+    await OrderItem.cancelOderItems(orderItemIds);
+    const orderItemList = await OrderItem.findByOrderId(orderId);
+
+    let cacleTotalAmount = 0;
+    let cancleItem = 0;
+    console.log(orderItemList);
+    orderItemList.forEach((item) => {
+      if (item.cancelYn === 'Y') {
+        cacleTotalAmount += item.totalPrice;
+        cancleItem += 1;
+      }
+    });
+
+    //업데이트
+    let update = {
+      cacleTotalAmount,
+    };
+    console.log(orderItemList);
+    if (orderItemList.length === cancleItem) {
+      update.status = '취소';
+      update.cancelDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    }
+
+    const updatedOrder = await Order.updateById(orderId, update);
+    return { order: updatedOrder, orderItemList };
+  }
+
+  async getOrderList(userId) {
+    const orders = await Order.findAll({ userId });
+    return orders;
+  }
+
+  async getAdminOrderList() {
+    const orders = await Order.findAll({ deleteYn: 'N' });
+    return orders;
+  }
+
+  async editOrderState(id, update) {
+    let option = {
+      ...update,
+    };
+    if (update.status === '취소') {
+      option.cancelDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    }
+    const updatedOrder = await Order.updateById(id, option);
+    return updatedOrder;
+  }
+
   async removeOrder(id) {
-    //TODO : 배송완료일때만 수정할 수 있도록 하기
+    const order = await Order.findById(id);
+    if (order.status !== '취소') {
+      throw new Error('취소 상태일때만 삭제할 수 있습니다.');
+    }
     const result = await Order.updateById(id, {
       deleteYn: 'Y',
       deleteDate: moment().format('YYYY-MM-DD HH:mm:ss'),

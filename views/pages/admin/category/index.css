@@ -1,50 +1,69 @@
+button {
+  padding: 12px 10px;
+  font-size: 18px;
+  border: unset;
+  cursor: pointer;
+}
+input {
+  padding: 10px 12px;
+  display: block;
+  margin-bottom: 20px;
+}
+hr {
+  background-color: black;
+  height: 1px;
+}
+.title {
+  margin-top: 30px;
+}
+.category-right input {
+  width: 200px;
+  display: block;
+}
+.category-left input {
+  width: 170px;
+  margin: 0;
+  margin-top: 10px;
+  margin-inline-start: 20px;
+}
+.category-left .input.cate {
+  margin-top: 0;
+}
+button {
+  margin-right: 15px;
+}
 .content-wrap {
   margin: 22px 44px 0;
 }
 li {
   list-style: none;
 }
-.header-logo {
-  text-align: center;
-}
-.header-nav {
-  text-align: center;
-  height: 50px;
-  width: 100%;
-  background-color: #e0ec38;
-  display: inline-block;
-}
-.header-nav ul {
-  display: flex;
-  justify-content: space-around;
-}
-.header-nav ul li {
-  display: inline-block;
-  cursor: pointer;
-}
-.header-nav ul li:hover {
-  font-weight: bold;
+.container {
+  height: 800px;
 }
 .category-left {
   display: inline-block;
-  width: 200px;
+  width: 20%;
   margin-top: 100px;
 }
 .category-right {
   display: inline-block;
   margin-left: 200px;
   margin: 100px 200px 0;
-  vertical-align: top;
+  vertical-align: middle;
 }
 .category-left {
-  background-color: aliceblue;
+  background: aliceblue;
   height: 100%;
+  padding: 12px 30px;
+  box-sizing: content-box;
+  vertical-align: middle;
 }
 .lowCateLi {
   cursor: pointer;
 }
 .lowCateLi.active {
-  background-color: #d3d1d1;
+  background-color: #a39c97;
 }
 #myUL {
   margin: 0;
@@ -63,7 +82,9 @@ li {
   margin-right: 6px;
 }
 .caret-down {
-  background-color: rgb(146, 153, 153);
+  background-color: #84776e;
+  padding: 4px 10px;
+  color: whitesmoke;
 }
 
 .caret-down::before {
@@ -82,4 +103,19 @@ li {
 }
 .button.saveCategory.active {
   display: block;
+  margin-top: 12px;
+}
+.nested-li > div {
+  margin-bottom: 12px;
+  padding-inline-start: 30px;
+}
+.nested-li > div:first-child {
+  margin-top: 12px;
+}
+.nested-li > div > ul > li {
+  margin-top: 5px;
+  /* padding-inline-start: 30px; */
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-inline-start: 30px;
 }

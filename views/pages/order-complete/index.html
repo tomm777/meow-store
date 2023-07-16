@@ -3,11 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="/common/global.css" />
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js" type="module"></script>
+    <script defer src="/components/header.js"></script>
+    <script defer src="/components/footer.js"></script>
+    <script defer type="module" src="index.js"></script>
     <title>야옹 잡화점</title>
   </head>
   <body>
-    order complete
+    <header class="header"></header>
+    <main>
+      <section class="content-wrap">
+        <div class="content-wrapper">
+          <div class="order-complete">
+            <h2 class="title">주문이 완료되었습니다.</h2>
+            <hr />
+            <div class="order-area">
+              <div class="order-card">
+                <ul id="order-ul">
+                  <!-- 주문 내용 -->
+                </ul>
+                <hr />
+                <div class="button-area">
+                  <span>성공적으로 구매 완료 되었습니다.</span>
+                  <button id="to_order_list" class="button is-warning">주문내역 확인</button>
+                  <button id="to_home" class="button is-warning">홈으로 이동</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer"></footer>
   </body>
 </html>

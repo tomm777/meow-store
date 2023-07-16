@@ -1,0 +1,136 @@
+body,
+div,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+p,
+button {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+table {
+  position: relative;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table tbody tr:first-child {
+  border-top: 2px solid #969696;
+}
+table tbody tr {
+  border-bottom: 1px solid #969696;
+}
+table th {
+  width: 160px;
+  padding: 14px 30px;
+}
+table td {
+  width: 500px;
+  padding: 14px 30px;
+  border-left: 1px solid #ddd;
+}
+button {
+  cursor: pointer;
+}
+table button {
+  display: block;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  /* border: unset; */
+  color: #777;
+  background-color: aliceblue;
+  border-radius: 9px;
+  border-color: white;
+}
+/* button.modify-mail {
+  display: block;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  color: #777;
+  background-color: aliceblue;
+  border-radius: 9px;
+  border-color: white;
+} 
+ button.modify-address {
+  display: block;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  color: #777;
+  background-color: aliceblue;
+  border-radius: 9px;
+  border-color: white;
+} */
+input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 80%;
+}
+input#address-input {
+  display: block;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+h2.title {
+  margin-bottom: 12px;
+}
+main {
+  margin: 40px 22px;
+  height: 725px;
+}
+section.content-wrap {
+  display: inline-block;
+  vertical-align: top;
+  width: 1000px;
+}
+
+/* content */
+.content-wrapper {
+  position: relative;
+  margin: 0 30px;
+  height: 100%;
+  /* border: 1px solid black; */
+  position: relative;
+}
+.save-area {
+  margin-top: 20px;
+}
+.save-area button {
+  position: absolute;
+  left: calc(50% - 320px);
+  color: #fff;
+  background-color: rgb(139, 168, 194);
+  width: 150px;
+  height: 60px;
+  border-radius: 5px;
+  line-height: 50px;
+  border: unset;
+  font-size: 20px;
+}
+.save-area button.cansle-button {
+  left: calc(50% - 100px);
+  background-color: #969696;
+}
+.address-area > span {
+  display: block;
+}
+span.check {
+  font-size: 12px;
+  color: red;
+  display: none;
+}

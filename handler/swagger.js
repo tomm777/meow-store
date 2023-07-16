@@ -10,16 +10,21 @@ const swaggerProduces = ['application/json'];
 
 const swaggerServers = [
   {
-    url: 'http://localhost:3000',
-    description: '로컬 서버',
+    url: 'http://kdt-sw-5-team12.elicecoding.com',
+    //url: 'http://localhost:3000',
+    //description: '로컬 서버',
   },
 ];
 
 const swaggerTags = [
   {
-    name: 'Categorys',
-    description: 'Category list API',
+    name: 'User',
+    description: 'User API',
   },
+  // {
+  //   name: 'Categorys',
+  //   description: 'Category list API',
+  // },
   {
     name: 'Products',
     description: '상품 list API',
@@ -40,11 +45,22 @@ const swaggerTags = [
     name: 'Admin Order',
     description: 'Admin 주문 API',
   },
-  {
-    name: 'Admin Category',
-    description: 'Admin Category API',
-  },
+  // {
+  //   name: 'Admin Category',
+  //   description: 'Admin Category API',
+  // },
 ];
+
+const swaggerSecurityScheme = {
+  bearerAuth: {
+    type: 'http',
+    scheme: 'bearer',
+    bearerFormat: 'Token',
+    name: 'Authorization',
+    description: '인증 토큰 값을 넣어주세요.',
+    in: 'header',
+  },
+};
 
 class Swagger {
   static #uniqueSwaggerInstance;
@@ -74,6 +90,9 @@ class Swagger {
 
         /* open api 3.0.0 version option */
         produces: swaggerProduces,
+        components: {
+          securitySchemes: swaggerSecurityScheme,
+        },
         tags: swaggerTags,
       },
       apis: [],
