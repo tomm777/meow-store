@@ -19,45 +19,48 @@ const cancelButton = document.querySelector('.cancelCategory');
 
 // 카테고리 API 호출
 const getCateList = () => {
-  API.get('/api/admin/subcategory')
-    .then((data) => data.data)
-    .then((result) => {
-      // getAttribute("categoryId")
-      result.map((item) => {
-        nested.insertAdjacentHTML(
-          'beforeend',
-          `<div>
-    <span class="caret" id=${item._id}>${item.categoryName}</span>
-    <ul class="nested">
-    ${item.data
-      .map(
-        (items) =>
-          `<li class="lowCateLi" id=${items._id}>${items.subCategoryName}</li>`,
-      )
-      .join('')}
-    </ul>
-    </div>`,
-        );
+  try {
+    API.get('/api/admin/subcategory')
+      .then((data) => data.data)
+      .then((result) => {
+        // getAttribute("categoryId")
+        result.map((item) => {
+          nested.insertAdjacentHTML(
+            'beforeend',
+            `<div>
+      <span class="caret" id=${item._id}>${item.categoryName}</span>
+      <ul class="nested">
+      ${item.data
+        .map(
+          (items) =>
+            `<li class="lowCateLi" id=${items._id}>${items.subCategoryName}</li>`,
+        )
+        .join('')}
+      </ul>
+      </div>`,
+          );
+        });
         nodeSet();
       });
-    })
-    .catch((error) => {
-      // 에러 처리하는 코드 작성
-      console.log('Error:', error);
-    });
+  } catch (error) {
+    // 에러 처리하는 코드 작성
+    console.log('Error:', error);
+  }
 };
 getCateList();
-
+const caretCheck = document.querySelectorAll('.caret-down');
+const caret_down = document.querySelector('.top');
+console.log(caret_down);
+const nested_active = document.querySelectorAll('.nested .active');
 function arrowClick() {
+  console.log('click');
   // 토글 클래스 추가
   console.log(this.id);
   this.parentElement.querySelector('.nested').classList.toggle('active');
   this.classList.toggle('caret-down');
   // 하위, 상위 카테고리가 활성화 된 상태에서 전체를 누르면
   // 선택 해제
-  const caretCheck = document.querySelectorAll('.caret-down');
-  const caret_down = document.querySelector('.top');
-  const nested_active = document.querySelectorAll('.nested .active');
+
   // 전체를 눌렀을 때 상위 카테고리 선택해제
   if (caret_down.className !== 'caret top caret-down') {
     caretCheck.forEach((item) => {
@@ -77,7 +80,7 @@ function arrowClick() {
 }
 // 선택한 하위카테고리에 active 클래스 추가
 function addToggle() {
-  console.log(this.id);
+  console.log('test', this.id);
   this.classList.toggle('active');
 }
 // 하위 카테고리를 클릭 했을 때 이벤트
@@ -89,6 +92,7 @@ function lowCateClick() {
 }
 // click 이벤트로 active, caret-down 클래스를 부여해 tree 구조로 보이도록 구현
 const nodeSet = () => {
+  console.log('렌더링1');
   Array.from(toggler).forEach((data) => {
     data.addEventListener('click', arrowClick);
   });
@@ -354,6 +358,7 @@ const updateCate = () => {
       addButton.disabled = false;
       deleteButton.disabled = false;
       updateButton.disabled = false;
+      inputValue.disabled = false;
       liEle.classList.remove('active');
       let li = document.createElement('li');
       li.className = liEle.className;
