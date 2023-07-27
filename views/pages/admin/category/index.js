@@ -13,14 +13,14 @@ const deleteButton = document.querySelector('.deleteCategory');
 // 카테고리 수정 버튼 엘리먼트
 const updateButton = document.querySelector('.updateCategory');
 // 저장 취소 버튼
-const cancelButton = document.querySelector('.cancelCategory');
+// const cancelButton = document.querySelector('.cancelCategory');
 // 수정 후 저장버튼
 // const saveButton = document.querySelector('.button.saveCategory');
 
 // 카테고리 API 호출
-const getCateList = () => {
+const getCateList = async () => {
   try {
-    API.get('/api/admin/subcategory')
+    await API.get('/api/admin/subcategory')
       .then((data) => data.data)
       .then((result) => {
         // getAttribute("categoryId")
@@ -102,7 +102,7 @@ const nodeSet = () => {
 // 카테고리 가져오기 실행
 
 // 카테고리 추가 클릭 이벤트
-addButton.addEventListener('click', function () {
+addButton.addEventListener('click', async function () {
   // 카테고리 이름 입력값
   // let inputValue = document.getElementById('cate-input').value;
   const inputValue = document.getElementById('cate-input');
@@ -127,7 +127,7 @@ addButton.addEventListener('click', function () {
   // 전체 카테고리만 선택 했을 때 상위 카테고리를 만들기 위해 구분
   if (caretCheck.length === 1) {
     // 상위 카테고리 추가 API
-    API.post('/api/admin/category', {
+    await API.post('/api/admin/category', {
       categoryName: inputValue.value,
     }).then((data) => {
       if (data.success) {
@@ -160,7 +160,7 @@ addButton.addEventListener('click', function () {
   const categoryName = caretCheck[caretCheck.length - 1];
   // console.log(categoryName.id, categoryName.textContent);
   // 하위 카테고리 추가 API
-  API.post('/api/admin/subcategory', {
+  await API.post('/api/admin/subcategory', {
     categoryId: categoryName.id,
     subCategoryName: inputValue.value,
   })
@@ -187,7 +187,7 @@ addButton.addEventListener('click', function () {
     });
 });
 // 카테고리 삭제 메서드
-const deleteCate = () => {
+const deleteCate = async () => {
   const cateArray = document.querySelectorAll('.lowCateLi.active');
   const caretCheck = document.querySelectorAll('.caret-down');
   // 아무것도 선택되지 않을 때
@@ -214,7 +214,7 @@ const deleteCate = () => {
   if (nullArrayCheck.length === 0) {
     if (confirm('정말 상위카테고리를 삭제하시겠습니까?')) {
       // console.log(caretCheck[caretCheck.length - 1].id);
-      API.delete(
+      await API.delete(
         '/api/admin/category/',
         `${caretCheck[caretCheck.length - 1].id}`,
       ).then((item) => {
@@ -233,17 +233,19 @@ const deleteCate = () => {
     alert('삭제 할 하나의 카테고리만 선택해주세요');
     return;
   }
-  API.delete('/api/admin/subcategory/', `${cateArray[0].id}`).then((result) => {
-    if (result.success) {
-      cateArray.forEach((item) => {
-        item.remove();
-      });
-      nodeSet();
-    } else {
-      alert(result.message);
-      return;
-    }
-  });
+  await API.delete('/api/admin/subcategory/', `${cateArray[0].id}`).then(
+    (result) => {
+      if (result.success) {
+        cateArray.forEach((item) => {
+          item.remove();
+        });
+        nodeSet();
+      } else {
+        alert(result.message);
+        return;
+      }
+    },
+  );
 };
 // 카테고리 수정 메서드
 const updateCate = () => {
@@ -251,6 +253,7 @@ const updateCate = () => {
   const caretCheck = document.querySelectorAll('.caret-down');
   const saveButton = document.querySelector('.button.saveCategory');
   const inputValue = document.getElementById('cate-input');
+  const statusManageElems = [addButton, deleteButton, updateButton, inputValue];
   // 하위 카테고리를 선택하지 않고 상위카테고리를 선택 했을때를 구분하기 위함
   const lowCateItem = document.querySelectorAll('.lowCateLi');
   const nullArrayCheck = Array.from(lowCateItem).filter((item) => {
@@ -273,10 +276,13 @@ const updateCate = () => {
     // const cateId = caretCheck[1].id;
     // 수정하는 동안 다른 버튼 비활성화
     console.log('상위 카테고리 수정');
-    updateButton.disabled = true;
-    addButton.disabled = true;
-    deleteButton.disabled = true;
-    inputValue.disabled = true;
+    statusManageElems.forEach((elem) => {
+      if ('disabled' in elem) elem.disabled = true;
+    });
+    // updateButton.disabled = true;
+    // addButton.disabled = true;
+    // deleteButton.disabled = true;
+    // inputValue.disabled = true;
 
     // span을 input으로 변환
     const spanEle = caretCheck[caretCheck.length - 1];
@@ -306,10 +312,10 @@ const updateCate = () => {
         alert(result.message);
         return;
       } else {
-        addButton.disabled = false;
-        deleteButton.disabled = false;
-        updateButton.disabled = false;
-        inputValue.disabled = false;
+        statusManageElems.forEach((elem) => {
+          if ('disabled' in elem) elem.disabled = false;
+        });
+
         // 원래대로 변환
         let span = document.createElement('span');
         span.className = spanEle.className;
@@ -332,10 +338,10 @@ const updateCate = () => {
     alert('수정 할 하나의 하위 카테고리를 선택하세요.');
     return;
   }
-  updateButton.disabled = true;
-  addButton.disabled = true;
-  deleteButton.disabled = true;
-  inputValue.disabled = true;
+
+  statusManageElems.forEach((elem) => {
+    if ('disabled' in elem) elem.disabled = true;
+  });
   const liEle = document.querySelector('.lowCateLi.active');
   const liValue = liEle.textContent;
   let input = document.createElement('input');
@@ -355,10 +361,9 @@ const updateCate = () => {
     });
     console.log(result);
     if (result.success) {
-      addButton.disabled = false;
-      deleteButton.disabled = false;
-      updateButton.disabled = false;
-      inputValue.disabled = false;
+      statusManageElems.forEach((elem) => {
+        if ('disabled' in elem) elem.disabled = false;
+      });
       liEle.classList.remove('active');
       let li = document.createElement('li');
       li.className = liEle.className;
