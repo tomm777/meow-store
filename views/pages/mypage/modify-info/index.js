@@ -9,7 +9,6 @@ const phoneNumberInput = document.querySelector('#phone-number');
 const addressDetailInput = document.querySelector('#address-detail-input');
 const addressZipCode = document.querySelector('#address-zip-input');
 const saveButton = document.querySelector('.save-button');
-const nameSpan = document.querySelector('.check.name');
 const phoneSpan = document.querySelector('.check.phone');
 
 let validation = '';
@@ -59,7 +58,6 @@ phoneNumberInput.onblur = function () {
     return;
   }
   // 하이픈 달아주기
-  console.log('타지마');
   // const newphone = phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
   phoneNumberInput.value = phoneNumberInput.value.replace(
     /^(\d{2,3})(\d{3,4})(\d{4})$/,

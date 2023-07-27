@@ -15,13 +15,26 @@ async function getInfo() {
   // 결제완료
   let paymentCompleteCount = 0;
   result.forEach((item) => {
-    item.status === '결제완료'
-      ? paymentCompleteCount++
-      : item.status === '배송중'
-      ? deliveryCount++
-      : item.status === '배송완료'
-      ? deliveryCompleteCount++
-      : '';
+    switch (item.status) {
+      case '결제완료':
+        paymentCompleteCount++;
+        break;
+      case '배송중':
+        deliveryCount++;
+        break;
+      case '배송완료':
+        deliveryCompleteCount++;
+        break;
+    }
+    // result.forEach((item) => {
+    //   item.status === '결제완료'
+    //     ? paymentCompleteCount++
+    //     : item.status === '배송중'
+    //     ? deliveryCount++
+    //     : item.status === '배송완료'
+    //     ? deliveryCompleteCount++
+    //     : '';
+    // });
   });
   delivery.textContent = deliveryCompleteCount + '건';
   deliveryReady.textContent = deliveryCount + '건';
