@@ -12,7 +12,7 @@ class CategoryController {
       });
       // 하위 카테고리 명이 있을때 받아온 상위카테고리를 찾아서 하위 카테고리를 생성
       if (checkCategory) {
-        return res.json({
+        return res.status(400).json({
           success: false,
           message: '이미 존재하는 카테고리 명입니다.',
         });
@@ -65,7 +65,7 @@ class CategoryController {
       });
       // 하위 카테고리 명이 있을때 받아온 상위카테고리를 찾아서 하위 카테고리를 생성
       if (checkCategory) {
-        return res.json({
+        return res.status(400).json({
           success: false,
           message: '이미 존재하는 카테고리 명입니다.',
         });

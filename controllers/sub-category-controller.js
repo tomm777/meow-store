@@ -10,7 +10,7 @@ class SubCategoryController {
         subCategoryName,
       });
       if (category) {
-        return res.json({
+        return res.status(400).json({
           success: false,
           message: '이미 존재하는 카테고리 명입니다.',
         });
@@ -54,7 +54,7 @@ class SubCategoryController {
         subCategoryName,
       });
       if (nameCheck) {
-        return res.json({
+        return res.status(400).json({
           success: false,
           message: '이미 존재하는 카테고리 명입니다.',
         });

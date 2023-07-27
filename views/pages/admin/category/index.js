@@ -127,27 +127,25 @@ addButton.addEventListener('click', async function () {
   // 전체 카테고리만 선택 했을 때 상위 카테고리를 만들기 위해 구분
   if (caretCheck.length === 1) {
     // 상위 카테고리 추가 API
-    await API.post('/api/admin/category', {
-      categoryName: inputValue.value,
-    }).then((data) => {
-      if (data.success) {
-        const result = data.data;
-        console.log(data);
-        nested.insertAdjacentHTML(
-          'beforeend',
-          `<div>
-            <span class="caret" id=${result._id}>${inputValue.value}</span>
-            <ul class="nested">
-            </ul>
-            </div>`,
-        );
-        nodeSet();
-        inputValue.value = '';
-      } else {
-        alert(data.message);
-        return;
-      }
-    });
+    try {
+      const result = await API.post('/api/admin/category', {
+        categoryName: inputValue.value,
+      });
+      console.log(result);
+      nested.insertAdjacentHTML(
+        'beforeend',
+        `<div>
+          <span class="caret" id=${result.data._id}>${inputValue.value}</span>
+          <ul class="nested">
+          </ul>
+          </div>`,
+      );
+      nodeSet();
+      inputValue.value = '';
+    } catch (err) {
+      // throw new Error를 하면 Error : Error : ..~ 로 표시됨
+      throw err;
+    }
 
     return;
   }
@@ -160,31 +158,26 @@ addButton.addEventListener('click', async function () {
   const categoryName = caretCheck[caretCheck.length - 1];
   // console.log(categoryName.id, categoryName.textContent);
   // 하위 카테고리 추가 API
-  await API.post('/api/admin/subcategory', {
-    categoryId: categoryName.id,
-    subCategoryName: inputValue.value,
-  })
-    .then((data) => {
-      const result = data.data;
-      // console.log(data._id);
-      // 하위 카테고리 추가
-      console.log(data);
-      if (!data.success) {
-        alert(data.message);
-        return;
-      }
-      caretDown.insertAdjacentHTML(
-        'beforeend',
-        `<li class="lowCateLi" id=${result._id}>${inputValue.value}</li>`,
-      );
-      lowCateClick();
-      nodeSet();
-      inputValue.value = '';
-    })
-    .catch((error) => {
-      // 에러 처리하는 코드 작성
-      console.log('Error:', error);
+  try {
+    const result = await API.post('/api/admin/subcategory', {
+      categoryId: categoryName.id,
+      subCategoryName: inputValue.value,
     });
+    // console.log(data._id);
+    // 하위 카테고리 추가
+    console.log(result);
+    caretDown.insertAdjacentHTML(
+      'beforeend',
+      `<li class="lowCateLi" id=${result.data._id}>${inputValue.value}</li>`,
+    );
+    lowCateClick();
+    nodeSet();
+    inputValue.value = '';
+  } catch (error) {
+    throw new Error(error);
+  }
+  // 에러 처리하는 코드 작성
+  console.log('Error:', error);
 });
 // 카테고리 삭제 메서드
 const deleteCate = async () => {
@@ -304,14 +297,12 @@ const updateCate = () => {
     saveButton.removeEventListener('click', lowCateClick);
     saveButton.addEventListener('click', async function setCategory() {
       // 상위 카테고리 수정 API
-      const result = await API.put('/api/admin/category/', `${spanEle.id}`, {
-        categoryName: input.value,
-      });
-      console.log(result);
-      if (!result.success) {
-        alert(result.message);
-        return;
-      } else {
+      try {
+        const result = await API.put('/api/admin/category/', `${spanEle.id}`, {
+          categoryName: input.value,
+        });
+        console.log(result);
+
         statusManageElems.forEach((elem) => {
           if ('disabled' in elem) elem.disabled = false;
         });
@@ -327,10 +318,12 @@ const updateCate = () => {
         saveButton.classList.remove('active');
         nodeSet();
         // window.location.reload();
-      }
 
-      // 연속적으로 부르지 못하게 event 제거
-      saveButton.removeEventListener('click', setCategory);
+        // 연속적으로 부르지 못하게 event 제거
+        saveButton.removeEventListener('click', setCategory);
+      } catch (error) {
+        throw new Error(error);
+      }
     });
     return;
   }
@@ -356,11 +349,11 @@ const updateCate = () => {
   saveButton.classList.add('active');
   saveButton.addEventListener('click', async function setSubCategory() {
     // 하위 카테고리 수정 API
-    const result = await API.put('/api/admin/subcategory/', `${liEle.id}`, {
-      subCategoryName: input.value,
-    });
-    console.log(result);
-    if (result.success) {
+    try {
+      const result = await API.put('/api/admin/subcategory/', `${liEle.id}`, {
+        subCategoryName: input.value,
+      });
+      console.log(result);
       statusManageElems.forEach((elem) => {
         if ('disabled' in elem) elem.disabled = false;
       });
@@ -377,9 +370,8 @@ const updateCate = () => {
       // window.location.reload();
       nodeSet();
       saveButton.removeEventListener('click', setSubCategory);
-    } else {
-      alert(result.message);
-      return;
+    } catch (error) {
+      throw new Error(error);
     }
   });
   // return;
