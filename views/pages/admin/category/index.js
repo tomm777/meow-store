@@ -319,7 +319,7 @@ const updateCate = () => {
         nodeSet();
         // window.location.reload();
 
-        // 연속적으로 부르지 못하게 event 제거
+        // 연속적으로 부르지 못하게 event 제거.
         saveButton.removeEventListener('click', setCategory);
       } catch (error) {
         throw new Error(error);
