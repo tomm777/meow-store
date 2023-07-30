@@ -14,30 +14,39 @@ async function getInfo() {
   let deliveryCompleteCount = 0;
   // 결제완료
   let paymentCompleteCount = 0;
+  // Switch문
+  // result.forEach((item) => {
+  //   switch (item.status) {
+  //     case '결제완료':
+  //       paymentCompleteCount++;
+  //       break;
+  //     case '배송중':
+  //       deliveryCount++;
+  //       break;
+  //     case '배송완료':
+  //       deliveryCompleteCount++;
+  //       break;
+  //   }
+  // Object-Literals 방식으로 변경
+  const obj = {
+    결제완료: () => {
+      return ++paymentCompleteCount;
+    },
+    배송중: () => {
+      return ++deliveryCount;
+    },
+    배송완료: () => {
+      return ++deliveryCompleteCount;
+    },
+  };
+
   result.forEach((item) => {
-    switch (item.status) {
-      case '결제완료':
-        paymentCompleteCount++;
-        break;
-      case '배송중':
-        deliveryCount++;
-        break;
-      case '배송완료':
-        deliveryCompleteCount++;
-        break;
-    }
-    // result.forEach((item) => {
-    //   item.status === '결제완료'
-    //     ? paymentCompleteCount++
-    //     : item.status === '배송중'
-    //     ? deliveryCount++
-    //     : item.status === '배송완료'
-    //     ? deliveryCompleteCount++
-    //     : '';
-    // });
+    // 함수호출 부분이라서 ()를 붙혀줘야 실행
+    obj[item.status]();
   });
-  delivery.textContent = deliveryCompleteCount + '건';
-  deliveryReady.textContent = deliveryCount + '건';
-  paymentComplete.textContent = paymentCompleteCount + '건';
+
+  delivery.textContent = deliveryCompleteCount + '건'; // 배송완료
+  deliveryReady.textContent = deliveryCount + '건'; // 배송중
+  paymentComplete.textContent = paymentCompleteCount + '건'; // 결제완료
 }
 getInfo();
