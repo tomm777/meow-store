@@ -8,10 +8,11 @@
     <title>회원가입</title>
     <link rel="stylesheet" href="../../../common/global.css" />
     <link rel="stylesheet" href="index.css" />
-    <script src="index.js" defer></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="../../../components/header.js" defer></script>
     <script src="../../../components/footer.js" defer></script>
+    <script type="module" src="index.js"></script>
+    <script type="module" src="../../../api/index.js"></script>
   </head>
   <body>
     <header class="header"></header>
@@ -25,9 +26,7 @@
               <td>
                 <div>
                   <input type="text" id="email" />
-                  <span class="check email"
-                    >이메일을 올바르게 입력해주세요</span
-                  >
+                  <span class="check email"></span>
                 </div>
               </td>
             </tr>
@@ -36,7 +35,7 @@
               <td>
                 <div>
                   <input type="text" id="name-input" />
-                  <span class="check name">이름을 입력하세요</span>
+                  <span class="check name"></span>
                 </div>
               </td>
             </tr>
@@ -45,7 +44,7 @@
               <td>
                 <div>
                   <input type="text" id="phone-number" />
-                  <span class="check phone">휴대폰 번호를 입력하세요</span>
+                  <span class="check phone"></span>
                 </div>
               </td>
             </tr>
@@ -61,6 +60,7 @@
                   <input type="text" id="address-input" readonly />
                   <span class="detail-address">상세 주소</span>
                   <input type="text" id="address-detail-input" />
+                  <span class="check address"></span>
                 </div>
               </td>
             </tr>
@@ -69,6 +69,7 @@
               <td>
                 <div>
                   <input type="password" id="password" />
+                  <span class="check password-validation"></span>
                 </div>
               </td>
             </tr>
@@ -77,15 +78,14 @@
               <td>
                 <div>
                   <input type="password" id="password-check" />
+                  <span class="check password-validation-check"></span>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
         <div>
-          <button type="button" onclick="register()" class="submit-button">
-            가입하기
-          </button>
+          <button type="button" class="submit-button">가입하기</button>
         </div>
       </div>
     </section>

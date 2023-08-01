@@ -4,16 +4,20 @@ import * as API from '/api/index.js';
 const addressValue = document.querySelector('#address-input');
 const cansleButton = document.querySelector('.cansle-button');
 const email = document.querySelector('.email');
-const nameValue = document.querySelector('#name-input');
+const nameValueInput = document.querySelector('#name-input');
 const phoneNumberInput = document.querySelector('#phone-number');
 const addressDetailInput = document.querySelector('#address-detail-input');
 const addressZipCode = document.querySelector('#address-zip-input');
 const saveButton = document.querySelector('.save-button');
 const phoneSpan = document.querySelector('.check.phone');
+const nameSpan = document.querySelector('.check.name');
+const detailAddrSpan = document.querySelector('.check.address-check');
 
 let validation = '';
 
+let nameFlag = false;
 let numberFlag = false;
+let detailAddressFlag = false;
 
 window.onload = function () {
   // 도로명 주소 가져오기
@@ -34,16 +38,21 @@ window.onload = function () {
     });
 };
 async function getUserInfo() {
-  const data = await API.get(`/api/user/mypage/`);
-  nameValue.value = `${data.name}`;
-  email.textContent = `${data.email}`;
-  phoneNumberInput.value = `${data.contact}`;
-  addressValue.value = `${data.address.address}`;
-  addressDetailInput.value = `${data.address.detailAddress}`;
-  addressZipCode.value = `${data.address.zipCode}`;
-  validation = data._id;
-  console.log(data);
-  numberFlag = true;
+  try {
+    const data = await API.get(`/api/user/mypage/`);
+    nameValueInput.value = `${data.name}`;
+    email.textContent = `${data.email}`;
+    phoneNumberInput.value = `${data.contact}`;
+    addressValue.value = `${data.address.address}`;
+    addressDetailInput.value = `${data.address.detailAddress}`;
+    addressZipCode.value = `${data.address.zipCode}`;
+    validation = data._id;
+    numberFlag = true;
+    nameFlag = true;
+    detailAddressFlag = true;
+  } catch (error) {
+    throw error;
+  }
 }
 getUserInfo();
 // 번호 validation
@@ -66,52 +75,65 @@ phoneNumberInput.onblur = function () {
   numberFlag = true;
   phoneSpan.style.display = 'none';
 };
+nameValueInput.onblur = function () {
+  if (nameValueInput.value === '') {
+    nameSpan.style.display = 'block';
+    nameSpan.textContent = '이름을 입력하세요';
+    nameFlag = false;
+    return;
+  }
+  nameSpan.style.display = 'none';
+  nameFlag = true;
+};
+addressDetailInput.onblur = function () {
+  if (addressDetailInput.value === '') {
+    detailAddrSpan.style.display = 'block';
+    detailAddrSpan.textContent = '상세 주소를 입력하세요';
+    detailAddressFlag = false;
+    return;
+  }
+  detailAddrSpan.style.display = 'none';
+  detailAddressFlag = true;
+};
 
 cansleButton.addEventListener('click', function () {
   window.location.href = '/mypage';
 });
 
 saveButton.addEventListener('click', function () {
-  if (phoneNumberInput.value === '') {
-    alert('휴대번호를 입력하세요.');
-    return;
-  }
-  if (
-    addressValue.value === '' ||
-    addressDetailInput.value === '' ||
-    addressZipCode.value === ''
-  ) {
-    alert('주소를 입력하세요');
-    return;
-  }
-  if (nameValue.value === '') {
-    alert('이름을 입력하세요.');
+  if (!nameFlag) {
+    nameValueInput.focus();
     return;
   }
   if (!numberFlag) {
-    alert('전화번호를 올바르게 입력하세요.');
+    phoneNumberInput.focus();
+    return;
+  }
+  if (!detailAddressFlag) {
+    addressDetailInput.focus();
+    return;
+  }
+  if (addressValue.value === '' || addressZipCode.value === '') {
+    alert('주소를 입력하세요');
     return;
   }
   modifyUserInfo();
-
-  // console.log('API시작');
 });
 
 async function modifyUserInfo() {
-  const result = await API.post('/api/user/mypage', {
-    contact: phoneNumberInput.value,
-    name: nameValue.value,
-    address: {
-      address: addressValue.value,
-      detailAddress: addressDetailInput.value,
-      zipCode: addressZipCode.value,
-    },
-  });
-  if (validation === result.updatedUser._id) {
+  try {
+    await API.post('/api/user/mypage', {
+      contact: phoneNumberInput.value,
+      name: nameValueInput.value,
+      address: {
+        address: addressValue.value,
+        detailAddress: addressDetailInput.value,
+        zipCode: addressZipCode.value,
+      },
+    });
     alert('정보 수정이 완료 되었습니다.');
     window.location.href = '/mypage';
-  } else {
-    alert(result);
-    return;
+  } catch (error) {
+    throw error;
   }
 }
