@@ -38,6 +38,9 @@ async function getInfo() {
     배송완료: () => {
       return ++deliveryCompleteCount;
     },
+    취소: () => {
+      return;
+    },
   };
 
   result.forEach((item) => {

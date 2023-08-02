@@ -7,39 +7,44 @@ const count = document.querySelector('.b2');
 getProductList();
 
 async function getProductList() {
-  const response = await fetch('/api/products');
-  const rawData = await response.json();
-  const sortedData = rawData.toSorted((a, b) =>
-    b.createDate - a.createDate ? 1 : -1,
-  );
-  count.innerHTML = sortedData.length.toString();
-  let tbody = document.querySelector('#table-body');
-  tbody.innerHTML = '';
-
-  sortedData.forEach(async (item, index) => {
-    let subCategory = '';
-    if (item.subcategoryId) {
-      subCategory = ` > ${item.subcategoryId.subCategoryName}`;
-    }
-
-    tbody.insertAdjacentHTML(
-      'beforeend',
-      `<tr name="table-body" product_id="${item._id}">
-        <td><input type="radio"></td>
-        <td name="number">${index + 1}</td>
-        <td name="image">
-          <div class="img-box">
-            <img src="${item.repImgUrl}" />
-          </div>
-        </td>
-        <td name="name">${item.name}</td>
-        <td name="category">${item.categoryId.categoryName}${subCategory}</td>
-        <td name="price">${item.price.toLocaleString()}원</td>
-        <td><button class="modify button is-light" name="modify" type="button">수정</button></td>
-      </tr>`,
+  try {
+    const rawData = await API.get('/api/products');
+    const sortedData = rawData.toSorted((a, b) =>
+      b.createDate - a.createDate ? 1 : -1,
     );
-  });
-  setFuncToModifyBtns();
+    count.innerHTML = sortedData.length.toString();
+    let tbody = document.querySelector('#table-body');
+    tbody.innerHTML = '';
+
+    sortedData.forEach(async (item, index) => {
+      let subCategory = '';
+      if (item.subcategoryId) {
+        subCategory = ` > ${item.subcategoryId.subCategoryName}`;
+      }
+
+      tbody.insertAdjacentHTML(
+        'beforeend',
+        `<tr name="table-body" product_id="${item._id}">
+          <td><input type="radio"></td>
+          <td name="number">${index + 1}</td>
+          <td name="image">
+            <div class="img-box">
+              <img src="${item.repImgUrl}" />
+            </div>
+          </td>
+          <td name="name">${item.name}</td>
+          <td name="category">${
+            item?.categoryId?.categoryName
+          }${subCategory}</td>
+          <td name="price">${item.price.toLocaleString()}원</td>
+          <td><button class="modify button is-light" name="modify" type="button">수정</button></td>
+        </tr>`,
+      );
+    });
+    setFuncToModifyBtns();
+  } catch (error) {
+    throw error;
+  }
 }
 
 function setFuncToModifyBtns() {
@@ -69,14 +74,18 @@ function deleteSelectedRows() {
       }
     });
 
-    rowsToDelete.forEach(function (row) {
+    rowsToDelete.forEach(async function (row) {
       row.parentNode.removeChild(row); // 화면에서 삭제
       count.innerHTML = Number(count.innerText) - 1;
       const id = row.getAttribute('product_id');
-      API.delete('/api/admin/product/', id); // API에서 삭제
+      try {
+        await API.delete('/api/admin/product/', id); // API에서 삭제
+        // alert('삭제되었습니다.');
+        getProductList();
+      } catch (error) {
+        throw error;
+      }
     });
-    getProductList();
-    alert('삭제되었습니다.');
   }
 }
 const deleteBtn = document.getElementById('deleteRows');

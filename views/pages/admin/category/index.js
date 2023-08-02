@@ -24,7 +24,7 @@ const getCateList = async () => {
       .then((data) => data.data)
       .then((result) => {
         // getAttribute("categoryId")
-        result.map((item) => {
+        result?.map((item) => {
           nested.insertAdjacentHTML(
             'beforeend',
             `<div>
@@ -44,7 +44,7 @@ const getCateList = async () => {
       });
   } catch (error) {
     // 에러 처리하는 코드 작성
-    console.log('Error:', error);
+    throw error;
   }
 };
 getCateList();
@@ -177,7 +177,6 @@ addButton.addEventListener('click', async function () {
     throw new Error(error);
   }
   // 에러 처리하는 코드 작성
-  console.log('Error:', error);
 });
 // 카테고리 삭제 메서드
 const deleteCate = async () => {
@@ -207,18 +206,16 @@ const deleteCate = async () => {
   if (nullArrayCheck.length === 0) {
     if (confirm('정말 상위카테고리를 삭제하시겠습니까?')) {
       // console.log(caretCheck[caretCheck.length - 1].id);
-      await API.delete(
-        '/api/admin/category/',
-        `${caretCheck[caretCheck.length - 1].id}`,
-      ).then((item) => {
-        if (item.success) {
-          caretCheck[caretCheck.length - 1].parentElement.remove();
-          nodeSet();
-        } else {
-          alert(item.message);
-          return;
-        }
-      });
+      try {
+        await API.delete(
+          '/api/admin/category/',
+          `${caretCheck[caretCheck.length - 1].id}`,
+        );
+        caretCheck[caretCheck.length - 1].parentElement.remove();
+        nodeSet();
+      } catch (error) {
+        throw error;
+      }
     }
     return;
   }
@@ -226,19 +223,15 @@ const deleteCate = async () => {
     alert('삭제 할 하나의 카테고리만 선택해주세요');
     return;
   }
-  await API.delete('/api/admin/subcategory/', `${cateArray[0].id}`).then(
-    (result) => {
-      if (result.success) {
-        cateArray.forEach((item) => {
-          item.remove();
-        });
-        nodeSet();
-      } else {
-        alert(result.message);
-        return;
-      }
-    },
-  );
+  try {
+    await API.delete('/api/admin/subcategory/', `${cateArray[0].id}`);
+    cateArray.forEach((item) => {
+      item.remove();
+      nodeSet();
+    });
+  } catch (error) {
+    throw error;
+  }
 };
 // 카테고리 수정 메서드
 const updateCate = () => {
