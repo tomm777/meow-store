@@ -1,3 +1,4 @@
+import * as API from '/api/index.js';
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 const infoBox = document.querySelector('#info_box');
@@ -5,17 +6,15 @@ let productData = {};
 
 async function getProductData(id) {
   try {
-    const response = await fetch(`/api/product/${id}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const response = await API.get(`/api/product/${id}`);
 
-    productData = await response.json();
+    productData = { ...response };
     productData.qty = 1;
 
     let subCategory = '';
-    if (productData.subcategoryId) subCategory = ` > ${productData.subcategoryId.subCategoryName}`;
-      infoBox.innerHTML = `
+    if (productData.subcategoryId)
+      subCategory = ` > ${productData.subcategoryId.subCategoryName}`;
+    infoBox.innerHTML = `
       <p class="product_category">${
         productData.categoryId.categoryName
       }${subCategory}</p>
@@ -35,7 +34,9 @@ async function getProductData(id) {
     thumbnail.src = `${productData.repImgUrl}`;
 
     document.querySelector('#cart_button').addEventListener('click', addToCart);
-    document.querySelector('#order_button').addEventListener('click', addToCart);
+    document
+      .querySelector('#order_button')
+      .addEventListener('click', addToCart);
   } catch (err) {
     console.log(err);
   }
