@@ -20,7 +20,6 @@ class ApiDocs {
       ...user,
       ...products,
       ...product,
-      //...categorys,
     };
 
     this.#swagger = new Swagger();

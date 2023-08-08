@@ -10,8 +10,8 @@ const swaggerProduces = ['application/json'];
 
 const swaggerServers = [
   {
-    url: 'http://kdt-sw-5-team12.elicecoding.com',
-    //url: 'http://localhost:3000',
+    // url: 'http://kdt-sw-5-team12.elicecoding.com',
+    url: 'http://localhost:3000',
     //description: '로컬 서버',
   },
 ];
@@ -21,10 +21,6 @@ const swaggerTags = [
     name: 'User',
     description: 'User API',
   },
-  // {
-  //   name: 'Categorys',
-  //   description: 'Category list API',
-  // },
   {
     name: 'Products',
     description: '상품 list API',
@@ -38,6 +34,10 @@ const swaggerTags = [
     description: '사용자 주문 API',
   },
   {
+    name: 'Admin Category',
+    description: 'Admin 카테고리 API',
+  },
+  {
     name: 'Admin Product',
     description: 'Admin 상품 API',
   },
@@ -45,10 +45,6 @@ const swaggerTags = [
     name: 'Admin Order',
     description: 'Admin 주문 API',
   },
-  // {
-  //   name: 'Admin Category',
-  //   description: 'Admin Category API',
-  // },
 ];
 
 const swaggerSecurityScheme = {

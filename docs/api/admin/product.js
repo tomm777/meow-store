@@ -45,10 +45,15 @@ module.exports = {
                   description: '재고',
                   example: 10,
                 },
-                category: {
-                  type: 'string',
+                categoryId: {
+                  type: 'Schema.Types.ObjectId',
                   description: '카테고리 id',
                   example: '카테고리 id(sdfsdf)',
+                },
+                subcategoryId: {
+                  type: 'Schema.Types.ObjectId',
+                  description: '서브 카테고리 id',
+                  example: '서브 카테고리 id(sdfsdf)',
                 },
               },
             },
