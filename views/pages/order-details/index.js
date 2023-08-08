@@ -50,20 +50,22 @@ zipCodeBtn.addEventListener('click', () => {
 getOrderDetail();
 
 async function getOrderDetail() {
-  const data = await API.get(`/api/member/order/${id}`);
+  try {
+    const data = await API.get(`/api/member/order/${id}`);
+    console.log(data);
+    //수정모드 판별
+    //결제완료 단계에서만 수정가능
+    isCancle = data.order.status === '취소';
+    checkStatus(data.order.status);
+    initShippingInfo(data.order);
+    initProductList(data.orderItemList);
 
-  console.log(data);
-
-  //수정모드 판별
-  //결제완료 단계에서만 수정가능
-  isCancle = data.order.status === '취소';
-  checkStatus(data.order.status);
-  initShippingInfo(data.order);
-  initProductList(data.orderItemList);
-
-  totalAmountDiv.innerHTML = `총 결제금액: ${Number(
-    data.order.totalPrice,
-  ).toLocaleString()}원`;
+    totalAmountDiv.innerHTML = `총 결제금액: ${Number(
+      data.order.totalPrice,
+    ).toLocaleString()}원`;
+  } catch (error) {
+    throw error;
+  }
 }
 
 function checkValidation() {
@@ -100,11 +102,14 @@ async function saveOrderDeatil() {
     detailAddress: detailAddressInput.value,
     shippingMessage: shippingMessageInput.value,
   };
-  const result = await API.post(`/api/member/order/${id}/info`, data);
-
-  alert('배송지 정보가 수정되었습니다.');
-  initShippingInfo(data);
-  showShippingViewMode();
+  try {
+    await API.post(`/api/member/order/${id}/info`, data);
+    alert('배송지 정보가 수정되었습니다.');
+    initShippingInfo(data);
+    showShippingViewMode();
+  } catch (error) {
+    throw error;
+  }
 }
 
 function initShippingInfo(info) {
@@ -226,15 +231,19 @@ function initProductList(list) {
 async function saveChangeProduct() {
   console.log(cancleProductList);
   if (cancleProductList.length > 0) {
-    const result = await API.delete(`/api/member/order/${id}/products`, '', {
-      orderItemIds: cancleProductList,
-    });
-    alert('주문 상품 정보가 수정되었습니다.');
-    isCancle = result.order.status === '취소';
-    if (isCancle) {
-      location.reload(true);
+    try {
+      const result = await API.delete(`/api/member/order/${id}/products`, '', {
+        orderItemIds: cancleProductList,
+      });
+      alert('주문 상품 정보가 수정되었습니다.');
+      isCancle = result.order.status === '취소';
+      if (isCancle) {
+        location.reload(true);
+      }
+      initProductList(result.orderItemList);
+    } catch (error) {
+      throw error;
     }
-    initProductList(result.orderItemList);
   }
 
   showViewMode();

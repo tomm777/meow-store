@@ -72,25 +72,28 @@ export default () => {
 };
 
 async function getCateList() {
-  const result = await API.get('/api/admin/subcategory');
-
-  const nested = document.querySelector('.nested-li');
-  result.data.forEach((item) => {
-    nested.insertAdjacentHTML(
-      'beforeend',
-      `<div>
-            <span class="caret" id=${item._id}>${item.categoryName}</span>
-            <ul class="nested">
-              ${item.data
-                .map(
-                  (items) =>
-                    `<li class="lowCateLi" id=${items._id} category_id=${item._id}>${items.subCategoryName}</li>`,
-                )
-                .join('')}
-            </ul>
-            </div>`,
-    );
-  });
+  try {
+    const result = await API.get('/api/admin/subcategory');
+    const nested = document.querySelector('.nested-li');
+    result.data.forEach((item) => {
+      nested.insertAdjacentHTML(
+        'beforeend',
+        `<div>
+              <span class="caret" id=${item._id}>${item.categoryName}</span>
+              <ul class="nested">
+                ${item.data
+                  .map(
+                    (items) =>
+                      `<li class="lowCateLi" id=${items._id} category_id=${item._id}>${items.subCategoryName}</li>`,
+                  )
+                  .join('')}
+              </ul>
+              </div>`,
+      );
+    });
+  } catch (error) {
+    throw error;
+  }
 
   nodeSet(document.getElementsByClassName('caret'));
 }

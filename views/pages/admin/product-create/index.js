@@ -84,12 +84,14 @@ async function createProduct() {
   console.log(formData);
 
   //validation 추가할것
-
-  const result = await API.post('/api/admin/product', formData, true, true);
-
-  console.log(result);
-  alert('제품등록이 완료되었습니다.');
-  location.href = '/admin/product';
+  try {
+    const result = await API.post('/api/admin/product', formData, true, true);
+    console.log(result);
+    alert('제품등록이 완료되었습니다.');
+    location.href = '/admin/product';
+  } catch (error) {
+    throw error;
+  }
 }
 
 fileInput.onchange = () => {

@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../../../common/global.css" />
     <link rel="stylesheet" href="../../../common/mypage-aside.css" />
     <link rel="stylesheet" href="index.css" />
-    <script type="module" , src="index.js"></script>
+    <script type="module" src="index.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="../../../components/header.js" defer></script>
     <script src="../../../components/footer.js" defer></script>
     <script src="../../../components/mypage-aside.js" defer></script>
-    <script type="module" src="../../../api/index.js" defer></script>
+    <script type="module" src="/api/index.js"></script>
   </head>
   <body>
     <!-- header -->
@@ -31,10 +31,6 @@
                 <td>
                   <div>
                     <div class="email"></div>
-                    <span class="check email"
-                      >이메일을 올바르게 입력해주세요</span
-                    >
-                    <!-- <button class="modify-mail">이메일 수정하기</button> -->
                   </div>
                 </td>
               </tr>
@@ -53,7 +49,6 @@
                   <div>
                     <input type="text" id="phone-number" />
                     <span class="check phone">휴대폰 번호를 입력하세요</span>
-                    <!-- <button class="modify-number">휴대폰 번호 수정</button> -->
                   </div>
                 </td>
               </tr>
@@ -69,6 +64,9 @@
                     <input type="text" id="address-input" readonly />
                     <span>상세 주소</span>
                     <input type="text" id="address-detail-input" />
+                    <span class="check address-check"
+                      >휴대폰 번호를 입력하세요</span
+                    >
                   </div>
                 </td>
               </tr>

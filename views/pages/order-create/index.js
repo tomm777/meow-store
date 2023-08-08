@@ -13,16 +13,20 @@ const orderList = document.querySelector('.order_list');
 const priceSumElement = document.querySelector('#price_sum');
 
 async function getUserInfo() {
-  const data = await API.get(`/api/user/mypage/`);
-  if (data.result === 'forbidden-approach') {
-    alert('로그인 후 주문이 가능합니다.');
-    location.href = '/cart/';
+  try {
+    const data = await API.get(`/api/user/mypage/`);
+    if (data.result === 'forbidden-approach') {
+      alert('로그인 후 주문이 가능합니다.');
+      location.href = '/cart/';
+    }
+    receiverInput.value = `${data.name}`;
+    contactInput.value = `${data.contact}`;
+    zipCodeInput.value = `${data.address.zipCode}`;
+    addressInput.value = `${data.address.address}`;
+    detailAddressInput.value = `${data.address.detailAddress}`;
+  } catch (error) {
+    throw error;
   }
-  receiverInput.value = `${data.name}`;
-  contactInput.value = `${data.contact}`;
-  zipCodeInput.value = `${data.address.zipCode}`;
-  addressInput.value = `${data.address.address}`;
-  detailAddressInput.value = `${data.address.detailAddress}`;
 }
 getUserInfo();
 
@@ -116,8 +120,12 @@ async function createOrder(event) {
 
   const userConfirm = confirm('결제하시겠습니까?');
   if (userConfirm) {
-    const result = await API.post('/api/member/order', dataToPost);
-    location.href = `/order-complete/?id=${result}`;
+    try {
+      const result = await API.post('/api/member/order', dataToPost);
+      location.href = `/order-complete/?id=${result}`;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 orderBtn.addEventListener('click', createOrder);

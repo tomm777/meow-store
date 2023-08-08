@@ -20,11 +20,15 @@ async function check() {
     alert('새로운 비밀번호가 일치하지 않습니다.');
     return;
   }
-  const result = await API.post('/api/user/mypage', {
-    currentPassword: password.value,
-    password: newPassword.value,
-  });
-  console.log(result);
-  alert('비밀번호 변경이 완료되었습니다.');
-  window.location.href = '/mypage';
+  try {
+    const result = await API.post('/api/user/mypage', {
+      currentPassword: password.value,
+      password: newPassword.value,
+    });
+    console.log(result);
+    alert('비밀번호 변경이 완료되었습니다.');
+    window.location.href = '/mypage';
+  } catch (error) {
+    throw error;
+  }
 }
