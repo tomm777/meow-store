@@ -9,9 +9,9 @@ const button = document.querySelector('.changeButton');
 button.addEventListener('click', check);
 async function check() {
   if (
-    password.value === '' ||
-    newPassword.value === '' ||
-    checkPassword.value === ''
+    !password.value.trim() ||
+    !newPassword.value.trim() ||
+    !checkPassword.value.trim()
   ) {
     alert('비밀번호를 입력해주세요.');
     return;

@@ -8,13 +8,11 @@ deleteButton.addEventListener('click', deleteUser);
 
 async function deleteUser() {
   const password = document.getElementById('password').value;
-  if (password === '') {
+  if (!password.trim()) {
     alert('비밀번호를 입력하세요');
     return false;
   }
   if (confirm('정말 탈퇴하시겠습니까?')) {
-    // const data = await API.get(`/api/user/mypage/`);
-    // console.log(data._id);
     try {
       const result = await API.delete('/api/user/mypage', '', {
         password,
@@ -30,6 +28,6 @@ async function deleteUser() {
       throw error;
     }
   } else {
-    console.log('취소');
+    return;
   }
 }
