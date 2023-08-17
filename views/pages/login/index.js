@@ -34,8 +34,29 @@ password.addEventListener('focusout', (e) => {
 });
 
 loginBtn.addEventListener('click', login);
-
+function enterKeyUp() {
+  password.addEventListener('keyup', function (e) {
+    if (e.key === 'Enter') {
+      login();
+    }
+  });
+  email.addEventListener('keyup', function (e) {
+    if (e.key === 'Enter') {
+      login();
+    }
+  });
+}
+enterKeyUp();
 async function login() {
+  if (!email.value.trim()) {
+    alert('이메일을 입력하세요');
+    return;
+  }
+  if (!password.value.trim()) {
+    console.log('비번');
+    alert('비밀번호를 입력하세요');
+    return;
+  }
   try {
     const response = await fetch('/api/user/login', {
       method: 'POST',

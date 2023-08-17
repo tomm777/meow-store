@@ -20,14 +20,12 @@ const updateButton = document.querySelector('.updateCategory');
 // 카테고리 API 호출
 const getCateList = async () => {
   try {
-    await API.get('/api/admin/subcategory')
-      .then((data) => data.data)
-      .then((result) => {
-        // getAttribute("categoryId")
-        result?.map((item) => {
-          nested.insertAdjacentHTML(
-            'beforeend',
-            `<div>
+    const result = await API.get('/api/admin/subcategory');
+    console.log(result);
+    result.data.map((item) => {
+      nested.insertAdjacentHTML(
+        'beforeend',
+        `<div>
       <span class="caret" id=${item._id}>${item.categoryName}</span>
       <ul class="nested">
       ${item.data
@@ -38,24 +36,19 @@ const getCateList = async () => {
         .join('')}
       </ul>
       </div>`,
-          );
-        });
-        nodeSet();
-      });
+      );
+    });
+    nodeSet();
   } catch (error) {
-    // 에러 처리하는 코드 작성
     throw error;
   }
 };
 getCateList();
 const caretCheck = document.querySelectorAll('.caret-down');
 const caret_down = document.querySelector('.top');
-console.log(caret_down);
 const nested_active = document.querySelectorAll('.nested .active');
 function arrowClick() {
-  console.log('click');
   // 토글 클래스 추가
-  console.log(this.id);
   this.parentElement.querySelector('.nested').classList.toggle('active');
   this.classList.toggle('caret-down');
   // 하위, 상위 카테고리가 활성화 된 상태에서 전체를 누르면
@@ -80,7 +73,7 @@ function arrowClick() {
 }
 // 선택한 하위카테고리에 active 클래스 추가
 function addToggle() {
-  console.log('test', this.id);
+  // console.log('test', this.id);
   this.classList.toggle('active');
 }
 // 하위 카테고리를 클릭 했을 때 이벤트
@@ -92,7 +85,7 @@ function lowCateClick() {
 }
 // click 이벤트로 active, caret-down 클래스를 부여해 tree 구조로 보이도록 구현
 const nodeSet = () => {
-  console.log('렌더링1');
+  // console.log('렌더링1');
   Array.from(toggler).forEach((data) => {
     data.addEventListener('click', arrowClick);
   });
@@ -131,7 +124,7 @@ addButton.addEventListener('click', async function () {
       const result = await API.post('/api/admin/category', {
         categoryName: inputValue.value,
       });
-      console.log(result);
+      // console.log(result);
       nested.insertAdjacentHTML(
         'beforeend',
         `<div>
@@ -261,7 +254,7 @@ const updateCate = () => {
   if (nullArrayCheck.length === 0) {
     // const cateId = caretCheck[1].id;
     // 수정하는 동안 다른 버튼 비활성화
-    console.log('상위 카테고리 수정');
+    // console.log('상위 카테고리 수정');
     statusManageElems.forEach((elem) => {
       if ('disabled' in elem) elem.disabled = true;
     });
@@ -291,10 +284,9 @@ const updateCate = () => {
     saveButton.addEventListener('click', async function setCategory() {
       // 상위 카테고리 수정 API
       try {
-        const result = await API.put('/api/admin/category/', `${spanEle.id}`, {
+        await API.put('/api/admin/category/', `${spanEle.id}`, {
           categoryName: input.value,
         });
-        console.log(result);
 
         statusManageElems.forEach((elem) => {
           if ('disabled' in elem) elem.disabled = false;

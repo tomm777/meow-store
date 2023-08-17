@@ -1,5 +1,6 @@
 import { blockIfNotLogin } from '/utils/index.js';
 blockIfNotLogin();
+import { failValidation, elementNone } from '/utils/data-check.js';
 import * as API from '/api/index.js';
 const addressValue = document.querySelector('#address-input');
 const cansleButton = document.querySelector('.cansle-button');
@@ -14,7 +15,6 @@ const nameSpan = document.querySelector('.check.name');
 const detailAddrSpan = document.querySelector('.check.address-check');
 
 let validation = '';
-
 let nameFlag = false;
 let numberFlag = false;
 let detailAddressFlag = false;
@@ -60,8 +60,7 @@ phoneNumberInput.onblur = function () {
   let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
   console.log(regPhone.test(phoneNumberInput.value));
   if (!regPhone.test(phoneNumberInput.value)) {
-    phoneSpan.style.display = 'block';
-    phoneSpan.textContent = '휴대폰 번호를 정확하게 입력하세요.';
+    failValidation(phoneSpan, '휴대폰 번호를 정확하게 입력하세요.');
     numberFlag = false;
     console.log(numberFlag);
     return;
@@ -72,28 +71,28 @@ phoneNumberInput.onblur = function () {
     /^(\d{2,3})(\d{3,4})(\d{4})$/,
     `$1-$2-$3`,
   );
-  numberFlag = true;
-  phoneSpan.style.display = 'none';
+
+  numberFlag = elementNone(phoneSpan);
+  // numberFlag = true;
 };
 nameValueInput.onblur = function () {
-  if (nameValueInput.value === '') {
-    nameSpan.style.display = 'block';
-    nameSpan.textContent = '이름을 입력하세요';
+  if (!nameValueInput.value.trim()) {
+    failValidation(nameSpan, '이름을 입력하세요');
     nameFlag = false;
     return;
   }
-  nameSpan.style.display = 'none';
-  nameFlag = true;
+  nameFlag = elementNone(nameSpan);
+  // console.log(nameFlag);
+  // nameFlag = true;
 };
 addressDetailInput.onblur = function () {
-  if (addressDetailInput.value === '') {
-    detailAddrSpan.style.display = 'block';
-    detailAddrSpan.textContent = '상세 주소를 입력하세요';
+  if (!addressDetailInput.value.trim()) {
+    failValidation(detailAddrSpan, '상세 주소를 입력하세요');
     detailAddressFlag = false;
     return;
   }
-  detailAddrSpan.style.display = 'none';
-  detailAddressFlag = true;
+  detailAddressFlag = elementNone(detailAddrSpan);
+  // detailAddressFlag = true;
 };
 
 cansleButton.addEventListener('click', function () {
@@ -113,7 +112,7 @@ saveButton.addEventListener('click', function () {
     addressDetailInput.focus();
     return;
   }
-  if (addressValue.value === '' || addressZipCode.value === '') {
+  if (!addressValue.value.trim() || !addressZipCode.value.trim()) {
     alert('주소를 입력하세요');
     return;
   }

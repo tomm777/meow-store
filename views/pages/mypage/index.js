@@ -31,13 +31,21 @@ async function getInfo() {
     // Object-Literals 방식으로 변경
     const obj = {
       결제완료: () => {
-        return ++paymentCompleteCount;
+        return (
+          ++paymentCompleteCount,
+          (paymentComplete.textContent = paymentCompleteCount + '건')
+        );
       },
       배송중: () => {
-        return ++deliveryCount;
+        return (
+          ++deliveryCount, (deliveryReady.textContent = deliveryCount + '건')
+        );
       },
       배송완료: () => {
-        return ++deliveryCompleteCount;
+        return (
+          ++deliveryCompleteCount,
+          (delivery.textContent = deliveryCompleteCount + '건')
+        );
       },
       취소: () => {
         return;
@@ -48,10 +56,6 @@ async function getInfo() {
       // 함수호출 부분이라서 ()를 붙혀줘야 실행
       obj[item.status]();
     });
-
-    delivery.textContent = deliveryCompleteCount + '건'; // 배송완료
-    deliveryReady.textContent = deliveryCount + '건'; // 배송중
-    paymentComplete.textContent = paymentCompleteCount + '건'; // 결제완료
   } catch (error) {
     throw error;
   }
