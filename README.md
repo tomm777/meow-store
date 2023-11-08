@@ -4,18 +4,29 @@
 
 <br />
 
+## [ 프로젝트 기간 ]
+2023.07.01 ~ 2023.07.14
+
 ## 😸 서비스 링크
 
->http://kdt-sw-5-team12.elicecoding.com/
+>http://35.227.150.91/
+
+
+
+#### 1. 최하은(팀장/BE)
+#### 2. 김기범(FE/BE)
+#### 3. 박준성(FE) 
+#### 4. 안보란(FE)
+#### 5. 정다희(FE)
 
 
 #### 테스트 계정
 - 일반 유저
    - ID: test@test.com
-   - PW: 1234
+   - PW: 123
 - 관리자
    - ID: admin@test.com
-   - PW: 1234
+   - PW: 1233
 <br />
 
 
@@ -91,6 +102,40 @@
 #### 주문 관리
 
 ![image](https://github.com/tomm777/mewo-store/assets/95726595/5edf4ddd-12bf-4448-8c1c-5b7abc796b06)
+
+
+# 🙋‍♂️ What did I do?
+
+<ul>
+  <li>구현기능
+    <ul>
+      <li>관리자 카테고리 백엔드 구현</li>
+      <li>관리자 카테고리 페이지 구현</li>
+      <li>관리자 주문관리 페이지 구현</li>
+      <li>회원가입 페이지 구현</li>
+      <li>마이페이지 구현</li>
+    </ul>
+  </li>
+  <li>구현 상세 설명</li>
+    <details markdown="1">
+  <summary>관리자 카테고리 기능 구현</summary>
+  <div>
+    <ul>
+      <li>Tree 구조로 API를 호출하는 동시에 DOM에 접근해 해당 이벤트를 수행한 후 화면 깜빡거림이 존재하지 않도록 구현</li>
+    </ul>
+  </div>
+</details>
+     <details markdown="1">
+  <summary>회원가입 페이지 구현</summary>
+  <div>
+    <ul>
+      <li>Flag를 주어서 onblur 이벤트가 일어났을 때 값이 정상적으로 입력되지 않았을 때 경고문 표시</li>
+    </ul>
+  </div>
+</details>
+   
+   
+</ul>
 
 ## :hammer_and_wrench: 기술 스택
 
