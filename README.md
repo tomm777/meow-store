@@ -30,7 +30,7 @@
    - PW: 123
 - 관리자
    - ID: admin@test.com
-   - PW: 1233
+   - PW: 123
 <br />
 
 
