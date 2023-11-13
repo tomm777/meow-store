@@ -1,6 +1,9 @@
 # 고양이 용품 쇼핑몰 야옹 잡화점입니다
 ![image](https://github.com/tomm777/mewo-store/assets/95726595/dac280f2-0caa-40f6-8bd6-2237a555f5a1)
 
+# 페르소나
+
+![image](https://github.com/tomm777/meow-store/assets/95726595/01606763-eba6-4ac7-8c60-1aee9287a2f3)
 
 <br />
 
